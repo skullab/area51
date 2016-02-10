@@ -24,7 +24,8 @@
 	</template>
 				
 	<routing>
-		<route name="backend:index" controller="index" action="index">backend</route>
+		<route controller="index" action="index">backend</route>
+		<route controller="index" action="1">backend/:action</route>
 	</routing>
 	
 	<required>

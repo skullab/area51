@@ -8,6 +8,6 @@ title			= "Thunderhawk"
 titleSeparator	= " - "
 
 theme.main		= "main"
-theme.partials	= "partials"
+theme.partials	= "common"
 theme.layouts	= "layouts"
 theme.name		= "default"

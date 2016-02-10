@@ -15,6 +15,7 @@ use Thunderhawk\API\Di\FactoryDefault;
 use Thunderhawk\API\Engine\Listener as EngineListener;
 use Thunderhawk\API\Dispatcher\Listener as DispatcherListener;
 use Thunderhawk\API\Manifest\Manager as ManifestManager;
+use Thunderhawk\API\Di\Service\Manager as ServiceManager;
 // REQUIRE SECTION //
 require 'Engine/constants.php';
 require 'Engine/EngineInterface.php';
@@ -102,7 +103,7 @@ final class Engine extends Application implements EngineInterface, Throwable {
 	 * @see \Thunderhawk\API\Engine\EngineInterface::isResisteredModule()
 	 */
 	public function isResisteredModule($moduleName) {
-		// TODO: Auto-generated method stub
+		return isset($this->getModules()[$moduleName]);
 	}
 	public function isInstalledModule($moduleName) {
 		return property_exists ( $this->config->modules->installed, $moduleName );
@@ -118,7 +119,7 @@ final class Engine extends Application implements EngineInterface, Throwable {
 	 * @see \Thunderhawk\API\Engine\EngineInterface::getModuleDefinition()
 	 */
 	public function getModuleDefinition($moduleName) {
-		// TODO: Auto-generated method stub
+		return $this->getModules()[$moduleName];
 	}
 	
 	/**
@@ -180,7 +181,9 @@ final class Engine extends Application implements EngineInterface, Throwable {
 		$config = $this->config;
 		// ROUTER SERVICE
 		$di->set ( 'router', function () use($config){
-			$router = new Router ( );
+			$router = new Router ();
+			$router->add('/:module/:controller/:action',array('module'=>1,'controller'=>2,'action'=>3));
+			$router->add('/:module/:controller/:action/:params',array('module'=>1,'controller'=>2,'action'=>3,'params'=>4));
 			return $router;
 		}, true );
 		// DISPATCHER SERVICE
@@ -211,24 +214,16 @@ final class Engine extends Application implements EngineInterface, Throwable {
 		$di->set ( 'view', function () use($config) {
 			$view = new View ();
 			$view->setBasePath(APP_PATH .'core/');
-			//$view->setMainView('../index');
-			//$view->setViewsDir('themes/'.$config->app->theme->name.'/');
-			//$view->setLayoutsDir('layouts/');
-			//$view->setBasePath(APP_PATH .'core/');
-			//$view->setLayoutsDir ( '../../../themes/' . $config->app->theme->name . '/');
-			/*$view->setPartialsDir ( '../../../themes/' . 
-					$config->app->theme->name . '/' . 
-					$config->app->theme->partials . '/');*/
-			//$view->setTemplateAfter( $config->app->theme->main );
-			/*$view->setMainView('../../../themes/' . 
-					$config->app->theme->name . '/' .
-					$config->app->theme->main);*/
+			$view->setMainView($config->app->theme->main);
 			return $view;
 		}, true );
 		$di->set ( 'manifestManager', function () use($di) {
 			$manifestManager = new ManifestManager ( $di );
 			return $manifestManager;
 		}, true );
+		$di->set('theme',function()use($config){
+			return $config->app->theme ;
+		});
 		$this->setDI ( $di );
 	}
 	protected function _registerListeners() {
@@ -279,6 +274,6 @@ final class Engine extends Application implements EngineInterface, Throwable {
 		$this->registerModules ( $modules );
 		$this->router->setDefaultModule ( $this->config->modules->default );
 		$defaultNamespace = $this->getModules()[$this->config->modules->default]['namespace'];
-		$this->router->setDefaultNamespace($defaultNamespace.'\Controllers');
+		//$this->router->setDefaultNamespace($defaultNamespace.'\Controllers');
 	}
 }

@@ -34,9 +34,9 @@ class Manager {
 	const TRANSACTION_MANAGER	= 'transactionManager';
 	const MODELS_CACHE			= 'modelsCache';
 	const VIEWS_CACHE			= 'viewsCache';
-	const MANIFEST_CACHE		= 'manifestCache';
-	const PERMISSIONS_GROUP		= 'permissionsGroup';
+	const MANIFEST_MANAGER		= 'manifestManager';
 	const THEME					= 'theme' ;
+	const CONFIG				= 'config';
 	
 	public static function get($serviceName){
 		return Engine::getInstance()->getService($serviceName);

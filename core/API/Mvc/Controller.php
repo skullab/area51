@@ -14,17 +14,25 @@ abstract class Controller extends PhalconController{
 		$this->tag->setTitle($this->config->app->title);
 		$this->onInitialize();
 	}
-	public function getTheme(){
-		return $this->config->app->theme ;
+	public function getModuleName(){
+		return $this->dispatcher->getModuleName();
+	}
+	public function getModuleManifest(){
+		return $this->manifestManager->getManifest($this->getModuleName());
 	}
 	public function switchViewsDir($mode){
 		switch ($mode){
 			case self::USE_THEME_VIEWS:
-				$this->view->setViewsDir('themes/'.$this->getTheme()->name.'/');
+				$this->view->setViewsDir('themes/'.$this->theme->name.'/');
+				$this->view->setPartialsDir($this->theme->partials.'/');
+				$this->view->setLayoutsDir($this->theme->layouts.'/');
 				break;
 			case self::USE_MODULE_VIEWS:
-				$this->view->setViewsDir('themes/'.$this->getTheme()->name.'/'.
+				$this->view->setViewsDir('themes/'.$this->theme->name.'/'.
 				$this->dispatcher->getModuleName().'/');
+				$this->view->setPartialsDir('../'.$this->theme->partials.'/');
+				$this->view->setLayoutsDir('../'.$this->theme->layouts.'/');
+				
 		}
 	}
 	public function pickModuleView($path){
@@ -48,10 +56,12 @@ abstract class Controller extends PhalconController{
 		$view->render($controller,$action,$params);
 	}
 	public function show404Action(){
-		$this->renderThemeView('errors', 'show404');
+		//$this->renderThemeView('errors', 'show404');
+		//$this->switchViewsDir(self::USE_THEME_VIEWS);
+		$content = $this->view->getPartial('errors/show404');
+		echo $content ;
 	}
 	public function route404Action(){}
-	protected function onInitialize(){}
 	public function sendAjax($payload,array $headers = array()){
 		$status      = 200;
 		$description = 'OK';
@@ -73,4 +83,5 @@ abstract class Controller extends PhalconController{
 		
 		return $response;
 	}
+	protected function onInitialize(){}
 }

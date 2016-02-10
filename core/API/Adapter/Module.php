@@ -7,13 +7,18 @@ use Thunderhawk\API\Engine;
 
 abstract class Module implements ModuleDefinitionInterface {
 	protected $_engine;
-	
+	protected $_namespace;
 	public function __construct() {
+		
+		$ref = new \ReflectionClass($this);
+		$this->_namespace = $ref->getNamespaceName();
+		
 		$this->_engine = Engine::getInstance();
 	}
 	public function getNamespaceName(){
-		$ns = $this->_engine->router->getNamespaceName();
-		return str_replace('\\'.basename($ns),'', $ns);
+		//$ns = $this->_engine->router->getNamespaceName();
+		//return str_replace('\\'.basename($ns),'', $ns);
+		return $this->_namespace;
 	}
 	public function getModuleName(){
 		return $this->_engine->router->getModuleName();
@@ -44,6 +49,10 @@ abstract class Module implements ModuleDefinitionInterface {
 		), true );
 	}
 	public function registerServices(\Phalcon\DiInterface $dependencyInjector = null) {
+		
+		$dispatcher = $dependencyInjector->get('dispatcher');
+		$dispatcher->setDefaultNamespace($this->getNamespaceName().'\Controllers');
+		
 		$view = $dependencyInjector->get('view');
 		$engines = array();
 		foreach ( $this->getManifest()->template->engine as $engine){
@@ -51,18 +60,8 @@ abstract class Module implements ModuleDefinitionInterface {
 		}
 		$view->registerEngines($engines);
 		$view->setViewsDir('themes/'.$this->getTheme()->name.'/'.$this->getModuleName().'/');
-		/*foreach ($engines as $ext => $class){
-			if(file_exists(APP_PATH.'core/themes/'.
-					$this->getTheme()->name.'/'.
-					$this->getTheme()->layouts.'/'.
-					$this->getControllerName().$ext)){
-				$view->setTemplateAfter('../../../../themes/'.
-						$this->getTheme()->name.'/'.
-						$this->getTheme()->layouts.'/'.
-						$this->getControllerName());
-				break;
-			}
-		}*/
+		$view->setPartialsDir('../'.$this->getTheme()->partials.'/');
+		$view->setLayoutsDir('../'.$this->getTheme()->layouts.'/');
 		
 	}
 }

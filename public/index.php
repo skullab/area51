@@ -35,8 +35,8 @@ use Thunderhawk\API\Adapter\Module;
 use Phalcon\Events\Manager as EventsManager;
 require '../core/API/Engine.php';
 $engine = new Engine();
-$ev = new EventsManager();
 $engine->run();
+var_dump($engine->router->getMatchedRoute());
 /***************************************************/
 $time_end = microtime ( true ) - $time_start;
 echo '<div class="benchmark">';
