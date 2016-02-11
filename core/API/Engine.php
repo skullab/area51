@@ -257,6 +257,9 @@ final class Engine extends Application implements EngineInterface, Throwable {
 		$di->set ( 'assets', function () use($config) {
 			$assets = new AssetsManager ();
 			$assets->setBasePath ( $config->app->base->staticUri );
+			$assets->setAssetsDir('assets/');
+			$assets->setCssDir('css/');
+			$assets->setJsDir('js/');
 			return $assets;
 		}, true );
 		$di->set ( 'flash', function () {
