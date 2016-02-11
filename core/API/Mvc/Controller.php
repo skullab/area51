@@ -62,6 +62,7 @@ abstract class Controller extends PhalconController{
 		echo $content ;
 	}
 	public function route404Action(){}
+	public function indexAction(){}
 	public function sendAjax($payload,array $headers = array()){
 		$status      = 200;
 		$description = 'OK';

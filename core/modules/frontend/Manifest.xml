@@ -20,7 +20,7 @@
 
 	<template>
 		<engine extension="phtml">php</engine>
-		<engine extension="volt">volt</engine>
+		<engine extension="html">volt</engine>
 	</template>
 				
 	<routing>

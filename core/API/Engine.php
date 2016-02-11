@@ -10,12 +10,14 @@ use Phalcon\Mvc\Url as UrlProvider;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\Router;
+use Phalcon\Flash\Direct as FlashDirect;
 use Thunderhawk\API\Engine\EngineInterface;
 use Thunderhawk\API\Di\FactoryDefault;
 use Thunderhawk\API\Engine\Listener as EngineListener;
 use Thunderhawk\API\Dispatcher\Listener as DispatcherListener;
 use Thunderhawk\API\Manifest\Manager as ManifestManager;
 use Thunderhawk\API\Di\Service\Manager as ServiceManager;
+use Thunderhawk\API\Assets\Manager as AssetsManager;
 // REQUIRE SECTION //
 require 'Engine/constants.php';
 require 'Engine/EngineInterface.php';
@@ -41,7 +43,7 @@ final class Engine extends Application implements EngineInterface, Throwable {
 	public function __construct(\Phalcon\DiInterface $di = null) {
 		if (! self::$_alreadyInit) {
 			self::$_alreadyInit = true;
-			self::$_instance = $this ;
+			self::$_instance = $this;
 			$loader = new Loader ();
 			$loader->registerNamespaces ( array (
 					'Thunderhawk\API' => '../core/API/' 
@@ -103,7 +105,7 @@ final class Engine extends Application implements EngineInterface, Throwable {
 	 * @see \Thunderhawk\API\Engine\EngineInterface::isResisteredModule()
 	 */
 	public function isResisteredModule($moduleName) {
-		return isset($this->getModules()[$moduleName]);
+		return isset ( $this->getModules () [$moduleName] );
 	}
 	public function isInstalledModule($moduleName) {
 		return property_exists ( $this->config->modules->installed, $moduleName );
@@ -119,7 +121,7 @@ final class Engine extends Application implements EngineInterface, Throwable {
 	 * @see \Thunderhawk\API\Engine\EngineInterface::getModuleDefinition()
 	 */
 	public function getModuleDefinition($moduleName) {
-		return $this->getModules()[$moduleName];
+		return $this->getModules () [$moduleName];
 	}
 	
 	/**
@@ -180,10 +182,19 @@ final class Engine extends Application implements EngineInterface, Throwable {
 		}, true );
 		$config = $this->config;
 		// ROUTER SERVICE
-		$di->set ( 'router', function () use($config){
+		$di->set ( 'router', function () use($config) {
 			$router = new Router ();
-			$router->add('/:module/:controller/:action',array('module'=>1,'controller'=>2,'action'=>3));
-			$router->add('/:module/:controller/:action/:params',array('module'=>1,'controller'=>2,'action'=>3,'params'=>4));
+			$router->add ( '/:module/:controller/:action', array (
+					'module' => 1,
+					'controller' => 2,
+					'action' => 3 
+			) );
+			$router->add ( '/:module/:controller/:action/:params', array (
+					'module' => 1,
+					'controller' => 2,
+					'action' => 3,
+					'params' => 4 
+			) );
 			return $router;
 		}, true );
 		// DISPATCHER SERVICE
@@ -207,23 +218,37 @@ final class Engine extends Application implements EngineInterface, Throwable {
 		$di->set ( 'url', function () use($config) {
 			$url = new UrlProvider ();
 			$url->setBaseUri ( $config->app->base->uri );
-			$url->setStaticBaseUri('//127.0.0.1'.$config->app->base->uri);
+			$url->setStaticBaseUri ( '//127.0.0.1' . $config->app->base->uri );
 			return $url;
 		}, true );
 		// VIEW SERVICE
 		$di->set ( 'view', function () use($config) {
 			$view = new View ();
-			$view->setBasePath(APP_PATH .'core/');
-			$view->setMainView($config->app->theme->main);
+			$view->setBasePath ( APP_PATH . 'core/' );
+			$view->setMainView ( $config->app->theme->main );
 			return $view;
 		}, true );
 		$di->set ( 'manifestManager', function () use($di) {
 			$manifestManager = new ManifestManager ( $di );
 			return $manifestManager;
 		}, true );
-		$di->set('theme',function()use($config){
-			return $config->app->theme ;
-		});
+		$di->set ( 'theme', function () use($config) {
+			return $config->app->theme;
+		} );
+		$di->set ( 'assets', function () use($config) {
+			$assets = new AssetsManager ();
+			$assets->setBasePath ( $config->app->base->staticUri );
+			return $assets;
+		}, true );
+		$di->set ( 'flash', function () {
+			$flash = new FlashDirect ( array (
+					'error' => 'alert alert-danger',
+					'success' => 'alert alert-success',
+					'notice' => 'alert alert-info',
+					'warning' => 'alert alert-warning' 
+			) );
+			return $flash;
+		}, true );
 		$this->setDI ( $di );
 	}
 	protected function _registerListeners() {
@@ -248,7 +273,7 @@ final class Engine extends Application implements EngineInterface, Throwable {
 			$modules [$moduleName] = array (
 					'className' => $manifest->getModuleNamespace () . '\Module',
 					'path' => $modulePath . 'Module.php',
-					'namespace' => $manifest->getModuleNamespace(),
+					'namespace' => $manifest->getModuleNamespace (),
 					'version' => $manifest->getVersion (),
 					'author' => $manifest->getAuthor () 
 			);
@@ -273,7 +298,7 @@ final class Engine extends Application implements EngineInterface, Throwable {
 		}
 		$this->registerModules ( $modules );
 		$this->router->setDefaultModule ( $this->config->modules->default );
-		$defaultNamespace = $this->getModules()[$this->config->modules->default]['namespace'];
-		//$this->router->setDefaultNamespace($defaultNamespace.'\Controllers');
+		// $defaultNamespace = $this->getModules()[$this->config->modules->default]['namespace'];
+		// $this->router->setDefaultNamespace($defaultNamespace.'\Controllers');
 	}
 }

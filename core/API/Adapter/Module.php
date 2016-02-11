@@ -9,11 +9,12 @@ abstract class Module implements ModuleDefinitionInterface {
 	protected $_engine;
 	protected $_namespace;
 	public function __construct() {
-		
-		$ref = new \ReflectionClass($this);
-		$this->_namespace = $ref->getNamespaceName();
-		
 		$this->_engine = Engine::getInstance();
+		//$ref = new \ReflectionClass($this);
+		//$this->_namespace = $ref->getNamespaceName();
+		$this->_namespace = $this->_engine->getModules()[$this->getModuleName()]['namespace'];
+		
+		//var_dump($this->_namespace);
 	}
 	public function getNamespaceName(){
 		//$ns = $this->_engine->router->getNamespaceName();
