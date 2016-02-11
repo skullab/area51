@@ -41,5 +41,7 @@ class Manager {
 	public static function get($serviceName){
 		return Engine::getInstance()->getService($serviceName);
 	}
-	
+	public static function isService($serviceName){
+		return Engine::getInstance()->isService($serviceName);
+	}
 }

@@ -11,6 +11,7 @@ use Phalcon\Mvc\View;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\Router;
 use Phalcon\Flash\Direct as FlashDirect;
+use Phalcon\Mvc\View\Engine\Volt;
 use Thunderhawk\API\Engine\EngineInterface;
 use Thunderhawk\API\Di\FactoryDefault;
 use Thunderhawk\API\Engine\Listener as EngineListener;
@@ -94,6 +95,9 @@ final class Engine extends Application implements EngineInterface, Throwable {
 		return $this->getDI ()->get ( $name );
 	}
 	
+	public function isService($name){
+		return $this->getDI()->has($name);
+	}
 	/**
 	 * Check if a module is registered
 	 *
@@ -213,7 +217,7 @@ final class Engine extends Application implements EngineInterface, Throwable {
 			unset ( $dbConfig ['name'] );
 			$db = new $dbAdapter ( $dbConfig );
 			return $db;
-		} );
+		},true);
 		// URL PROVIDER
 		$di->set ( 'url', function () use($config) {
 			$url = new UrlProvider ();
@@ -228,13 +232,28 @@ final class Engine extends Application implements EngineInterface, Throwable {
 			$view->setMainView ( $config->app->theme->main );
 			return $view;
 		}, true );
-		$di->set ( 'manifestManager', function () use($di) {
-			$manifestManager = new ManifestManager ( $di );
+		// VOLT SERVICE
+		$di->set('voltService',function($view,$di)use($config){
+			$volt = new Volt($view,$di);
+			$options = array(
+					'compiledPath' => $config->dirs->core->cache->volt,
+					'compiledExtension' => $config->app->volt->compiledExtension,
+					'compiledSeparator' => $config->app->volt->compiledSeparator,
+					'stat' => (bool)$config->app->volt->stat,
+					'compileAlways' => (bool)$config->app->volt->compileAlways,
+					'prefix' => $config->app->volt->prefix,
+					'autoescape' => (bool)$config->app->volt->autoescape
+			);
+			$volt->setOptions($options);
+			return $volt;
+		},true);
+		$di->set ( 'manifestManager', function (){
+			$manifestManager = new ManifestManager ();
 			return $manifestManager;
 		}, true );
 		$di->set ( 'theme', function () use($config) {
 			return $config->app->theme;
-		} );
+		},true);
 		$di->set ( 'assets', function () use($config) {
 			$assets = new AssetsManager ();
 			$assets->setBasePath ( $config->app->base->staticUri );
