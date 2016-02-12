@@ -4,15 +4,30 @@ namespace Thunderhawk\API\Mvc;
 use Phalcon\Mvc\Controller as PhalconController;
 use Phalcon\Http\Response;
 use Phalcon\Mvc\View;
+use Thunderhawk\API\Component\Settings;
 abstract class Controller extends PhalconController{
 	
 	const USE_MODULE_VIEWS = 0 ;
 	const USE_THEME_VIEWS = 1 ;
+	protected $settings ;
 	
 	public function initialize(){
 		$this->tag->setTitleSeparator($this->config->app->titleSeparator);
 		$this->tag->setTitle($this->config->app->title);
+		$this->settings = Settings::findFirst(array(
+				'namespace = ?0 AND controller = ?1',
+				'bind' => array(
+						$this->dispatcher->getNamespaceName(),
+						$this->dispatcher->getControllerName()
+				)
+		));
+		if($this->settings === false){
+			$this->settings = new Settings();
+		}
 		$this->onInitialize();
+	}
+	public function getNamespaceName(){
+		$this->dispatcher->getNamespaceName();
 	}
 	public function getModuleName(){
 		return $this->dispatcher->getModuleName();

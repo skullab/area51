@@ -3,34 +3,46 @@
 namespace Thunderhawk\Modules\Frontend\Controllers;
 
 use Thunderhawk\API\Mvc\Controller;
+use Thunderhawk\API\Assets\Manager as AssetsManager;
 use Phalcon\Mvc\View;
 use Phalcon\Assets\Filters\Cssmin;
 class IndexController extends Controller {
 	public function onInitialize(){
-		$this->assets->collection('css-header')
-		->setPrefix($this->assets->getFullCssPath())
-		//->setTargetPath('css-header.css')
-		->addCss('gfonts.css')
-		->addCss('bootstrap.css')
-		->addCss('materialadmin.css')
-		->addCss('font.awesome.min.css')
-		->addCss('material-design-iconic-font.css');
-		//->join(true)
-		//->addFilter(new Cssmin());
-		
-		$jsPath = APP_PATH.'public/'.$this->assets->getAssetsDir().$this->assets->getJsDir(); 
-		if ($handle = opendir($jsPath)) {
-			echo "Directory handle: $handle\n";
-			echo "Entries:\n";
-		
-			/* This is the correct way to loop over the directory. */
-			while (false !== ($entry = readdir($handle))) {
-				if($entry != '.' && $entry != '..'){
-					var_dump($entry);
-				}
-			}
-			closedir($handle);
+		if(!isset($this->settings['test'])){
+			var_dump('settings test doesnt exists');
+			$this->settings->test = 'hello world' ;
+			$this->settings->save();
 		}
+		var_dump($this->settings->test);
+		/*if(!file_exists(APP_PATH.'public/assets/css/collections/css-header.css')){
+			$this->assets->collection('css-header')
+			//->setPrefix($this->assets->getFullCssPath())
+			//->setPrefix(APP_PATH.'public/assets/css/')
+			->setTargetPath(APP_PATH.'public/assets/css/collections/css-header.css')
+			->setTargetUri('public/assets/css/collections/css-header.css')
+			->addCss(APP_PATH.'public/assets/css/gfonts.css')
+			->addCss(APP_PATH.'public/assets/css/bootstrap.css')
+			->addCss(APP_PATH.'public/assets/css/materialadmin.css')
+			->addCss(APP_PATH.'public/assets/css/font.awesome.min.css')
+			->addCss(APP_PATH.'public/assets/css/material-design-iconic-font.css')
+			->join(true)
+			->addFilter(new Cssmin());
+		}else{
+			$this->assets->collection('css-header')
+			->setPrefix($this->assets->getFullCssPath().'collections/')
+			->addCss('css-header.css');
+		}*/
+		$this->assets->requireCollection('css-header',
+				AssetsManager::RESOURCE_CSS,
+				array(
+						'gfonts.css',
+						'bootstrap.css',
+						'materialadmin.css',
+						'font.awesome.min.css',
+						'material-design-iconic-font.css'
+						
+				),true,
+				array(new Cssmin()));
 		/*$this->assets->requireCss('gfonts.css');
 		$this->assets->requireCss('bootstrap.css');
 		$this->assets->requireCss('materialadmin.css');

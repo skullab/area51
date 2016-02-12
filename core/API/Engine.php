@@ -23,6 +23,7 @@ use Thunderhawk\API\Assets\Manager as AssetsManager;
 require 'Engine/constants.php';
 require 'Engine/EngineInterface.php';
 require 'Throwable.php';
+require '../core/autoload.php';
 /**
  * Thunderhawk Engine class
  *
@@ -94,9 +95,8 @@ final class Engine extends Application implements EngineInterface, Throwable {
 	public function getService($name) {
 		return $this->getDI ()->get ( $name );
 	}
-	
-	public function isService($name){
-		return $this->getDI()->has($name);
+	public function isService($name) {
+		return $this->getDI ()->has ( $name );
 	}
 	/**
 	 * Check if a module is registered
@@ -177,11 +177,13 @@ final class Engine extends Application implements EngineInterface, Throwable {
 			$app = new ConfigIni ( APP_PATH . 'core/config/app.ini.php' );
 			$dirs = new ConfigIni ( APP_PATH . 'core/config/dirs.ini.php' );
 			$db = new ConfigIni ( APP_PATH . 'core/config/db.ini.php' );
+			$smtp = new ConfigIni ( APP_PATH . 'core/config/smtp.ini.php' );
 			require (APP_PATH . 'core/config/modules.php');
 			$modules = new ConfigArray ( $modulesInstalled );
 			$app->merge ( $dirs );
 			$app->merge ( $db );
 			$app->merge ( $modules );
+			$app->merge ( $smtp );
 			return $app;
 		}, true );
 		$config = $this->config;
@@ -217,7 +219,7 @@ final class Engine extends Application implements EngineInterface, Throwable {
 			unset ( $dbConfig ['name'] );
 			$db = new $dbAdapter ( $dbConfig );
 			return $db;
-		},true);
+		}, true );
 		// URL PROVIDER
 		$di->set ( 'url', function () use($config) {
 			$url = new UrlProvider ();
@@ -233,33 +235,33 @@ final class Engine extends Application implements EngineInterface, Throwable {
 			return $view;
 		}, true );
 		// VOLT SERVICE
-		$di->set('voltService',function($view,$di)use($config){
-			$volt = new Volt($view,$di);
-			$options = array(
+		$di->set ( 'voltService', function ($view, $di) use($config) {
+			$volt = new Volt ( $view, $di );
+			$options = array (
 					'compiledPath' => $config->dirs->core->cache->volt,
 					'compiledExtension' => $config->app->volt->compiledExtension,
 					'compiledSeparator' => $config->app->volt->compiledSeparator,
-					'stat' => (bool)$config->app->volt->stat,
-					'compileAlways' => (bool)$config->app->volt->compileAlways,
+					'stat' => ( bool ) $config->app->volt->stat,
+					'compileAlways' => ( bool ) $config->app->volt->compileAlways,
 					'prefix' => $config->app->volt->prefix,
-					'autoescape' => (bool)$config->app->volt->autoescape
+					'autoescape' => ( bool ) $config->app->volt->autoescape 
 			);
-			$volt->setOptions($options);
+			$volt->setOptions ( $options );
 			return $volt;
-		},true);
-		$di->set ( 'manifestManager', function (){
+		}, true );
+		$di->set ( 'manifestManager', function () {
 			$manifestManager = new ManifestManager ();
 			return $manifestManager;
 		}, true );
 		$di->set ( 'theme', function () use($config) {
 			return $config->app->theme;
-		},true);
+		}, true );
 		$di->set ( 'assets', function () use($config) {
 			$assets = new AssetsManager ();
 			$assets->setBasePath ( $config->app->base->staticUri );
-			$assets->setAssetsDir('assets/');
-			$assets->setCssDir('css/');
-			$assets->setJsDir('js/');
+			$assets->setAssetsDir ( 'assets/' );
+			$assets->setCssDir ( 'css/' );
+			$assets->setJsDir ( 'js/' );
 			return $assets;
 		}, true );
 		$di->set ( 'flash', function () {
