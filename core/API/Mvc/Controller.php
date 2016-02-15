@@ -9,9 +9,12 @@ abstract class Controller extends PhalconController{
 	
 	const USE_MODULE_VIEWS = 0 ;
 	const USE_THEME_VIEWS = 1 ;
+	const SESSION_TOKEN_KEY = '$TOKEN-KEY$' ;
+	protected $_numBytes = 12 ;
 	protected $settings ;
 	
 	public function initialize(){
+		$this->session->start();
 		$this->tag->setTitleSeparator($this->config->app->titleSeparator);
 		$this->tag->setTitle($this->config->app->title);
 		$this->settings = Settings::findFirst(array(
@@ -41,12 +44,14 @@ abstract class Controller extends PhalconController{
 				$this->view->setViewsDir('themes/'.$this->theme->name.'/');
 				$this->view->setPartialsDir($this->theme->partials.'/');
 				$this->view->setLayoutsDir($this->theme->layouts.'/');
+				$this->view->setMainView($this->theme->main);
 				break;
 			case self::USE_MODULE_VIEWS:
 				$this->view->setViewsDir('themes/'.$this->theme->name.'/'.
 				$this->dispatcher->getModuleName().'/');
 				$this->view->setPartialsDir('../'.$this->theme->partials.'/');
 				$this->view->setLayoutsDir('../'.$this->theme->layouts.'/');
+				$this->view->setMainView('../'.$this->theme->main);
 				
 		}
 	}
@@ -73,11 +78,33 @@ abstract class Controller extends PhalconController{
 	public function show404Action(){
 		//$this->renderThemeView('errors', 'show404');
 		//$this->switchViewsDir(self::USE_THEME_VIEWS);
+		//$view = clone $this->view ;
+		//$this->renderModuleView('index', 'index');
+		//$this->renderModuleView('index','index');
+		$this->view->pick('index/index');
 		$content = $this->view->getPartial('errors/show404');
+		//$this->view->setContent($content);
 		echo $content ;
 	}
 	public function route404Action(){}
 	public function indexAction(){}
+	public function beforeExecuteRoute(){
+		/*$auth = $this->session->get('auth');
+		if(!$auth){
+			$role = 'Guest' ;
+		}else{
+			$role = 'Admin' ;
+		}
+		
+		$resource = $this->dispatcher->getModuleName().':'.$this->dispatcher->getControllerName();
+		$action = $this->dispatcher->getActionName();
+		if(!$this->acl->isAllowed($role,$resource,$action)){
+			$this->accessDenied($role, $resource, $action);
+		}*/
+	}
+	protected function accessDenied($role,$resource,$action){
+		var_dump('access denied for : '.$role.' '.$resource.' '.$action);
+	}
 	public function sendAjax($payload,array $headers = array()){
 		$status      = 200;
 		$description = 'OK';

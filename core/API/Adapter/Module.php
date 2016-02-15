@@ -67,5 +67,6 @@ abstract class Module implements ModuleDefinitionInterface {
 		$view->setViewsDir ( 'themes/' . $this->getTheme ()->name . '/' . $this->getModuleName () . '/' );
 		$view->setPartialsDir ( '../' . $this->getTheme ()->partials . '/' );
 		$view->setLayoutsDir ( '../' . $this->getTheme ()->layouts . '/' );
+		$view->setMainView('../'.$this->getTheme()->main);
 	}
 }

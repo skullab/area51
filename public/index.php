@@ -49,8 +49,8 @@ use Thunderhawk\API\Component\Defuse\Crypto;
 use Thunderhawk\API\Component\Defuse\Crypto\Exception as Ex;
 require '../core/API/Engine.php';
 $engine = new Engine ();
-gc_collect_cycles();
-$engine->run();
+gc_collect_cycles ();
+$engine->run ();
 
 // ID | userID | pw | private | date_created_at | expired_time
 /**
@@ -59,9 +59,9 @@ $engine->run();
 $time_end = microtime ( true ) - $time_start;
 echo '<div class="benchmark">';
 echo "<h1>Time execution : $time_end seconds</h1>";
-echo "<h1>Memory usage : " . number_format ( memory_get_usage (), 0, '.', ',' ) . " bytes</h1>";
-echo "<h1>Memory peak : " . number_format ( memory_get_peak_usage (), 0, '.', ',' ) . " bytes</h1>";
-//echo "<h1>Memory Usage : ".convert(memory_get_usage(true))."</h1>";
-//echo "<h1>Memory Peak : ".convert(memory_get_peak_usage(true))."</h1>";
+//echo "<h1>Memory usage : " . number_format ( memory_get_usage (), 0, '.', ' ' ) . " bytes</h1>";
+//echo "<h1>Memory peak : " . number_format ( memory_get_peak_usage (), 0, '.', ' ' ) . " bytes</h1>";
+echo "<h1>Memory Usage : ".convert(memory_get_usage())."</h1>";
+echo "<h1>Memory Peak : ".convert(memory_get_peak_usage())."</h1>";
 echo '</div>';
 /***************************************************/

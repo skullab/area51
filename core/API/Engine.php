@@ -12,6 +12,7 @@ use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\Router;
 use Phalcon\Flash\Direct as FlashDirect;
 use Phalcon\Mvc\View\Engine\Volt;
+use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Thunderhawk\API\Engine\EngineInterface;
 use Thunderhawk\API\Di\FactoryDefault;
 use Thunderhawk\API\Engine\Listener as EngineListener;
@@ -19,6 +20,8 @@ use Thunderhawk\API\Dispatcher\Listener as DispatcherListener;
 use Thunderhawk\API\Manifest\Manager as ManifestManager;
 use Thunderhawk\API\Di\Service\Manager as ServiceManager;
 use Thunderhawk\API\Assets\Manager as AssetsManager;
+use Thunderhawk\API\Component\Acl;
+use Thunderhawk\API\Component\Token;
 // REQUIRE SECTION //
 require 'Engine/constants.php';
 require 'Engine/EngineInterface.php';
@@ -190,7 +193,7 @@ final class Engine extends Application implements EngineInterface, Throwable {
 		// ROUTER SERVICE
 		$di->set ( 'router', function () use($config) {
 			$router = new Router ();
-			$router->add ( '/:module/:controller/:action', array (
+			/*$router->add ( '/:module/:controller/:action', array (
 					'module' => 1,
 					'controller' => 2,
 					'action' => 3 
@@ -200,7 +203,7 @@ final class Engine extends Application implements EngineInterface, Throwable {
 					'controller' => 2,
 					'action' => 3,
 					'params' => 4 
-			) );
+			) );*/
 			return $router;
 		}, true );
 		// DISPATCHER SERVICE
@@ -231,7 +234,7 @@ final class Engine extends Application implements EngineInterface, Throwable {
 		$di->set ( 'view', function () use($config) {
 			$view = new View ();
 			$view->setBasePath ( APP_PATH . 'core/' );
-			$view->setMainView ( $config->app->theme->main );
+			//$view->setMainView ( $config->app->theme->main );
 			return $view;
 		}, true );
 		// VOLT SERVICE
@@ -273,6 +276,23 @@ final class Engine extends Application implements EngineInterface, Throwable {
 			) );
 			return $flash;
 		}, true );
+		$di->set('acl',function(){
+			$acl = new Acl();
+			$acl->setDefaultAction(\Phalcon\Acl::DENY);
+			//$acl->addRole('Guest');
+			//$acl->addResource('frontend:index', array('index'));
+			//$acl->deny('Guest','frontend:index','index');
+			return $acl;
+		},true);
+		$di->set('session',function(){
+			$session = new SessionAdapter();
+			$session->start();
+			return $session ;
+		},true);
+		$di->set('token',function(){
+			$token = new Token();
+			return $token ;
+		});
 		$this->setDI ( $di );
 	}
 	protected function _registerListeners() {

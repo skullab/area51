@@ -24,8 +24,8 @@
 	</template>
 				
 	<routing>
-		<route name="frontend-index" controller="index" action="index"></route>
-		<route name="frontend-login" controller="login" action="index">login</route>
+		<route name="frontend$index" controller="index" action="index"></route>
+		<route name="frontend$sign" controller="index" action="sign">login</route>
 	</routing>
 	
 	<required>

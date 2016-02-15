@@ -2,8 +2,8 @@
 
 [app]
 
-base.uri		= "/area51/"
-base.staticUri	= "//127.0.0.1/area51/"
+base.uri		= "/"
+base.staticUri	= "//127.0.0.1/"
 
 title			= "Thunderhawk"
 titleSeparator	= " - "

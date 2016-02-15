@@ -7,7 +7,7 @@ host			= "localhost"
 username		= "root"
 password		= 
 name			= "area_riservata"
-table.prefix 	= 
+table.prefix 	= ""
 
 
 

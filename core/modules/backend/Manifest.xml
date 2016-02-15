@@ -20,12 +20,12 @@
 
 	<template>
 		<engine extension="phtml">php</engine>
-		<engine extension="volt">volt</engine>
+		<engine extension="html">volt</engine>
 	</template>
 				
 	<routing>
-		<route controller="index" action="index">backend</route>
-		<route controller="index" action="1">backend/:action</route>
+		<route name="backend$index" controller="index" action="index">panel</route>
+		<route name="backend$index" controller="index" action="1">panel/:action</route>
 	</routing>
 	
 	<required>
