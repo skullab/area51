@@ -9,12 +9,11 @@ abstract class Controller extends PhalconController{
 	
 	const USE_MODULE_VIEWS = 0 ;
 	const USE_THEME_VIEWS = 1 ;
-	const SESSION_TOKEN_KEY = '$TOKEN-KEY$' ;
-	protected $_numBytes = 12 ;
 	protected $settings ;
 	
 	public function initialize(){
 		$this->session->start();
+		$this->tag->setDoctype(\Phalcon\Tag::HTML5);
 		$this->tag->setTitleSeparator($this->config->app->titleSeparator);
 		$this->tag->setTitle($this->config->app->title);
 		$this->settings = Settings::findFirst(array(
@@ -28,6 +27,7 @@ abstract class Controller extends PhalconController{
 			$this->settings = new Settings();
 		}
 		$this->onInitialize();
+		$this->prepareAssets();
 	}
 	public function getNamespaceName(){
 		$this->dispatcher->getNamespaceName();
@@ -101,6 +101,36 @@ abstract class Controller extends PhalconController{
 		if(!$this->acl->isAllowed($role,$resource,$action)){
 			$this->accessDenied($role, $resource, $action);
 		}*/
+	}
+	protected function prepareAssets(){
+		$themeDir = 'theme-default/' ; 
+		$this->assets->
+		addCss('http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900',false)->
+		addCss($themeDir.'bootstrap.css')->
+		addCss($themeDir.'materialadmin.css')->
+		addCss($themeDir.'font-awesome.min.css')->
+		addCss($themeDir.'material-design-iconic-font.min.css');
+		/*****/
+		$this->assets->collection('ie')->
+		addJs('assets/js/libs/utils/html5shiv.js')->
+		addJs('assets/js/libs/utils/respond.min.js');
+		/*****/
+		$this->assets->
+		addJs('libs/jquery/jquery-1.11.2.min.js')->
+		addJs('libs/jquery/jquery-migrate-1.2.1.min.js')->
+		addJs('libs/bootstrap/bootstrap.min.js')->
+		addJs('libs/spin.js/spin.min.js')->
+		addJs('libs/autosize/jquery.autosize.min.js')->
+		addJs('libs/nanoscroller/jquery.nanoscroller.min.js')->
+		addJs('core/source/App.js')->
+		addJs('core/source/AppNavigation.js')->
+		addJs('core/source/AppOffcanvas.js')->
+		addJs('core/source/AppCard.js')->
+		addJs('core/source/AppForm.js')->
+		addJs('core/source/AppNavSearch.js')->
+		addJs('core/source/AppVendor.js')->
+		addJs('core/demo/Demo.js');
+		
 	}
 	protected function accessDenied($role,$resource,$action){
 		var_dump('access denied for : '.$role.' '.$resource.' '.$action);

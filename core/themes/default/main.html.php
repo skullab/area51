@@ -1,7 +1,8 @@
-<!DOCTYPE html>
-<html lang="<?php if (isset($lang)) { ?><?php echo $lang; ?><?php } else { ?>it<?php } ?>">
+<?php echo $this->tag->getDoctype(); ?>
+<html lang="it">
 	<head>
 		<?php echo $this->tag->getTitle(); ?>
+
 		<!-- BEGIN META -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,16 +11,21 @@
 		<!-- END META -->
 
 		<!-- BEGIN STYLESHEETS -->
-		<?php echo $this->assets->outputCss('css-header'); ?>
+		<?php echo $this->assets->outputCss(); ?>
 		<!-- END STYLESHEETS -->
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
-			<script type="text/javascript" src="http://www.codecovers.eu/assets/js/modules/materialadmin/libs/utils/html5shiv.js?1422823601"></script>
-			<script type="text/javascript" src="http://www.codecovers.eu/assets/js/modules/materialadmin/libs/utils/respond.min.js?1422823601"></script>
-    	<![endif]-->
-    	
-	<body class="menubar-hoverable header-fixed ">
-	<?php echo $this->getContent(); ?>
+		<?php echo $this->assets->outputJs('ie'); ?>
+		<![endif]-->
+	</head>
+	<body class="menubar-hoverable header-fixed menubar-pin ">
+
+		<?php echo $this->getContent(); ?>
+
+		<!-- BEGIN JAVASCRIPT -->
+		<?php echo $this->assets->outputJs(); ?>
+		<!-- END JAVASCRIPT -->
+
 	</body>
 </html>

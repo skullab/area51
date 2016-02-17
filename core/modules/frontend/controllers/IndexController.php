@@ -16,24 +16,13 @@ class IndexController extends Controller {
 			//return $this->response->redirect('//127.0.0.1/panel');
 		}
 	}
-	public function onInitialize() {
-		$this->assets->requireCollection ( 'css-header', AssetsManager::RESOURCE_CSS, array (
-				'gfonts.css',
-				'bootstrap.css',
-				'materialadmin.css',
-				'font.awesome.min.css',
-				'material-design-iconic-font.css',
-				'morris.core.css'
-		), true, array (
-				new Cssmin () 
-		) );
-	}
 	public function signAction() {
 		if ($this->request->isPost ()) {
 			if($this->token->checkToken()){
 				$username = $this->request->getPost('username');
 				$password = $this->request->getPost('password');
 				$remember = $this->request->getPost('remember');
+				return $this->response->redirect($this->url->getStaticBaseUri().'panel');
 			}
 		} else {
 			$this->dispatcher->forward ( array (

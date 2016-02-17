@@ -49,14 +49,16 @@ class Manager extends PhalconAssetsManager implements InjectionAwareInterface {
 	public function requireCss($path, $local = true, $filter = true, $attributes = null) {
 		if(!isset($this->_cssList[$path])){
 			$this->_cssList[$path] = true ;
-			return parent::addCss($this->getFullCssPath().$path,$local,$filter,$attributes);
+			$path = $local ? $this->getFullCssPath().$path : $path ;
+			return parent::addCss($path,$local,$filter,$attributes);
 		}
 		return $this ;
 	}
 	public function requireJs($path, $local = true, $filter = true, $attributes = null) {
 		if(!isset($this->_jsList[$path])){
 			$this->_jsList[$path] = true ;
-			return parent::addJs($this->getFullJsPath().$path,$local,$filter,$attributes);
+			$path = $local ? $this->getFullJsPath().$path : $path ;
+			return parent::addJs($path,$local,$filter,$attributes);
 		}
 		return $this ;
 	}
@@ -99,10 +101,12 @@ class Manager extends PhalconAssetsManager implements InjectionAwareInterface {
 		}
 	}
 	public function addCss($path, $local = true, $filter = true, $attributes = null) {
-		return parent::addCss($this->getFullCssPath().$path,$local,$filter,$attributes);
+		$path = $local ? $this->getFullCssPath().$path : $path ;
+		return parent::addCss($path,$local,$filter,$attributes);
 	}
 	public function addJs($path, $local = true, $filter = true, $attributes = null) {
-		return parent::addJs($this->getFullJsPath().$path,$local,$filter,$attributes);
+		$path = $local ? $this->getFullJsPath().$path : $path ;
+		return parent::addJs($path,$local,$filter,$attributes);
 	}
 	
 	public function setDI (\Phalcon\DiInterface $dependencyInjector){

@@ -1,7 +1,8 @@
-<!DOCTYPE html>
-<html lang="{% if lang is defined %}{{lang}}{% else %}it{% endif %}">
+{{ get_doctype() }}
+<html lang="it">
 	<head>
 		{{ get_title() }}
+
 		<!-- BEGIN META -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,16 +11,21 @@
 		<!-- END META -->
 
 		<!-- BEGIN STYLESHEETS -->
-		{{ assets.outputCss('css-header') }}
+		{{ assets.outputCss() }}
 		<!-- END STYLESHEETS -->
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
-			<script type="text/javascript" src="http://www.codecovers.eu/assets/js/modules/materialadmin/libs/utils/html5shiv.js?1422823601"></script>
-			<script type="text/javascript" src="http://www.codecovers.eu/assets/js/modules/materialadmin/libs/utils/respond.min.js?1422823601"></script>
-    	<![endif]-->
-    	
-	<body class="menubar-hoverable header-fixed ">
-	{{ get_content() }}
+		{{ assets.outputJs('ie') }}
+		<![endif]-->
+	</head>
+	<body class="menubar-hoverable header-fixed menubar-pin ">
+
+		{{ content() }}
+
+		<!-- BEGIN JAVASCRIPT -->
+		{{ assets.outputJs() }}
+		<!-- END JAVASCRIPT -->
+
 	</body>
 </html>
