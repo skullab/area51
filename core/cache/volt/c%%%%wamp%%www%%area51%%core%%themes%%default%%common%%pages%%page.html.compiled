@@ -1,0 +1,5 @@
+<!-- Page -->
+  
+<?php echo $this->getContent(); ?>
+    
+<!-- End Page -->

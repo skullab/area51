@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-	<namespace>Vendor\Backend</namespace>
+	<namespace>Thunderhawk\Modules\Backend</namespace>
 	<name>backend</name>
 				
 	<info>
-		<author>Vendor</author>
+		<author>Thunderhawk</author>
 		<description>
-			<long>
-			</long>
+			<long></long>
 			<short></short>
 		</description>
 	</info>
@@ -24,8 +23,9 @@
 	</template>
 				
 	<routing>
-		<route name="backend$index" controller="index" action="index">panel</route>
-		<route name="backend$index" controller="index" action="1">panel/:action</route>
+		<route name="backend$index" controller="index" action="index">dashboard</route>
+		<route name="backend$chat" controller="chat" action="index">chat</route>
+		<route name="backend$users" controller="users" action="1">users/:action</route>
 	</routing>
 	
 	<required>

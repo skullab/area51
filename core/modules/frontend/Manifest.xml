@@ -20,12 +20,15 @@
 
 	<template>
 		<engine extension="phtml">php</engine>
-		<engine extension="html">voltService</engine>
+		<engine extension="html">volt</engine>
 	</template>
 				
 	<routing>
 		<route name="frontend$index" controller="index" action="index"></route>
 		<route name="frontend$sign" controller="index" action="sign">login</route>
+		<route name="frontend$logout" controller="index" action="logout">logout</route>
+		<route name="frontend$forgot" controller="index" action="forgot">forgot-password</route>
+		<route name="frontend$reset" controller="index" action="reset">reset-password</route>
 	</routing>
 	
 	<required>

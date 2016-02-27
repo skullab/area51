@@ -37,6 +37,12 @@ class Manager {
 	const MANIFEST_MANAGER		= 'manifestManager';
 	const THEME					= 'theme' ;
 	const CONFIG				= 'config';
+	CONST ACL					= 'acl';
+	CONST TOKEN					= 'token';
+	const UI					= 'ui';
+	const TRANSLATOR			= 'translator';
+	const AUTH					= 'auth';
+	const MAIL					= 'mail';
 	
 	public static function get($serviceName){
 		return Engine::getInstance()->getService($serviceName);

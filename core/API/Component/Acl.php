@@ -220,6 +220,7 @@ class Acl extends Adapter implements InjectionAwareInterface {
 				$resourceName,
 				$access 
 		) );
+		
 		$allowed = is_array ( $allowed ) ? (( int ) $allowed [0] == \Phalcon\Acl::ALLOW) : ($this->_defaultAccess == \Phalcon\Acl::ALLOW);
 		$this->_accessGranted = $allowed;
 		if ($this->_eventsManager != null) {

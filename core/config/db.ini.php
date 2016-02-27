@@ -2,11 +2,14 @@
 
 [db]
 
-adapter			= Mysql
 host			= "localhost"
 username		= "root"
-password		= 
-name			= "area_riservata"
+;password		= "9G16EJpc"
+;dbname			= "prv001_area51"
+password		= ""
+dbname			= "area_riservata"
+
+adapter			= Mysql
 table.prefix 	= ""
 
 

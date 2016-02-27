@@ -1,0 +1,43 @@
+<!-- Page -->
+<div class="page animsition vertical-align text-center"
+	data-animsition-in="fade-in" data-animsition-out="fade-out">
+	<div class="page-content vertical-align-middle">
+		<h2 class="page-title">Reset Your Password </h2>
+		<p>Input your new password</p>
+
+		{{ content() }}
+		<form class="width-300 margin-top-30 center-block" 
+			method="POST" action="{{static_url('reset-password')}}">
+			<div class="form-group">
+				<input type="password" class="form-control" id="inputPassword"
+					name="password" placeholder="Password" required>
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control" id="inputPassword2"
+					name="password2" placeholder="Repeat Password" required>
+			</div>
+			<input type="hidden" name="k" value="{% if public_key is defined %} {{ public_key }} {% endif %}"/>
+			<input type="hidden" name="t" value="{% if token is defined %} {{ token }} {% endif %}"/>
+			{{ token.generateInput() }}
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary btn-block">Reset
+					Your Password</button>
+			</div>
+		</form>
+
+		<footer class="page-copyright">
+			<p>WEBSITE BY amazingSurge</p>
+			<p>© 2015. All RIGHT RESERVED.</p>
+			<div class="social">
+				<a href="javascript:void(0)"> <i class="icon bd-twitter"
+					aria-hidden="true"></i>
+				</a> <a href="javascript:void(0)"> <i class="icon bd-facebook"
+					aria-hidden="true"></i>
+				</a> <a href="javascript:void(0)"> <i class="icon bd-dribbble"
+					aria-hidden="true"></i>
+				</a>
+			</div>
+		</footer>
+	</div>
+</div>
+<!-- End Page -->

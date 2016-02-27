@@ -31,7 +31,7 @@ class Mail extends Component implements MailInterface {
 	public function setOptions(array $settings) {
 		$this->_settings = array_merge ( $this->_settings, $settings );
 	}
-	protected function applyOptions() {
+	public function applyOptions() {
 		foreach ( $this->_settings as $option => $value ) {
 			switch ($option) {
 				case 'host' :
@@ -49,6 +49,15 @@ class Mail extends Component implements MailInterface {
 				case 'password' :
 					$this->setPassword ( $value );
 					break;
+				case 'from' :
+					$this->setFrom($value);
+					break;
+				case 'to' :
+					$this->setTo($value);
+					break;
+				case 'subject':
+					$this->setSubject($value);
+					break;
 			}
 		}
 	}
@@ -62,13 +71,13 @@ class Mail extends Component implements MailInterface {
 		if ($this->_transport == null) {
 			$this->_transport = Smtp::newInstance ();
 		}
-		$this->applyOptions ();
 		if ($this->_mailer == null) {
 			$this->_mailer = Mailer::newInstance ( $this->_transport );
 		}
 		if ($this->_message == null) {
 			$this->_message = Message::newInstance ();
 		}
+		$this->applyOptions ();
 	}
 	public function setHost($host) {
 		if ($this->_transport != null)

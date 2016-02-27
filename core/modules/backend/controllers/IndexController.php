@@ -1,9 +1,14 @@
 <?php
 
-namespace Vendor\Backend\Controllers;
+namespace Thunderhawk\Modules\Backend\Controllers;
 use Thunderhawk\API\Mvc\Controller;
-use Thunderhawk\API\Assets\Manager as AssetsManager;
-use Phalcon\Assets\Filters\Cssmin;
 class IndexController extends Controller {
-	
+	protected function onInitialize(){
+		$this->view->body_class = "dashboard" ;
+	}
+	protected function accessDenied($role, $resource, $action){
+		if($role == 'Guest'){
+			return $this->redirect('login');
+		}
+	}
 }

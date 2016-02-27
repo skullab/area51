@@ -4,38 +4,27 @@ namespace Thunderhawk\API;
 
 use Phalcon\Mvc\Application;
 use Phalcon\Loader;
-use Phalcon\Config\Adapter\Ini as ConfigIni;
-use Phalcon\Config as ConfigArray;
-use Phalcon\Mvc\Url as UrlProvider;
-use Phalcon\Mvc\View;
-use Phalcon\Mvc\Dispatcher;
-use Phalcon\Mvc\Router;
-use Phalcon\Flash\Direct as FlashDirect;
-use Phalcon\Mvc\View\Engine\Volt;
-use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Thunderhawk\API\Engine\EngineInterface;
 use Thunderhawk\API\Di\FactoryDefault;
 use Thunderhawk\API\Engine\Listener as EngineListener;
 use Thunderhawk\API\Dispatcher\Listener as DispatcherListener;
-use Thunderhawk\API\Manifest\Manager as ManifestManager;
-use Thunderhawk\API\Di\Service\Manager as ServiceManager;
-use Thunderhawk\API\Assets\Manager as AssetsManager;
-use Thunderhawk\API\Component\Acl;
-use Thunderhawk\API\Component\Token;
+use Thunderhawk;
 // REQUIRE SECTION //
 require 'Engine/constants.php';
+require 'Engine/functions.php';
 require 'Engine/EngineInterface.php';
-require 'Throwable.php';
-require '../core/autoload.php';
+require __DIR__.'../../autoload.php';
 /**
  * Thunderhawk Engine class
  *
  * @author Ivan Maruca - ivan[dot]maruca[at]gmail[dot]com
  *        
  */
-final class Engine extends Application implements EngineInterface, Throwable {
+final class Engine extends Application implements EngineInterface{
+	const VERSION = '1.0.0';
 	private static $_instance = null;
 	private static $_alreadyInit = false;
+	protected $_debug ;
 	/**
 	 * Construct an application engine.<br>
 	 * Use Engine::getInstance to get the engine in the application.<br>
@@ -51,19 +40,17 @@ final class Engine extends Application implements EngineInterface, Throwable {
 			self::$_instance = $this;
 			$loader = new Loader ();
 			$loader->registerNamespaces ( array (
-					'Thunderhawk\API' => '../core/API/' 
+					'Thunderhawk\API' => API_PATH
 			) )->register ();
 			if ($di == null) {
 				$di = new FactoryDefault ();
 			}
 			$di->set ( 'loader', $loader, true );
-			
 			$this->_registerServices ( $di );
 			$this->_registerListeners ();
 			$this->_registerModules ();
-			// $this->setDefaultModule($this->config->modules->default);
 		} else {
-			$this->throwException ( null, 10 );
+			throw new Engine\Exception(null,10);
 		}
 	}
 	/**
@@ -85,9 +72,20 @@ final class Engine extends Application implements EngineInterface, Throwable {
 	 * @see \Thunderhawk\API\Engine\EngineInterface::run()
 	 */
 	public function run() {
-		echo $this->handle ()->getContent ();
+		//try{
+			echo $this->handle ()->getContent ();
+		//}catch(\Exception $e){
+			//echo $e->getMessage();
+		//}
 	}
-	
+	public function enableDebug($enable){
+		if($enable){
+			$this->_debug = new \Phalcon\Debug();
+			$this->_debug->listen();
+		}else{
+			$this->_debug = null ;
+		}
+	}
 	/**
 	 * Get a service in the DependencyInjector container
 	 *
@@ -153,6 +151,9 @@ final class Engine extends Application implements EngineInterface, Throwable {
 		return $this->url->getBaseUri ();
 	}
 	
+	public function getStaticBaseUri(){
+		return $this->url->getStaticBaseUri();
+	}
 	/**
 	 *
 	 * {@inheritDoc}
@@ -162,137 +163,20 @@ final class Engine extends Application implements EngineInterface, Throwable {
 	public function getConfig() {
 		return $this->config;
 	}
-	
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see \Thunderhawk\API\Throwable::throwException()
-	 */
-	public function throwException($message = null, $code = 0, \Exception $previous = null) {
-		throw new Engine\Exception ( $message, $code, $previous );
+	public function getVersion(){
+		return self::VERSION ;
 	}
-	
+	public function runBootstrap($filename){
+		if(file_exists(CORE_PATH.'boostrap/'.$filename)){
+			require CORE_PATH.'boostrap/'.$filename ;
+		}
+		return $this->run();
+	}
 	// *********************************************************//
 	protected function _registerServices($di) {
-		// READ CONFIGIGURATIONS INI
-		$di->set ( 'config', function () {
-			$app = new ConfigIni ( APP_PATH . 'core/config/app.ini.php' );
-			$dirs = new ConfigIni ( APP_PATH . 'core/config/dirs.ini.php' );
-			$db = new ConfigIni ( APP_PATH . 'core/config/db.ini.php' );
-			$smtp = new ConfigIni ( APP_PATH . 'core/config/smtp.ini.php' );
-			require (APP_PATH . 'core/config/modules.php');
-			$modules = new ConfigArray ( $modulesInstalled );
-			$app->merge ( $dirs );
-			$app->merge ( $db );
-			$app->merge ( $modules );
-			$app->merge ( $smtp );
-			return $app;
-		}, true );
-		$config = $this->config;
-		// ROUTER SERVICE
-		$di->set ( 'router', function () use($config) {
-			$router = new Router ();
-			/*$router->add ( '/:module/:controller/:action', array (
-					'module' => 1,
-					'controller' => 2,
-					'action' => 3 
-			) );
-			$router->add ( '/:module/:controller/:action/:params', array (
-					'module' => 1,
-					'controller' => 2,
-					'action' => 3,
-					'params' => 4 
-			) );*/
-			return $router;
-		}, true );
-		// DISPATCHER SERVICE
-		$di->set ( 'dispatcher', function () {
-			$dispatcher = new Dispatcher ();
-			// $dispatcher->setDefaultNamespace('Thunderhawk\API');
-			return $dispatcher;
-		}, true );
-		// DB CONFIGURATION
-		$di->set ( 'db', function () use($config) {
-			$dbConfig = ( array ) $config->db;
-			$dbAdapter = 'Phalcon\Db\Adapter\PDO\\' . $dbConfig ['adapter'];
-			unset ( $dbConfig ['adapter'] );
-			unset ( $dbConfig ['table'] );
-			$dbConfig ['dbname'] = $dbConfig ['name'];
-			unset ( $dbConfig ['name'] );
-			$db = new $dbAdapter ( $dbConfig );
-			return $db;
-		}, true );
-		// URL PROVIDER
-		$di->set ( 'url', function () use($config) {
-			$url = new UrlProvider ();
-			$url->setBaseUri ( $config->app->base->uri );
-			$url->setStaticBaseUri ( '//127.0.0.1' . $config->app->base->uri );
-			return $url;
-		}, true );
-		// VIEW SERVICE
-		$di->set ( 'view', function () use($config) {
-			$view = new View ();
-			$view->setBasePath ( APP_PATH . 'core/' );
-			//$view->setMainView ( $config->app->theme->main );
-			return $view;
-		}, true );
-		// VOLT SERVICE
-		$di->set ( 'voltService', function ($view, $di) use($config) {
-			$volt = new Volt ( $view, $di );
-			$options = array (
-					'compiledPath' => $config->dirs->core->cache->volt,
-					'compiledExtension' => $config->app->volt->compiledExtension,
-					'compiledSeparator' => $config->app->volt->compiledSeparator,
-					'stat' => ( bool ) $config->app->volt->stat,
-					'compileAlways' => ( bool ) $config->app->volt->compileAlways,
-					'prefix' => $config->app->volt->prefix,
-					'autoescape' => ( bool ) $config->app->volt->autoescape 
-			);
-			$volt->setOptions ( $options );
-			return $volt;
-		}, true );
-		$di->set ( 'manifestManager', function () {
-			$manifestManager = new ManifestManager ();
-			return $manifestManager;
-		}, true );
-		$di->set ( 'theme', function () use($config) {
-			return $config->app->theme;
-		}, true );
-		$di->set ( 'assets', function () use($config) {
-			$assets = new AssetsManager ();
-			$assets->setBasePath ( $config->app->base->staticUri );
-			$assets->setAssetsDir ( 'assets/' );
-			$assets->setCssDir ( 'css/' );
-			$assets->setJsDir ( 'js/' );
-			return $assets;
-		}, true );
-		$di->set ( 'flash', function () {
-			$flash = new FlashDirect ( array (
-					'error' => 'alert alert-danger',
-					'success' => 'alert alert-success',
-					'notice' => 'alert alert-info',
-					'warning' => 'alert alert-warning' 
-			) );
-			return $flash;
-		}, true );
-		$di->set('acl',function(){
-			$acl = new Acl();
-			$acl->setDefaultAction(\Phalcon\Acl::DENY);
-			//$acl->addRole('Guest');
-			//$acl->addResource('frontend:index', array('index'));
-			//$acl->deny('Guest','frontend:index','index');
-			return $acl;
-		},true);
-		$di->set('session',function(){
-			$session = new SessionAdapter();
-			$session->start();
-			return $session ;
-		},true);
-		$di->set('token',function(){
-			$token = new Token();
-			return $token ;
-		});
+		if($di instanceof Thunderhawk\API\Di\FactoryDefault){
+			$di->initializeServices();
+		}
 		$this->setDI ( $di );
 	}
 	protected function _registerListeners() {
@@ -307,10 +191,10 @@ final class Engine extends Application implements EngineInterface, Throwable {
 			$this->registeredModule = $moduleName;
 			if (! file_exists ( $modulePath . 'Module.php' )) {
 				if ($this->eventsManager->fire ( 'application:moduleNotFound', $this ) !== false)
-					$this->throwException ( $moduleName, 20 );
+					throw new Engine\Exception($moduleName,20);
 			}
 			if (! file_exists ( $modulePath . 'Manifest.xml' )) {
-				$this->throwException ( $moduleName, 30 );
+				throw new Engine\Exception($moduleName,30);
 			}
 			$this->manifestManager->load ( $moduleName );
 			$manifest = $this->manifestManager->getManifest ( $moduleName );
@@ -318,6 +202,7 @@ final class Engine extends Application implements EngineInterface, Throwable {
 					'className' => $manifest->getModuleNamespace () . '\Module',
 					'path' => $modulePath . 'Module.php',
 					'namespace' => $manifest->getModuleNamespace (),
+					'name' => $manifest->getModuleName(),
 					'version' => $manifest->getVersion (),
 					'author' => $manifest->getAuthor () 
 			);
@@ -342,7 +227,5 @@ final class Engine extends Application implements EngineInterface, Throwable {
 		}
 		$this->registerModules ( $modules );
 		$this->router->setDefaultModule ( $this->config->modules->default );
-		// $defaultNamespace = $this->getModules()[$this->config->modules->default]['namespace'];
-		// $this->router->setDefaultNamespace($defaultNamespace.'\Controllers');
 	}
 }

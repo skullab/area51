@@ -1,0 +1,40 @@
+<li class="site-menu-category"><?php echo 'Administrator'; ?></li>
+
+<li class="site-menu-item has-sub">
+	<a href="javascript:void(0)" data-slug="admin-user"> 
+		<i class="site-menu-icon wb-user-circle" aria-hidden="true"></i> 
+		<span class="site-menu-title"><?php echo 'Users'; ?></span>
+		<?php $warning_user = $model->users->count('status_id != 1'); ?>
+		<?php if ($warning_user) { ?>
+		<div class="site-menu-badge">
+			<span class="badge badge-danger" ><?php echo $warning_user; ?></span>
+		</div>
+		<?php } ?>
+	</a>
+	<ul class="site-menu-sub">
+		<li class="site-menu-item">
+			<a class="animsition-link" href="<?php echo $this->url->getStatic('users/add'); ?>" data-slug="admin-user-add">
+				<i class="site-menu-icon " aria-hidden="true"></i> 
+				<span class="site-menu-title"><?php echo 'Add'; ?></span>
+			</a>
+		</li>
+		<li class="site-menu-item">
+			<a class="animsition-link" href="<?php echo $this->url->getStatic('users/list'); ?>" data-slug="admin-user-list">
+				<i class="site-menu-icon " aria-hidden="true"></i> 
+				<span class="site-menu-title"><?php echo 'List'; ?></span>
+			</a>
+		</li>
+		<li class="site-menu-item">
+			<a class="animsition-link" href="<?php echo $this->url->getStatic('users/failed'); ?>" data-slug="admin-user-failed">
+				<i class="site-menu-icon " aria-hidden="true"></i> 
+				<span class="site-menu-title"><?php echo 'Failed Attempts'; ?></span>
+			</a>
+		</li>
+		<li class="site-menu-item">
+			<a class="animsition-link" href="<?php echo $this->url->getStatic('users/forgot'); ?>" data-slug="admin-user-forgot"> 
+				<i class="site-menu-icon " aria-hidden="true"></i> 
+				<span class="site-menu-title"><?php echo 'Forgot password requests'; ?></span>
+			</a>
+		</li>
+	</ul>
+</li>

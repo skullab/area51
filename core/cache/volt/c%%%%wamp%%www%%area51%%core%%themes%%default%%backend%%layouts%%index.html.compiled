@@ -1,0 +1,6 @@
+<?php echo $this->partial('menus/gridmenu'); ?> 
+<?php echo $this->partial('menus/navbar'); ?> 
+<?php echo $this->partial('menus/menubar'); ?> 
+<?php echo $this->partial('pages/page'); ?>
+<!-- Footer -->
+<?php echo $this->partial('pages/footer'); ?>

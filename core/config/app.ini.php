@@ -2,8 +2,9 @@
 
 [app]
 
-base.uri		= "/"
-base.staticUri	= "//127.0.0.1/"
+base.uri		= "/area51/"
+;base.staticUri	= "//areariservata.iprovenzali.it/area51/"
+base.staticUri	= "//127.0.0.1/area51/"
 
 title			= "Thunderhawk"
 titleSeparator	= " - "
@@ -12,6 +13,15 @@ theme.main		= "main"
 theme.partials	= "common"
 theme.layouts	= "layouts"
 theme.name		= "default"
+
+;-------------------------------------------------------------+
+; CRYPT SALT - DON'T CHANGE THIS VALUE ! 					  |
+;-------------------------------------------------------------+
+; Change this only the first time that Thunderhawk
+; is installed, otherwise every encrypted data will be lost !
+;--------------------------------------------------------------
+crypt.salt		= "#8da9/7b064X.$lP"
+;--------------------------------------------------------------
 
 ;--------------+
 ; VOLT OPTIONS |
@@ -33,7 +43,7 @@ volt.stat = true
 ;Tell Volt if the templates must be compiled in each request 
 ;or only when they change
 ;----------------------------------------------------------------
-volt.compileAlways = false
+volt.compileAlways = true
 ;----------------------------------------------------------------
 :Allows to prepend a prefix to the templates in the 
 ;compilation path

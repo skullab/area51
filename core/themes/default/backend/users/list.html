@@ -1,0 +1,126 @@
+
+<div class="page animsition">
+	<div class="page-content">
+		<!-- Panel -->
+		<div class="panel">
+			<div class="panel-body">
+				<form class="page-search-form" role="search">
+					<div class="input-search input-search-dark">
+						<i class="input-search-icon wb-search" aria-hidden="true"></i> <input
+							type="text" class="form-control" id="inputSearch" name="search"
+							placeholder="Search Users">
+						<button type="button" class="input-search-close icon wb-close"
+							aria-label="Close"></button>
+					</div>
+				</form>
+
+				<div class="nav-tabs-horizontal">
+					<div class="dropdown page-user-sortlist">
+						Order By: <a class="dropdown-toggle inline-block"
+							data-toggle="dropdown" href="#" aria-expanded="false">Last
+							Active<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" role="menu">
+							<li class="active" role="presentation"><a
+								href="javascript:void(0)">Last Active</a></li>
+							<li role="presentation"><a href="javascript:void(0)">Username</a></li>
+							<li role="presentation"><a href="javascript:void(0)">Location</a></li>
+							<li role="presentation"><a href="javascript:void(0)">Register
+									Date</a></li>
+						</ul>
+					</div>
+
+					<ul class="nav nav-tabs nav-tabs-line" data-plugin="nav-tabs"
+						role="tablist">
+						<li class="active" role="presentation"><a data-toggle="tab"
+							href="#all_contacts" aria-controls="all_contacts" role="tab">All
+								Contacts</a></li>
+						<li role="presentation"><a data-toggle="tab"
+							href="#my_contacts" aria-controls="my_contacts" role="tab">My
+								Contacts</a></li>
+						<li role="presentation"><a data-toggle="tab"
+							href="#google_contacts" aria-controls="google_contacts"
+							role="tab">Google Contacts</a></li>
+						<li class="dropdown" role="presentation"><a
+							class="dropdown-toggle" data-toggle="dropdown" href="#"
+							aria-expanded="false"> <span class="caret"></span>Contacts
+						</a>
+							<ul class="dropdown-menu" role="menu">
+								<li role="presentation"><a data-toggle="tab"
+									href="#all_contacts" aria-controls="all_contacts" role="tab">All
+										Contacts</a></li>
+								<li class="active" role="presentation"><a data-toggle="tab"
+									href="#my_contacts" aria-controls="my_contacts" role="tab">My
+										Contacts</a></li>
+								<li role="presentation"><a data-toggle="tab"
+									href="#google_contacts" aria-controls="google_contacts"
+									role="tab">Google Contacts</a></li>
+							</ul></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="all_contacts" role="tabpanel">
+							<ul class="list-group">
+							{% for user in model.users.find() %}
+							<!-- USER -->
+								<li class="list-group-item {% if user.status_id != 1%}bg-orange-300{% endif %}">
+									<div class="media">
+										<div class="media-left">
+											<div class="avatar {% if user.status_id != 1%}avatar-locked{% else %}avatar-active{% endif %}">
+												<img src="{{ static_url() }}assets/portraits/1.jpg" alt="..."> <i
+													class="avatar avatar-busy"></i>
+											</div>
+										</div>
+										<div class="media-body">
+											<h4 class="media-heading">
+												{{ user.email }} <small>Last Access: 1 hour ago</small>
+											</h4>
+											<p>
+												<i class="icon icon-color wb-map" aria-hidden="true"></i>
+												Street 4425 Golf Course Rd
+											</p>
+											<div>
+												<a class="text-action" href="javascript:void(0)"> <i
+													class="icon icon-color wb-envelope" aria-hidden="true"></i>
+												</a> <a class="text-action" href="javascript:void(0)"> <i
+													class="icon icon-color wb-mobile" aria-hidden="true"></i>
+												</a> <a class="text-action" href="javascript:void(0)"> <i
+													class="icon icon-color bd-twitter" aria-hidden="true"></i>
+												</a> <a class="text-action" href="javascript:void(0)"> <i
+													class="icon icon-color bd-facebook" aria-hidden="true"></i>
+												</a> <a class="text-action" href="javascript:void(0)"> <i
+													class="icon icon-color bd-dribbble" aria-hidden="true"></i>
+												</a>
+											</div>
+										</div>
+										<div class="media-right">
+											<a href="{{ static_url('users/profile/id/') }}{{ user.id }}" type="button" class="btn btn-outline btn-success btn-sm">{{ _('Show profile') }}</a>
+										</div>
+									</div>
+								</li>
+							{% endfor %}
+							<!-- END USER -->
+							</ul>
+							<nav>
+								<ul class="pagination pagination-no-border">
+									<li><a href="javascript:void(0)" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
+									</a></li>
+									<li class="active"><a href="javascript:void(0)">1 <span
+											class="sr-only">(current)</span></a></li>
+									<li><a href="javascript:void(0)">2</a></li>
+									<li><a href="javascript:void(0)">3</a></li>
+									<li><a href="javascript:void(0)">4</a></li>
+									<li><a href="javascript:void(0)">5</a></li>
+									<li><a href="javascript:void(0)" aria-label="Next"> <span
+											aria-hidden="true">&raquo;</span>
+									</a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Panel -->
+	</div>
+</div>

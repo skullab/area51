@@ -10,7 +10,7 @@ use Phalcon\Mvc\Router\Route;
  * @author Ivan Maruca - ivan[dot]maruca[at]gmail[dot]com
  *        
  */
-class Manifest extends \SimpleXMLElement implements Throwable {
+class Manifest extends \SimpleXMLElement {
 	const TAG_MODULE = 'Module';
 	const TAG_APPLICATION = 'Application';
 	const TAG_NAMESPACE = 'namespace';
@@ -144,7 +144,6 @@ class Manifest extends \SimpleXMLElement implements Throwable {
 					self::ATTRIBUTE_ACTION => self::VALUE_INDEX 
 			);
 			$pattern = '/' . trim ( ( string ) $route );
-			// var_dump($pattern);
 			foreach ( $route->attributes () as $attribute => $value ) {
 				$value = ( string ) $value;
 				if ($attribute == self::ATTRIBUTE_HTTP_METHODS){
@@ -155,14 +154,6 @@ class Manifest extends \SimpleXMLElement implements Throwable {
 			if ($paths [self::ATTRIBUTE_MODULE] != $this->getModuleName ()) {
 				unset ( $paths [self::ATTRIBUTE_NAMESPACE] );
 			}
-			/*$routeObject = new Route ( $pattern, $paths );
-			if (isset ( $route [self::ATTRIBUTE_HTTP_METHODS] )) {
-				$httpMethods = explode ( ',', ( string ) $route [self::ATTRIBUTE_HTTP_METHODS] );
-				$routeObject->via ( $httpMethods );
-			}
-			if (isset ( $route [self::ATTRIBUTE_NAME] )) {
-				$routeObject->setName ( ( string ) $route [self::ATTRIBUTE_NAME] );
-			}*/
 			$routes [] = array('pattern' => $pattern , 'paths' => $paths);
 		}
 		return $routes;
@@ -234,13 +225,5 @@ class Manifest extends \SimpleXMLElement implements Throwable {
 	 * @see SimpleXMLElement::addChild()
 	 */
 	public function addChild($name, $value = null, $namespace = null) { /* do nothing */
-	}
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see \Thunderhawk\API\Throwable::throwException()
-	 */
-	public function throwException($message = null, $code = 0, Exception $previous = null) {
 	}
 }

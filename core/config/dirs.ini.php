@@ -4,14 +4,14 @@
 
 ;PRIVATE
 
-core.api		= APP_PATH "core/API/"
-core.modules	= APP_PATH "core/modules/"
-core.cache.base	= APP_PATH "core/cache/"
-core.cache.volt	= APP_PATH "core/cache/volt/"
-core.logs		= APP_PATH "core/logs/"
-core.plugins 	= APP_PATH "core/plugins/"
-core.themes		= APP_PATH "core/themes/"
-core.config		= APP_PATH "core/config/"
+core.api		= CORE_PATH "API/"
+core.modules	= CORE_PATH "modules/"
+core.cache.base	= CORE_PATH "cache/"
+core.cache.volt	= CORE_PATH "cache/volt/"
+core.logs		= CORE_PATH "logs/"
+core.plugins 	= CORE_PATH "plugins/"
+core.themes		= CORE_PATH "themes/"
+core.config		= CORE_PATH "config/"
 
 ;PUBLIC
 

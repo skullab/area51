@@ -1,31 +1,240 @@
 <?php echo $this->tag->getDoctype(); ?>
-<html lang="it">
-	<head>
-		<?php echo $this->tag->getTitle(); ?>
+<html class="no-js before-run" lang="<?php echo $this->translator->getLang(); ?>">
+<head>
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta name="description" content="bootstrap admin template">
+  <meta name="author" content="">
 
-		<!-- BEGIN META -->
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="keywords" content="your,keywords">
-		<meta name="description" content="Short explanation about this website">
-		<!-- END META -->
+  <?php echo $this->tag->getTitle(); ?>
 
-		<!-- BEGIN STYLESHEETS -->
-		<?php echo $this->assets->outputCss(); ?>
-		<!-- END STYLESHEETS -->
+  <!-- Apple touch | Favicon -->
+  
+  <link rel="apple-touch-icon" href="<?php echo $this->url->getStatic(''); ?>assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="<?php echo $this->url->getStatic(''); ?>assets/images/favicon.ico">
+  <!-- Stylesheets -->
+  
+  <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/css/bootstrap-extend.min.css">
+  <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/css/site.min.css">
+  <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/vendor/animsition/animsition.css">
+  <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/vendor/asscrollable/asScrollable.css">
+  <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/vendor/switchery/switchery.css">
+  <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/vendor/intro-js/introjs.css">
+  <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/vendor/slidepanel/slidePanel.css">
+  <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/vendor/flag-icon-css/flag-icon.css">
+  <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/css/pages/login.css">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/vendor/bootstrap-treeview/bootstrap-treeview.css">
+  <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/css/../fonts/glyphicons/glyphicons.css">
+  
+  <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/fonts/web-icons/web-icons.min.css">
+  <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/fonts/brand-icons/brand-icons.min.css">
+  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
 
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-		<?php echo $this->assets->outputJs('ie'); ?>
-		<![endif]-->
-	</head>
-	<body class="menubar-hoverable header-fixed menubar-pin ">
+  <!--[if lt IE 9]>
+  	<?php echo $this->assets->outputJs(); ?>
+    <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/html5shiv/html5shiv.min.js"></script>
+    <![endif]-->
 
-		<?php echo $this->getContent(); ?>
+  <!--[if lt IE 10]>
+  	<?php echo $this->assets->outputJs(); ?>
+    <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/media-match/media.match.min.js"></script>
+    <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/respond/respond.min.js"></script>
+    <![endif]-->
 
-		<!-- BEGIN JAVASCRIPT -->
-		<?php echo $this->assets->outputJs(); ?>
-		<!-- END JAVASCRIPT -->
+  <!-- Scripts -->
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/breakpoints/breakpoints.js"></script>
+  <script>
+    Breakpoints();
+  </script>
+  
+  <style>
+  .avatar-active i{background-color:#46be8a}
+  .avatar-locked i{background-color:#f96868}
+  </style>
+</head>
+<body class="<?php echo $body_class; ?>">
+  	<!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <?php echo $this->flashSession->output(); ?>
+	<?php echo $this->getContent(); ?>
+  	<!-- Core  -->
+  
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/jquery/jquery.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/bootstrap/bootstrap.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/animsition/jquery.animsition.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/asscroll/jquery-asScroll.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/mousewheel/jquery.mousewheel.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/asscrollable/jquery.asScrollable.all.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/ashoverscroll/jquery-asHoverScroll.js"></script>
 
-	</body>
+  <!-- Plugins -->
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/switchery/switchery.min.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/intro-js/intro.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/screenfull/screenfull.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/slidepanel/jquery-slidePanel.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/bootstrap-treeview/bootstrap-treeview.min.js"></script>
+
+  <!-- Scripts -->
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/js/core.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/js/site.js"></script>
+
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/js/sections/menu.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/js/sections/menubar.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/js/sections/sidebar.js"></script>
+
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/js/configs/config-colors.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/js/configs/config-tour.js"></script>
+
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/js/components/asscrollable.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/js/components/animsition.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/js/components/slidepanel.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/js/components/switchery.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/formvalidation/formValidation.min.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/formvalidation/framework/bootstrap.min.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/js/components/bootstrap-treeview.js"></script>
+  
+  <script type="text/javascript">
+    (function(document, window, $) {
+      'use strict';
+
+      var Site = window.Site;
+      $(document).ready(function() {
+        Site.run();
+      });
+    })(document, window, jQuery);
+  </script>
+<script>
+var defaults = $.components.getDefaults("treeview");
+console.log(defaults);
+var treeData = [
+            {
+            	text: "Gruppo 1",
+            	state: {
+            	    expanded: false         	  
+            	  },
+              nodes: [
+                {
+                  text: "Fatturatario 1-1",
+                  nodes: [
+                    {
+                      text: "PDV 1-1-1",
+                    },
+                    {
+                      text: "PDV 1-1-2"
+                    }
+                  ]
+                },
+                {
+                  text: "Fatturatario 1-2",
+                  nodes: [
+                          {
+                            text: "PDV 1-2-1",
+                          },
+                          {
+                            text: "PDV 1-2-2"
+                          }
+                        ]
+                }
+              ]
+            },{
+            text: "Gruppo 2",
+        	state: {
+        	    expanded: false         	  
+        	  },
+          nodes: [
+            {
+              text: "Fatturatario 2-1",
+              nodes: [
+                {
+                  text: "PDV 2-1-1",
+                },
+                {
+                  text: "PDV 2-1-2"
+                }
+              ]
+            },
+            {
+              text: "Fatturatario 2-2",
+              nodes: [
+                      {
+                        text: "PDV 2-2-1",
+                      },
+                      {
+                        text: "PDV 2-2-2"
+                      }
+                    ]
+            }
+          ]
+        }
+          ];
+/*var data = $.extend({}, defaults, {
+    data: treeData
+});*/
+var $nodes = [] ;
+var $tree = $('#exampleSearchableTree').treeview({
+	data:treeData,
+	showCheckbox: true,
+	showTags: true,
+	onNodeChecked: function(event, node) {
+		updateSelectedNode(node,true);
+		$('#exampleSearchableTree').treeview('expandNode',[node.nodeId]);
+		for(var n in node.nodes){
+			if(node.nodes[n].state.checked == false){
+				$('#exampleSearchableTree').treeview('checkNode',[node.nodes[n].nodeId]);
+			}
+		}
+      },
+	onNodeUnchecked: function (event, node) {
+		updateSelectedNode(node,false);
+	},
+	onNodeSelected: function (event,node){
+		
+	},
+	onNodeUnselected: function (event,node){
+		
+	},
+	onSearchComplete: function (event, results){
+		
+	}
+});
+$('#inputSearchable').keyup(function(e){
+	searchTree($(this).val());
+});
+
+function updateSelectedNode(node,add){
+	if(add == true){
+		$nodes[node.nodeId] = node ;
+	}else{
+		$nodes[node.nodeId] = false ;
+	}
+	tot = 0 ;
+	for(var n in $nodes){
+		if($nodes[n] !== false){
+			tot++;
+		}
+	}
+	$('#selectedNode').text(tot);
+	console.log($nodes);
+}
+function showData(){
+	console.log($nodes);
+}
+function searchTree(text){
+	if(!text){
+		text = $('#inputSearchable').val();
+	}
+	$('#exampleSearchableTree').treeview('search',[text,{
+		ignoreCase: true,     // case insensitive
+  		exactMatch: false,    // like or equals
+  		revealResults: true,  // reveal matching nodes}]);
+	}]);
+}
+</script>
+</body>
+
 </html>

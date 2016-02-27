@@ -5,6 +5,7 @@ use Phalcon\Mvc\Controller as PhalconController;
 use Phalcon\Http\Response;
 use Phalcon\Mvc\View;
 use Thunderhawk\API\Component\Settings;
+use Thunderhawk\API\Component\Auth;
 abstract class Controller extends PhalconController{
 	
 	const USE_MODULE_VIEWS = 0 ;
@@ -34,6 +35,15 @@ abstract class Controller extends PhalconController{
 	}
 	public function getModuleName(){
 		return $this->dispatcher->getModuleName();
+	}
+	public function getControllerName(){
+		return $this->dispatcher->getControllerName();
+	}
+	public function getActionName(){
+		return $this->dispatcher->getActionName();
+	}
+	public function getResource(){
+		return $this->getModuleName().':'.$this->getControllerName();
 	}
 	public function getModuleManifest(){
 		return $this->manifestManager->getManifest($this->getModuleName());
@@ -76,64 +86,48 @@ abstract class Controller extends PhalconController{
 		$view->render($controller,$action,$params);
 	}
 	public function show404Action(){
-		//$this->renderThemeView('errors', 'show404');
-		//$this->switchViewsDir(self::USE_THEME_VIEWS);
-		//$view = clone $this->view ;
-		//$this->renderModuleView('index', 'index');
-		//$this->renderModuleView('index','index');
-		$this->view->pick('index/index');
-		$content = $this->view->getPartial('errors/show404');
-		//$this->view->setContent($content);
-		echo $content ;
+		$this->view->body_class = "page-error page-error-404 layout-full" ;
+		$this->view->partial('errors/show404');
+	}
+	public function forward($controller,$action){
+		return $this->dispatcher->forward(array(
+				'controller' => $controller,
+				'action' => $action
+		));
+	}
+	public function redirect($uri,$static = true){
+		$uri = $static ? $this->url->getStaticBaseUri().$uri : $uri ;
+		return $this->response->redirect($uri);
 	}
 	public function route404Action(){}
 	public function indexAction(){}
 	public function beforeExecuteRoute(){
-		/*$auth = $this->session->get('auth');
-		if(!$auth){
-			$role = 'Guest' ;
+		$resource = $this->getResource();
+		$action = $this->getActionName();
+		$auth = $this->auth->getIdentity();
+		if($auth){
+			$role = $auth['role'] ;
 		}else{
-			$role = 'Admin' ;
+			$role = 'Guest' ;
 		}
-		
-		$resource = $this->dispatcher->getModuleName().':'.$this->dispatcher->getControllerName();
-		$action = $this->dispatcher->getActionName();
-		if(!$this->acl->isAllowed($role,$resource,$action)){
-			$this->accessDenied($role, $resource, $action);
-		}*/
+		try{
+			$this->auth->checkIntegrity();
+		}catch (Auth\Exception $e){
+			$this->flashSession->error($e->getMessage());
+			return $this->redirect();
+		}
+		return $this->perfomAcl($role, $resource, $action);
 	}
 	protected function prepareAssets(){
-		$themeDir = 'theme-default/' ; 
-		$this->assets->
-		addCss('http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900',false)->
-		addCss($themeDir.'bootstrap.css')->
-		addCss($themeDir.'materialadmin.css')->
-		addCss($themeDir.'font-awesome.min.css')->
-		addCss($themeDir.'material-design-iconic-font.min.css');
-		/*****/
-		$this->assets->collection('ie')->
-		addJs('assets/js/libs/utils/html5shiv.js')->
-		addJs('assets/js/libs/utils/respond.min.js');
-		/*****/
-		$this->assets->
-		addJs('libs/jquery/jquery-1.11.2.min.js')->
-		addJs('libs/jquery/jquery-migrate-1.2.1.min.js')->
-		addJs('libs/bootstrap/bootstrap.min.js')->
-		addJs('libs/spin.js/spin.min.js')->
-		addJs('libs/autosize/jquery.autosize.min.js')->
-		addJs('libs/nanoscroller/jquery.nanoscroller.min.js')->
-		addJs('core/source/App.js')->
-		addJs('core/source/AppNavigation.js')->
-		addJs('core/source/AppOffcanvas.js')->
-		addJs('core/source/AppCard.js')->
-		addJs('core/source/AppForm.js')->
-		addJs('core/source/AppNavSearch.js')->
-		addJs('core/source/AppVendor.js')->
-		addJs('core/demo/Demo.js');
 		
 	}
+	protected function perfomAcl($role,$resource,$action){
+		if(!$this->acl->isAllowed($role,$resource,$action)){
+			return $this->accessDenied($role, $resource, $action);
+		}
+	}
 	protected function accessDenied($role,$resource,$action){
-		var_dump('access denied for : '.$role.' '.$resource.' '.$action);
+		var_dump('access denied for '.$role);
 	}
 	public function sendAjax($payload,array $headers = array()){
 		$status      = 200;

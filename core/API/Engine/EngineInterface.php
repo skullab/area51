@@ -10,4 +10,5 @@ interface EngineInterface {
 	public function getDbPrefix();
 	public function getBaseUri();
 	public function getConfig();
+	public function getVersion();
 }
