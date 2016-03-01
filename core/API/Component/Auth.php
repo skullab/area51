@@ -9,6 +9,7 @@ use Thunderhawk\API\Mvc\Model\User\UsersRememberTokens;
 use Thunderhawk\API\Component\Defuse\Crypto;
 use Thunderhawk\API\Mvc\Model\User\UsersForgotPassword;
 use Thunderhawk\API\Mvc\Model\User\UsersStatus;
+use Thunderhawk\API\Mvc\Model\User\UsersLogin;
 class Auth extends Component implements AuthInterface{
 	
 	const ROLE_ADMIN	= 'Admin';
@@ -123,6 +124,10 @@ class Auth extends Component implements AuthInterface{
 	 * @see \Thunderhawk\API\Component\Auth\AuthInterface::logout()
 	 */
 	public function logout() {
+		$identity = $this->getIdentity();
+		$user = Users::findFirstById($identity['id']);
+		$user->login->online = 0;
+		$user->save();
 		$this->deleteCookies();
 		$this->session->remove(self::SESSION_AUTH);
 	}
@@ -177,15 +182,37 @@ class Auth extends Component implements AuthInterface{
 	 * @see \Thunderhawk\API\Component\Auth\AuthInterface::registerIdentity()
 	 */
 	public function registerIdentity(Users $user) {
+		if(!$user->login){
+			$login = new UsersLogin();
+			$login->users_id = $user->id ;
+			$login->last_access = date("Y-m-d H:i:s");
+			$login->save();
+		}
+		$user->login->last_access = date("Y-m-d H:i:s");
+		$user->login->online = 1 ;
+		$user->login->busy = 0 ;
+		$user->save();
 		$this->session->set(self::SESSION_AUTH,array(
 				'id' => $user->id,
 				'email' => $user->email,
 				'status' => $user->status->name,
 				'role' => $user->role,
-				'user-agent' => $this->request->getUserAgent()
+				'display_name' => $user->details ? $user->details->name.' '.$this->details->surname : $user->email 
 		));
 	}
 
+	public function updateOnlineUser($user_id = null,$online = 1,$busy = 0){
+		if($user_id == null){
+			$user_id = $this->getIdentity()['id'] ;
+		}
+		$user = Users::findFirstById($user_id);
+		if($user && $user->login){
+			$user->login->online = $online ;
+			$user->login->busy = $busy ;
+			$user->login->last_operation = date("Y-m-d H:i:s");
+			$user->save();
+		}
+	}
 	/**
 	 * {@inheritDoc}
 	 * @see \Thunderhawk\API\Component\Auth\AuthInterface::checkUserStatus()
@@ -213,7 +240,9 @@ class Auth extends Component implements AuthInterface{
 				throw new Auth\Exception(null,700);
 			}
 			$this->checkUserStatus($user);
+			return true ;
 		}
+		return false ;
 	}
 	public function forgotPassword($email) {
 		$user = Users::findFirstByEmail($email);
@@ -270,7 +299,7 @@ class Auth extends Component implements AuthInterface{
 			throw new Auth\Exception(null,500);
 		}
 		$privateKey = Crypto::decrypt(rawurldecode($token),rawurldecode($publicKey));
-		if($forgot->private_key != $privateKey){
+		if(!hash_equals($forgot->private_key, $privateKey)){
 			$this->userThrottling($forgot->user->id);
 			$forgot->delete();
 			throw new Auth\Exception(null,600);

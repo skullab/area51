@@ -4,6 +4,7 @@ namespace Thunderhawk\API;
 
 use Phalcon\Mvc\Application;
 use Phalcon\Loader;
+use Phalcon\Mvc\View\Engine\Volt\Compiler as VoltCompiler;
 use Thunderhawk\API\Engine\EngineInterface;
 use Thunderhawk\API\Di\FactoryDefault;
 use Thunderhawk\API\Engine\Listener as EngineListener;
@@ -98,6 +99,19 @@ final class Engine extends Application implements EngineInterface{
 	}
 	public function isService($name) {
 		return $this->getDI ()->has ( $name );
+	}
+	
+	public function getVoltCompiler(){
+		$volt = new VoltCompiler();
+		$volt->setOptions(array(
+				'stat' => true,
+				'compileAlways' => true
+		));
+		require CORE_PATH.'config/volt.functions.php';
+		foreach ($voltFunctions as $macro => $function){
+			$volt->addFunction($macro,$function);
+		}
+		return $volt ;
 	}
 	/**
 	 * Check if a module is registered

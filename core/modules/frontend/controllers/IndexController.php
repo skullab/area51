@@ -8,10 +8,13 @@ use Thunderhawk\API\Component\Auth;
 class IndexController extends Controller {
 	protected function onInitialize(){
 		$this->view->body_class = "page-login layout-full" ;
+		$this->cssPlugins->addCss('css/pages/login.css');
+		$this->jsPlugins->addJs('vendor/jquery-placeholder/jquery.placeholder.js');
+		$this->jsComponents->addJs('js/components/jquery-placeholder.js');
 	}
 	public function indexAction(){
 		if($this->auth->hasRememberMe()){
-			var_dump('remember');
+			//var_dump('remember');
 			try{
 				if($this->auth->loginWithRememberMe()){
 					return $this->redirect('dashboard');
@@ -19,7 +22,16 @@ class IndexController extends Controller {
 			}catch(Auth\Exception $e){
 				$this->flash->error($e->getMessage());
 			}
+		}else {
+			try{
+				if($this->auth->checkIntegrity()){
+					return $this->redirect('dashboard');
+				}
+			}catch(\Excpetion $e){
+				$this->flash->error($e->getMessage());
+			}
 		}
+		
 	}
 	public function signAction() {
 		if ($this->request->isPost ()) {

@@ -10,6 +10,8 @@ use Thunderhawk\API\Engine;
 class Manager {
 	const LOADER				= 'loader' ;
 	const VIEW					= 'view' ;
+	const VIEW_SIMPLE			= 'viewSimple';
+	const VIEW_JS				= 'viewJs';
 	const URL					= 'url' ;
 	const ROUTER				= 'router' ;
 	const DISPATCHER			= 'dispatcher' ;

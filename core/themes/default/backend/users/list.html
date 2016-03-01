@@ -1,5 +1,13 @@
 
 <div class="page animsition">
+<div class="page-header">
+		<ol class="breadcrumb">
+			<li><a href="{{ static_url('dashboard') }}">Home</a></li>
+			<li class="active">Users</li>
+		</ol>
+		<h1 class="page-title">List</h1>
+		
+	</div>
 	<div class="page-content">
 		<!-- Panel -->
 		<div class="panel">
@@ -60,35 +68,69 @@
 					<div class="tab-content">
 						<div class="tab-pane active" id="all_contacts" role="tabpanel">
 							<ul class="list-group">
+							<style>
+							.user-status-bar{position:absolute;left:0;top:0;height:100%;width:10px;}
+							</style>
 							{% for user in model.users.find() %}
 							<!-- USER -->
-								<li class="list-group-item {% if user.status_id != 1%}bg-orange-300{% endif %}">
+							{% set name = user.details ? user.details.name : user.email %}
+							{% set surname = user.details ? user.details.surname : '' %}
+							{% set address = user.details ? user.details.address : '' %}
+							{% set phone = user.details ? user.details.phone : '' %}
+							{% set online = user.login ? user.login.online : 0 %}
+							{% set busy = user.login ? user.login.busy : 0 %}
+							{% set last_access = user.login ? user.login.last_access : 0 %}
+							{% set last_operation = user.login ? user.login.last_operation : 0 %}
+							{% set unix_last_op = user.login ? user.login.unix_last_operation : 0 %}
+							
+							{% if unix_last_op+(60*30) < time() %}
+								{% if user.login %}
+									{% set user.login.busy = 1 %}
+									{% set save = user.save() %}
+									{% set busy = 1 %}
+								{% endif %}
+							{% endif %}
+							
+							{% if unix_last_op+(60*60) < time() %}
+								{% if user.login %}
+									{% set user.login.busy = 0 %}
+									{% set user.login.online = 0 %}
+									{% set save = user.save() %}
+									{% set busy = 0 %}
+									{% set online = 0 %}
+								{% endif %}
+							{% endif %}
+							
+								<li class="list-group-item">
+									
 									<div class="media">
 										<div class="media-left">
-											<div class="avatar {% if user.status_id != 1%}avatar-locked{% else %}avatar-active{% endif %}">
-												<img src="{{ static_url() }}assets/portraits/1.jpg" alt="..."> <i
-													class="avatar avatar-busy"></i>
+											<div class="user-status-bar {% if user.status.name != 'active' %}bg-orange-800{% endif %}"></div>
+											<div class="avatar {% if busy is 1 %}avatar-busy{% elseif online is 1 %}avatar-online{% else %}avatar-off{% endif %}">
+												<img src="{{ static_url() }}assets/portraits/1.jpg" alt="..."> <i class="avatar"></i>
 											</div>
 										</div>
 										<div class="media-body">
 											<h4 class="media-heading">
-												{{ user.email }} <small>Last Access: 1 hour ago</small>
+												{{ name }} {{ surname }} <small><br>{{ _('Last Access')}}: {{ last_access }}<br>{{ _('Last operation') }}: {{ last_operation }}</small>
 											</h4>
 											<p>
 												<i class="icon icon-color wb-map" aria-hidden="true"></i>
-												Street 4425 Golf Course Rd
+												{{ address }}
 											</p>
 											<div>
-												<a class="text-action" href="javascript:void(0)"> <i
+												<a class="text-action" href="mailto:{{ user.email }}"> <i
 													class="icon icon-color wb-envelope" aria-hidden="true"></i>
 												</a> <a class="text-action" href="javascript:void(0)"> <i
-													class="icon icon-color wb-mobile" aria-hidden="true"></i>
+													class="icon icon-color wb-mobile" aria-hidden="true"
+													data-toggle="tooltip" data-placement="top" data-trigger="click" 
+													data-original-title="{{ phone }}"></i>
 												</a> <a class="text-action" href="javascript:void(0)"> <i
 													class="icon icon-color bd-twitter" aria-hidden="true"></i>
 												</a> <a class="text-action" href="javascript:void(0)"> <i
 													class="icon icon-color bd-facebook" aria-hidden="true"></i>
 												</a> <a class="text-action" href="javascript:void(0)"> <i
-													class="icon icon-color bd-dribbble" aria-hidden="true"></i>
+													class="icon icon-color bd-linkedin" aria-hidden="true"></i>
 												</a>
 											</div>
 										</div>

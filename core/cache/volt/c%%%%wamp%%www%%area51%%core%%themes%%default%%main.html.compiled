@@ -11,29 +11,32 @@
   <?php echo $this->tag->getTitle(); ?>
 
   <!-- Apple touch | Favicon -->
-  
   <link rel="apple-touch-icon" href="<?php echo $this->url->getStatic(''); ?>assets/images/apple-touch-icon.png">
   <link rel="shortcut icon" href="<?php echo $this->url->getStatic(''); ?>assets/images/favicon.ico">
   <!-- Stylesheets -->
-  
   <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/css/bootstrap-extend.min.css">
   <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/css/site.min.css">
+  
   <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/vendor/animsition/animsition.css">
   <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/vendor/asscrollable/asScrollable.css">
   <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/vendor/switchery/switchery.css">
   <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/vendor/intro-js/introjs.css">
   <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/vendor/slidepanel/slidePanel.css">
   <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/vendor/flag-icon-css/flag-icon.css">
-  <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/css/pages/login.css">
-  <!-- Fonts -->
-  <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/vendor/bootstrap-treeview/bootstrap-treeview.css">
   <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/css/../fonts/glyphicons/glyphicons.css">
+  
+  <!-- PLUGINS CSS -->
+  <?php echo $this->assets->outputCss('cssPlugins'); ?>
   
   <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/fonts/web-icons/web-icons.min.css">
   <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/fonts/brand-icons/brand-icons.min.css">
+  <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/fonts/material-design/material-design.css">
+  <!-- Fonts -->
   <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
 
+  <?php echo $this->assets->outputCss(); ?>
+  <?php echo $this->assets->outputInlineCss(); ?>
   <!--[if lt IE 9]>
   	<?php echo $this->assets->outputJs(); ?>
     <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/html5shiv/html5shiv.min.js"></script>
@@ -51,12 +54,9 @@
     Breakpoints();
   </script>
   
-  <style>
-  .avatar-active i{background-color:#46be8a}
-  .avatar-locked i{background-color:#f96868}
-  </style>
 </head>
 <body class="<?php echo $body_class; ?>">
+	
   	<!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -77,8 +77,10 @@
   <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/intro-js/intro.js"></script>
   <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/screenfull/screenfull.js"></script>
   <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/slidepanel/jquery-slidePanel.js"></script>
-  <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/bootstrap-treeview/bootstrap-treeview.min.js"></script>
-
+  
+  <!-- PLUGINS JS -->
+  <?php echo $this->assets->outputJs('jsPlugins'); ?>
+  
   <!-- Scripts -->
   <script src="<?php echo $this->url->getStatic(''); ?>assets/js/core.js"></script>
   <script src="<?php echo $this->url->getStatic(''); ?>assets/js/site.js"></script>
@@ -94,24 +96,98 @@
   <script src="<?php echo $this->url->getStatic(''); ?>assets/js/components/animsition.js"></script>
   <script src="<?php echo $this->url->getStatic(''); ?>assets/js/components/slidepanel.js"></script>
   <script src="<?php echo $this->url->getStatic(''); ?>assets/js/components/switchery.js"></script>
-  <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/formvalidation/formValidation.min.js"></script>
-  <script src="<?php echo $this->url->getStatic(''); ?>assets/vendor/formvalidation/framework/bootstrap.min.js"></script>
-  <script src="<?php echo $this->url->getStatic(''); ?>assets/js/components/bootstrap-treeview.js"></script>
+  
+  <?php echo $this->assets->outputJs('jsComponents'); ?>
   
   <script type="text/javascript">
     (function(document, window, $) {
       'use strict';
-
+	  
       var Site = window.Site;
       $(document).ready(function() {
         Site.run();
+        $(window).on('unload',function(){
+        	
+        });
       });
     })(document, window, jQuery);
   </script>
+  
+  <!-- CUSTOM JS -->
+  
+  <?php echo $this->assets->outputJs('jsControllers'); ?>
+  <?php echo $this->assets->outputJs(); ?>
+  <?php echo $this->assets->outputRenderInlineJs(); ?>
+  
 <script>
-var defaults = $.components.getDefaults("treeview");
-console.log(defaults);
-var treeData = [
+<!-- TODO REMOVE -->
+/*(function() {
+    var defaults = $.components.getDefaults("wizard");
+    var options = $.extend(true, {}, defaults, {
+      onInit: function() {
+        $('#formContainer').formValidation({
+          framework: 'bootstrap',
+          fields: {
+            email: {
+              validators: {
+            	emailAddress: {
+                      message: "<?php echo 'The email address is not valid'; ?>"
+                },
+                notEmpty: {
+                  message: "<?php echo 'The email is required'; ?>"
+                },
+               	
+              }
+            },
+            password: {
+              validators: {
+                notEmpty: {
+                  message: "<?php echo 'The password is required'; ?>"
+                },
+                stringLength: {
+                    min: 8,
+                    message: "<?php echo 'The password is too short'; ?>"
+               	},
+               	regexp: {
+               		regexp: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*#?&.])[A-Za-z\d$@$!%*#?&.]/,
+               		message: "<?php echo 'Password MUST contains at least'; ?>:<ul>"+
+               			"<li><?php echo '1 Uppercase Alphabet'; ?></li>"+
+               			"<li><?php echo '1 Lowercase Alphabet'; ?></li>"+
+               			"<li><?php echo '1 Number'; ?></li>"+
+               			"<li><?php echo '1 Special character'; ?> : @ $ ! % * ? & # .</li>"+
+               			"</ul>"
+               	}
+              }
+            }
+          }
+        });
+      },
+      validator: function() {
+        var fv = $('#formContainer').data(
+          'formValidation');
+
+        var $this = $(this);
+
+        // Validate the container
+        fv.validateContainer($this);
+
+        var isValidStep = fv.isValidContainer($this);
+        if (isValidStep === false || isValidStep === null) {
+          return false;
+        }
+
+        return true;
+      },
+      onFinish: function() {
+        // $('#formContainer').submit();
+      },
+      buttonsAppendTo: '.panel-body'
+    });
+
+    $("#wizardFormContainer").wizard(options);
+  })();
+  
+/*var treeData = [
             {
             	text: "Gruppo 1",
             	state: {
@@ -172,9 +248,7 @@ var treeData = [
           ]
         }
           ];
-/*var data = $.extend({}, defaults, {
-    data: treeData
-});*/
+
 var $nodes = [] ;
 var $tree = $('#exampleSearchableTree').treeview({
 	data:treeData,
@@ -233,7 +307,7 @@ function searchTree(text){
   		exactMatch: false,    // like or equals
   		revealResults: true,  // reveal matching nodes}]);
 	}]);
-}
+}*/
 </script>
 </body>
 

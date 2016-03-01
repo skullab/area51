@@ -11,6 +11,8 @@ abstract class Controller extends PhalconController{
 	const USE_MODULE_VIEWS = 0 ;
 	const USE_THEME_VIEWS = 1 ;
 	protected $settings ;
+	protected $cssPlugins ;
+	protected $jsPlugins,$jsComponents,$jsControllers ;
 	
 	public function initialize(){
 		$this->session->start();
@@ -27,8 +29,13 @@ abstract class Controller extends PhalconController{
 		if($this->settings === false){
 			$this->settings = new Settings();
 		}
+		$this->cssPlugins = $this->assets->collection('cssPlugins');
+		$this->jsPlugins = $this->assets->collection('jsPlugins');
+		$this->jsComponents = $this->assets->collection('jsComponents');
+		$this->jsControllers = $this->assets->collection('jsControllers');
+		$this->view->body_class = '' ;
 		$this->onInitialize();
-		$this->prepareAssets();
+		
 	}
 	public function getNamespaceName(){
 		$this->dispatcher->getNamespaceName();
@@ -53,14 +60,14 @@ abstract class Controller extends PhalconController{
 			case self::USE_THEME_VIEWS:
 				$this->view->setViewsDir('themes/'.$this->theme->name.'/');
 				$this->view->setPartialsDir($this->theme->partials.'/');
-				$this->view->setLayoutsDir($this->theme->layouts.'/');
+				//$this->view->setLayoutsDir($this->theme->layouts.'/');
 				$this->view->setMainView($this->theme->main);
 				break;
 			case self::USE_MODULE_VIEWS:
 				$this->view->setViewsDir('themes/'.$this->theme->name.'/'.
 				$this->dispatcher->getModuleName().'/');
 				$this->view->setPartialsDir('../'.$this->theme->partials.'/');
-				$this->view->setLayoutsDir('../'.$this->theme->layouts.'/');
+				//$this->view->setLayoutsDir($this->theme->layouts.'/');
 				$this->view->setMainView('../'.$this->theme->main);
 				
 		}
@@ -107,9 +114,13 @@ abstract class Controller extends PhalconController{
 		$auth = $this->auth->getIdentity();
 		if($auth){
 			$role = $auth['role'] ;
+			$this->view->display_name = $auth['display_name'];
+			$this->auth->updateOnlineUser();
 		}else{
 			$role = 'Guest' ;
+			//$this->view->display_name = '' ;
 		}
+		
 		try{
 			$this->auth->checkIntegrity();
 		}catch (Auth\Exception $e){
@@ -118,16 +129,13 @@ abstract class Controller extends PhalconController{
 		}
 		return $this->perfomAcl($role, $resource, $action);
 	}
-	protected function prepareAssets(){
-		
-	}
 	protected function perfomAcl($role,$resource,$action){
 		if(!$this->acl->isAllowed($role,$resource,$action)){
 			return $this->accessDenied($role, $resource, $action);
 		}
 	}
 	protected function accessDenied($role,$resource,$action){
-		var_dump('access denied for '.$role);
+		//var_dump('access denied for '.$role);
 	}
 	public function sendAjax($payload,array $headers = array()){
 		$status      = 200;

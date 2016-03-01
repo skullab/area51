@@ -21,6 +21,14 @@ class FactoryDefault extends PhalconFactoryDefault{
 					$app->merge($c);
 				}
 			}
+			
+			$this->set(ServiceManager::VIEW_JS,function(){
+				$simple = new \Phalcon\Mvc\View\Simple();
+				$simple->registerEngines(array(
+						".js" => "Thunderhawk\API\Mvc\View\Engine\VoltJs"
+				));
+				return $simple ;
+			},true);
 			//$dirs = new ConfigIni ( $files['dirs'] );
 			//$db = new ConfigIni ( CORE_PATH . 'config/db.ini.php' );
 			//$smtp = new ConfigIni ( CORE_PATH . 'config/smtp.ini.php' );

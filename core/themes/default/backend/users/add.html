@@ -1,39 +1,163 @@
+<style>
+
+</style>
 <div class="page animsition">
 	<div class="page-header">
 		<ol class="breadcrumb">
-			<li><a href="../index.html">Home</a></li>
-			<li class="active">Advanced UI</li>
+			<li><a href="{{ static_url('dashboard') }}">{{ _('Home') }}</a></li>
+			<li class="active">{{ _('Users') }}</li>
 		</ol>
-		<h1 class="page-title">Treeview</h1>
-		<div class="page-header-actions">
-			<a class="btn btn-sm btn-inverse btn-round"
-				href="https://github.com/jonmiles/bootstrap-treeview"
-				target="_blank"> <i class="icon wb-link" aria-hidden="true"></i>
-				<span class="hidden-xs">Official Website</span>
-			</a>
-		</div>
+		<h1 class="page-title">{{ _('Add a user') }}</h1>
 	</div>
-	<div class="page-content">
-		<!-- Example Searchable Tree -->
-		<div class="example-wrap">
-			<h4 class="example-title">Searchable Tree</h4>
-			<form class="form-group" id="exampleSearchForm" role="search">
-				<div class="input-search">
-					<input type="search" class="form-control" id="inputSearchable"
-						placeholder="Search ...">
-					<button type="button" class="input-search-btn" onclick="searchTree();">
-						<i class="icon wb-search" aria-hidden="true"></i>
-					</button>
+
+	<div class="page-content container-fluid">
+		<div class="row">
+		{{ content() }}
+			<div class="col-md-3"></div>
+			<div class="progress col-md-6" data-goal="100" data-plugin="progress">
+               <div class="progress-bar progress-bar-info " 
+               			aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+                        role="progressbar" style="width:50%">
+                   <span class="progress-label"></span>
+               </div>
+            </div>
+	        <div class="col-md-3"></div>
+			</div>
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<!-- Panel Wizard Form Container -->
+				<div class="panel" id="wizardFormContainer">
+					<div class="panel-heading">
+						<h3 class="panel-title">{{ _('User informations') }}</h3>
+					</div>
+					<div class="panel-body">
+						<!-- Steps -->
+						<div class="pearls row">
+							<div class="pearl current col-xs-4">
+								<div class="pearl-icon">
+									<i class="icon wb-lock" aria-hidden="true"></i>
+								</div>
+								<span class="pearl-title">{{ _('Login Info') }}</span>
+							</div>
+							<div class="pearl col-xs-4">
+								<div class="pearl-icon">
+									<i class="icon wb-user" aria-hidden="true"></i>
+								</div>
+								<span class="pearl-title">{{ _('Details Info') }}</span>
+							</div>
+							<div class="pearl col-xs-4">
+								<div class="pearl-icon">
+									<i class="icon wb-check" aria-hidden="true"></i>
+								</div>
+								<span class="pearl-title">{{ _('Confirmations') }}</span>
+							</div>
+						</div>
+						<!-- End Steps -->
+
+						<!-- Wizard Content -->
+						<form class="wizard-content" id="formContainer" method="POST" action="{{ static_url('users/register') }}">
+							<!-- LOGIN INFO -->
+							<div class="wizard-pane active" role="tabpanel">
+								<div class="form-group">
+									<label class="control-label" for="inputEmail">{{
+										_('Email') }}</label> <input type="email" class="form-control"
+										id="inputEmail" name="email" required="required">
+								</div>
+								<div class="form-group">
+									<label class="control-label" for="inputPasswordOne">{{
+										_('Password') }}</label> <input type="password" class="form-control"
+										id="inputPasswordOne" name="password" required="required">
+								</div>
+								<div class="form-group">
+									<label class="control-label" for="inputPasswordTwo">{{
+										_('Repeat Password') }}</label> <input type="password"
+										class="form-control" id="inputPasswordTwo"
+										data-fv-identical="true" data-fv-identical-field="password"
+										data-fv-identical-message="{{ _('The password does not match') }}"
+										name="password-2" required="required">
+								</div>
+							</div>
+							<!-- DETAILS INFO -->
+							<div class="wizard-pane" id="exampleBillingOne" role="tabpanel">
+								<div class="form-group">
+									<label class="control-label" for="inputRole">{{
+										_('Role') }}</label> <select class="form-control" id="inputRole"
+										name="role" required="required">
+										<option></option> {% for role in model.aclRoles.find() %}
+										<option value="{{ role.name }}">{{ role.name }}</option> {%
+										endfor %}
+									</select>
+								</div>
+								{{ _('Optionals') }}:<br>
+								<div class="form-group">
+									<label class="control-label" for="inputName">{{
+										_('Name') }}</label> <input type="text" class="form-control"
+										id="inputName" name="name" placeholder="">
+								</div>
+								<div class="form-group">
+									<label class="control-label" for="inputSurname">{{
+										_('Surname') }}</label> <input type="text" class="form-control"
+										id="inputSurname" name="surname" placeholder="">
+								</div>
+								<div class="form-group">
+									<label class="control-label" for="inputAddress">{{
+										_('Address') }}</label> <input type="text" class="form-control"
+										id="inputAddress" name="address" placeholder="">
+								</div>
+								<div class="form-group">
+									<label class="control-label" for="inputPhone">{{
+										_('Phone') }}</label> <input type="text" class="form-control"
+										id="inputPhone" name="phone" placeholder="">
+								</div>
+							</div>
+
+							<div class="wizard-pane" id="confirmWizardPane" role="tabpanel">
+								<div class="text-center margin-vertical-20">
+									<h4>{{ _('Confirm registration') }}</h4>
+									<div class="table-responsive">
+										<div class="table-responsive">
+											<table class="table table-bordered table-striped"
+												id="confirmTableUser">
+												<tbody>
+													<tr>
+														<td style="width: 35%">{{ _('Email') }}</td>
+														<td style="width: 65%" id="confirmInputEmail"></td>
+													</tr>
+													<tr>
+														<td style="width: 35%">{{ _('Role') }}</td>
+														<td style="width: 65%" id="confirmInputRole"></td>
+													</tr>
+													<tr>
+														<td style="width: 35%">{{ _('Name') }}</td>
+														<td style="width: 65%" id="confirmInputName"></td>
+													</tr>
+													<tr>
+														<td style="width: 35%">{{ _('Surname') }}</td>
+														<td style="width: 65%" id="confirmInputSurname"></td>
+													</tr>
+													<tr>
+														<td style="width: 35%">{{ _('Address') }}</td>
+														<td style="width: 65%" id="confirmInputAddress"></td>
+													</tr>
+													<tr>
+														<td style="width: 35%">{{ _('Phone') }}</td>
+														<td style="width: 65%" id="confirmInputPhone"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							{{ token.generateInput() }}
+						</form>
+						<!-- Wizard Content -->
+					</div>
 				</div>
-			</form>
-			<div>
-				Total selected : <span class="badge" id="selectedNode">0</span>
+				<!-- End Panel Wizard Form Container -->
 			</div>
-			<div class="example">
-				<div id="exampleSearchableTree"></div>
-			</div>
+			<div class="col-md-3"></div>
 		</div>
-		<!-- End Example Searchable Tree -->
-		<input type="button" onclick="showData()" value="show">
 	</div>
 </div>

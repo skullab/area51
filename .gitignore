@@ -1,3 +1,4 @@
 public/assets/
 dll/
-schema/
+
+*.zip

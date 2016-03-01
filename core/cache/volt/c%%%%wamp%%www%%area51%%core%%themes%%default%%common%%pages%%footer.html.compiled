@@ -1,7 +1,8 @@
+<!-- Footer -->
 <footer class="site-footer">
-	<span class="site-footer-legal">&copy; 2016 <a
-		href="http://www.gcore.it">GCORE.IT</a></span>
+	<span class="site-footer-legal">&copy; 2016 Gianasso srl</span>
 	<div class="site-footer-right">
-		Developed by <a href="mailto:ivan.maruca@gmail.com">Ivan Maruca</a>
+		Crafted with <i class="red-600 wb wb-heart"></i> by <a
+			href="http://gcore.it">Gcore.it</a>
 	</div>
 </footer>

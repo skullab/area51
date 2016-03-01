@@ -55,14 +55,18 @@ $services = array(
 					'autoescape' => ( bool ) $config->app->volt->autoescape
 			);
 			$volt->setOptions ( $options );
-			$volt->getCompiler()->addFunction('_',function(){
+			require CORE_PATH.'config/volt.functions.php' ;
+			foreach ($voltFunctions as $macro => $function){
+				$volt->getCompiler()->addFunction($macro,$function);
+			}
+			/*$volt->getCompiler()->addFunction('_',function(){
 				if(count(func_get_args()) == 3){
 					return ngettext(func_get_arg(0), func_get_arg(1),func_get_arg(2));
 				}else{
 					return gettext(func_get_arg(0));
 				}
 			});
-			$volt->getCompiler()->addFunction('gettext','gettext');
+			$volt->getCompiler()->addFunction('gettext','gettext');*/
 			return $volt;
 		},
 		ServiceManager::MANIFEST_MANAGER => function()use($config){

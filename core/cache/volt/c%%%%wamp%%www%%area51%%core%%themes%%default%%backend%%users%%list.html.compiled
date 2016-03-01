@@ -1,5 +1,13 @@
 
 <div class="page animsition">
+<div class="page-header">
+		<ol class="breadcrumb">
+			<li><a href="<?php echo $this->url->getStatic('dashboard'); ?>">Home</a></li>
+			<li class="active">Users</li>
+		</ol>
+		<h1 class="page-title">List</h1>
+		
+	</div>
 	<div class="page-content">
 		<!-- Panel -->
 		<div class="panel">
@@ -60,35 +68,69 @@
 					<div class="tab-content">
 						<div class="tab-pane active" id="all_contacts" role="tabpanel">
 							<ul class="list-group">
+							<style>
+							.user-status-bar{position:absolute;left:0;top:0;height:100%;width:10px;}
+							</style>
 							<?php foreach ($model->users->find() as $user) { ?>
 							<!-- USER -->
-								<li class="list-group-item <?php if ($user->status_id != 1) { ?>bg-orange-300<?php } ?>">
+							<?php $name = ($user->details ? $user->details->name : $user->email); ?>
+							<?php $surname = ($user->details ? $user->details->surname : ''); ?>
+							<?php $address = ($user->details ? $user->details->address : ''); ?>
+							<?php $phone = ($user->details ? $user->details->phone : ''); ?>
+							<?php $online = ($user->login ? $user->login->online : 0); ?>
+							<?php $busy = ($user->login ? $user->login->busy : 0); ?>
+							<?php $last_access = ($user->login ? $user->login->last_access : 0); ?>
+							<?php $last_operation = ($user->login ? $user->login->last_operation : 0); ?>
+							<?php $unix_last_op = ($user->login ? $user->login->unix_last_operation : 0); ?>
+							
+							<?php if ($unix_last_op + (60 * 30) < time()) { ?>
+								<?php if ($user->login) { ?>
+									<?php $user->login->busy = 1; ?>
+									<?php $save = $user->save(); ?>
+									<?php $busy = 1; ?>
+								<?php } ?>
+							<?php } ?>
+							
+							<?php if ($unix_last_op + (60 * 60) < time()) { ?>
+								<?php if ($user->login) { ?>
+									<?php $user->login->busy = 0; ?>
+									<?php $user->login->online = 0; ?>
+									<?php $save = $user->save(); ?>
+									<?php $busy = 0; ?>
+									<?php $online = 0; ?>
+								<?php } ?>
+							<?php } ?>
+							
+								<li class="list-group-item">
+									
 									<div class="media">
 										<div class="media-left">
-											<div class="avatar <?php if ($user->status_id != 1) { ?>avatar-locked<?php } else { ?>avatar-active<?php } ?>">
-												<img src="<?php echo $this->url->getStatic(); ?>assets/portraits/1.jpg" alt="..."> <i
-													class="avatar avatar-busy"></i>
+											<div class="user-status-bar <?php if ($user->status->name != 'active') { ?>bg-orange-800<?php } ?>"></div>
+											<div class="avatar <?php if ($busy == 1) { ?>avatar-busy<?php } elseif ($online == 1) { ?>avatar-online<?php } else { ?>avatar-off<?php } ?>">
+												<img src="<?php echo $this->url->getStatic(); ?>assets/portraits/1.jpg" alt="..."> <i class="avatar"></i>
 											</div>
 										</div>
 										<div class="media-body">
 											<h4 class="media-heading">
-												<?php echo $user->email; ?> <small>Last Access: 1 hour ago</small>
+												<?php echo $name; ?> <?php echo $surname; ?> <small><br><?php echo 'Last Access'; ?>: <?php echo $last_access; ?><br><?php echo 'Last operation'; ?>: <?php echo $last_operation; ?></small>
 											</h4>
 											<p>
 												<i class="icon icon-color wb-map" aria-hidden="true"></i>
-												Street 4425 Golf Course Rd
+												<?php echo $address; ?>
 											</p>
 											<div>
-												<a class="text-action" href="javascript:void(0)"> <i
+												<a class="text-action" href="mailto:<?php echo $user->email; ?>"> <i
 													class="icon icon-color wb-envelope" aria-hidden="true"></i>
 												</a> <a class="text-action" href="javascript:void(0)"> <i
-													class="icon icon-color wb-mobile" aria-hidden="true"></i>
+													class="icon icon-color wb-mobile" aria-hidden="true"
+													data-toggle="tooltip" data-placement="top" data-trigger="click" 
+													data-original-title="<?php echo $phone; ?>"></i>
 												</a> <a class="text-action" href="javascript:void(0)"> <i
 													class="icon icon-color bd-twitter" aria-hidden="true"></i>
 												</a> <a class="text-action" href="javascript:void(0)"> <i
 													class="icon icon-color bd-facebook" aria-hidden="true"></i>
 												</a> <a class="text-action" href="javascript:void(0)"> <i
-													class="icon icon-color bd-dribbble" aria-hidden="true"></i>
+													class="icon icon-color bd-linkedin" aria-hidden="true"></i>
 												</a>
 											</div>
 										</div>

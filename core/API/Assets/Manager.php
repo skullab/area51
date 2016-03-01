@@ -4,6 +4,8 @@ namespace Thunderhawk\API\Assets;
 
 use Phalcon\Assets\Manager as PhalconAssetsManager;
 use Phalcon\Di\InjectionAwareInterface;
+use Thunderhawk\API\Engine;
+use Thunderhawk\API\Di\Service\Manager as ServiceManager ;
 
 class Manager extends PhalconAssetsManager implements InjectionAwareInterface {
 	const RESOURCE_JS = 'js' ;
@@ -15,6 +17,7 @@ class Manager extends PhalconAssetsManager implements InjectionAwareInterface {
 	protected $_assetsDir;
 	protected $_jsDir;
 	protected $_cssDir;
+	protected $_renderJs = array();
 	
 	public function setBasePath($basePath){
 		$this->_basePath = (string)$basePath;
@@ -108,11 +111,29 @@ class Manager extends PhalconAssetsManager implements InjectionAwareInterface {
 		$path = $local ? $this->getFullJsPath().$path : $path ;
 		return parent::addJs($path,$local,$filter,$attributes);
 	}
-	
+	public function renderInlineJs($filename,$local = true){
+		$path = $local ? PUBLIC_PATH.$this->getAssetsDir().$filename : $filename ;
+		$this->_renderJs[] = $path ;
+		return $this ;
+	}
+	public function outputRenderInlineJs(){
+		foreach($this->_renderJs as $file){
+			$js = Engine::getInstance()->getService(ServiceManager::VIEW_JS);
+			echo '<script>' ;
+			echo $js->render($file);
+			echo '</script>' ;
+		}
+	}
 	public function setDI (\Phalcon\DiInterface $dependencyInjector){
 		$this->_dependencyInjector = $dependencyInjector;
 	}
 	public function getDI(){
 		return $this->_dependencyInjector;
+	}
+	public function collection($name){
+		$collection = parent::collection($name);
+		$collection->setSourcePath($this->getBasePath().$this->getAssetsDir());
+		$collection->setPrefix($this->getBasePath().$this->getAssetsDir());
+		return $collection ;
 	}
 }

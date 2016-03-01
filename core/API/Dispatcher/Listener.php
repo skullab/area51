@@ -3,7 +3,9 @@
 namespace Thunderhawk\API\Dispatcher;
 
 class Listener {
-	public function beforeDispatchLoop($event,$dispatcher){}
+	public function beforeDispatchLoop($event,$dispatcher){
+		$dispatcher->setActionName(lcfirst(\Phalcon\Text::camelize($dispatcher->getActionName())));
+	}
 	public function beforeDispatch($event,$dispatcher){}
 	public function beforeExecuteRoute($event,$dispatcher){}
 	public function beforeNotFoundAction($event,$dispatcher){}
@@ -19,6 +21,7 @@ class Listener {
                 	return false;
                 case \Phalcon\Dispatcher::EXCEPTION_ACTION_NOT_FOUND:
                 	// action not found
+                	var_dump($dispatcher->getActionName());
                     $dispatcher->forward(array(
        					'controller' => $dispatcher->getControllerName(),
                         'action'=>'show404'
