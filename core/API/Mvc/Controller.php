@@ -92,11 +92,23 @@ abstract class Controller extends PhalconController{
 		$view = clone $this->view;
 		$view->render($controller,$action,$params);
 	}
-	public function show404Action(){
-		$this->view->body_class = "page-error page-error-404 layout-full" ;
-		$this->view->partial('errors/show404');
+	public function startViewStream(){
+		ob_start();
 	}
-	public function forward($controller,$action){
+	public function endViewStream($view){
+		$content = ob_get_clean();
+		$this->view->setContent($content);
+		$this->view->partial($view);
+	}
+	public function show404Action(){
+		if($this->auth->getIdentity()){
+			$this->view->body_class = "page-error page-error-404 layout-full" ;
+			$this->view->partial('errors/show404');
+		}else{
+			return $this->forward();
+		}
+	}
+	public function forward($controller = 'index',$action = 'index'){
 		return $this->dispatcher->forward(array(
 				'controller' => $controller,
 				'action' => $action
@@ -136,6 +148,7 @@ abstract class Controller extends PhalconController{
 	}
 	protected function accessDenied($role,$resource,$action){
 		//var_dump('access denied for '.$role);
+		return $this->forward();
 	}
 	public function sendAjax($payload,array $headers = array()){
 		$status      = 200;

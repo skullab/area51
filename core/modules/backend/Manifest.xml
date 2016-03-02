@@ -26,6 +26,7 @@
 		<route name="backend$index" controller="index" action="index">dashboard</route>
 		<route name="backend$chat" controller="chat" action="index">chat</route>
 		<route name="backend$users" controller="users" action="1">users/:action</route>
+		<route name="backend$users" controller="users" action="1" params="2">users/:action/:params</route>
 	</routing>
 	
 	<required>

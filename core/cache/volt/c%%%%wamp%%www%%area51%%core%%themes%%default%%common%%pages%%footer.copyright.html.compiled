@@ -1,0 +1,6 @@
+<footer class="page-copyright">
+	<p>
+		<?php echo 'Powered by'; ?> <a href="http://gcore.it">Gcore.it</a>
+	</p>
+	<p>&copy; 2016</p>
+</footer>

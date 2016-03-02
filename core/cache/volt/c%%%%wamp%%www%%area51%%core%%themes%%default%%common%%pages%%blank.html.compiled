@@ -1,0 +1,8 @@
+<!-- Page -->
+<div class="page">
+	<div class="page-content">
+		<?php echo $this->getContent(); ?>
+	</div>
+</div>
+<!-- End Page -->
+

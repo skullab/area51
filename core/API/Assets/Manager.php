@@ -111,16 +111,19 @@ class Manager extends PhalconAssetsManager implements InjectionAwareInterface {
 		$path = $local ? $this->getFullJsPath().$path : $path ;
 		return parent::addJs($path,$local,$filter,$attributes);
 	}
-	public function renderInlineJs($filename,$local = true){
+	public function renderInlineJs($filename,$local = true,$parameters = array()){
 		$path = $local ? PUBLIC_PATH.$this->getAssetsDir().$filename : $filename ;
-		$this->_renderJs[] = $path ;
+		$this->_renderJs[$path] = array(
+				'local' => $local,
+				'parameters' => $parameters
+		) ;
 		return $this ;
 	}
 	public function outputRenderInlineJs(){
-		foreach($this->_renderJs as $file){
+		foreach($this->_renderJs as $file => $content){
 			$js = Engine::getInstance()->getService(ServiceManager::VIEW_JS);
 			echo '<script>' ;
-			echo $js->render($file);
+			echo $js->render($file,$content['parameters']);
 			echo '</script>' ;
 		}
 	}

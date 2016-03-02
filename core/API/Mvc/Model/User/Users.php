@@ -29,4 +29,7 @@ class Users extends Model{
 		));
 		$this->hasMany('role',__NAMESPACE__.'\Acl\AclRoles','name');
 	}
+	public static function exists($where){
+		return self::findFirst($where);
+	}
 }
