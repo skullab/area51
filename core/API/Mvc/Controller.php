@@ -150,11 +150,11 @@ abstract class Controller extends PhalconController{
 		//var_dump('access denied for '.$role);
 		return $this->forward();
 	}
-	public function sendAjax($payload,array $headers = array()){
+	public function sendAjax($payload,$encode = true,array $headers = array()){
 		$status      = 200;
 		$description = 'OK';
 		$contentType = 'application/json';
-		$content     = json_encode($payload);
+		$content     = $encode ? json_encode($payload) : $payload ;
 		
 		$response = new Response();
 		

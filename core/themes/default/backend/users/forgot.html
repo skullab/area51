@@ -1,0 +1,64 @@
+<!-- Page -->
+<div class="page animsition">
+	<div class="page-header">
+		<h1 class="page-title">{{ _('Forgot password') }}</h1>
+		<ol class="breadcrumb">
+			<li><a href="{{ static_url('dashboard') }}">{{ _('Dashboard') }}</a></li>
+			<li><a href="{{ static_url('users') }}">{{ _('Users') }}</a></li>
+			<li class="active">{{ _('Forgot passwords') }}</li>
+		</ol>
+		<div class="page-header-actions">
+			<a class="btn btn-sm btn-default btn-outline btn-round"
+				href="http://datatables.net" target="_blank"> <i
+				class="icon wb-link" aria-hidden="true"></i> <span class="hidden-xs">Official
+					Website</span>
+			</a>
+		</div>
+	</div>
+	<div class="page-content">
+		{{ content() }}
+		<!-- Panel Basic -->
+		<div class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions"></div>
+				<h3 class="panel-title">{{ _('Forgot passwords requests') }}</h3>
+			</header>
+			<div class="panel-body">
+				<table class="table table-hover dataTable table-striped width-full"
+					id="forgotTable" data-plugin="dataTable">
+					<thead>
+						<tr>
+							<th>{{ _('ID') }}</th>
+							<th>{{ _('Users id') }}</th>
+							<th>{{ _('Created at') }}</th>
+							<th>{{ _('Token') }}</th>
+							<th>{{ _('Private Key') }}</th>
+							<th>{{ _('Expires') }}</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for record in model.usersForgotPassword.find() %}
+						<tr>
+							{% for row in record %}
+							<td>{{ row }}</td>
+							{% endfor %}
+						</tr>
+						{% endfor %}
+					</tbody>
+					<tfoot>
+						<tr>
+							<th>{{ _('ID') }}</th>
+							<th>{{ _('Users id') }}</th>
+							<th>{{ _('Created at') }}</th>
+							<th>{{ _('Token') }}</th>
+							<th>{{ _('Private Key') }}</th>
+							<th>{{ _('Expires') }}</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+		<!-- End Panel Basic -->
+	</div>
+</div>
+<!-- End Page -->

@@ -7,6 +7,7 @@ use Thunderhawk\API\Mvc\Model\User\Users;
 use Thunderhawk\API\Mvc\Model\User\UsersDetails;
 use Thunderhawk\API\Mvc\Model\User\UsersStatus;
 use Phalcon\Mvc\View;
+use Thunderhawk\API\Mvc\Model\User\UsersForgotPassword;
 
 class UsersController extends Controller {
 	protected function onInitialize() {
@@ -89,7 +90,34 @@ class UsersController extends Controller {
 	}
 	public function listAction() {
 	}
+	
+	public function getForgotAction(){
+		$records = UsersForgotPassword::find()->toArray() ;
+		$forgot = array();
+		$c = 0 ;
+		foreach ($records as $record){
+			$forgot[$c] = array();
+			foreach ($record as $n => $v){
+				$forgot[$c][$n] = htmlspecialchars($v);
+			}
+			$c++;
+		}
+		
+		return $this->sendAjax(array('data' => $forgot));
+	}
 	public function forgotAction() {
+		
+		$this->cssPlugins->addCss('vendor/datatables-bootstrap/dataTables.bootstrap.css')
+		->addCss('vendor/datatables-fixedheader/dataTables.fixedHeader.css')
+		->addCss('vendor/datatables-responsive/dataTables.responsive.css');
+		$this->jsPlugins->addJs('vendor/datatables/jquery.dataTables.min.js')
+		->addJs('vendor/datatables-fixedheader/dataTables.fixedHeader.js')
+		->addJs('vendor/datatables-bootstrap/dataTables.bootstrap.js')
+		->addJs('vendor/datatables-responsive/dataTables.responsive.js')
+		->addJs('vendor/datatables-tabletools/dataTables.tableTools.js');
+		$this->assets->renderInlineJs('js/controllers/userForgot.js');
+		
+		$records = UsersForgotPassword::find()->toArray() ;
 	}
 	public function failedAction() {
 	}

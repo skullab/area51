@@ -4,7 +4,7 @@
 
 base.uri		= "/area51/"
 ;base.staticUri	= "//areariservata.iprovenzali.it/area51/"
-base.staticUri	= "//127.0.0.1/area51/"
+base.staticUri	= "http://127.0.0.1/area51/"
 
 title			= "Thunderhawk"
 titleSeparator	= " - "

@@ -1,0 +1,25 @@
+<!-- Page -->
+<div class="page animsition vertical-align text-center"
+	data-animsition-in="fade-in" data-animsition-out="fade-out">
+	<div class="page-content vertical-align-middle">
+		<h2 class="page-title"><?php echo 'Forgot Your Password ?'; ?></h2>
+		<p><?php echo 'Input your registered email to reset your password'; ?></p>
+
+		<?php echo $this->getContent(); ?>
+		<form class="width-300 margin-top-30 center-block" 
+			method="POST" action="<?php echo $this->url->getStatic('forgot-password'); ?>">
+			<div class="form-group">
+				<input type="email" class="form-control" id="inputEmail"
+					name="email" placeholder="<?php echo 'Your Email'; ?>" required>
+			</div>
+			<?php echo $this->token->generateInput(); ?>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary btn-block"><?php echo 'Reset Your Password'; ?></button>
+			</div>
+		</form>
+
+		<?php echo $this->partial('pages/footer.copyright'); ?>
+		
+	</div>
+</div>
+<!-- End Page -->

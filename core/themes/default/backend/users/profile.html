@@ -1,8 +1,10 @@
 <!-- Page -->
-{% set portrait = user.details ? user.details.portrait : 'user_blank.png' %} 
-{% set name = user.details ? user.details.name : user.email %} 
+{% set portrait = user.details ? 
+	(user.details.portrait ? user.details.portrait : 'user_blank.png') 
+	: 'user_blank.png' %} 
+{% set name = user.details ? user.details.name : '' %} 
 {% set surname = user.details ? user.details.surname : '' %}
-{% set address = user.details ? user.details : '' %}
+{% set address = user.details ? user.details.address : '' %}
 {% set phone = user.details ? user.details.phone : '' %}
 
 <div class="page animsition">

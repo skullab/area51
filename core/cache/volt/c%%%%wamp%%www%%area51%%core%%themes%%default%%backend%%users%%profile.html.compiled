@@ -1,8 +1,8 @@
 <!-- Page -->
-<?php $portrait = ($user->details ? $user->details->portrait : 'user_blank.png'); ?> 
-<?php $name = ($user->details ? $user->details->name : $user->email); ?> 
+<?php $portrait = ($user->details ? (($user->details->portrait ? $user->details->portrait : 'user_blank.png')) : 'user_blank.png'); ?> 
+<?php $name = ($user->details ? $user->details->name : ''); ?> 
 <?php $surname = ($user->details ? $user->details->surname : ''); ?>
-<?php $address = ($user->details ? $user->details : ''); ?>
+<?php $address = ($user->details ? $user->details->address : ''); ?>
 <?php $phone = ($user->details ? $user->details->phone : ''); ?>
 
 <div class="page animsition">
