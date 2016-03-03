@@ -8,6 +8,7 @@ use Thunderhawk\API\Mvc\Model\User\UsersDetails;
 use Thunderhawk\API\Mvc\Model\User\UsersStatus;
 use Phalcon\Mvc\View;
 use Thunderhawk\API\Mvc\Model\User\UsersForgotPassword;
+use Thunderhawk\API\Mvc\Model\User\UsersFailedAttempts;
 
 class UsersController extends Controller {
 	protected function onInitialize() {
@@ -105,9 +106,10 @@ class UsersController extends Controller {
 		
 		return $this->sendAjax(array('data' => $forgot));
 	}
+	
 	public function forgotAction() {
 		
-		$this->cssPlugins->addCss('vendor/datatables-bootstrap/dataTables.bootstrap.css')
+		/*$this->cssPlugins->addCss('vendor/datatables-bootstrap/dataTables.bootstrap.css')
 		->addCss('vendor/datatables-fixedheader/dataTables.fixedHeader.css')
 		->addCss('vendor/datatables-responsive/dataTables.responsive.css');
 		$this->jsPlugins->addJs('vendor/datatables/jquery.dataTables.min.js')
@@ -115,12 +117,44 @@ class UsersController extends Controller {
 		->addJs('vendor/datatables-bootstrap/dataTables.bootstrap.js')
 		->addJs('vendor/datatables-responsive/dataTables.responsive.js')
 		->addJs('vendor/datatables-tabletools/dataTables.tableTools.js');
-		$this->assets->renderInlineJs('js/controllers/userForgot.js');
+		$this->assets->renderInlineJs('js/controllers/userForgot.js');*/
+		$this->cssPlugins->addCss('vendor/filament-tablesaw/tablesaw.css');
+		$this->jsPlugins->addJs('vendor/filament-tablesaw/tablesaw.js');
 		
 		$records = UsersForgotPassword::find()->toArray() ;
+		$table = array();
+		$i = 0 ;
+		foreach ($records as $record){
+			$table[$i] = array();
+			foreach ($record as $n => $v){
+				$table[$i][$n] = $v ;
+				if($n == 'token' || $n == 'private_key'){
+					$table[$i][$n] = '***' ;
+				}
+			}
+			$i++ ;
+		}
+		$records = null ;
+		$this->view->table = $table ;
 	}
 	public function failedAction() {
+		/*$this->cssPlugins->addCss('vendor/datatables-bootstrap/dataTables.bootstrap.css')
+		->addCss('vendor/datatables-fixedheader/dataTables.fixedHeader.css')
+		->addCss('vendor/datatables-responsive/dataTables.responsive.css');
+		$this->jsPlugins->addJs('vendor/datatables/jquery.dataTables.min.js')
+		->addJs('vendor/datatables-fixedheader/dataTables.fixedHeader.js')
+		->addJs('vendor/datatables-bootstrap/dataTables.bootstrap.js')
+		->addJs('vendor/datatables-responsive/dataTables.responsive.js')
+		->addJs('vendor/datatables-tabletools/dataTables.tableTools.js');
+		$this->assets->renderInlineJs('js/controllers/userFailed.js');
+		*/
+		$this->cssPlugins->addCss('vendor/filament-tablesaw/tablesaw.css');
+		$this->jsPlugins->addJs('vendor/filament-tablesaw/tablesaw.js');
+		
+		$table = UsersFailedAttempts::find()->toArray() ;
+		$this->view->table = $table ;
 	}
+	
 	public function profileAction($id, $change = null, $value = null) {
 		if (is_numeric ( $id )) {
 			$user = Users::findFirstById ( $id );

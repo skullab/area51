@@ -1,11 +1,11 @@
 <!-- Page -->
 <div class="page animsition">
 	<div class="page-header">
-		<h1 class="page-title">{{ _('Forgot password') }}</h1>
+		<h1 class="page-title">{{ _('Failed logins') }}</h1>
 		<ol class="breadcrumb">
 			<li><a href="{{ static_url('dashboard') }}">{{ _('Dashboard') }}</a></li>
 			<li><a href="{{ static_url('users/list') }}">{{ _('Users') }}</a></li>
-			<li class="active">{{ _('Forgot passwords') }}</li>
+			<li class="active">{{ _('Failed logins') }}</li>
 		</ol>
 		
 	</div>
@@ -15,7 +15,7 @@
 		<div class="panel">
 			<header class="panel-heading">
 				<div class="panel-actions"></div>
-				<h3 class="panel-title">{{ _('Forgot passwords requests') }}</h3>
+				<h3 class="panel-title">{{ _('Failed users logins') }}</h3>
 			</header>
 			<div class="panel-body">
 				<table class="tablesaw table-striped table-bordered table-hover" data-tablesaw-mode="swipe"
@@ -24,11 +24,9 @@
 					<thead>
 						<tr>
 							<th data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist">{{ _('ID') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="5">{{ _('Created at') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="4">{{ _('Token') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="3">{{ _('Private Key') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="2">{{ _('Expires') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="1">{{ _('Users id') }}</th>
+							<th data-tablesaw-sortable-col data-tablesaw-priority="3">{{ _('Users id') }}</th>
+							<th data-tablesaw-sortable-col data-tablesaw-priority="2">{{ _('IP address') }}</th>
+							<th data-tablesaw-sortable-col data-tablesaw-priority="1">{{ _('Attempted') }}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -43,11 +41,9 @@
 					<tfoot>
 						<tr>
 							<th data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist">{{ _('ID') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="5">{{ _('Created at') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="4">{{ _('Token') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="3">{{ _('Private Key') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="2">{{ _('Expires') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="1">{{ _('Users id') }}</th>
+							<th data-tablesaw-sortable-col data-tablesaw-priority="3">{{ _('Users id') }}</th>
+							<th data-tablesaw-sortable-col data-tablesaw-priority="2">{{ _('IP address') }}</th>
+							<th data-tablesaw-sortable-col data-tablesaw-priority="1">{{ _('Attempted') }}</th>
 						</tr>
 					</tfoot>
 				</table>

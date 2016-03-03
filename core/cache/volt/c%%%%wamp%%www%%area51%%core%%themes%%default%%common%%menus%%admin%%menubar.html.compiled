@@ -3,7 +3,7 @@
 <li class="site-menu-item has-sub">
 	<a href="javascript:void(0)" data-slug="admin-user"> 
 		<i class="site-menu-icon wb-user-circle" aria-hidden="true"></i> 
-		<span class="site-menu-title"><?php echo 'Users'; ?></span>
+		<span class="site-menu-title"><?php echo 'Users'; ?></span><span class="site-menu-arrow"></span>
 		<?php $warning_user = $model->users->count('status_id != 1'); ?>
 		<?php if ($warning_user) { ?>
 		<div class="site-menu-badge">
@@ -35,6 +35,25 @@
 				<i class="site-menu-icon " aria-hidden="true"></i> 
 				<span class="site-menu-title"><?php echo 'Forgot password requests'; ?></span>
 			</a>
+		</li>
+	</ul>
+</li>
+
+<li class="site-menu-item has-sub">
+	<a href="javascript:void(0)"> 
+		<i class="site-menu-icon wb-lock" aria-hidden="true"></i> 
+		<span class="site-menu-title"><?php echo 'ACL'; ?></span><span class="site-menu-arrow"></span>
+	</a>
+	<ul class="site-menu-sub">
+		<li class="site-menu-item">
+			<a class="animsition-link" href="javascript:void(0)">
+			<i class="site-menu-icon" ></i>
+			<span><?php echo 'Add Role'; ?></span></a>
+		</li>
+		<li class="site-menu-item">
+			<a class="animsition-link" href="javascript:void(0)">
+			<i class="site-menu-icon" ></i>
+			<span><?php echo 'Access list'; ?></span></a>
 		</li>
 	</ul>
 </li>

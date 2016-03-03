@@ -23,10 +23,12 @@
 	</template>
 				
 	<routing>
-		<route name="backend$index" controller="index" action="index">dashboard</route>
-		<route name="backend$chat" controller="chat" action="index">chat</route>
-		<route name="backend$users" controller="users" action="1">users/:action</route>
-		<route name="backend$users" controller="users" action="1" params="2">users/:action/:params</route>
+		<route name="backend:index" controller="index" action="index">dashboard</route>
+		<route name="backend:chat" controller="chat" action="index">chat</route>
+		<route name="backend:users" controller="users" action="1">users/:action</route>
+		<route name="backend:users" controller="users" action="1" params="2">users/:action/:params</route>
+		<!-- B2B -->
+		<route name="b2b:index" controller="B2B" action="index">order-entry</route>
 	</routing>
 	
 	<required>

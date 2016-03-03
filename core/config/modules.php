@@ -6,7 +6,8 @@ $modulesInstalled = array(
 				[
 						/* module name */	/* module path */
 						'frontend' 		=>	CORE_PATH .'modules/frontend/',
-						'backend'		=> 	CORE_PATH .'modules/backend/' 
+						'backend'		=> 	CORE_PATH .'modules/backend/',
+						
 						
 				],
 			/* the default module name */

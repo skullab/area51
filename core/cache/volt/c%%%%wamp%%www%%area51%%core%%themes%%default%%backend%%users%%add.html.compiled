@@ -1,10 +1,10 @@
 <!-- Page -->
 <div class="page animsition">
 	<div class="page-header">
-	<h1 class="page-title">{{ _('Add a user') }}</h1>
+	<h1 class="page-title"><?php echo 'Add a user'; ?></h1>
 		<ol class="breadcrumb">
-			<li><a href="{{ static_url('dashboard') }}">{{ _('Home') }}</a></li>
-			<li class="active">{{ _('Users') }}</li>
+			<li><a href="<?php echo $this->url->getStatic('dashboard'); ?>"><?php echo 'Home'; ?></a></li>
+			<li class="active"><?php echo 'Users'; ?></li>
 		</ol>
 	</div>
 	<div class="page-content container-fluid">
@@ -15,7 +15,7 @@
 				<!-- Panel Wizard Form Container -->
 				<div class="panel" id="wizardFormContainer">
 					<div class="panel-heading">
-						<h3 class="panel-title">{{ _('User informations') }}</h3>
+						<h3 class="panel-title"><?php echo 'User informations'; ?></h3>
 					</div>
 					<div class="panel-body">
 						<!-- Steps -->
@@ -24,111 +24,102 @@
 								<div class="pearl-icon">
 									<i class="icon wb-lock" aria-hidden="true"></i>
 								</div>
-								<span class="pearl-title">{{ _('Login Info') }}</span>
+								<span class="pearl-title"><?php echo 'Login Info'; ?></span>
 							</div>
 							<div class="pearl col-xs-4">
 								<div class="pearl-icon">
 									<i class="icon wb-user" aria-hidden="true"></i>
 								</div>
-								<span class="pearl-title">{{ _('Details Info') }}</span>
+								<span class="pearl-title"><?php echo 'Details Info'; ?></span>
 							</div>
 							<div class="pearl col-xs-4">
 								<div class="pearl-icon">
 									<i class="icon wb-check" aria-hidden="true"></i>
 								</div>
-								<span class="pearl-title">{{ _('Confirmations') }}</span>
+								<span class="pearl-title"><?php echo 'Confirmations'; ?></span>
 							</div>
 						</div>
 						<!-- End Steps -->
 
 						<!-- Wizard Content -->
 						<form class="wizard-content" id="formContainer" method="POST"
-							action="{{ static_url('users/register') }}">
+							action="<?php echo $this->url->getStatic('users/register'); ?>">
 							<!-- LOGIN INFO -->
 							<div class="wizard-pane active" role="tabpanel">
 								<div class="form-group">
-									<label class="control-label" for="inputEmail">{{
-										_('Email') }}</label> <input type="email" class="form-control"
+									<label class="control-label" for="inputEmail"><?php echo 'Email'; ?></label> <input type="email" class="form-control"
 										id="inputEmail" name="email" required="required">
 								</div>
 								<div class="form-group">
-									<label class="control-label" for="inputPasswordOne">{{
-										_('Password') }}</label> <input type="password" class="form-control"
+									<label class="control-label" for="inputPasswordOne"><?php echo 'Password'; ?></label> <input type="password" class="form-control"
 										id="inputPasswordOne" name="password" required="required">
 								</div>
 								<div class="form-group">
-									<label class="control-label" for="inputPasswordTwo">{{
-										_('Repeat Password') }}</label> <input type="password"
+									<label class="control-label" for="inputPasswordTwo"><?php echo 'Repeat Password'; ?></label> <input type="password"
 										class="form-control" id="inputPasswordTwo"
 										data-fv-identical="true" data-fv-identical-field="password"
-										data-fv-identical-message="{{ _('The password does not match') }}"
+										data-fv-identical-message="<?php echo 'The password does not match'; ?>"
 										name="password-2" required="required">
 								</div>
 							</div>
 							<!-- DETAILS INFO -->
 							<div class="wizard-pane" id="exampleBillingOne" role="tabpanel">
 								<div class="form-group">
-									<label class="control-label" for="inputRole">{{
-										_('Role') }}</label> <select class="form-control" id="inputRole"
+									<label class="control-label" for="inputRole"><?php echo 'Role'; ?></label> <select class="form-control" id="inputRole"
 										name="role" required="required">
-										<option></option> {% for role in model.aclRoles.find() %}
-										<option value="{{ role.name }}">{{ role.name }}</option> {%
-										endfor %}
+										<option></option> <?php foreach ($model->aclRoles->find() as $role) { ?>
+										<option value="<?php echo $role->name; ?>"><?php echo $role->name; ?></option> <?php } ?>
 									</select>
 								</div>
-								{{ _('Optionals') }}:<br>
+								<?php echo 'Optionals'; ?>:<br>
 								<div class="form-group">
-									<label class="control-label" for="inputName">{{
-										_('Name') }}</label> <input type="text" class="form-control"
+									<label class="control-label" for="inputName"><?php echo 'Name'; ?></label> <input type="text" class="form-control"
 										id="inputName" name="name" placeholder="">
 								</div>
 								<div class="form-group">
-									<label class="control-label" for="inputSurname">{{
-										_('Surname') }}</label> <input type="text" class="form-control"
+									<label class="control-label" for="inputSurname"><?php echo 'Surname'; ?></label> <input type="text" class="form-control"
 										id="inputSurname" name="surname" placeholder="">
 								</div>
 								<div class="form-group">
-									<label class="control-label" for="inputAddress">{{
-										_('Address') }}</label> <input type="text" class="form-control"
+									<label class="control-label" for="inputAddress"><?php echo 'Address'; ?></label> <input type="text" class="form-control"
 										id="inputAddress" name="address" placeholder="">
 								</div>
 								<div class="form-group">
-									<label class="control-label" for="inputPhone">{{
-										_('Phone') }}</label> <input type="text" class="form-control"
+									<label class="control-label" for="inputPhone"><?php echo 'Phone'; ?></label> <input type="text" class="form-control"
 										id="inputPhone" name="phone" placeholder="">
 								</div>
 							</div>
 
 							<div class="wizard-pane" id="confirmWizardPane" role="tabpanel">
 								<div class="text-center margin-vertical-20">
-									<h4>{{ _('Confirm registration') }}</h4>
+									<h4><?php echo 'Confirm registration'; ?></h4>
 									<div class="table-responsive">
 										<div class="table-responsive">
 											<table class="table table-bordered table-striped"
 												id="confirmTableUser">
 												<tbody>
 													<tr>
-														<td style="width: 35%">{{ _('Email') }}</td>
+														<td style="width: 35%"><?php echo 'Email'; ?></td>
 														<td style="width: 65%" id="confirmInputEmail"></td>
 													</tr>
 													<tr>
-														<td style="width: 35%">{{ _('Role') }}</td>
+														<td style="width: 35%"><?php echo 'Role'; ?></td>
 														<td style="width: 65%" id="confirmInputRole"></td>
 													</tr>
 													<tr>
-														<td style="width: 35%">{{ _('Name') }}</td>
+														<td style="width: 35%"><?php echo 'Name'; ?></td>
 														<td style="width: 65%" id="confirmInputName"></td>
 													</tr>
 													<tr>
-														<td style="width: 35%">{{ _('Surname') }}</td>
+														<td style="width: 35%"><?php echo 'Surname'; ?></td>
 														<td style="width: 65%" id="confirmInputSurname"></td>
 													</tr>
 													<tr>
-														<td style="width: 35%">{{ _('Address') }}</td>
+														<td style="width: 35%"><?php echo 'Address'; ?></td>
 														<td style="width: 65%" id="confirmInputAddress"></td>
 													</tr>
 													<tr>
-														<td style="width: 35%">{{ _('Phone') }}</td>
+														<td style="width: 35%"><?php echo 'Phone'; ?></td>
 														<td style="width: 65%" id="confirmInputPhone"></td>
 													</tr>
 												</tbody>
@@ -137,7 +128,7 @@
 									</div>
 								</div>
 							</div>
-							{{ token.generateInput() }}
+							<?php echo $this->token->generateInput(); ?>
 						</form>
 						<!-- Wizard Content -->
 					</div>

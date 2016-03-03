@@ -1,11 +1,11 @@
 <!-- Page -->
 <div class="page animsition">
 	<div class="page-header">
-		<h1 class="page-title"><?php echo 'Forgot password'; ?></h1>
+		<h1 class="page-title"><?php echo 'Failed logins'; ?></h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo $this->url->getStatic('dashboard'); ?>"><?php echo 'Dashboard'; ?></a></li>
 			<li><a href="<?php echo $this->url->getStatic('users/list'); ?>"><?php echo 'Users'; ?></a></li>
-			<li class="active"><?php echo 'Forgot passwords'; ?></li>
+			<li class="active"><?php echo 'Failed logins'; ?></li>
 		</ol>
 		
 	</div>
@@ -15,7 +15,7 @@
 		<div class="panel">
 			<header class="panel-heading">
 				<div class="panel-actions"></div>
-				<h3 class="panel-title"><?php echo 'Forgot passwords requests'; ?></h3>
+				<h3 class="panel-title"><?php echo 'Failed users logins'; ?></h3>
 			</header>
 			<div class="panel-body">
 				<table class="tablesaw table-striped table-bordered table-hover" data-tablesaw-mode="swipe"
@@ -24,11 +24,9 @@
 					<thead>
 						<tr>
 							<th data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist"><?php echo 'ID'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="5"><?php echo 'Created at'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="4"><?php echo 'Token'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="3"><?php echo 'Private Key'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="2"><?php echo 'Expires'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="1"><?php echo 'Users id'; ?></th>
+							<th data-tablesaw-sortable-col data-tablesaw-priority="3"><?php echo 'Users id'; ?></th>
+							<th data-tablesaw-sortable-col data-tablesaw-priority="2"><?php echo 'IP address'; ?></th>
+							<th data-tablesaw-sortable-col data-tablesaw-priority="1"><?php echo 'Attempted'; ?></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -43,11 +41,9 @@
 					<tfoot>
 						<tr>
 							<th data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist"><?php echo 'ID'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="5"><?php echo 'Created at'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="4"><?php echo 'Token'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="3"><?php echo 'Private Key'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="2"><?php echo 'Expires'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="1"><?php echo 'Users id'; ?></th>
+							<th data-tablesaw-sortable-col data-tablesaw-priority="3"><?php echo 'Users id'; ?></th>
+							<th data-tablesaw-sortable-col data-tablesaw-priority="2"><?php echo 'IP address'; ?></th>
+							<th data-tablesaw-sortable-col data-tablesaw-priority="1"><?php echo 'Attempted'; ?></th>
 						</tr>
 					</tfoot>
 				</table>
