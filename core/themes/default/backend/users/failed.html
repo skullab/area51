@@ -18,32 +18,22 @@
 				<h3 class="panel-title">{{ _('Failed users logins') }}</h3>
 			</header>
 			<div class="panel-body">
-				<table class="tablesaw table-striped table-bordered table-hover" data-tablesaw-mode="swipe"
-              data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap
-              data-tablesaw-mode-switch>
+				<table id="failedTable" class="table table-hover dataTable table-striped width-full">
 					<thead>
 						<tr>
-							<th data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist">{{ _('ID') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="3">{{ _('Users id') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="2">{{ _('IP address') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="1">{{ _('Attempted') }}</th>
+							<th>{{ _('ID') }}</th>
+							<th>{{ _('Users id') }}</th>
+							<th>{{ _('IP address') }}</th>
+							<th>{{ _('Attempted') }}</th>
 						</tr>
 					</thead>
-					<tbody>
-						{% for record in table %}
-						<tr>
-							{% for row in record %}
-							<td>{{ row }}</td>
-							{% endfor %}
-						</tr>
-						{% endfor %}
-					</tbody>
+					
 					<tfoot>
 						<tr>
-							<th data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist">{{ _('ID') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="3">{{ _('Users id') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="2">{{ _('IP address') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="1">{{ _('Attempted') }}</th>
+							<th>{{ _('ID') }}</th>
+							<th>{{ _('Users id') }}</th>
+							<th>{{ _('IP address') }}</th>
+							<th>{{ _('Attempted') }}</th>
 						</tr>
 					</tfoot>
 				</table>

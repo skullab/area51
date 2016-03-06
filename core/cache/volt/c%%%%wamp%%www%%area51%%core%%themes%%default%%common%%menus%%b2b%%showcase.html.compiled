@@ -1,0 +1,5 @@
+<li id="menu-b2b-bacheca" class="site-menu-item">
+<a href="<?php echo $this->url->getStatic('order-entry'); ?>"> <i
+		class="site-menu-icon wb-home" aria-hidden="true"></i> <span
+		class="site-menu-title">Bacheca</span> 
+</a></li>

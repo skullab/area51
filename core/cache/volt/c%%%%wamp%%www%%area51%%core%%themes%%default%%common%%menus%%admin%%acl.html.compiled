@@ -1,0 +1,18 @@
+<li class="site-menu-item has-sub">
+	<a href="javascript:void(0)"> 
+		<i class="site-menu-icon wb-lock" aria-hidden="true"></i> 
+		<span class="site-menu-title"><?php echo 'ACL'; ?></span><span class="site-menu-arrow"></span>
+	</a>
+	<ul class="site-menu-sub">
+		<li class="site-menu-item">
+			<a class="animsition-link" href="<?php echo $this->url->getStatic('acl/add-role'); ?>">
+			<i class="site-menu-icon" ></i>
+			<span><?php echo 'Add Role'; ?></span></a>
+		</li>
+		<li class="site-menu-item">
+			<a class="animsition-link" href="<?php echo $this->url->getStatic('acl/list'); ?>">
+			<i class="site-menu-icon" ></i>
+			<span><?php echo 'Access list'; ?></span></a>
+		</li>
+	</ul>
+</li>

@@ -1,0 +1,125 @@
+<style>
+#buttonsPanel {
+	padding-left: 3%;
+}
+</style>
+<!-- Page -->
+<div class="page animsition">
+	<div class="page-header">
+		<h1 class="page-title"><?php echo 'Access Control List'; ?></h1>
+		<ol class="breadcrumb">
+			<li><a href="<?php echo $this->url->getStatic('dashboard'); ?>"><?php echo 'Dashboard'; ?></a></li>
+			<li><a href="<?php echo $this->url->getStatic('acl'); ?>"><?php echo 'ACL'; ?></a></li>
+			<li class="active"><?php echo 'Access List'; ?></li>
+		</ol>
+
+	</div>
+	<div class="page-content">
+		<?php echo $this->getContent(); ?>
+		<!-- Panel Basic -->
+		<div class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions"></div>
+				<h3 class="panel-title"><?php echo 'Permissions'; ?></h3>
+			</header>
+			<div id="buttonsPanel">
+				<button id="addRule" class="btn btn-outline btn-primary"
+					data-target="#addRuleModal" data-toggle="modal" type="button">
+					<i class="icon wb-plus" aria-hidden="true"></i> <?php echo 'Add Rule'; ?> / <?php echo 'Modify'; ?>
+				</button>
+				
+				<button id="dropRule" class="btn btn-outline btn-danger" type="button">
+					<i class="icon wb-trash" aria-hidden="true"></i> <?php echo 'Drop Rule'; ?>
+				</button>
+				
+			</div>
+			<div class="panel-body">
+				<table id="accessListTable"
+					class="table table-hover dataTable table-striped width-full">
+					<thead>
+						<tr>
+							<th><?php echo 'Role Name'; ?></th>
+							<th><?php echo 'Resource'; ?></th>
+							<th><?php echo 'Action'; ?></th>
+							<th><?php echo 'Allowed'; ?></th>
+						</tr>
+					</thead>
+
+					<tfoot>
+						<tr>
+							<th><?php echo 'Role Name'; ?></th>
+							<th><?php echo 'Resource'; ?></th>
+							<th><?php echo 'Action'; ?></th>
+							<th><?php echo 'Allowed'; ?></th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+		<!-- End Panel Basic -->
+		<!-- Modal -->
+		<div class="modal fade" id="addRuleModal" aria-hidden="false"
+			aria-labelledby="exampleFormModalLabel" role="dialog" tabindex="-1">
+			<div class="modal-dialog">
+				<form id="ruleForm" class="modal-content" 
+				method="post" action="<?php echo $this->url->getStatic('acl/list'); ?>">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&#10005;</span>
+						</button>
+						<h4 class="modal-title"><?php echo 'Add Access List Rule'; ?></h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-lg-4 form-group">
+								<label class="control-label" for="inputRoleName"><?php echo 'Role Name'; ?></label> <select class="form-control"
+									id="inputRoleName" name="roles_name"> <?php foreach ($model->aclRoles->find() as $role) { ?>
+									<option value="<?php echo $role->name; ?>"><?php echo $role->name; ?></option> <?php } ?>
+								</select>
+							</div>
+
+							<div class="col-lg-4 form-group">
+								<label class="control-label" for="inputResourceName"><?php echo 'Resource Name'; ?></label> <select class="form-control"
+									id="inputResourceName" name="resources_name"> <?php foreach ($model->aclResources->find() as $resource) { ?>
+									<option value="<?php echo $resource->name; ?>"><?php echo $resource->name; ?></option> <?php } ?>
+								</select>
+							</div>
+
+							<div class="col-lg-4 form-group">
+								<label class="control-label" for="resourceDescription"><?php echo 'Resource Description'; ?></label> <?php $first = $model->aclResources->findFirst(); ?>
+								<textarea style="height: 70px; resize: vertical;"
+									id="resourceDescription" class="form-control" readonly><?php echo $first->description; ?></textarea>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-4 form-group">
+								<label class="control-label" for="inputActionName"><?php echo 'Action Name'; ?></label> <select class="form-control"
+									id="inputActionName" name="access_name"> <?php foreach ($model->aclResourcesAccess->findByResourcesName($first->name) as $actions) { ?>
+									<option value="<?php echo $actions->access_name; ?>"><?php echo $actions->access_name; ?></option> <?php } ?>
+									<option value="*">*</option>
+								</select>
+							</div>
+
+							<div class="col-lg-4 form-group">
+								<label class="control-label" for="inputAllowedName"><?php echo 'Permission'; ?></label> <select class="form-control"
+									id="inputAllowedName" name="allowed">
+									<option value="1"><?php echo 'Allow'; ?></option>
+									<option value="0"><?php echo 'Deny'; ?></option>
+								</select>
+							</div>
+
+							<div class="col-sm-12 pull-right">
+								<button class="btn btn-primary btn-outline" data-dismiss="modal"
+									id="addRuleSubmit" type="button"><?php echo 'Submit'; ?></button>
+							</div>
+						</div>
+						<?php echo $this->token->generateInput(); ?>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- End Modal -->
+</div>
+</div>
+<!-- End Page -->

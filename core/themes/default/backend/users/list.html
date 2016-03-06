@@ -74,6 +74,7 @@
 							</style>
 							{% for user in model.users.find() %}
 							<!-- USER -->
+							{% set portrait = user.details ? (user.details.portrait  ? user.details.portrait : 'user_blank.png') : 'user_blank.png' %}
 							{% set name = user.details ? user.details.name : user.email %}
 							{% set surname = user.details ? user.details.surname : '' %}
 							{% set address = user.details ? user.details.address : '' %}
@@ -102,18 +103,21 @@
 								{% endif %}
 							{% endif %}
 							
-								<li class="list-group-item">
+								<li id="user-{{ user.id }}" class="list-group-item">
 									
 									<div class="media">
 										<div class="media-left">
 											<div class="user-status-bar {% if user.status.name != 'active' %}bg-orange-800{% endif %}"></div>
 											<div class="avatar {% if busy is 1 %}avatar-busy{% elseif online is 1 %}avatar-online{% else %}avatar-off{% endif %}">
-												<img src="{{ static_url() }}assets/portraits/1.jpg" alt="..."> <i class="avatar"></i>
+												<img src="{{ static_url() }}assets/portraits/{{ portrait }}" alt="..."> <i class="avatar"></i>
 											</div>
 										</div>
 										<div class="media-body">
 											<h4 class="media-heading">
-												{{ name }} {{ surname }} <small><br>{{ _('Last Access')}}: {{ last_access }}<br>{{ _('Last operation') }}: {{ last_operation }}</small>
+												{{ user.email }}<small><br>
+												<br><i class="icon wb-chevron-right-mini"></i>{{ _('Last Access')}}: {{ last_access }}
+												<br><i class="icon wb-chevron-right-mini"></i>{{ _('Last operation') }}: {{ last_operation }}
+												</small>
 											</h4>
 											<p>
 												<i class="icon icon-color wb-map" aria-hidden="true"></i>
@@ -135,8 +139,13 @@
 												</a>
 											</div>
 										</div>
-										<div class="media-right">
-											<a href="{{ static_url('users/profile/') }}{{ user.id }}" type="button" class="btn btn-outline btn-success btn-sm">{{ _('Show profile') }}</a>
+										<div class="media-right" style="display:inline;margin-top:5%">
+											<a href="{{ static_url('users/profile/') }}{{ user.id }}" type="button" class="btn btn-outline btn-success btn-sm">
+											<i class="icon wb-pencil" aria-hidden="true"></i>{{ _('Show Profile') }}
+											</a>
+											<a href="javascript:void(0)" id="dropWarningCancel" onclick="dropUser('{{ user.id }}')" type="button" class="btn btn-outline btn-danger btn-sm">
+											<i class="icon wb-trash" aria-hidden="true"></i>{{ _('Drop User') }}
+											</a>
 										</div>
 									</div>
 								</li>

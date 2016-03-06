@@ -18,36 +18,26 @@
 				<h3 class="panel-title"><?php echo 'Forgot passwords requests'; ?></h3>
 			</header>
 			<div class="panel-body">
-				<table class="tablesaw table-striped table-bordered table-hover" data-tablesaw-mode="swipe"
-              data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap
-              data-tablesaw-mode-switch>
+				<table id="forgotTable" class="table table-hover dataTable table-striped width-full">
 					<thead>
 						<tr>
-							<th data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist"><?php echo 'ID'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="5"><?php echo 'Created at'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="4"><?php echo 'Token'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="3"><?php echo 'Private Key'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="2"><?php echo 'Expires'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="1"><?php echo 'Users id'; ?></th>
+							<th><?php echo 'ID'; ?></th>
+							<th><?php echo 'Created at'; ?></th>
+							<th><?php echo 'Token'; ?></th>
+							<th><?php echo 'Private Key'; ?></th>
+							<th><?php echo 'Expires'; ?></th>
+							<th><?php echo 'Users id'; ?></th>
 						</tr>
 					</thead>
-					<tbody>
-						<?php foreach ($table as $record) { ?>
-						<tr>
-							<?php foreach ($record as $row) { ?>
-							<td><?php echo $row; ?></td>
-							<?php } ?>
-						</tr>
-						<?php } ?>
-					</tbody>
+					
 					<tfoot>
 						<tr>
-							<th data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist"><?php echo 'ID'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="5"><?php echo 'Created at'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="4"><?php echo 'Token'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="3"><?php echo 'Private Key'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="2"><?php echo 'Expires'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="1"><?php echo 'Users id'; ?></th>
+							<th><?php echo 'ID'; ?></th>
+							<th><?php echo 'Created at'; ?></th>
+							<th><?php echo 'Token'; ?></th>
+							<th><?php echo 'Private Key'; ?></th>
+							<th><?php echo 'Expires'; ?></th>
+							<th><?php echo 'Users id'; ?></th>
 						</tr>
 					</tfoot>
 				</table>

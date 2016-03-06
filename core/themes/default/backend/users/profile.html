@@ -88,7 +88,7 @@
 													role="menu">
 													{% for status in model.usersStatus.find() %}
 													<li role="presentation"><a
-														href="{{ static_url('users/profile/') }}{{ user.id }}/change-status/{{ status.id }}"
+														href="{{ static_url('users/change-status/') }}{{ user.id }}/{{ status.id }}"
 														role="menuitem">{{ status.name }}</a></li> {% endfor %}
 												</ul>
 											</div>

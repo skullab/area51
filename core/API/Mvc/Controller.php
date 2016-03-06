@@ -6,6 +6,7 @@ use Phalcon\Http\Response;
 use Phalcon\Mvc\View;
 use Thunderhawk\API\Component\Settings;
 use Thunderhawk\API\Component\Auth;
+use Thunderhawk\API\Engine;
 abstract class Controller extends PhalconController{
 	
 	const USE_MODULE_VIEWS = 0 ;
@@ -13,8 +14,11 @@ abstract class Controller extends PhalconController{
 	protected $settings ;
 	protected $cssPlugins ;
 	protected $jsPlugins,$jsComponents,$jsControllers ;
+	protected $engine ;
 	
 	public function initialize(){
+		$this->engine = Engine::getInstance();
+		
 		$this->session->start();
 		$this->tag->setDoctype(\Phalcon\Tag::HTML5);
 		$this->tag->setTitleSeparator($this->config->app->titleSeparator);
@@ -36,6 +40,34 @@ abstract class Controller extends PhalconController{
 		$this->view->body_class = '' ;
 		$this->onInitialize();
 		
+	}
+	protected function getAssetsPackageSweetAlert(){
+		$this->cssPlugins->addCss('vendor/bootstrap-sweetalert/sweet-alert.css');
+		$this->jsPlugins->addJs('vendor/bootbox/bootbox.js')
+		->addJs('vendor/bootstrap-sweetalert/sweet-alert.js');
+		$this->jsComponents->addJs('js/components/bootbox.js')
+		->addJs('js/components/bootstrap-sweetalert.js');
+	}
+	protected function getAssetsPackageToastr(){
+		$this->cssPlugins->addCss('vendor/toastr/toastr.original.css');
+		$this->jsPlugins->addJs('vendor/toastr/toastr.js');
+	}
+	protected function getAssetsPackageDataTable(){
+		$this->cssPlugins->addCss('vendor/datatables-bootstrap/dataTables.bootstrap.css')
+		->addCss('vendor/datatables-fixedheader/dataTables.fixedHeader.css')
+		->addCss('vendor/datatables-responsive/dataTables.responsive.css')
+		->addCss('vendor/datatables-select/select.dataTables.min.css');
+		$this->jsPlugins->addJs('vendor/datatables/jquery.dataTables.min.js')
+		->addJs('vendor/datatables-fixedheader/dataTables.fixedHeader.js')
+		->addJs('vendor/datatables-bootstrap/dataTables.bootstrap.js')
+		->addJs('vendor/datatables-responsive/dataTables.responsive.js')
+		->addJs('vendor/datatables-tabletools/dataTables.tableTools.js')
+		->addJs('vendor/datatables-select/dataTables.select.min.js');
+		$this->jsComponents->addJs('js/components/datatables.js');
+	}
+	public function assetsPackage($package){
+		$func = "getAssetsPackage".\Phalcon\Text::camelize($package);
+		return $this->{$func}() ;
 	}
 	public function getNamespaceName(){
 		$this->dispatcher->getNamespaceName();
@@ -108,10 +140,11 @@ abstract class Controller extends PhalconController{
 			return $this->forward();
 		}
 	}
-	public function forward($controller = 'index',$action = 'index'){
+	public function forward($controller = 'index',$action = 'index',$params = array()){
 		return $this->dispatcher->forward(array(
 				'controller' => $controller,
-				'action' => $action
+				'action' => $action,
+				'params' => $params
 		));
 	}
 	public function redirect($uri,$static = true){
@@ -127,6 +160,7 @@ abstract class Controller extends PhalconController{
 		if($auth){
 			$role = $auth['role'] ;
 			$this->view->display_name = $auth['display_name'];
+			$this->view->identity = $auth ;
 			$this->auth->updateOnlineUser();
 		}else{
 			$role = 'Guest' ;
@@ -147,7 +181,7 @@ abstract class Controller extends PhalconController{
 		}
 	}
 	protected function accessDenied($role,$resource,$action){
-		//var_dump('access denied for '.$role);
+		$this->flash->error(_('You don\'t have permission to perform this operation'));
 		return $this->forward();
 	}
 	public function sendAjax($payload,$encode = true,array $headers = array()){

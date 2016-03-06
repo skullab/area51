@@ -1,0 +1,22 @@
+<li id="menu-b2b-promozioni" class="site-menu-item has-sub"><a
+	href=""> <i class="site-menu-icon icon md-money" aria-hidden="true"></i>
+		<span class="site-menu-title">Promozioni</span> <span
+		class="site-menu-arrow"></span>
+</a>
+	<ul class="site-menu-sub">
+		<li id="menu-b2b-promozioni-attive" class="site-menu-item"><a
+			class="animsition-link" href="javascript:void(0)"> <i
+				class="site-menu-icon " aria-hidden="true"></i> <span
+				class="site-menu-title">Attive</span>
+		</a></li>
+		<li id="menu-b2b-promozioni-aggiungi" class="site-menu-item"><a
+			class="animsition-link" href="javascript:void(0)"> <i
+				class="site-menu-icon " aria-hidden="true"></i> <span
+				class="site-menu-title">Aggiungi</span>
+		</a></li>
+		<li id="menu-b2b-promozioni-calendario" class="site-menu-item"><a
+			class="animsition-link" href="javascript:void(0)"> <i
+				class="site-menu-icon " aria-hidden="true"></i> <span
+				class="site-menu-title">Calendario</span>
+		</a></li>
+	</ul></li>

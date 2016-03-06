@@ -1,0 +1,18 @@
+<li class="site-menu-item has-sub">
+	<a href="javascript:void(0)"> 
+		<i class="site-menu-icon wb-flag" aria-hidden="true"></i> 
+		<span class="site-menu-title"><?php echo 'Languages'; ?></span><span class="site-menu-arrow"></span>
+	</a>
+	<ul class="site-menu-sub">
+		<li class="site-menu-item">
+			<a class="animsition-link" href="">
+			<i class="site-menu-icon" ></i>
+			<span><?php echo 'Show supported languages'; ?></span></a>
+		</li>
+		<li class="site-menu-item">
+			<a class="animsition-link" href="">
+			<i class="site-menu-icon" ></i>
+			<span><?php echo 'Translate'; ?></span></a>
+		</li>
+	</ul>
+</li>

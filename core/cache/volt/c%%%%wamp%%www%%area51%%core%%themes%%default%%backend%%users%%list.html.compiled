@@ -74,6 +74,7 @@
 							</style>
 							<?php foreach ($model->users->find() as $user) { ?>
 							<!-- USER -->
+							<?php $portrait = ($user->details ? (($user->details->portrait ? $user->details->portrait : 'user_blank.png')) : 'user_blank.png'); ?>
 							<?php $name = ($user->details ? $user->details->name : $user->email); ?>
 							<?php $surname = ($user->details ? $user->details->surname : ''); ?>
 							<?php $address = ($user->details ? $user->details->address : ''); ?>
@@ -102,18 +103,21 @@
 								<?php } ?>
 							<?php } ?>
 							
-								<li class="list-group-item">
+								<li id="user-<?php echo $user->id; ?>" class="list-group-item">
 									
 									<div class="media">
 										<div class="media-left">
 											<div class="user-status-bar <?php if ($user->status->name != 'active') { ?>bg-orange-800<?php } ?>"></div>
 											<div class="avatar <?php if ($busy == 1) { ?>avatar-busy<?php } elseif ($online == 1) { ?>avatar-online<?php } else { ?>avatar-off<?php } ?>">
-												<img src="<?php echo $this->url->getStatic(); ?>assets/portraits/1.jpg" alt="..."> <i class="avatar"></i>
+												<img src="<?php echo $this->url->getStatic(); ?>assets/portraits/<?php echo $portrait; ?>" alt="..."> <i class="avatar"></i>
 											</div>
 										</div>
 										<div class="media-body">
 											<h4 class="media-heading">
-												<?php echo $name; ?> <?php echo $surname; ?> <small><br><?php echo 'Last Access'; ?>: <?php echo $last_access; ?><br><?php echo 'Last operation'; ?>: <?php echo $last_operation; ?></small>
+												<?php echo $user->email; ?><small><br>
+												<br><i class="icon wb-chevron-right-mini"></i><?php echo 'Last Access'; ?>: <?php echo $last_access; ?>
+												<br><i class="icon wb-chevron-right-mini"></i><?php echo 'Last operation'; ?>: <?php echo $last_operation; ?>
+												</small>
 											</h4>
 											<p>
 												<i class="icon icon-color wb-map" aria-hidden="true"></i>
@@ -135,8 +139,13 @@
 												</a>
 											</div>
 										</div>
-										<div class="media-right">
-											<a href="<?php echo $this->url->getStatic('users/profile/'); ?><?php echo $user->id; ?>" type="button" class="btn btn-outline btn-success btn-sm"><?php echo 'Show profile'; ?></a>
+										<div class="media-right" style="display:inline;margin-top:5%">
+											<a href="<?php echo $this->url->getStatic('users/profile/'); ?><?php echo $user->id; ?>" type="button" class="btn btn-outline btn-success btn-sm">
+											<i class="icon wb-pencil" aria-hidden="true"></i><?php echo 'Show Profile'; ?>
+											</a>
+											<a href="javascript:void(0)" id="dropWarningCancel" onclick="dropUser('<?php echo $user->id; ?>')" type="button" class="btn btn-outline btn-danger btn-sm">
+											<i class="icon wb-trash" aria-hidden="true"></i><?php echo 'Drop User'; ?>
+											</a>
 										</div>
 									</div>
 								</li>

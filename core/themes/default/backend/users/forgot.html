@@ -18,36 +18,26 @@
 				<h3 class="panel-title">{{ _('Forgot passwords requests') }}</h3>
 			</header>
 			<div class="panel-body">
-				<table class="tablesaw table-striped table-bordered table-hover" data-tablesaw-mode="swipe"
-              data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap
-              data-tablesaw-mode-switch>
+				<table id="forgotTable" class="table table-hover dataTable table-striped width-full">
 					<thead>
 						<tr>
-							<th data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist">{{ _('ID') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="5">{{ _('Created at') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="4">{{ _('Token') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="3">{{ _('Private Key') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="2">{{ _('Expires') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="1">{{ _('Users id') }}</th>
+							<th>{{ _('ID') }}</th>
+							<th>{{ _('Created at') }}</th>
+							<th>{{ _('Token') }}</th>
+							<th>{{ _('Private Key') }}</th>
+							<th>{{ _('Expires') }}</th>
+							<th>{{ _('Users id') }}</th>
 						</tr>
 					</thead>
-					<tbody>
-						{% for record in table %}
-						<tr>
-							{% for row in record %}
-							<td>{{ row }}</td>
-							{% endfor %}
-						</tr>
-						{% endfor %}
-					</tbody>
+					
 					<tfoot>
 						<tr>
-							<th data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist">{{ _('ID') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="5">{{ _('Created at') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="4">{{ _('Token') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="3">{{ _('Private Key') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="2">{{ _('Expires') }}</th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="1">{{ _('Users id') }}</th>
+							<th>{{ _('ID') }}</th>
+							<th>{{ _('Created at') }}</th>
+							<th>{{ _('Token') }}</th>
+							<th>{{ _('Private Key') }}</th>
+							<th>{{ _('Expires') }}</th>
+							<th>{{ _('Users id') }}</th>
 						</tr>
 					</tfoot>
 				</table>

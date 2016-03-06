@@ -138,6 +138,11 @@ class Acl extends Adapter implements InjectionAwareInterface {
 			}
 		}
 	}
+	public function dropAccessList($roleName,$resourceName,$accessName){
+		if($access = $this->accessExists($roleName, $resourceName, $accessName)){
+			return $access->delete();
+		}
+	}
 	protected function accessExists($roleName, $resourceName, $accessName) {
 		return AclAccessList::findFirst(array(
 				'roles_name = ?0 AND resources_name = ?1 AND access_name = ?2',
@@ -238,7 +243,7 @@ class Acl extends Adapter implements InjectionAwareInterface {
 		$rolesInherits = AclRolesInherits::find ();
 		$inherits = array ();
 		foreach ( $rolesInherits as $role ) {
-			$inherits [$role->roles_name] [] = $role->roles_inherits;
+			$inherits [$role->roles_name][] = $role->roles_inherits;
 		}
 		$rolesInherits = null;
 		return $inherits;

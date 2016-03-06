@@ -126,8 +126,10 @@ class Auth extends Component implements AuthInterface{
 	public function logout() {
 		$identity = $this->getIdentity();
 		$user = Users::findFirstById($identity['id']);
-		$user->login->online = 0;
-		$user->save();
+		if(isset($user->login)){
+			$user->login->online = 0;
+			$user->save();
+		}
 		$this->deleteCookies();
 		$this->session->remove(self::SESSION_AUTH);
 	}
@@ -192,12 +194,17 @@ class Auth extends Component implements AuthInterface{
 		$user->login->online = 1 ;
 		$user->login->busy = 0 ;
 		$user->save();
+		if($user->details && (trim($user->details->name) != '' || trim($user->details->surname) != '')){
+			$display_name = $user->details->name.' '.$user->details->surname ;
+		}else{
+			$display_name = $user->email ;
+		}
 		$this->session->set(self::SESSION_AUTH,array(
 				'id' => $user->id,
 				'email' => $user->email,
 				'status' => $user->status->name,
 				'role' => $user->role,
-				'display_name' => $user->details ? $user->details->name.' '.$this->details->surname : $user->email 
+				'display_name' => $display_name 
 		));
 	}
 
@@ -223,7 +230,31 @@ class Auth extends Component implements AuthInterface{
 			throw new Auth\Exception($user->status->description,200);
 		}
 	}
-
+	public function isRole($role_name){
+		$identity = $this->getIdentity();
+		if(!$identity)return false ;
+		if($identity['role'] == $role_name)return true ;
+		return false ;
+	}
+	public function isInherits($role){
+		$identity = $this->getIdentity();
+		if(!$identity)return false ;
+		$check = false ;
+		//$role_name = null ;
+		foreach ($this->acl->getRolesInherits() as $role_name => $inherits){
+			if($inherits[0] == $role){
+				$check = true ;
+				//$role_name = $r ;
+				break;
+			}
+		}
+		if(!$check)return false ;
+		if($identity['role'] == $role_name){
+			return true ;
+		}else{
+			return $this->isInherits($role_name);
+		}
+	}
 	/**
 	 * {@inheritDoc}
 	 * @see \Thunderhawk\API\Component\Auth\AuthInterface::getIdentity()

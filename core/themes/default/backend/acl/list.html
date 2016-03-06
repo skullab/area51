@@ -1,0 +1,138 @@
+<style>
+#buttonsPanel {
+	padding-left: 3%;
+}
+</style>
+<!-- Page -->
+<div class="page animsition">
+	<div class="page-header">
+		<h1 class="page-title">{{ _('Access Control List') }}</h1>
+		<ol class="breadcrumb">
+			<li><a href="{{ static_url('dashboard') }}">{{
+					_('Dashboard') }}</a></li>
+			<li><a href="{{ static_url('acl') }}">{{ _('ACL') }}</a></li>
+			<li class="active">{{ _('Access List') }}</li>
+		</ol>
+
+	</div>
+	<div class="page-content">
+		{{ content() }}
+		<!-- Panel Basic -->
+		<div class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions"></div>
+				<h3 class="panel-title">{{ _('Permissions') }}</h3>
+			</header>
+			<div id="buttonsPanel">
+				<button id="addRule" class="btn btn-outline btn-primary"
+					data-target="#addRuleModal" data-toggle="modal" type="button">
+					<i class="icon wb-plus" aria-hidden="true"></i> {{ _('Add Rule') }} / {{ _('Modify') }}
+				</button>
+				
+				<button id="dropRule" class="btn btn-outline btn-danger" type="button">
+					<i class="icon wb-trash" aria-hidden="true"></i> {{ _('Drop Rule') }}
+				</button>
+				
+			</div>
+			<div class="panel-body">
+				<table id="accessListTable"
+					class="table table-hover dataTable table-striped width-full">
+					<thead>
+						<tr>
+							<th>{{ _('Role Name') }}</th>
+							<th>{{ _('Resource') }}</th>
+							<th>{{ _('Action') }}</th>
+							<th>{{ _('Allowed') }}</th>
+						</tr>
+					</thead>
+
+					<tfoot>
+						<tr>
+							<th>{{ _('Role Name') }}</th>
+							<th>{{ _('Resource') }}</th>
+							<th>{{ _('Action') }}</th>
+							<th>{{ _('Allowed') }}</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+		<!-- End Panel Basic -->
+		<!-- Modal -->
+		<div class="modal fade" id="addRuleModal" aria-hidden="false"
+			aria-labelledby="exampleFormModalLabel" role="dialog" tabindex="-1">
+			<div class="modal-dialog">
+				<form id="ruleForm" class="modal-content" 
+				method="post" action="{{ static_url('acl/list') }}">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&#10005;</span>
+						</button>
+						<h4 class="modal-title">{{ _('Add Access List Rule') }}</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-lg-4 form-group">
+								<label class="control-label" for="inputRoleName">{{
+									_('Role Name') }}</label> <select class="form-control"
+									id="inputRoleName" name="roles_name"> {% for role in
+									model.aclRoles.find() %}
+									<option value="{{ role.name }}">{{ role.name }}</option> {%
+									endfor %}
+								</select>
+							</div>
+
+							<div class="col-lg-4 form-group">
+								<label class="control-label" for="inputResourceName">{{
+									_('Resource Name') }}</label> <select class="form-control"
+									id="inputResourceName" name="resources_name"> {% for
+									resource in model.aclResources.find() %}
+									<option value="{{ resource.name }}">{{ resource.name
+										}}</option> {% endfor %}
+								</select>
+							</div>
+
+							<div class="col-lg-4 form-group">
+								<label class="control-label" for="resourceDescription">{{
+									_('Resource Description') }}</label> {% set first =
+								model.aclResources.findFirst() %}
+								<textarea style="height: 70px; resize: vertical;"
+									id="resourceDescription" class="form-control" readonly>{{ first.description }}</textarea>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-4 form-group">
+								<label class="control-label" for="inputActionName">{{
+									_('Action Name') }}</label> <select class="form-control"
+									id="inputActionName" name="access_name"> {% for actions
+									in model.aclResourcesAccess.findByResourcesName(first.name) %}
+									<option value="{{ actions.access_name }}">{{
+										actions.access_name }}</option> {% endfor %}
+									<option value="*">*</option>
+								</select>
+							</div>
+
+							<div class="col-lg-4 form-group">
+								<label class="control-label" for="inputAllowedName">{{
+									_('Permission') }}</label> <select class="form-control"
+									id="inputAllowedName" name="allowed">
+									<option value="1">{{ _('Allow') }}</option>
+									<option value="0">{{ _('Deny') }}</option>
+								</select>
+							</div>
+
+							<div class="col-sm-12 pull-right">
+								<button class="btn btn-primary btn-outline" data-dismiss="modal"
+									id="addRuleSubmit" type="button">{{ _('Submit') }}</button>
+							</div>
+						</div>
+						{{ token.generateInput() }}
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- End Modal -->
+</div>
+</div>
+<!-- End Page -->

@@ -18,32 +18,22 @@
 				<h3 class="panel-title"><?php echo 'Failed users logins'; ?></h3>
 			</header>
 			<div class="panel-body">
-				<table class="tablesaw table-striped table-bordered table-hover" data-tablesaw-mode="swipe"
-              data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap
-              data-tablesaw-mode-switch>
+				<table id="failedTable" class="table table-hover dataTable table-striped width-full">
 					<thead>
 						<tr>
-							<th data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist"><?php echo 'ID'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="3"><?php echo 'Users id'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="2"><?php echo 'IP address'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="1"><?php echo 'Attempted'; ?></th>
+							<th><?php echo 'ID'; ?></th>
+							<th><?php echo 'Users id'; ?></th>
+							<th><?php echo 'IP address'; ?></th>
+							<th><?php echo 'Attempted'; ?></th>
 						</tr>
 					</thead>
-					<tbody>
-						<?php foreach ($table as $record) { ?>
-						<tr>
-							<?php foreach ($record as $row) { ?>
-							<td><?php echo $row; ?></td>
-							<?php } ?>
-						</tr>
-						<?php } ?>
-					</tbody>
+					
 					<tfoot>
 						<tr>
-							<th data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist"><?php echo 'ID'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="3"><?php echo 'Users id'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="2"><?php echo 'IP address'; ?></th>
-							<th data-tablesaw-sortable-col data-tablesaw-priority="1"><?php echo 'Attempted'; ?></th>
+							<th><?php echo 'ID'; ?></th>
+							<th><?php echo 'Users id'; ?></th>
+							<th><?php echo 'IP address'; ?></th>
+							<th><?php echo 'Attempted'; ?></th>
 						</tr>
 					</tfoot>
 				</table>

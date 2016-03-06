@@ -1,0 +1,99 @@
+<!-- Page -->
+<div class="page animsition">
+	<div class="page-header">
+	<h1 class="page-title"><?php echo 'Add Role'; ?></h1>
+		<ol class="breadcrumb">
+			<li><a href="<?php echo $this->url->getStatic('dashboard'); ?>"><?php echo 'Home'; ?></a></li>
+			<li class="active"><?php echo 'Acl'; ?></li>
+		</ol>
+	</div>
+	<div class="page-content container-fluid">
+	<div id="spinner" class="spinner-container"></div>
+	<div class="row"><div class="col-md-12"><?php echo $this->getContent(); ?></div></div>
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<!-- Panel Wizard Form Container -->
+				<div class="panel" id="wizardFormContainer">
+					<div class="panel-heading">
+						<h3 class="panel-title"><?php echo 'Role informations'; ?></h3>
+					</div>
+					<div class="panel-body">
+						<!-- Steps -->
+						<div class="pearls row">
+							<div class="pearl current col-xs-6">
+								<div class="pearl-icon">
+									<i class="icon wb-lock" aria-hidden="true"></i>
+								</div>
+								<span class="pearl-title"><?php echo 'Role info'; ?></span>
+							</div>
+							<div class="pearl col-xs-6">
+								<div class="pearl-icon">
+									<i class="icon wb-check" aria-hidden="true"></i>
+								</div>
+								<span class="pearl-title"><?php echo 'Confirmations'; ?></span>
+							</div>
+						</div>
+						<!-- End Steps -->
+
+						<!-- Wizard Content -->
+						<form class="wizard-content" id="formContainer" method="POST"
+							action="<?php echo $this->url->getStatic('acl/add-role'); ?>">
+							<!-- LOGIN INFO -->
+							<div class="wizard-pane active" role="tabpanel">
+								<div class="form-group">
+									<label class="control-label" for="inputRoleName"><?php echo 'Role name'; ?></label> <input type="text" class="form-control"
+										id="inputRoleName" name="roleName" required="required">
+								</div>
+								<div class="form-group">
+									<label class="control-label" for="inputRoleInherits"><?php echo 'Role inherits'; ?></label>
+										<select class="form-control" id="inputRoleInherits" name="roleInherits">
+											<option value="0"><?php echo 'Nothing'; ?></option>
+											<?php foreach ($model->aclRoles->find() as $role) { ?>
+											<option value="<?php echo $role->name; ?>"><?php echo $role->name; ?></option>
+											<?php } ?>
+										</select>
+								</div>
+								<div class="form-group">
+									<label class="control-label" for="inputRoleDescription"><?php echo 'Role Description'; ?></label> <textarea id="inputRoleDescription" class="form-control"
+										name="roleDescription"></textarea>
+								</div>
+							</div>
+							
+							<div class="wizard-pane" id="confirmWizardPane" role="tabpanel">
+								<div class="text-center margin-vertical-20">
+									<h4><?php echo 'Confirm registration'; ?></h4>
+									<div class="table-responsive">
+										<div class="table-responsive">
+											<table class="table table-bordered table-striped"
+												id="confirmTableRole">
+												<tbody>
+													<tr>
+														<td style="width: 35%"><?php echo 'Role name'; ?></td>
+														<td style="width: 65%" id="confirmInputRoleName"></td>
+													</tr>
+													<tr>
+														<td style="width: 35%"><?php echo 'Role inherits'; ?></td>
+														<td style="width: 65%" id="confirmInputRoleInherits"></td>
+													</tr>
+													<tr>
+														<td style="width: 35%"><?php echo 'Role Description'; ?></td>
+														<td style="width: 65%" id="confirmInputRoleDescription"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<?php echo $this->token->generateInput(); ?>
+						</form>
+						<!-- Wizard Content -->
+					</div>
+				</div>
+				<!-- End Panel Wizard Form Container -->
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+</div>

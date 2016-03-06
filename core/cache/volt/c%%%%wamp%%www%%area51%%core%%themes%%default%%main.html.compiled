@@ -14,7 +14,7 @@
   <link rel="apple-touch-icon" href="<?php echo $this->url->getStatic(''); ?>assets/images/apple-touch-icon.png">
   <link rel="shortcut icon" href="<?php echo $this->url->getStatic(''); ?>assets/images/favicon.ico">
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/css/bootstrap.css">
   <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/css/bootstrap-extend.min.css">
   <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/css/site.min.css">
   

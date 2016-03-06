@@ -9,6 +9,7 @@ use Thunderhawk\API\Mvc\Model\User\UsersStatus;
 use Phalcon\Mvc\View;
 use Thunderhawk\API\Mvc\Model\User\UsersForgotPassword;
 use Thunderhawk\API\Mvc\Model\User\UsersFailedAttempts;
+use Thunderhawk\API\Component\Auth;
 
 class UsersController extends Controller {
 	protected function onInitialize() {
@@ -90,55 +91,86 @@ class UsersController extends Controller {
 		return $this->forward ( 'users', 'add' );
 	}
 	public function listAction() {
+		$this->cssPlugins->addCss('css/pages/user.css');
+		$this->jsPlugins->addJs('js/plugins/responsive-tabs.js');
+		//->addJs('js/components/tabs.js');
+		$this->cssPlugins->addCss('vendor/bootstrap-sweetalert/sweet-alert.css');
+		$this->jsPlugins->addJs('vendor/bootbox/bootbox.js')
+		->addJs('vendor/bootstrap-sweetalert/sweet-alert.js');
+		$this->jsComponents->addJs('js/components/bootbox.js')
+		->addJs('js/components/bootstrap-sweetalert.js');
+		$this->assets->renderInlineJs('js/controllers/dropUser.js');
 	}
-	
-	public function getForgotAction(){
-		$records = UsersForgotPassword::find()->toArray() ;
-		$forgot = array();
-		$c = 0 ;
-		foreach ($records as $record){
-			$forgot[$c] = array();
-			foreach ($record as $n => $v){
-				$forgot[$c][$n] = htmlspecialchars($v);
+	public function dropAction(){
+		if($this->request->isPost()){
+			if($this->request->isAjax()){
+				$id = $this->request->getPost('users_id');
+				$user = Users::findFirstById($id);
+				$payload = array('error'=>1);
+				if($user){
+					if($user->role == Auth::ROLE_ADMIN){
+						try{
+							$delete = $user->delete();
+							if($delete){
+								$payload['error'] = 0 ;
+							}else{
+								foreach ($user->getMessages() as $message){
+									$payload['message'] .= $message.'<br>' ;
+								}
+							}
+						}catch(\Exception $e){
+							$payload = array('error'=>$e->getCode(),'message'=>$e->getMessage());
+						}
+					}else{
+						$payload['message'] = _('You don\'t have permission to perform this operation');
+					}
+				}else{
+					$payload['message'] = _('User not found');
+				}
+				return $this->sendAjax($payload);
 			}
-			$c++;
 		}
 		
-		return $this->sendAjax(array('data' => $forgot));
+		$this->redirect();
+		
 	}
-	
-	public function forgotAction() {
-		
-		/*$this->cssPlugins->addCss('vendor/datatables-bootstrap/dataTables.bootstrap.css')
-		->addCss('vendor/datatables-fixedheader/dataTables.fixedHeader.css')
-		->addCss('vendor/datatables-responsive/dataTables.responsive.css');
-		$this->jsPlugins->addJs('vendor/datatables/jquery.dataTables.min.js')
-		->addJs('vendor/datatables-fixedheader/dataTables.fixedHeader.js')
-		->addJs('vendor/datatables-bootstrap/dataTables.bootstrap.js')
-		->addJs('vendor/datatables-responsive/dataTables.responsive.js')
-		->addJs('vendor/datatables-tabletools/dataTables.tableTools.js');
-		$this->assets->renderInlineJs('js/controllers/userForgot.js');*/
-		$this->cssPlugins->addCss('vendor/filament-tablesaw/tablesaw.css');
-		$this->jsPlugins->addJs('vendor/filament-tablesaw/tablesaw.js');
-		
-		$records = UsersForgotPassword::find()->toArray() ;
-		$table = array();
-		$i = 0 ;
-		foreach ($records as $record){
-			$table[$i] = array();
-			foreach ($record as $n => $v){
-				$table[$i][$n] = $v ;
-				if($n == 'token' || $n == 'private_key'){
-					$table[$i][$n] = '***' ;
+	public function getForgotAction(){
+		if($this->request->isPost()){
+			if($this->request->isAjax()){
+				if($this->token->check('token')){
+					$records = UsersForgotPassword::find()->toArray() ;
+					$table = array();
+					$i = 0 ;
+					foreach ($records as $record){
+						$table[$i] = array();
+						foreach ($record as $n => $v){
+							$table[$i][$n] = $v ;
+							if($n == 'token' || $n == 'private_key'){
+								$table[$i][$n] = '***' ;
+							}
+						}
+						$i++ ;
+					}
+					$records = null ;
+					$data = array('data'=>$table);
+					return $this->sendAjax($data);
 				}
 			}
-			$i++ ;
 		}
-		$records = null ;
-		$this->view->table = $table ;
 	}
-	public function failedAction() {
-		/*$this->cssPlugins->addCss('vendor/datatables-bootstrap/dataTables.bootstrap.css')
+	public function getFailedAction(){
+		if($this->request->isPost()){
+			if($this->request->isAjax()){
+				if($this->token->check('token')){
+					$records = UsersFailedAttempts::find()->toArray();
+					$data = array('data'=>$records);
+					return $this->sendAjax($data);
+				}
+			}
+		}
+	}
+	public function forgotAction() {
+		$this->cssPlugins->addCss('vendor/datatables-bootstrap/dataTables.bootstrap.css')
 		->addCss('vendor/datatables-fixedheader/dataTables.fixedHeader.css')
 		->addCss('vendor/datatables-responsive/dataTables.responsive.css');
 		$this->jsPlugins->addJs('vendor/datatables/jquery.dataTables.min.js')
@@ -146,15 +178,34 @@ class UsersController extends Controller {
 		->addJs('vendor/datatables-bootstrap/dataTables.bootstrap.js')
 		->addJs('vendor/datatables-responsive/dataTables.responsive.js')
 		->addJs('vendor/datatables-tabletools/dataTables.tableTools.js');
-		$this->assets->renderInlineJs('js/controllers/userFailed.js');
-		*/
-		$this->cssPlugins->addCss('vendor/filament-tablesaw/tablesaw.css');
-		$this->jsPlugins->addJs('vendor/filament-tablesaw/tablesaw.js');
-		
-		$table = UsersFailedAttempts::find()->toArray() ;
-		$this->view->table = $table ;
+		$this->jsComponents->addJs('js/components/datatables.js');
+		$this->assets->renderInlineJs('js/controllers/userForgot.js');
 	}
-	
+	public function failedAction() {
+		$this->cssPlugins->addCss('vendor/datatables-bootstrap/dataTables.bootstrap.css')
+		->addCss('vendor/datatables-fixedheader/dataTables.fixedHeader.css')
+		->addCss('vendor/datatables-responsive/dataTables.responsive.css');
+		$this->jsPlugins->addJs('vendor/datatables/jquery.dataTables.min.js')
+		->addJs('vendor/datatables-fixedheader/dataTables.fixedHeader.js')
+		->addJs('vendor/datatables-bootstrap/dataTables.bootstrap.js')
+		->addJs('vendor/datatables-responsive/dataTables.responsive.js')
+		->addJs('vendor/datatables-tabletools/dataTables.tableTools.js');
+		$this->jsComponents->addJs('js/components/datatables.js');
+		$this->assets->renderInlineJs('js/controllers/userFailed.js');
+	}
+	public function changeStatusAction($id,$status){
+		$user = Users::findFirstById ( $id );
+		if($user){
+			$user->status_id = $status ;
+			try {
+				$user->save ();
+				$this->flash->success(_('Status changed'));
+				$this->forward('users','profile',array($id));
+			} catch ( \Exception $e ) {
+				$this->flash->error ( $e->getMessage () );
+			}
+		}
+	}
 	public function profileAction($id, $change = null, $value = null) {
 		if (is_numeric ( $id )) {
 			$user = Users::findFirstById ( $id );
