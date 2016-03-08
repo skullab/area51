@@ -12,5 +12,15 @@ dbname			= "area_riservata"
 adapter			= Mysql
 table.prefix 	= ""
 
+[remotedb]
+
+host			= ""
+username		= ""
+password		= ""
+dbname			= ""
+
+adapter			= Mysql
+table.prefix 	= "ps_"
+
 
 

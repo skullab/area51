@@ -10,6 +10,7 @@ use Phalcon\Mvc\View;
 use Thunderhawk\API\Mvc\Model\User\UsersForgotPassword;
 use Thunderhawk\API\Mvc\Model\User\UsersFailedAttempts;
 use Thunderhawk\API\Component\Auth;
+use Thunderhawk\API\Mvc\Model\Acl\AclRoles;
 
 class UsersController extends Controller {
 	protected function onInitialize() {
@@ -206,6 +207,14 @@ class UsersController extends Controller {
 			}
 		}
 	}
+	public function getRolesAction(){
+		if($this->request->isPost()){
+			if($this->request->isAjax()){
+				$roles = AclRoles::find()->toArray();
+				return $this->sendAjax($roles);
+			}
+		}
+	}
 	public function profileAction($id, $change = null, $value = null) {
 		if (is_numeric ( $id )) {
 			$user = Users::findFirstById ( $id );
@@ -220,7 +229,11 @@ class UsersController extends Controller {
 							$user->details = new UsersDetails();
 							$user->details->users_id = $user->id ;
 						}
-						$user->details->{$field} = $value ;
+						if($field == 'role'){
+							$user->role = $value ;
+						}else{
+							$user->details->{$field} = $value ;
+						}
 						try{
 							$user->save();
 						}catch(\Exception $e){
@@ -248,23 +261,7 @@ class UsersController extends Controller {
 				
 				$this->view->body_class = 'page-profile';
 				$this->view->user = $user;
-				if ($change) {
-					
-						switch ($change) {
-							case 'change-status' :
-								if ($value && is_numeric ( $value )) {
-									$user->status_id = $value;
-									try {
-										$response = $user->save ();
-										$this->flash->success(_('Status changed'));
-									} catch ( \Exception $e ) {
-										$this->flash->error ( $e->getMessage () );
-									}
-									break;
-								}
-						}
-					
-				}
+				
 			}else{
 				$this->redirect();
 			}

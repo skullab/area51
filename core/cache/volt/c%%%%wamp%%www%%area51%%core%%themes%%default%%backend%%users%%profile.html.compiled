@@ -6,6 +6,16 @@
 <?php $phone = ($user->details ? $user->details->phone : ''); ?>
 
 <div class="page animsition">
+	<div class="page-header">
+	<h1 class="page-title"><?php echo 'User Profile'; ?></h1>
+		<ol class="breadcrumb">
+			<li><a href="<?php echo $this->url->getStatic('dashboard'); ?>"><?php echo 'Home'; ?></a></li>
+			<li><a href="<?php echo $this->url->getStatic('users/list'); ?>"><?php echo 'Users List'; ?></a></li>
+			<li class="active"><?php echo 'User Profile'; ?></li>
+		</ol>
+		
+		
+	</div>
 	<div class="page-content container-fluid">
 		<div class="row">
 			<div class="col-md-12"><?php echo $this->getContent(); ?></div>
@@ -49,19 +59,21 @@
 					<div class="panel-body">
 						<ul class="nav nav-tabs nav-tabs-line" data-plugin="nav-tabs"
 							role="tablist">
-							<li class="active" role="presentation"><a data-toggle="tab"
+							<?php if ($this->auth->isRole('admin') || $this->auth->isInherits('admin')) { ?>
+							<li role="presentation"><a data-toggle="tab"
 								href="#status" aria-controls="status" role="tab"><?php echo 'Status'; ?> <?php if ($user->status->name != 'active') { ?><span
 									class="badge badge-danger">!</span><?php } ?>
 							</a></li>
-							<li role="presentation"><a data-toggle="tab" href="#details"
+							<?php } ?>
+							<li class="active" role="presentation"><a data-toggle="tab" href="#details"
 								aria-controls="details" role="tab"><?php echo 'Details'; ?> </a></li>
 							<li role="presentation"><a data-toggle="tab" href="#logs"
 								aria-controls="logs" role="tab"><?php echo 'Logs'; ?></a></li>
 						</ul>
 
 						<div class="tab-content">
-
-							<div class="tab-pane active" id="status" role="tabpanel">
+							<?php if ($this->auth->isRole('admin') || $this->auth->isInherits('admin')) { ?>
+							<div class="tab-pane" id="status" role="tabpanel">
 								<ul class="list-group">
 									<li class="list-group-item">
 										<div class="btn-group" role="group">
@@ -88,8 +100,8 @@
 											</div>
 									</li>
 							</div>
-
-							<div class="tab-pane" id="details" role="tabpanel">
+							<?php } ?>
+							<div class="tab-pane active" id="details" role="tabpanel">
 								<ul class="list-group">
 									<li class="list-group-item">
 										<div class="table-responsive">
@@ -112,7 +124,6 @@
 														<td><?php echo 'Surname'; ?></td>
 														<td><a id="editableSurname"
 															href="javascript:void(0)" data-type="text" data-pk="<?php echo $user->id; ?>"
-															data-placement="right" 
 															data-title="<?php echo 'Surname'; ?>"><?php echo $surname; ?></a></td>
 													</tr>
 													<tr>

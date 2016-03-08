@@ -9,6 +9,13 @@
 			<i class="site-menu-icon" ></i>
 			<span><?php echo 'Add Role'; ?></span></a>
 		</li>
+		<?php if ($this->auth->isRoleOrInherits('super')) { ?>
+		<li class="site-menu-item">
+			<a class="animsition-link" href="<?php echo $this->url->getStatic('acl/add-resource'); ?>">
+			<i class="site-menu-icon" ></i>
+			<span><?php echo 'Add Resource'; ?></span></a>
+		</li>
+		<?php } ?>
 		<li class="site-menu-item">
 			<a class="animsition-link" href="<?php echo $this->url->getStatic('acl/list'); ?>">
 			<i class="site-menu-icon" ></i>

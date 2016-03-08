@@ -9,6 +9,13 @@
 			<i class="site-menu-icon" ></i>
 			<span>{{ _('Add Role') }}</span></a>
 		</li>
+		{% if auth.isRoleOrInherits('super') %}
+		<li class="site-menu-item">
+			<a class="animsition-link" href="{{ static_url('acl/add-resource') }}">
+			<i class="site-menu-icon" ></i>
+			<span>{{ _('Add Resource') }}</span></a>
+		</li>
+		{% endif %}
 		<li class="site-menu-item">
 			<a class="animsition-link" href="{{ static_url('acl/list') }}">
 			<i class="site-menu-icon" ></i>

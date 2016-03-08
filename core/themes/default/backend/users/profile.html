@@ -8,6 +8,16 @@
 {% set phone = user.details ? user.details.phone : '' %}
 
 <div class="page animsition">
+	<div class="page-header">
+	<h1 class="page-title">{{ _('User Profile') }}</h1>
+		<ol class="breadcrumb">
+			<li><a href="{{ static_url('dashboard') }}">{{ _('Home') }}</a></li>
+			<li><a href="{{ static_url('users/list') }}">{{ _('Users List') }}</a></li>
+			<li class="active">{{ _('User Profile') }}</li>
+		</ol>
+		
+		
+	</div>
 	<div class="page-content container-fluid">
 		<div class="row">
 			<div class="col-md-12">{{ content() }}</div>
@@ -52,20 +62,22 @@
 					<div class="panel-body">
 						<ul class="nav nav-tabs nav-tabs-line" data-plugin="nav-tabs"
 							role="tablist">
-							<li class="active" role="presentation"><a data-toggle="tab"
+							{% if auth.isRole('admin') or auth.isInherits('admin') %}
+							<li role="presentation"><a data-toggle="tab"
 								href="#status" aria-controls="status" role="tab">{{
 									_('Status') }} {% if user.status.name != 'active' %}<span
 									class="badge badge-danger">!</span>{% endif %}
 							</a></li>
-							<li role="presentation"><a data-toggle="tab" href="#details"
+							{% endif %}
+							<li class="active" role="presentation"><a data-toggle="tab" href="#details"
 								aria-controls="details" role="tab">{{ _('Details') }} </a></li>
 							<li role="presentation"><a data-toggle="tab" href="#logs"
 								aria-controls="logs" role="tab">{{ _('Logs') }}</a></li>
 						</ul>
 
 						<div class="tab-content">
-
-							<div class="tab-pane active" id="status" role="tabpanel">
+							{% if auth.isRole('admin') or auth.isInherits('admin') %}
+							<div class="tab-pane" id="status" role="tabpanel">
 								<ul class="list-group">
 									<li class="list-group-item">
 										<div class="btn-group" role="group">
@@ -94,8 +106,8 @@
 											</div>
 									</li>
 							</div>
-
-							<div class="tab-pane" id="details" role="tabpanel">
+							{% endif %}
+							<div class="tab-pane active" id="details" role="tabpanel">
 								<ul class="list-group">
 									<li class="list-group-item">
 										<div class="table-responsive">
@@ -118,7 +130,6 @@
 														<td>{{ _('Surname') }}</td>
 														<td><a id="editableSurname"
 															href="javascript:void(0)" data-type="text" data-pk="{{ user.id }}"
-															data-placement="right" 
 															data-title="{{ _('Surname') }}">{{ surname }}</a></td>
 													</tr>
 													<tr>

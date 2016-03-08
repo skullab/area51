@@ -12,9 +12,15 @@ use Thunderhawk\API\Mvc\Model\User\UsersStatus;
 use Thunderhawk\API\Mvc\Model\User\UsersLogin;
 class Auth extends Component implements AuthInterface{
 	
-	const ROLE_ADMIN	= 'Admin';
-	const ROLE_USER		= 'User';
-	const ROLE_GUEST	= 'Guest';
+	const ROLE_SUPER	= 'super';
+	const ROLE_ADMIN	= 'admin';
+	const ROLE_AGENT	= 'sales agent';
+	const ROLE_SUPPLY	= 'supply chain';
+	const ROLE_PROMO	= 'promotions manager';
+	const ROLE_BOOK		= 'bookkeeper';
+	const ROLE_BUSINESS	= 'business consultant';
+	const ROLE_USER		= 'user';
+	const ROLE_GUEST	= 'guest';
 		const STATUS_ACTIVE = 'active';
 	const STATUS_LOCKED = 'locked';
 	const STATUS_SUSPENDED = 'suspended' ;
@@ -118,7 +124,10 @@ class Auth extends Component implements AuthInterface{
 		return $this->cookies->has(self::COOKIE_REMEMBER_SELECTOR) && 
 		$this->cookies->has(self::COOKIE_REMEMBER_TOKEN);
 	}
-
+	public function hasIdentity(){
+		$identity = $this->getIdentity();
+		return ($identity !== false && $identity != null) ;
+	}
 	/**
 	 * {@inheritDoc}
 	 * @see \Thunderhawk\API\Component\Auth\AuthInterface::logout()
@@ -199,12 +208,18 @@ class Auth extends Component implements AuthInterface{
 		}else{
 			$display_name = $user->email ;
 		}
+		if($user-details && (trim($user->details->portrait)) != ''){
+			$portrait = $user->details->portrait ;
+		}else{
+			$portrait = 'user_blank.png' ;
+		}
 		$this->session->set(self::SESSION_AUTH,array(
 				'id' => $user->id,
 				'email' => $user->email,
 				'status' => $user->status->name,
 				'role' => $user->role,
-				'display_name' => $display_name 
+				'display_name' => $display_name,
+				'portrait' => $portrait
 		));
 	}
 
@@ -230,10 +245,13 @@ class Auth extends Component implements AuthInterface{
 			throw new Auth\Exception($user->status->description,200);
 		}
 	}
+	public function isRoleOrInherits($role_name){
+		return $this->isRole($role_name) || $this->isInherits($role_name) ;
+	}
 	public function isRole($role_name){
 		$identity = $this->getIdentity();
 		if(!$identity)return false ;
-		if($identity['role'] == $role_name)return true ;
+		if(strcasecmp($identity['role'],$role_name) == 0)return true ;
 		return false ;
 	}
 	public function isInherits($role){
@@ -242,14 +260,13 @@ class Auth extends Component implements AuthInterface{
 		$check = false ;
 		//$role_name = null ;
 		foreach ($this->acl->getRolesInherits() as $role_name => $inherits){
-			if($inherits[0] == $role){
+			if(strcasecmp($inherits[0],$role) == 0){
 				$check = true ;
-				//$role_name = $r ;
 				break;
 			}
 		}
 		if(!$check)return false ;
-		if($identity['role'] == $role_name){
+		if(strcasecmp($identity['role'],$role_name) == 0){
 			return true ;
 		}else{
 			return $this->isInherits($role_name);
