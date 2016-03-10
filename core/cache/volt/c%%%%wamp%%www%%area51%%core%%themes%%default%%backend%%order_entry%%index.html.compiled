@@ -1,0 +1,157 @@
+<!-- Page -->
+  <div class="page animsition">
+    <div class="page-header">
+      <!--
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Home</a></li>
+              <li class="active">Basic UI</li>
+            </ol>
+       -->
+      <h1 class="page-title">Bacheca</h1>
+    </div>
+
+    <!-- Page Content -->
+    <div class="page-content container-fluid">
+    <div class="row">
+
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <!-- Example Heading With Label -->
+          <div class="panel panel-bordered panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title"><i class="icon wb-users" aria-hidden="true"></i>Anagrafica</h3>
+            </div>
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">CHIUDI</span>
+              </button>
+              Il cliente ESSELUNGA MILANO <a class="alert-link" href="javascript:void(0)">è stato bloccato</a>.
+            </div>
+            <ul class="list-group list-group-bordered">
+              <li class="list-group-item"><span class="badge badge-primary">3</span> <a href="#">Aggiornamenti di stato</a></li>
+              <li class="list-group-item"><span class="badge badge-primary">1</span> <a href="#">Nuovo inserimento</a></li>
+              <li class="list-group-item"><span class="badge badge-danger">1</span> <a href="#">Cliente bloccato</a></li>
+              <li class="list-group-item"><span class="badge badge-warning">1</span> <a href="#">Cliente controllato</a></li>
+              <li class="list-group-item"><a href="#">Vai all'anagrafica clienti</a></li>
+            </ul>
+          </div>
+          <!-- End Example Heading With Label -->
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <!-- Example Heading With Label -->
+          <div class="panel panel-bordered panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title"><i class="icon md-money" aria-hidden="true"></i>Promozioni</h3>
+            </div>
+            <div class="alert alert-success alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">CHIUDI</span>
+              </button>
+              COOP LIGURIA approvata. <a class="alert-link" href="javascript:void(0)">Compila l'ordine</a>.
+            </div>
+            <ul class="list-group list-group-bordered">
+              <li class="list-group-item"><span class="badge badge-primary">1</span> <a href="#">Promozione approvata</a></li>
+              <li class="list-group-item"><span class="badge badge-primary">1</span> <a href="#">Promozione respinta</a></li>
+              <li class="list-group-item"><a href="#">Aggiungi nuova</a></li>
+              <li class="list-group-item"><a href="#">Vai al calendario</a></li>
+            </ul>
+          </div>
+          <!-- End Example Heading With Label -->
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <div class="panel panel-bordered panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title"><i class="icon md-shopping-cart" aria-hidden="true"></i>Ordini</h3>
+            </div>
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">CHIUDI</span>
+              </button>
+              L'ordine ESSELUNGA MILANO <a class="alert-link" href="javascript:void(0)">è stato bloccato</a>.
+            </div>
+            <div class="alert alert-success alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">CHIUDI</span>
+              </button>
+              COOP PIEMONTE approvato.
+            </div>
+            <ul class="list-group list-group-bordered">
+              <li class="list-group-item"><span class="badge badge-success">1</span> <a href="#">Ordine approvato</a></li>
+              <li class="list-group-item"><span class="badge badge-warning">1</span> <a href="#">Ordine respinto</a></li>
+              <li class="list-group-item"><span class="badge badge-danger">1</span> <a href="#">Ordine bloccato</a></li>
+              <li class="list-group-item"><a href="#">Aggiungi nuovo</a></li>
+              <li class="list-group-item"><a href="#">Vai al calendario</a></li>
+            </ul>
+          </div>
+        </div>
+
+
+        <!-- PANEL ESEMPIO COMPLETO   <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <div class="panel panel-bordered panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title"><i class="icon md-money" aria-hidden="true"></i>Promozioni</h3>
+            </div>
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">CHIUDI</span>
+              </button>
+              Il cliente ESSELUNGA MILANO <a class="alert-link" href="javascript:void(0)">è stato bloccato</a>.
+            </div>
+            <div class="panel-body">
+              <p>Accedi all'anagrafica clienti e consulta gli aggiornamenti di stato.</p>
+            </div>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Larry</td>
+                  <td>the Bird</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Jason</td>
+                  <td>Wu</td>
+                </tr>
+              </tbody>
+            </table>
+            <ul class="list-group list-group-bordered">
+              <li class="list-group-item"><span class="badge badge-danger">5</span> Dapibus ac facilisis</li>
+              <li class="list-group-item">Morbi leo risus</li>
+            </ul>
+            <div class="panel-body">
+              <p>Lorem ipsum Mollit et minim commodo est labore fugiat id Ut in ut
+                exercitation aute esse Ut do irure non dolore id anim dolore in
+                ad incididunt elit eiusmod sed dolor labore sunt est consectetur
+                sint ex Duis Ut officia pariatur.</p>
+            </div>
+          </div>
+        </div>  -->
+
+        <div class="clearfix visible-md-block visible-lg-block"></div>  <!-- clear per le colonne -->
+
+        </div> <!-- end row -->
+    </div> <!-- End Page Content -->
+  </div> <!-- End Page -->

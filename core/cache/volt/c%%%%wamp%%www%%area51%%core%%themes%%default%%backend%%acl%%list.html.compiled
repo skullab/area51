@@ -81,13 +81,15 @@
 
 							<div class="col-lg-4 form-group">
 								<label class="control-label" for="inputResourceName"><?php echo 'Resource Name'; ?></label> <select class="form-control"
-									id="inputResourceName" name="resources_name"> <?php foreach ($model->aclResources->find() as $resource) { ?>
-									<option value="<?php echo $resource->name; ?>"><?php echo $resource->name; ?></option> <?php } ?>
+									id="inputResourceName" name="resources_name">
+									<?php foreach ($model->acl_resources->find() as $resource) { ?>
+									<option value="<?php echo $resource->name; ?>"><?php echo $resource->name; ?></option> 
+									<?php } ?>
 								</select>
 							</div>
 
 							<div class="col-lg-4 form-group">
-								<label class="control-label" for="resourceDescription"><?php echo 'Resource Description'; ?></label> <?php $first = $model->aclResources->findFirst(); ?>
+								<label class="control-label" for="resourceDescription"><?php echo 'Resource Description'; ?></label> <?php $first = $model->acl_resources->findFirst(); ?>
 								<textarea style="height: 70px; resize: vertical;"
 									id="resourceDescription" class="form-control" readonly><?php echo $first->description; ?></textarea>
 							</div>
@@ -95,7 +97,7 @@
 						<div class="row">
 							<div class="col-lg-4 form-group">
 								<label class="control-label" for="inputActionName"><?php echo 'Action Name'; ?></label> <select class="form-control"
-									id="inputActionName" name="access_name"> <?php foreach ($model->aclResourcesAccess->findByResourcesName($first->name) as $actions) { ?>
+									id="inputActionName" name="access_name"> <?php foreach ($model->acl_resources_access->findByResourcesName($first->name) as $actions) { ?>
 									<option value="<?php echo $actions->access_name; ?>"><?php echo $actions->access_name; ?></option> <?php } ?>
 									<option value="*">*</option>
 								</select>

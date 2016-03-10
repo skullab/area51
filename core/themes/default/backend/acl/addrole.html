@@ -51,7 +51,7 @@
 										_('Role inherits') }}</label>
 										<select class="form-control" id="inputRoleInherits" name="roleInherits">
 											<option value="0">{{ _('Nothing') }}</option>
-											{% for role in model.aclRoles.find() %}
+											{% for role in model.acl_roles.find() %}
 											<option value="{{ role.name }}">{{ role.name }}</option>
 											{% endfor %}
 										</select>

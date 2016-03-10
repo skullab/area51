@@ -96,6 +96,7 @@ class AclController extends Controller{
 		$this->assetsPackage('toastr');
 		$this->assetsPackage('sweet-alert');
 		$this->assetsPackage('data-table');
+		$this->assetsPackage('date-picker');
 		$this->assets->renderInlineJs('js/controllers/aclList.js');
 		$this->flash->warning('<b>'._('Pay close attention to the permissions change !').'</b><br>'._('A wrong operation could compromise access to users'));
 		if($this->request->isPost()){

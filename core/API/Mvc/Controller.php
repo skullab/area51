@@ -41,6 +41,21 @@ abstract class Controller extends PhalconController{
 		$this->onInitialize();
 		
 	}
+	protected function getAssetsPackageDatePicker(){
+		$this->cssPlugins->addCss('vendor/fullcalendar/fullcalendar.css')
+		->addCss('vendor/bootstrap-datepicker/bootstrap-datepicker.css')
+		->addCss('vendor/bootstrap-touchspin/bootstrap-touchspin.css');
+		$this->jsPlugins->addJs('vendor/moment/moment.min.js')
+		->addJs('vendor/fullcalendar/fullcalendar.js')
+		->addJs('vendor/jquery-selective/jquery-selective.min.js')
+		->addJs('vendor/bootstrap-datepicker/bootstrap-datepicker.js')
+		->addJs('vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js');
+		$this->jsComponents->addJs('js/components/bootstrap-datepicker.js');
+	}
+	protected function getAssetsPackageEditableTable(){
+		$this->cssPlugins->addCss('vendor/editable-table/editable-table.css');
+		$this->jsPlugins->addJs('vendor/editable-table/mindmup-editabletable.js');
+	}
 	protected function getAssetsPackageSweetAlert(){
 		$this->cssPlugins->addCss('vendor/bootstrap-sweetalert/sweet-alert.css');
 		$this->jsPlugins->addJs('vendor/bootbox/bootbox.js')
@@ -62,7 +77,8 @@ abstract class Controller extends PhalconController{
 		->addJs('vendor/datatables-bootstrap/dataTables.bootstrap.js')
 		->addJs('vendor/datatables-responsive/dataTables.responsive.js')
 		->addJs('vendor/datatables-tabletools/dataTables.tableTools.js')
-		->addJs('vendor/datatables-select/dataTables.select.min.js');
+		->addJs('vendor/datatables-select/dataTables.select.min.js')
+		->addJs('vendor/dataEditor/editor.js');
 		$this->jsComponents->addJs('js/components/datatables.js');
 	}
 	public function assetsPackage($package){

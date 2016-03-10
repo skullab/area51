@@ -9,10 +9,10 @@ class Ui extends Component {
 			$this->view->partial ( 'menus/admin/category' );
 			$this->view->partial ( 'menus/admin/users' );
 			$this->view->partial ( 'menus/admin/acl' );
-			$this->view->partial ( 'menus/admin/languages' );
+			//$this->view->partial ( 'menus/admin/languages' );
 		}
 		
-		if($this->auth->isRoleOrInherits(Auth::ROLE_SUPPLY)){
+		if($this->auth->isRoleOrInherits(Auth::ROLE_USER)){
 			$this->view->partial ('menus/b2b/category');
 			$this->view->partial ('menus/b2b/showcase');
 			$this->view->partial ('menus/b2b/registry');

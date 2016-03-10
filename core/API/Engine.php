@@ -65,6 +65,9 @@ final class Engine extends Application implements EngineInterface{
 		}
 		return self::$_instance;
 	}
+	public function getRequestTime(){
+		return (microtime(true)-$_SERVER['REQUEST_TIME_FLOAT']);
+	}
 	/**
 	 * Run the engine
 	 *

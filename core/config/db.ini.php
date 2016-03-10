@@ -3,9 +3,12 @@
 [db]
 
 host			= "localhost"
-username		= "root"
+
+;username		= "prv001"
 ;password		= "9G16EJpc"
 ;dbname			= "prv001_area51"
+
+username		= "root"
 password		= ""
 dbname			= "area_riservata"
 

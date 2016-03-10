@@ -86,17 +86,17 @@
 							<div class="col-lg-4 form-group">
 								<label class="control-label" for="inputResourceName">{{
 									_('Resource Name') }}</label> <select class="form-control"
-									id="inputResourceName" name="resources_name"> {% for
-									resource in model.aclResources.find() %}
-									<option value="{{ resource.name }}">{{ resource.name
-										}}</option> {% endfor %}
+									id="inputResourceName" name="resources_name">
+									{% for resource in model.acl_resources.find() %}
+									<option value="{{ resource.name }}">{{ resource.name }}</option> 
+									{% endfor %}
 								</select>
 							</div>
 
 							<div class="col-lg-4 form-group">
 								<label class="control-label" for="resourceDescription">{{
 									_('Resource Description') }}</label> {% set first =
-								model.aclResources.findFirst() %}
+								model.acl_resources.findFirst() %}
 								<textarea style="height: 70px; resize: vertical;"
 									id="resourceDescription" class="form-control" readonly>{{ first.description }}</textarea>
 							</div>
@@ -106,7 +106,7 @@
 								<label class="control-label" for="inputActionName">{{
 									_('Action Name') }}</label> <select class="form-control"
 									id="inputActionName" name="access_name"> {% for actions
-									in model.aclResourcesAccess.findByResourcesName(first.name) %}
+									in model.acl_resources_access.findByResourcesName(first.name) %}
 									<option value="{{ actions.access_name }}">{{
 										actions.access_name }}</option> {% endfor %}
 									<option value="*">*</option>
