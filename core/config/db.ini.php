@@ -17,10 +17,10 @@ table.prefix 	= ""
 
 [remotedb]
 
-host			= ""
-username		= ""
-password		= ""
-dbname			= ""
+host			= "81.29.208.233"
+username		= "gc2110008_pr0v"
+password		= "asAOYAN0Ti"
+dbname			= "gc2110008_pr0v"
 
 adapter			= Mysql
 table.prefix 	= "ps_"

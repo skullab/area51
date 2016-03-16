@@ -17,9 +17,8 @@ abstract class Controller extends PhalconController{
 	protected $engine ;
 	
 	public function initialize(){
-		$this->engine = Engine::getInstance();
-		
 		$this->session->start();
+		$this->engine = Engine::getInstance();
 		$this->tag->setDoctype(\Phalcon\Tag::HTML5);
 		$this->tag->setTitleSeparator($this->config->app->titleSeparator);
 		$this->tag->setTitle($this->config->app->title);
@@ -40,6 +39,25 @@ abstract class Controller extends PhalconController{
 		$this->view->body_class = '' ;
 		$this->onInitialize();
 		
+	}
+	protected function getAssetsPackageJqueryWizard(){
+		$this->cssPlugins->addCss ( 'vendor/jquery-wizard/jquery-wizard.css' );
+		$this->jsPlugins->addJs('vendor/jquery-wizard/jquery-wizard.js');
+		$this->jsComponents->addJs('js/components/jquery-wizard.js');
+	}
+	protected function getAssetsPackageFormValidation(){
+		$this->cssPlugins->addCss('vendor/formvalidation/formValidation.css');
+		$this->jsPlugins->addJs('vendor/formvalidation/formValidation.js')
+		->addJs('vendor/formvalidation/framework/bootstrap.js')
+		->addJs('vendor/matchheight/jquery.matchHeight-min.js');
+	}
+	protected function getAssetsPackageSelect2(){
+		$this->cssPlugins->addCss('vendor/select2/select2.min.css');
+		$this->jsPlugins->addJs('vendor/select2/select2.min.js');
+	}
+	protected function getAssetsPackageXEditable(){
+		$this->cssPlugins->addCss('vendor/x-editable/x-editable.css');
+		$this->jsPlugins->addJs('vendor/x-editable/bootstrap-editable.js');
 	}
 	protected function getAssetsPackageDatePicker(){
 		$this->cssPlugins->addCss('vendor/fullcalendar/fullcalendar.css')
@@ -67,6 +85,10 @@ abstract class Controller extends PhalconController{
 		$this->cssPlugins->addCss('vendor/toastr/toastr.original.css');
 		$this->jsPlugins->addJs('vendor/toastr/toastr.js');
 	}
+	protected function getAssetsPackageDataEditor(){
+		$this->getAssetsPackageXEditable();
+		$this->jsPlugins->addJs('vendor/dataEditor/dataEditor.js');
+	}
 	protected function getAssetsPackageDataTable(){
 		$this->cssPlugins->addCss('vendor/datatables-bootstrap/dataTables.bootstrap.css')
 		->addCss('vendor/datatables-fixedheader/dataTables.fixedHeader.css')
@@ -77,8 +99,7 @@ abstract class Controller extends PhalconController{
 		->addJs('vendor/datatables-bootstrap/dataTables.bootstrap.js')
 		->addJs('vendor/datatables-responsive/dataTables.responsive.js')
 		->addJs('vendor/datatables-tabletools/dataTables.tableTools.js')
-		->addJs('vendor/datatables-select/dataTables.select.min.js')
-		->addJs('vendor/dataEditor/editor.js');
+		->addJs('vendor/datatables-select/dataTables.select.min.js');
 		$this->jsComponents->addJs('js/components/datatables.js');
 	}
 	public function assetsPackage($package){
@@ -180,7 +201,6 @@ abstract class Controller extends PhalconController{
 			$this->auth->updateOnlineUser();
 		}else{
 			$role = 'Guest' ;
-			//$this->view->display_name = '' ;
 		}
 		
 		try{
@@ -197,8 +217,10 @@ abstract class Controller extends PhalconController{
 		}
 	}
 	protected function accessDenied($role,$resource,$action){
-		$this->flash->error(_('You don\'t have permission to perform this operation'));
-		return $this->forward();
+		if($this->auth->getIdentity()){
+			$this->flash->error(_('You don\'t have permission to perform this operation'));
+			return $this->forward();
+		}
 	}
 	public function sendAjax($payload,$encode = true,array $headers = array()){
 		$status      = 200;

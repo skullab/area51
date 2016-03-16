@@ -13,6 +13,11 @@ class Ui extends Component {
 		}
 		
 		if($this->auth->isRoleOrInherits(Auth::ROLE_USER)){
+			$this->view->partial('menus/products/category');
+			$this->view->partial('menus/products/list');
+			$this->view->partial('menus/products/price_list');
+		}
+		if($this->auth->isRoleOrInherits(Auth::ROLE_USER)){
 			$this->view->partial ('menus/b2b/category');
 			$this->view->partial ('menus/b2b/showcase');
 			$this->view->partial ('menus/b2b/registry');

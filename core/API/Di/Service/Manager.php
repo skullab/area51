@@ -26,6 +26,7 @@ class Manager {
 	const FLASH_SESSION 		= 'flashSession';
 	const EVENTS_MANAGER 		= 'eventsManager';
 	const DB					= 'db';
+	const REMOTE_DB				= 'remotedb';
 	const SECURITY				= 'security';
 	const CRYPT					= 'crypt';
 	const TAG					= 'tag';

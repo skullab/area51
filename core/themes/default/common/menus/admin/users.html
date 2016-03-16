@@ -1,8 +1,9 @@
 <li class="site-menu-item has-sub">
 	<a href="javascript:void(0)" data-slug="admin-user"> 
-		<i class="site-menu-icon wb-user-circle" aria-hidden="true"></i> 
+		<i class="site-menu-icon wb-users" aria-hidden="true"></i> 
 		<span class="site-menu-title">{{ _('Users') }}</span><span class="site-menu-arrow"></span>
-		{% set warning_user = model.users.count('status_id != 1') %}
+		{% set active_id = model.users_status.findFirstByName('active').id %}
+		{% set warning_user = model.users.count('status_id != ' ~ active_id) %}
 		{% if  warning_user %}
 		<div class="site-menu-badge">
 			<span class="badge badge-danger" >{{ warning_user }}</span>

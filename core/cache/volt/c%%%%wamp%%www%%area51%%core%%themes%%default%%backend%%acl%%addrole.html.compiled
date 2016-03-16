@@ -49,7 +49,7 @@
 									<label class="control-label" for="inputRoleInherits"><?php echo 'Role inherits'; ?></label>
 										<select class="form-control" id="inputRoleInherits" name="roleInherits">
 											<option value="0"><?php echo 'Nothing'; ?></option>
-											<?php foreach ($model->aclRoles->find() as $role) { ?>
+											<?php foreach ($model->acl_roles->find() as $role) { ?>
 											<option value="<?php echo $role->name; ?>"><?php echo $role->name; ?></option>
 											<?php } ?>
 										</select>

@@ -125,6 +125,14 @@ $services = array(
 			$db = new $dbAdapter ( $dbConfig );
 			return $db;
 		},
+		ServiceManager::REMOTE_DB => function()use($config){
+			$dbConfig = (array) $config->remotedb ;
+			$dbAdapter = 'Phalcon\Db\Adapter\PDO\\' . $dbConfig['adapter'];
+			unset ( $dbConfig ['adapter'] );
+			unset ( $dbConfig ['table'] );
+			$remotedb = new $dbAdapter($dbConfig);
+			return $remotedb ;
+		},
 		ServiceManager::COOKIES => function()use($config){
 			$cookies = new Cookies();
 			$cookies->useEncryption(true);

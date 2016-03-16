@@ -28,9 +28,12 @@
 		<route name="backend:users" controller="users" action="1">users/:action</route>
 		<route name="backend:users:params" controller="users" action="1" params="2">users/:action/:params</route>
 		<!-- B2B -->
-		<route name="b2b:index" controller="order_entry" action="index">order-entry</route>
+		<route name="backend:b2b:index" controller="order_entry" action="index">order-entry</route>
 		<!-- ACL -->
-		<route name="acl:index" controller="acl" action="1">acl/:action</route>
+		<route name="backend:acl:index" controller="acl" action="1">acl/:action</route>
+		<!-- PRODUCTS -->
+		<route name="backend:products:index" controller="products" action="index">products</route>
+		<route name="backend:products:action" controller="products" action="1">products/:action</route>
 	</routing>
 	
 	<required>

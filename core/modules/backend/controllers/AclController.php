@@ -96,9 +96,11 @@ class AclController extends Controller{
 		$this->assetsPackage('toastr');
 		$this->assetsPackage('sweet-alert');
 		$this->assetsPackage('data-table');
-		$this->assetsPackage('date-picker');
+		/*$this->assetsPackage('date-picker');
+		$this->assetsPackage('x-editable');
+		$this->assetsPackage('select2');*/
 		$this->assets->renderInlineJs('js/controllers/aclList.js');
-		$this->flash->warning('<b>'._('Pay close attention to the permissions change !').'</b><br>'._('A wrong operation could compromise access to users'));
+		$this->flash->warning('<b>'._('Pay close attention to the permissions change !').'</b><br>'._('A wrong operation could compromise users access'));
 		if($this->request->isPost()){
 			if($this->token->check()){
 				$allowed = (bool)$this->request->getPost('allowed') ;
@@ -118,7 +120,7 @@ class AclController extends Controller{
 			}
 		}
 	}
-	function dropAction(){
+	public function dropAction(){
 		if($this->request->isPost()){
 			if($this->request->isAjax()){
 				if($this->token->check('token')){

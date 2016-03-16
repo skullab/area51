@@ -43,6 +43,9 @@ class Auth extends Component implements AuthInterface{
 				!isset($credentials['password'])){
 			throw new Auth\Exception(null,10);
 		}
+		if(Users::count() == 0){
+			throw new Auth\Exception(null,800);
+		}
 		$user = Users::findFirstByEmail($credentials['email']);
 		if($user == false){
 			$this->userThrottling(0);
@@ -65,7 +68,9 @@ class Auth extends Component implements AuthInterface{
 		
 		return true ;
 	}
-
+	public function hasUsers(){
+		return (bool)Users::count();
+	}
 	public function passwordHash($plaintext){
 		return base64_encode(hash('sha256', $plaintext,true));
 	}
@@ -260,10 +265,13 @@ class Auth extends Component implements AuthInterface{
 		$check = false ;
 		//$role_name = null ;
 		foreach ($this->acl->getRolesInherits() as $role_name => $inherits){
-			if(strcasecmp($inherits[0],$role) == 0){
-				$check = true ;
-				break;
+			foreach ($inherits as $inheritsRole){
+				if(strcasecmp($inheritsRole,$role) == 0){
+					$check = true ;
+					break;
+				}
 			}
+			if($check)break;
 		}
 		if(!$check)return false ;
 		if(strcasecmp($identity['role'],$role_name) == 0){

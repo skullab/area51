@@ -14,7 +14,6 @@ class IndexController extends Controller {
 	}
 	public function indexAction(){
 		if($this->auth->hasRememberMe()){
-			//var_dump('remember');
 			try{
 				if($this->auth->loginWithRememberMe()){
 					return $this->redirect('dashboard');
@@ -23,12 +22,16 @@ class IndexController extends Controller {
 				$this->flash->error($e->getMessage());
 			}
 		}else {
-			try{
-				if($this->auth->checkIntegrity()){
-					return $this->redirect('dashboard');
+			if($this->auth->hasUsers()){
+				try{
+					if($this->auth->checkIntegrity()){
+						return $this->redirect('dashboard');
+					}
+				}catch(\Excpetion $e){
+					$this->flash->error($e->getMessage());
 				}
-			}catch(\Excpetion $e){
-				$this->flash->error($e->getMessage());
+			}else{
+				return $this->redirect('install');
 			}
 		}
 		
