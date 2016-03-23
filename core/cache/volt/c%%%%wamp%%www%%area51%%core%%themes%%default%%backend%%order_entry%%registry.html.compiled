@@ -1,0 +1,134 @@
+<!-- Page -->
+  <div class="page animsition">
+    <div class="page-header">
+     <h1 class="page-title"><?php echo 'Customers Database'; ?></h1>
+		<ol class="breadcrumb">
+			<li><a href="<?php echo $this->url->getStatic('dashboard'); ?>"><?php echo 'Dashboard'; ?></a></li>
+			<li><a href="<?php echo $this->url->getStatic('order-entry'); ?>"><?php echo 'Order Entry'; ?></a></li>
+			<li class="active"><?php echo 'Customers Database'; ?></li>
+		</ol>
+    </div>
+
+    <!-- Page Content -->
+    <div class="page-content container-fluid">
+    <div class="row">
+
+      <!-- Panel Table Individual column searching -->
+      <div class="panel">
+        <header class="panel-heading">
+          <h3 class="panel-title">Clicca sull'icona <i class="wb-order"></i> per accedere alla scheda completa.</h3>
+        </header>
+        <div class="panel-body">
+          <table class="table table-hover dataTable table-striped width-full" id="Anagrafica">
+            <thead>
+              <tr>
+                <th>Gruppo</th>
+                <th>Fatturatario</th>
+                <th>PDV</th>
+                <th>Indirizzo</th>
+                <th>Listino</th>
+                <th>Agente</th>
+                <th>Resp. Promozioni</th>
+                <th>Contabilita</th>
+                <th>Stato</th>
+                <th style="display:none">+</th>
+              </tr>
+            </thead>
+            
+            <tfoot>
+              <tr>
+                <th>Gruppo</th>
+                <th>Fatturatario</th>
+                <th>PDV</th>
+                <th>Indirizzo</th>
+                <th>Listino</th>
+                <th>Agente</th>
+                <th>Resp. Promozioni</th>
+                <th>Contabilita</th>
+                <th>Stato</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+      <!-- End Panel Table Individual column searching -->
+
+        <div class="clearfix visible-md-block visible-lg-block"></div>  <!-- clear per le colonne -->
+
+
+                  <!-- Modal -->
+                  <div class="modal fade modal-fade-in-scale-up" id="PopUp" aria-hidden="true" aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                          </button>
+                          <h4 class="modal-title">Scheda Completa</h4>
+                        </div>
+                        <div class="modal-body">
+                          <table class="table table-bordered">
+                          <tr><td>Cod Gruppo</td><td>_____</td></tr>
+                          <tr><td>Gruppo</td><td>_____</td></tr>
+                          <tr><td>Cliente Fat. Cod.</td><td>_____</td></tr>
+                          <tr><td>Cliente Fat. Cod.</td><td>_____</td></tr>
+                          <tr><td>Indirizzo Cli. Fat.</td><td>_____</td></tr>
+                          <tr><td>Indirizzo Cli. Fat.</td><td>_____</td></tr>
+                          <tr><td>CAP Cli. Fat.</td><td>_____</td></tr>
+                          <tr><td>Città Cli. Fat.</td><td>_____</td></tr>
+                          <tr><td>Provincia Cli. Fat.</td><td>_____</td></tr>
+                          <tr><td>Nazione Cli. Fat.</td><td>_____</td></tr>
+                          <tr><td>Regione Cli. Fat.</td><td>_____</td></tr>
+                          <tr><td>Tel Cli Fat.</td><td>_____</td></tr>
+                          <tr><td>Fax Cli Fat.</td><td>_____</td></tr>
+                          <tr><td>Email Cli Fat.</td><td>_____</td></tr>
+                          <tr><td>PIVA	CF Cli Fat.</td><td>_____</td></tr>
+                          <tr><td>EPAL SI/NO</td><td>_____</td></tr>
+                          <tr><td>MONOREF SI/NO</td><td>_____</td></tr>
+                          <tr><td>Note Cli. Fat.</td><td>_____</td></tr>
+                          <tr><td>Cliente Dest. Cod.</td><td>_____</td></tr>
+                          <tr><td>Cliente Dest.</td><td>_____</td></tr>
+                          <tr><td>Cod. Indirizzo Dest</td><td>_____</td></tr>
+                          <tr><td>Cod. Insegna Dest</td><td>_____</td></tr>
+                          <tr><td>Insegna Dest</td><td>_____</td></tr>
+                          <tr><td>Indirizzo Cli. Dest.</td><td>_____</td></tr>
+                          <tr><td>CAP Cli. Dest.</td><td>_____</td></tr>
+                          <tr><td>Città Cli. Dest.</td><td>_____</td></tr>
+                          <tr><td>Provincia Cli. Dest.</td><td>_____</td></tr>
+                          <tr><td>Regione Cli. Dest.</td><td>_____</td></tr>
+                          <tr><td>Nazione Cli. Dest.</td><td>_____</td></tr>
+                          <tr><td>Tel Cli. Dest.</td><td>_____</td></tr>
+                          <tr><td>Note Cli. Dest.</td><td>_____</td></tr>
+                          <tr><td>Agente</td><td>_____</td></tr>
+                          <tr><td>Cod. Agente</td><td>_____</td></tr>
+                          <tr><td>Mail Agente</td><td>_____</td></tr>
+                          <tr><td>Mail Responsabile Approvazione Promozioni</td><td>_____</td></tr>
+                          <tr><td>Mail Cliente per Conferma d'Ordine</td><td>_____</td></tr>
+                          <tr><td>Brand</td><td>_____</td></tr>
+                          <tr><td>Listino A</td><td>_____</td></tr>
+                          <tr><td>Data Inizio Validità Listino A</td><td>_____</td></tr>
+                          <tr><td>Listino B</td><td>_____</td></tr>
+                          <tr><td>Data Inizio Validità Listino B</td><td>_____</td></tr>
+                          <tr><td>Sconti Canale 1</td><td>_____</td></tr>
+                          <tr><td>Sconti Canale 2</td><td>_____</td></tr>
+                          <tr><td>Sconti Cvss1</td><td>_____</td></tr>
+                          <tr><td>Sconti Carico 1</td><td>_____</td></tr>
+                          <tr><td>Sconto Anticipato 1</td><td>_____</td></tr>
+                          <tr><td>Sconto Finanziario</td><td>_____</td></tr>
+                          </table>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default margin-0" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Modal -->
+
+
+
+        </div> <!-- end row -->
+    </div> <!-- End Page Content -->
+  </div> <!-- End Page -->
+

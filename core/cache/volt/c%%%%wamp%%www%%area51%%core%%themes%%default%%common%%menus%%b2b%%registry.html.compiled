@@ -1,4 +1,43 @@
-<li id="menu-b2b-anagrafica" class="site-menu-item"><a href="javascript:void(0)"> <i
-		class="site-menu-icon wb-users" aria-hidden="true"></i> <span
-		class="site-menu-title">Anagrafica</span>
-</a></li>
+<li id="menu-b2b-anagrafica" class="site-menu-item has-sub">
+	<a href="javascript(void);">
+	<i class="site-menu-icon wb-users" aria-hidden="true"></i> 
+	<span class="site-menu-title">Anagrafica</span><span class="site-menu-arrow"></span>
+	</a>
+	<ul class="site-menu-sub">
+		<li id="" class="site-menu-item"><a
+			class="animsition-link" href="<?php echo $this->url->getStatic('order-entry/registry'); ?>"> <i
+				class="site-menu-icon " aria-hidden="true"></i> <span
+				class="site-menu-title">Tutti</span>
+		</a></li>
+		<li id="" class="site-menu-item"><a
+			class="animsition-link" href="<?php echo $this->url->getStatic('order-entry/group'); ?>"> <i
+				class="site-menu-icon " aria-hidden="true"></i> <span
+				class="site-menu-title">Gruppi</span>
+		</a></li>
+		<li id="" class="site-menu-item"><a
+			class="animsition-link" href="<?php echo $this->url->getStatic('order-entry/customer'); ?>"> <i
+				class="site-menu-icon " aria-hidden="true"></i> <span
+				class="site-menu-title">Fatturatari</span>
+		</a></li>
+		<li id="" class="site-menu-item"><a
+			class="animsition-link" href="<?php echo $this->url->getStatic('order-entry/pdv'); ?>"> <i
+				class="site-menu-icon " aria-hidden="true"></i> <span
+				class="site-menu-title">PDV</span>
+		</a></li>
+		<li id="" class="site-menu-item"><a
+			class="animsition-link" href="<?php echo $this->url->getStatic('order-entry/address'); ?>"> <i
+				class="site-menu-icon " aria-hidden="true"></i> <span
+				class="site-menu-title">Indirizzi</span>
+		</a></li>
+		<li id="" class="site-menu-item"><a
+			class="animsition-link" href="<?php echo $this->url->getStatic('order-entry/manager-agent'); ?>"> <i
+				class="site-menu-icon " aria-hidden="true"></i> <span
+				class="site-menu-title">Responsabili/Agenti</span>
+		</a></li>
+		<li id="" class="site-menu-item"><a
+			class="animsition-link" href="<?php echo $this->url->getStatic('order-entry/bookkeeper'); ?>"> <i
+				class="site-menu-icon " aria-hidden="true"></i> <span
+				class="site-menu-title">Contabilita</span>
+		</a></li>
+	</ul>
+</li>

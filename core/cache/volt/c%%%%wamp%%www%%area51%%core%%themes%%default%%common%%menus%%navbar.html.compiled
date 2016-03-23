@@ -55,7 +55,7 @@
           <li class="dropdown">
             <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
             data-animation="slide-bottom" role="button">
-           	<b><?php echo 'hello'; ?>, </b><?php echo $identity['display_name']; ?>
+           	<?php echo 'hello'; ?>, <b><?php echo $identity['display_name']; ?></b>
               <span class="avatar avatar-online">
                 <img src="<?php echo $this->url->getStatic(''); ?>assets/portraits/<?php echo $identity['portrait']; ?>" alt="...">
                 <i></i>

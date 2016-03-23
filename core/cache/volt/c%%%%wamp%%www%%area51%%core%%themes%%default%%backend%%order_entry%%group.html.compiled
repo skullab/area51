@@ -1,0 +1,94 @@
+<style>
+#buttonsPanel {
+	padding-left: 3%;
+}
+</style>
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+     <h1 class="page-title"><?php echo 'Customers Group'; ?></h1>
+		<ol class="breadcrumb">
+			<li><a href="<?php echo $this->url->getStatic('dashboard'); ?>"><?php echo 'Dashboard'; ?></a></li>
+			<li><a href="<?php echo $this->url->getStatic('order-entry'); ?>"><?php echo 'Order Entry'; ?></a></li>
+			<li class="active"><?php echo 'Customers Group'; ?></li>
+		</ol>
+    </div>
+	
+    <!-- Page Content -->
+    <div class="page-content">
+		<?php echo $this->getContent(); ?>
+		<!-- Panel Basic -->
+		<div class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions"></div>
+				<h3 class="panel-title"><?php echo 'Customers Group'; ?></h3>
+			</header>
+			<div id="buttonsPanel">
+				<button id="addList" class="btn btn-outline btn-primary"
+					data-target="#addGroupModal" data-toggle="modal" type="button">
+					<i class="icon wb-plus" aria-hidden="true"></i> <?php echo 'Add Group'; ?>
+				</button>
+				<button id="dropList" class="btn btn-outline btn-danger"
+					type="button">
+					<i class="icon wb-trash" aria-hidden="true"></i> <?php echo 'Drop Group'; ?>
+				</button>
+			</div>
+			<div class="panel-body">
+				<table id="priceListsTable"
+					class="table table-hover dataTable table-striped width-full">
+					<thead>
+						<tr>
+							<th><?php echo 'Code'; ?></th>
+							<th><?php echo 'Name'; ?></th>
+						</tr>
+					</thead>
+
+					<tfoot>
+						<tr>
+							<th><?php echo 'Code'; ?></th>
+							<th><?php echo 'Name'; ?></th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+		<!-- End Panel Basic -->
+		<!-- Modal -->
+		<div class="modal fade" id="addGroupModal" aria-hidden="false"
+			aria-labelledby="exampleFormModalLabel" role="dialog" tabindex="-1">
+			<div class="modal-dialog">
+				<form id="listForm" class="modal-content" method="post"
+					action="<?php echo $this->url->getStatic('products/add-price-list'); ?>">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&#10005;</span>
+						</button>
+						<h4 class="modal-title"><?php echo 'Add Customers Group'; ?></h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputGroupCode"><?php echo 'Code'; ?></label> 
+								<input id="inputGroupCode"
+									class="form-control" type="text" name="groupCode" required="required">
+							</div>
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputGroupName"><?php echo 'Name'; ?></label>
+								<input id="inputGroupName" type="text"
+										class="form-control" name="groupName" required="required"/>
+							</div>
+							<div class="col-sm-12 pull-right">
+								<button class="btn btn-primary btn-outline" data-dismiss=""
+									id="addGroupSubmit" type="button"><?php echo 'Submit'; ?></button>
+							</div>
+						</div>
+						<?php echo $this->token->generateInput(); ?>
+				</form>
+			</div>
+		</div>
+		<!-- End Modal -->
+	</div>
+</div>
+</div> <!-- End Page -->
+
