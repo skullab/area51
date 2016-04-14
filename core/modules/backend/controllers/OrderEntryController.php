@@ -12,6 +12,7 @@ use Thunderhawk\API\Mvc\Model\Customer\CustomersDestintions;
 use Thunderhawk\API\Mvc\Model\Customer\CustomersDestinations;
 use Thunderhawk\API\Mvc\Model\Customer\CustomersDestinationsAddress;
 use Thunderhawk\API\Mvc\Model\Customer\AgentManager;
+use Thunderhawk\API\Mvc\Model\User\Users;
 
 class OrderEntryController extends Controller {
 	protected function onInitialize() {
@@ -678,8 +679,9 @@ class OrderEntryController extends Controller {
 					$response = array();
 					foreach ($relations as $relation){
 						$r = array();
-						$r['agente'] = $relation->agent->email ;
-						$r['responsabile'] = $relation->manager->email ;
+						$r['id'] = $relation->id ;
+						$r['agente'] = $relation->agent->details->name.' '.$relation->agent->details->surname ;
+						$r['responsabile'] = $relation->manager->details->name.' '.$relation->manager->details->surname ;
 						$r['indirizzo'] = $relation->address->indirizzo ;
 						$r['pdv'] = $relation->address->destination->nome ;
 						$response[] = $r ;
@@ -713,6 +715,117 @@ class OrderEntryController extends Controller {
 			}
 		}
 		return $this->forward('order_entry','managerAgent');
+	}
+	public function dropManagerAgentAction(){
+		if($this->request->isPost()){
+			if($this->request->isAjax()){
+				if($this->token->check('token')){
+					$dropList = $this->request->getPost('dropList');
+					$response = array (
+							'error' => 0
+					);
+					$messages = '';
+					$check = true;
+					foreach ( $dropList as $list ) {
+						$relation = AgentManager::findFirstById ( $list ['id'] );
+						if ($relation) {
+							$check &= $relation->delete ();
+							if (! $check) {
+								foreach ( $relation->getMessages () as $message ) {
+									$messages .= $message . '<br>';
+								}
+							}
+						}
+					}
+					if (! $check) {
+						$response ['error'] = 1;
+						$response ['message'] = $messages;
+					}
+					return $this->sendAjax($response);
+				}
+			}
+		}
+	}
+	public function sourceAgentsAction(){
+		if($this->request->isPost()){
+			if($this->request->isAjax()){
+				$users = Users::find("role = 'sales agent'");
+				$response = array();
+				foreach ($users as $user){
+					$source = array('value'=>$user->id,'text'=>$user->details->name.' '.$user->details->surname);
+					$response[] = $source ;
+				}
+				return $this->sendAjax($response);
+			}
+		}
+	}
+	public function sourceManagersAction(){
+		if($this->request->isPost()){
+			if($this->request->isAjax()){
+				$users = Users::find("role = 'promotions manager'");
+				$response = array();
+				foreach ($users as $user){
+					$source = array('value'=>$user->id,'text'=>$user->details->name.' '.$user->details->surname);
+					$response[] = $source ;
+				}
+				return $this->sendAjax($response);
+			}
+		}
+	}
+	public function sourceAddressAction(){
+		if($this->request->isPost()){
+			if($this->request->isAjax()){
+				$address = CustomersDestinationsAddress::find();
+				$response = array();
+				foreach ($address as $ad){
+					$source = array('value'=>$ad->id,'text'=>$ad->indirizzo);
+					$response[] = $source ;
+				}
+				return $this->sendAjax($response);
+			}
+		}
+	}
+	public function updateManagerAgentAction(){
+		if($this->request->isPost()){
+			if($this->request->isAjax()){
+				$data = $this->request->getPost();
+				$id = $data['data']['id'];
+				$newValue = $data['value'];
+				
+				switch ($data['columnName']){
+					case 'agente':
+						$field = 'agent_id';
+						break;
+					case 'responsabile':
+						$field = 'manager_id';
+						break;
+					case 'indirizzo';
+						$field = 'customers_destinations_address_id';
+						break;
+				}
+				$relation = AgentManager::findFirstById($id);
+				$response = array ();
+				if ($relation) {
+					$relation->{$field} = $newValue;
+				}
+				try {
+					if ($relation->save () !== false) {
+						$response ['error'] = 0;
+						$response ['message'] = _ ( 'The Relation has been updated' );
+					} else {
+						$response ['error'] = 1;
+						foreach ( $relation->getMessages () as $message ) {
+							$response ['message'] .= $message . '<br>';
+						}
+					}
+				} catch ( \Exception $e ) {
+					$response ['error'] = 2;
+					$response ['message'] = $e->getMessage ();
+				}
+				$response['column'] = $data['columnName'];
+				return $this->sendAjax ( $response );
+			}
+		}
 	}
 	public function managerAgentAction() {
 		$this->assetsPackage ( 'toastr' );
