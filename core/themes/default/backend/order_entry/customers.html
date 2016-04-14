@@ -7,32 +7,33 @@
 <!-- Page -->
 <div class="page animsition">
     <div class="page-header">
-     <h1 class="page-title"><?php echo 'Customers'; ?></h1>
+     <h1 class="page-title">{{ _('Customers') }}</h1>
 		<ol class="breadcrumb">
-			<li><a href="<?php echo $this->url->getStatic('dashboard'); ?>"><?php echo 'Dashboard'; ?></a></li>
-			<li><a href="<?php echo $this->url->getStatic('order-entry'); ?>"><?php echo 'Order Entry'; ?></a></li>
-			<li class="active"><?php echo 'Customers'; ?></li>
+			<li><a href="{{ static_url('dashboard') }}">{{ _('Dashboard') }}</a></li>
+			<li><a href="{{ static_url('order-entry') }}">{{ _('Order Entry') }}</a></li>
+			<li class="active">{{ _('Customers') }}</li>
 		</ol>
     </div>
 	
     <!-- Page Content -->
     <div class="page-content">
     	<div id="spinner" class="spinner-container"></div>
-		<?php echo $this->getContent(); ?>
+		{{ content() }}
 		<!-- Panel Basic -->
 		<div class="panel">
 			<header class="panel-heading">
 				<div class="panel-actions"></div>
-				<h3 class="panel-title"><?php echo 'Customers'; ?></h3>
+				<h3 class="panel-title">{{ _('Customers') }}</h3>
 			</header>
 			<div id="buttonsPanel">
 				<button id="addList" class="btn btn-outline btn-primary"
 					data-target="#addCustomerModal" data-toggle="modal" type="button">
-					<i class="icon wb-plus" aria-hidden="true"></i> <?php echo 'Add Customer'; ?>
+					<i class="icon wb-plus" aria-hidden="true"></i> {{ _('Add Customer') }}
 				</button>
 				<button id="dropList" class="btn btn-outline btn-danger"
 					type="button">
-					<i class="icon wb-trash" aria-hidden="true"></i> <?php echo 'Drop Customers'; ?>
+					<i class="icon wb-trash" aria-hidden="true"></i> {{ _('Drop Customers')
+					}}
 				</button>
 			</div>
 			<div class="panel-body">
@@ -40,21 +41,21 @@
 					class="table table-hover dataTable table-striped width-full">
 					<thead>
 						<tr>
-							<th><?php echo 'Gruppo'; ?></th>
-							<th><?php echo 'Codice'; ?></th>
-							<th><?php echo 'Nome'; ?></th>
-							<th><?php echo 'Stato'; ?></th>
-							<th style="display:none"><?php echo 'Scheda'; ?></th>
+							<th>{{ _('Gruppo') }}</th>
+							<th>{{ _('Codice') }}</th>
+							<th>{{ _('Nome') }}</th>
+							<th>{{ _('Stato') }}</th>
+							<th style="display:none">{{ _('Scheda') }}</th>
 						</tr>
 					</thead>
 					
 					<tfoot>
 						<tr>
-							<th><?php echo 'Gruppo'; ?></th>
-							<th><?php echo 'Codice'; ?></th>
-							<th><?php echo 'Nome'; ?></th>
-							<th><?php echo 'Stato'; ?></th>
-							<th style="display:none"><?php echo 'Scheda'; ?></th>
+							<th>{{ _('Gruppo') }}</th>
+							<th>{{ _('Codice') }}</th>
+							<th>{{ _('Nome') }}</th>
+							<th>{{ _('Stato') }}</th>
+							<th style="display:none">{{ _('Scheda') }}</th>
 						</tr>
 					</tfoot>
 				</table>
@@ -71,40 +72,40 @@
 								aria-label="Close">
 								<span aria-hidden="true">&#10005;</span>
 							</button>
-							<h4 class="modal-title"><?php echo 'Customer Details'; ?></h4>
+							<h4 class="modal-title">{{ _('Customer Details') }}</h4>
 					</div>
 					<div class="modal-body">
 						<table id="customerScheda" class="table table-bordered">
-							<tr><td><?php echo 'Codice Indirizzo'; ?></td>
+							<tr><td>{{ _('Codice Indirizzo') }}</td>
 							<td><a id="codice_indirizzo" href="javascript(void);" data-type="text"></a></td></tr>
-							<tr><td><?php echo 'Indirizzo'; ?></td>
+							<tr><td>{{ _('Indirizzo') }}</td>
 							<td><a id="indirizzo" href="javascript(void);" data-type="text"></a></td></tr>
-							<tr><td><?php echo 'CAP'; ?></td>
+							<tr><td>{{ _('CAP') }}</td>
 							<td><a id="cap" href="javascript(void);" data-type="text"></a></td></tr>
-							<tr><td><?php echo 'Citta'; ?></td>
+							<tr><td>{{ _('Citta') }}</td>
 							<td><a id="citta" href="javascript(void);" data-type="text"></a></td></tr>
-							<tr><td><?php echo 'Provincia'; ?></td>
+							<tr><td>{{ _('Provincia') }}</td>
 							<td><a id="provincia" href="javascript(void);" data-type="text"></a></td></tr>
-							<tr><td><?php echo 'Regione'; ?></td>
+							<tr><td>{{ _('Regione') }}</td>
 							<td><a id="regione" href="javascript(void);" data-type="text"></a></td></tr>
-							<tr><td><?php echo 'Nazione'; ?></td>
+							<tr><td>{{ _('Nazione') }}</td>
 							<td><a id="nazione" href="javascript(void);" data-type="text"></a></td></tr>
 							
-							<tr><td><?php echo 'Telefono'; ?></td>
+							<tr><td>{{ _('Telefono') }}</td>
 							<td><a id="telefono" href="javascript(void);" data-type="text"></a></td></tr>
-							<tr><td><?php echo 'Fax'; ?></td>
+							<tr><td>{{ _('Fax') }}</td>
 							<td><a id="fax" href="javascript(void);" data-type="text"></a></td></tr>
-							<tr><td><?php echo 'Email'; ?></td>
+							<tr><td>{{ _('Email') }}</td>
 							<td><a id="email" href="javascript(void);" data-type="email"></a></td></tr>
-							<tr><td><?php echo 'P.IVA'; ?></td>
+							<tr><td>{{ _('P.IVA') }}</td>
 							<td><a id="piva" href="javascript(void);" data-type="text"></a></td></tr>
-							<tr><td><?php echo 'CF'; ?></td>
+							<tr><td>{{ _('CF') }}</td>
 							<td><a id="cf" href="javascript(void);" data-type="text"></a></td></tr>
-							<tr><td><?php echo 'EPAL'; ?></td>
-							<td><a id="epal" href="javascript(void);" data-type="select" data-source="<?php echo $this->url->getStatic('order-entry/source-epal'); ?>"></a></td></tr>
-							<tr><td><?php echo 'MONOREF'; ?></td>
-							<td><a id="monoref" href="javascript(void);" data-type="select" data-source="<?php echo $this->url->getStatic('order-entry/source-monoref'); ?>"></a></td></tr>
-							<tr><td><?php echo 'Note'; ?></td>
+							<tr><td>{{ _('EPAL') }}</td>
+							<td><a id="epal" href="javascript(void);" data-type="select" data-source="{{ static_url('order-entry/source-epal') }}"></a></td></tr>
+							<tr><td>{{ _('MONOREF') }}</td>
+							<td><a id="monoref" href="javascript(void);" data-type="select" data-source="{{ static_url('order-entry/source-monoref') }}"></a></td></tr>
+							<tr><td>{{ _('Note') }}</td>
 							<td><a id="note" href="javascript(void);" data-type="textarea"></a></td></tr>
 						</table>
 					</div>
@@ -117,55 +118,55 @@
 			aria-labelledby="exampleFormModalLabel" role="dialog" tabindex="-1">
 			<div class="modal-dialog">
 				<form id="customerForm" class="modal-content" method="post"
-					action="<?php echo $this->url->getStatic('order-entry/add-customer'); ?>">
+					action="{{ static_url('order-entry/add-customer') }}">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&#10005;</span>
 						</button>
-						<h4 class="modal-title"><?php echo 'Add Customer'; ?></h4>
+						<h4 class="modal-title">{{ _('Add Customer') }}</h4>
 					</div>
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputCustomerCode"><?php echo 'Code'; ?></label> 
+								<label class="control-label" for="inputCustomerCode">{{ _('Code') }}</label> 
 								<input id="inputGroupCode"
 									class="form-control" type="text" name="customerCode" required="required">
 							</div>
 							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputCustomerName"><?php echo 'Name'; ?></label>
+								<label class="control-label" for="inputCustomerName">{{_('Name') }}</label>
 								<input id="inputGroupName" type="text"
 										class="form-control" name="customerName" required="required"/>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputCustomerGroup"><?php echo 'Group'; ?></label> 
+								<label class="control-label" for="inputCustomerGroup">{{ _('Group') }}</label> 
 								<select id="inputCustomerGroup" class="form-control" 
 								name="customerGroup" required="required">
 									<option value=""></option>
-									<?php foreach ($model->customers_groups->find() as $group) { ?>
-									<option value="<?php echo $group->id; ?>"><?php echo $group->nome; ?></option>
-									<?php } ?>
+									{% for group in model.customers_groups.find() %}
+									<option value="{{ group.id }}">{{ group.nome }}</option>
+									{% endfor %}
 								</select>
 								
 							</div>
 							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputCustomerState"><?php echo 'State'; ?></label> 
+								<label class="control-label" for="inputCustomerState">{{ _('State') }}</label> 
 								<select id="inputCustomerState" class="form-control" 
 								name="customerState" required="required">
-									<?php foreach ($model->customers_state->find() as $state) { ?>
-									<option value="<?php echo $state->id; ?>"><?php echo $state->stato; ?></option>
-									<?php } ?>
+									{% for state in model.customers_state.find() %}
+									<option value="{{ state.id }}">{{ state.stato }}</option>
+									{% endfor %}
 								</select>
 								
 							</div>
 							<div class="col-sm-12 pull-right">
 								<button class="btn btn-primary btn-outline" data-dismiss=""
-									id="addCustomerSubmit" type="button"><?php echo 'Submit'; ?></button>
+									id="addCustomerSubmit" type="button">{{ _('Submit') }}</button>
 							</div>
 						</div>
-						<?php echo $this->token->generateInput(); ?>
+						{{ token.generateInput() }}
 				</form>
 			</div>
 		</div>

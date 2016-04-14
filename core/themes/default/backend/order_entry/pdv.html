@@ -1,0 +1,136 @@
+<style>
+#buttonsPanel {
+	padding-left: 3%;
+}
+</style>
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+     <h1 class="page-title">{{ _('PDV') }}</h1>
+		<ol class="breadcrumb">
+			<li><a href="{{ static_url('dashboard') }}">{{ _('Dashboard') }}</a></li>
+			<li><a href="{{ static_url('order-entry') }}">{{ _('Order Entry') }}</a></li>
+			<li class="active">{{ _('PDV') }}</li>
+		</ol>
+    </div>
+	
+    <!-- Page Content -->
+    <div class="page-content">
+		{{ content() }}
+		<!-- Panel Basic -->
+		<div class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions"></div>
+				<h3 class="panel-title">{{ _('PDV') }}</h3>
+			</header>
+			<div id="buttonsPanel">
+				<button id="addList" class="btn btn-outline btn-primary"
+					data-target="#addPdvModal" data-toggle="modal" type="button">
+					<i class="icon wb-plus" aria-hidden="true"></i> {{ _('Add PDV') }}
+				</button>
+				<button id="dropList" class="btn btn-outline btn-danger"
+					type="button">
+					<i class="icon wb-trash" aria-hidden="true"></i> {{ _('Drop PDV')
+					}}
+				</button>
+			</div>
+			<div class="panel-body">
+				<table id="pdvTable"
+					class="table table-hover dataTable table-striped width-full">
+					<thead>
+						<tr>
+							<th>{{ _('Fatturatario') }}</th>
+							<th>{{ _('Codice Destinazione') }}</th>
+							<th>{{ _('Nome') }}</th>
+							<th>{{ _('Codice Indirizzo') }}</th>
+							<th>{{ _('Codice Insegna') }}</th>
+							<th>{{ _('Insegna') }}</th>
+						</tr>
+					</thead>
+					
+					<tfoot>
+						<tr>
+							<th>{{ _('Fatturatario') }}</th>
+							<th>{{ _('Codice Destinazione') }}</th>
+							<th>{{ _('Nome') }}</th>
+							<th>{{ _('Codice Indirizzo') }}</th>
+							<th>{{ _('Codice Insegna') }}</th>
+							<th>{{ _('Insegna') }}</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+		<!-- End Panel Basic -->
+		<!-- Modal -->
+		<div class="modal fade" id="addPdvModal" aria-hidden="false"
+			aria-labelledby="exampleFormModalLabel" role="dialog" tabindex="-1">
+			<div class="modal-dialog">
+				<form id="pdvForm" class="modal-content" method="post"
+					action="{{ static_url('order-entry/add-pdv') }}">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&#10005;</span>
+						</button>
+						<h4 class="modal-title">{{ _('Add PDV') }}</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputPdvCodiceDestinazione">{{ _('PDV Code') }}</label> 
+								<input id="inputPdvCodiceDestinazione"
+									class="form-control" type="text" name="pdvCode" required="required">
+							</div>
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputPdvName">{{_('Name') }}</label>
+								<input id="inputPdvName" type="text"
+										class="form-control" name="pdvName" required="required"/>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputPdvCodiceIndirizzo">{{ _('Address Code') }}</label> 
+								<input id="inputPdvCodiceIndirizzo" type="text"
+										class="form-control" name="pdvAddressCode" required="required"/>
+								
+							</div>
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputPdvCodiceInsegna">{{ _('Label Code') }}</label> 
+								<input id="inputPdvCodiceInsegna" type="text"
+										class="form-control" name="pdvLabelCode" required="required"/>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputPdvLabel">{{ _('Label') }}</label> 
+								<input id="inputPdvLabel" type="text"
+										class="form-control" name="pdvLabel" required="required"/>
+								
+							</div>
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputPdvCustomer">{{ _('Customer') }}</label> 
+								<select class="form-control" 
+								id="inputPdvCustomer" name="pdvCustomer" required="required">
+									<option value=""></option>
+									{% for customer in model.customers.find() %}
+									<option value="{{ customer.id }}">{{ customer.nome }}</option>
+									{% endfor %}
+								</select>
+							</div>
+							<div class="col-sm-12 pull-right">
+								<button class="btn btn-primary btn-outline" data-dismiss=""
+									id="addPdvSubmit" type="button">{{ _('Submit') }}</button>
+							</div>
+						</div>
+						{{ token.generateInput() }}
+				</form>
+			</div>
+		</div>
+		<!-- End Modal -->
+	</div>
+</div>
+</div> <!-- End Page -->
+

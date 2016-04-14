@@ -38,15 +38,15 @@
 					class="table table-hover dataTable table-striped width-full">
 					<thead>
 						<tr>
-							<th><?php echo 'Code'; ?></th>
-							<th><?php echo 'Name'; ?></th>
+							<th><?php echo 'Codice'; ?></th>
+							<th><?php echo 'Nome'; ?></th>
 						</tr>
 					</thead>
 
 					<tfoot>
 						<tr>
-							<th><?php echo 'Code'; ?></th>
-							<th><?php echo 'Name'; ?></th>
+							<th><?php echo 'Codice'; ?></th>
+							<th><?php echo 'Nome'; ?></th>
 						</tr>
 					</tfoot>
 				</table>

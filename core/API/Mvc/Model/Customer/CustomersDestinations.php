@@ -2,9 +2,9 @@
 
 namespace Thunderhawk\API\Mvc\Model\Customer;
 use Thunderhawk\API\Mvc\Model;
-class CustomersDestintions extends Model{
+class CustomersDestinations extends Model{
 	public $id;
-	public $codice;
+	public $codice_destinazione;
 	public $nome;
 	public $codice_indirizzo;
 	public $codice_insegna;

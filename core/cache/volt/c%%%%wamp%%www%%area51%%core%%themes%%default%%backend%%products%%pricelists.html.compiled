@@ -25,11 +25,11 @@
 			<div id="buttonsPanel">
 				<button id="addList" class="btn btn-outline btn-primary"
 					data-target="#addListModal" data-toggle="modal" type="button">
-					<i class="icon wb-plus" aria-hidden="true"></i> <?php echo 'Add List'; ?>
+					<i class="icon wb-plus" aria-hidden="true"></i> <?php echo 'Add Price List'; ?>
 				</button>
 				<button id="dropList" class="btn btn-outline btn-danger"
 					type="button">
-					<i class="icon wb-trash" aria-hidden="true"></i> <?php echo 'Drop List'; ?>
+					<i class="icon wb-trash" aria-hidden="true"></i> <?php echo 'Drop Price List'; ?>
 				</button>
 			</div>
 			<div class="panel-body">

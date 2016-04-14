@@ -11,25 +11,25 @@ class Customers extends Model{
 	protected function onInitialize(){
 		// n-1
 		$this->belongsTo('customers_groups_id',__NAMESPACE__.'\CustomersGroups','id',array(
-				'alias' => 'group',
+				'alias' => 'gruppo',
 				'reusable' => true
 		));
 		$this->belongsTo('customers_state_id',__NAMESPACE__.'\CustomersState','id',array(
-				'alias' => 'state',
+				'alias' => 'stato',
 				'reusable' => true
 		));
 		// 1-1
 		$this->hasOne('id',__NAMESPACE__.'\CustomersAddress','customers_id',array(
-				'alias' => 'address',
+				'alias' => 'indirizzo',
 				'reusable' => true
 		));
 		$this->hasOne('id',__NAMESPACE__.'\CustomersDetails','customers_id',array(
-				'alias' => 'details',
+				'alias' => 'dettagli',
 				'reusable' => true
 		));
 		//1-n
 		$this->hasMany('id',__NAMESPACE__.'\CustomersDestinations','customers_id',array(
-				'alias' => 'destinations',
+				'alias' => 'pdv',
 				'reusable' => true
 		));
 	}

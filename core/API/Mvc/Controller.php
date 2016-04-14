@@ -102,6 +102,10 @@ abstract class Controller extends PhalconController{
 		->addJs('vendor/datatables-select/dataTables.select.min.js');
 		$this->jsComponents->addJs('js/components/datatables.js');
 	}
+	protected function getAssetsPackageSpinner(){
+		$this->cssPlugins->addCss('css/spinner.css');
+		$this->jsPlugins->addJs('js/spinner.js');
+	}
 	public function assetsPackage($package){
 		$func = "getAssetsPackage".\Phalcon\Text::camelize($package);
 		return $this->{$func}() ;
