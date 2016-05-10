@@ -1,0 +1,169 @@
+<style>
+#buttonsPanel {
+	padding-left: 3%;
+}
+</style>
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+     <h1 class="page-title">{{ _('Comuni') }}</h1>
+		<ol class="breadcrumb">
+			<li><a href="{{ static_url('dashboard') }}">{{ _('Dashboard') }}</a></li>
+			<li><a href="{{ static_url('countries') }}">{{ _('Luoghi') }}</a></li>
+			<li><a href="{{ static_url('countries/') }}{{ country}}">{{ country }}</a></li>
+			<li class="active">{{ _('Comuni') }}</li>
+		</ol>
+    </div>
+	
+    <!-- Page Content -->
+    <div class="page-content">
+		{{ content() }}
+		<!-- Panel Basic -->
+		<div class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions"></div>
+				<h3 class="panel-title">{{ _('Comuni') }}</h3>
+			</header>
+			<div id="buttonsPanel">
+				<button id="addList" class="btn btn-outline btn-primary"
+					data-target="#addCountryModal" data-toggle="modal" type="button">
+					<i class="icon wb-plus" aria-hidden="true"></i> {{ _('Aggiungi Comune') }}
+				</button>
+				<button id="dropList" class="btn btn-outline btn-danger"
+					type="button">
+					<i class="icon wb-trash" aria-hidden="true"></i> {{ _('Elimina Comune')
+					}}
+				</button>
+			</div>
+			<div class="panel-body">
+				<table id="countryTable"
+					class="table table-hover dataTable table-striped width-full">
+					<thead>
+						<tr>
+							<th>{{ _('Regione') }}</th>
+							<th>{{ _('Provincia') }}</th>
+							<th>{{ _('Nome') }}</th>
+							<th>{{ _('CAP') }}</th>
+							<th>{{ _('Prefisso Telefonico') }}</th>
+							<th>{{ _('Codice Istat') }}</th>
+							<th>{{ _('Codice Catastale') }}</th>
+							<th>{{ _('Latitudine') }}</th>
+							<th>{{ _('Longitudine') }}</th>
+						</tr>
+					</thead>
+
+					<tfoot>
+						<tr>
+							<th>{{ _('Regione') }}</th>
+							<th>{{ _('Provincia') }}</th>
+							<th>{{ _('Nome') }}</th>
+							<th>{{ _('CAP') }}</th>
+							<th>{{ _('Prefisso Telefonico') }}</th>
+							<th>{{ _('Codice Istat') }}</th>
+							<th>{{ _('Codice Catastale') }}</th>
+							<th>{{ _('Latitudine') }}</th>
+							<th>{{ _('Longitudine') }}</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+		<!-- End Panel Basic -->
+		<!-- Modal -->
+		<div class="modal fade" id="addCountryModal" aria-hidden="false"
+			aria-labelledby="exampleFormModalLabel" role="dialog" tabindex="-1">
+			<div class="modal-dialog">
+				<form id="countryForm" class="modal-content" method="post"
+					action="{{ static_url('countries/add-italy-city') }}">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&#10005;</span>
+						</button>
+						<h4 class="modal-title">{{ _('Aggiungi Comune') }}</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputRegione">{{ _('Regione') }}</label> 
+								<select id="inputRegione"
+									class="form-control" name="regione">
+									<option></option>
+								{% for regione in model.italia_regioni.find() %}
+									<option value="{{ regione.id }}">{{ regione.nome }}</option>
+								{% endfor %}
+								</select>
+							</div>
+							
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputProvincia">{{ _('Provincia') }}</label> 
+								<select id="inputProvincia"
+									class="form-control" name="provincia" required="required">
+									<option></option>
+								{% for provincia in model.italia_province.find() %}
+									<option value="{{ provincia.id }}">{{ provincia.nome }}</option>
+								{% endfor %}
+								</select>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputNome">{{ _('Nome') }}</label> 
+								<input id="inputNome"
+									class="form-control" type="text" name="nome" required="required">
+							</div>
+							
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputCap">{{ _('CAP') }}</label> 
+								<input id="inputCap"
+									class="form-control" type="text" name="cap">
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputPrefisso">{{_('Prefisso Telefonico') }}</label>
+								<input id="inputPrefisso" type="text"
+										class="form-control" name="prefisso"/>
+							</div>
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputIstat">{{_('Codice Istat') }}</label>
+								<input id="inputIstat" type="text"
+										class="form-control" name="istat" />
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputCatasto">{{_('Codice Catastale') }}</label>
+								<input id="inputCatasto" type="text"
+										class="form-control" name="catasto" />
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputLatitudine">{{_('Latitudine') }}</label>
+								<input id="inputLatitudine" type="text"
+										class="form-control" name="latitudine" />
+							</div>
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputLongitudine">{{_('Longitudine') }}</label>
+								<input id="inputLongitudine" type="text"
+										class="form-control" name="longitudine" />
+							</div>
+							<div class="col-sm-12 pull-right">
+								<button class="btn btn-primary btn-outline" data-dismiss=""
+									id="addCountrySubmit" type="button">{{ _('Invia') }}</button>
+							</div>
+						</div>
+						{{ token.generateInput() }}
+				</form>
+			</div>
+		</div>
+		<!-- End Modal -->
+	</div>
+</div>
+</div> <!-- End Page -->
+

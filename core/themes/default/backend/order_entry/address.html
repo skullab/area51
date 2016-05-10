@@ -82,48 +82,61 @@
 						<h4 class="modal-title">{{ _('Add Address') }}</h4>
 					</div>
 					<div class="modal-body">
+					
 						<div class="row">
 							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputAddress">{{ _('Address') }}</label> 
-								<input id="inputAddress"
-									class="form-control" type="text" name="indirizzo" required="required">
+								<label class="control-label" for="inputNazione">{{ _('Nazione') }}</label> 
+								<input id="inputNazione" type="text" value="Italia"
+										class="form-control" name="nazione" required="required"/>
+								
 							</div>
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputRegione">{{ _('Regione') }}</label> 
+								<select id="inputRegione" 
+										class="form-control" name="regione" required="required"/>
+									<option></option>
+								{% for option in model.italia_regioni.find() %}
+									<option value="{{ option.nome }}">{{ option.nome }}</option>
+								{% endfor %}
+								</select>
+								
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputProvincia">{{ _('Provincia') }}</label> 
+								<select id="inputProvincia" 
+										class="form-control" name="provincia" required="required"/>
+									<option></option>
+								{% for option in model.italia_province.find() %}
+									<option value="{{ option.nome }}">{{ option.nome }}</option>
+								{% endfor %}
+								</select>
+							</div>
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputCitta">{{ _('Citta') }}</label> 
+								<select id="inputCitta" 
+										class="form-control" name="citta" required="required"/>
+									<option></option>
+								{% for option in model.italia_comuni.find() %}
+									<option value="{{ option.nome }}">{{ option.nome }}</option>
+								{% endfor %}
+								</select>
+								
+							</div>
+						</div>
+						<div class="row">
 							<div class="col-lg-6 form-group">
 								<label class="control-label" for="inputCap">{{_('CAP') }}</label>
 								<input id="inputCap" type="text"
 										class="form-control" name="cap" required="required"/>
 							</div>
-						</div>
-						
-						<div class="row">
 							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputCitta">{{ _('Citta') }}</label> 
-								<input id="inputCitta" type="text"
-										class="form-control" name="citta" required="required"/>
-								
-							</div>
-							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputProvincia">{{ _('Provincia') }}</label> 
-								<input id="inputProvincia" type="text"
-										class="form-control" name="provincia" required="required"/>
+								<label class="control-label" for="inputAddress">{{ _('Address') }}</label> 
+								<input id="inputAddress"
+									class="form-control" type="text" name="indirizzo" required="required">
 							</div>
 						</div>
-						
-						<div class="row">
-							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputRegione">{{ _('Regione') }}</label> 
-								<input id="inputRegione" type="text"
-										class="form-control" name="regione" required="required"/>
-								
-							</div>
-							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputNazione">{{ _('Nazione') }}</label> 
-								<input id="inputNazione" type="text"
-										class="form-control" name="nazione" required="required"/>
-								
-							</div>
-						</div>
-						
 						<div class="row">
 							<div class="col-lg-6 form-group">
 								<label class="control-label" for="inputTelefono">{{ _('Telefono') }}</label> 

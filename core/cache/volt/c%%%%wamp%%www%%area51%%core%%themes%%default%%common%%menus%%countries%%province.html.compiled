@@ -1,0 +1,4 @@
+<li id="menu-countries-province" class="site-menu-item"><a href="<?php echo $this->url->getStatic('countries/province'); ?>"> <i
+		class="site-menu-icon wb-map" aria-hidden="true"></i> <span
+		class="site-menu-title"><?php echo 'Province'; ?></span>
+</a></li>

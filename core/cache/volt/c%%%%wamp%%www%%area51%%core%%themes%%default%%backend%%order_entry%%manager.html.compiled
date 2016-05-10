@@ -1,0 +1,108 @@
+<style>
+#buttonsPanel {
+	padding-left: 3%;
+}
+</style>
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+     <h1 class="page-title"><?php echo 'Relazione Agenti/Responsabili'; ?></h1>
+		<ol class="breadcrumb">
+			<li><a href="<?php echo $this->url->getStatic('dashboard'); ?>"><?php echo 'Dashboard'; ?></a></li>
+			<li><a href="<?php echo $this->url->getStatic('order-entry'); ?>"><?php echo 'Order Entry'; ?></a></li>
+			<li class="active"><?php echo 'Responsabili'; ?></li>
+		</ol>
+    </div>
+	
+    <!-- Page Content -->
+    <div class="page-content">
+		<?php echo $this->getContent(); ?>
+		<!-- Panel Basic -->
+		<div class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions"></div>
+				<h3 class="panel-title"><?php echo 'Relazione Agenti/Responsabili'; ?></h3>
+			</header>
+			<div id="buttonsPanel">
+				<button id="addList" class="btn btn-outline btn-primary"
+					data-target="#addRelationModal" data-toggle="modal" type="button">
+					<i class="icon wb-plus" aria-hidden="true"></i> <?php echo 'Aggiungi Relazione'; ?>
+				</button>
+				<button id="dropList" class="btn btn-outline btn-danger"
+					type="button">
+					<i class="icon wb-trash" aria-hidden="true"></i> <?php echo 'Cancella Relazione'; ?>
+				</button>
+			</div>
+			<div class="panel-body">
+				<table id="relationTable"
+					class="table table-hover dataTable table-striped width-full">
+					<thead>
+						<tr>
+							<th><?php echo 'Agente'; ?></th>
+							<th><?php echo 'Responsabile'; ?></th>
+						</tr>
+					</thead>
+					
+					<tfoot>
+						<tr>
+							<th><?php echo 'Agente'; ?></th>
+							<th><?php echo 'Responsabile'; ?></th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+		<!-- End Panel Basic -->
+		<!-- Modal -->
+		<div class="modal fade" id="addRelationModal" aria-hidden="false"
+			aria-labelledby="exampleFormModalLabel" role="dialog" tabindex="-1">
+			<div class="modal-dialog">
+				<form id="relationForm" class="modal-content" method="post"
+					action="<?php echo $this->url->getStatic('order-entry/add-manager'); ?>">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&#10005;</span>
+						</button>
+						<h4 class="modal-title"><?php echo 'Aggiungi Relazione'; ?></h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+						
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputAgente"><?php echo 'Agente'; ?></label> 
+								<select id="inputAgente" name="agente" 
+								class="form-control" required="required">
+								<option></option>
+								<?php foreach ($model->users->find('role = \'sales agent\'') as $agent) { ?>
+								<option value="<?php echo $agent->id; ?>"><?php echo $agent->details->name; ?> <?php echo $agent->details->surname; ?></option>
+								<?php } ?>
+								</select>
+							</div>
+							
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputResponsabile"><?php echo 'Responsabile'; ?></label> 
+								<select id="inputResponsabile" name="responsabile" 
+								class="form-control">
+								<option></option>
+								<?php foreach ($model->users->find('role = \'promotions manager\'') as $manager) { ?>
+								<option value="<?php echo $manager->id; ?>"><?php echo $manager->details->name; ?> <?php echo $manager->details->surname; ?></option>
+								<?php } ?>
+								</select>
+							</div>
+							
+							<div class="col-sm-12 pull-right">
+								<button class="btn btn-primary btn-outline" data-dismiss=""
+									id="addRelationSubmit" type="button"><?php echo 'Invia'; ?></button>
+							</div>
+							
+						</div>
+						<?php echo $this->token->generateInput(); ?>
+				</form>
+			</div>
+		</div>
+		<!-- End Modal -->
+	</div>
+</div>
+</div> <!-- End Page -->
+

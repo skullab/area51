@@ -72,23 +72,24 @@
 								<span aria-hidden="true">&#10005;</span>
 							</button>
 							<h4 class="modal-title"><?php echo 'Customer Details'; ?></h4>
+							<h5 id="customerName"></h5>
 					</div>
 					<div class="modal-body">
 						<table id="customerScheda" class="table table-bordered">
 							<tr><td><?php echo 'Codice Indirizzo'; ?></td>
 							<td><a id="codice_indirizzo" href="javascript(void);" data-type="text"></a></td></tr>
-							<tr><td><?php echo 'Indirizzo'; ?></td>
-							<td><a id="indirizzo" href="javascript(void);" data-type="text"></a></td></tr>
-							<tr><td><?php echo 'CAP'; ?></td>
-							<td><a id="cap" href="javascript(void);" data-type="text"></a></td></tr>
-							<tr><td><?php echo 'Citta'; ?></td>
-							<td><a id="citta" href="javascript(void);" data-type="text"></a></td></tr>
-							<tr><td><?php echo 'Provincia'; ?></td>
-							<td><a id="provincia" href="javascript(void);" data-type="text"></a></td></tr>
-							<tr><td><?php echo 'Regione'; ?></td>
-							<td><a id="regione" href="javascript(void);" data-type="text"></a></td></tr>
 							<tr><td><?php echo 'Nazione'; ?></td>
 							<td><a id="nazione" href="javascript(void);" data-type="text"></a></td></tr>
+							<tr><td><?php echo 'Regione'; ?></td>
+							<td><a id="regione" href="javascript(void);" data-type="select" data-source="<?php echo $this->url->getStatic('countries/source-text-italy-region'); ?>"></a></td></tr>
+							<tr><td><?php echo 'Provincia'; ?></td>
+							<td><a id="provincia" href="javascript(void);" data-type="select" data-source="<?php echo $this->url->getStatic('countries/source-text-italy-province'); ?>"></a></td></tr>
+							<tr><td><?php echo 'Citta'; ?></td>
+							<td><a id="citta" href="javascript(void);" data-type="select" data-source="<?php echo $this->url->getStatic('countries/source-text-italy-city'); ?>"></a></td></tr>
+							<tr><td><?php echo 'CAP'; ?></td>
+							<td><a id="cap" href="javascript(void);" data-type="text"></a></td></tr>
+							<tr><td><?php echo 'Indirizzo'; ?></td>
+							<td><a id="indirizzo" href="javascript(void);" data-type="text"></a></td></tr>
 							
 							<tr><td><?php echo 'Telefono'; ?></td>
 							<td><a id="telefono" href="javascript(void);" data-type="text"></a></td></tr>

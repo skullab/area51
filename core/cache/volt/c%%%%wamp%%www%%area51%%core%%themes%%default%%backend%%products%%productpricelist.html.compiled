@@ -36,19 +36,19 @@
 					class="table table-hover dataTable table-striped width-full">
 					<thead>
 						<tr>
-							<th><?php echo 'Name'; ?></th>
-							<th><?php echo 'List Name'; ?></th>
-							<th><?php echo 'Price of List'; ?></th>
-							<th><?php echo 'Price of Retail'; ?></th>
+							<th><?php echo 'Prodotto'; ?></th>
+							<th><?php echo 'Listino'; ?></th>
+							<th><?php echo 'Prezzo di listino'; ?></th>
+							<th><?php echo 'Prezzo di vendita'; ?></th>
 						</tr>
 					</thead>
 
 					<tfoot>
 						<tr>
-							<th><?php echo 'Name'; ?></th>
-							<th><?php echo 'List Name'; ?></th>
-							<th><?php echo 'Price of List'; ?></th>
-							<th><?php echo 'Price of Retail'; ?></th>
+							<th><?php echo 'Prodotto'; ?></th>
+							<th><?php echo 'Listino'; ?></th>
+							<th><?php echo 'Prezzo di listino'; ?></th>
+							<th><?php echo 'Prezzo di vendita'; ?></th>
 						</tr>
 					</tfoot>
 				</table>

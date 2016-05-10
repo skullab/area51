@@ -95,6 +95,18 @@
 						</div>
 						
 						<div class="row">
+						
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputPdv"><?php echo 'PDV'; ?></label> 
+								<select id="inputPdv" name="pdv" 
+								class="form-control">
+								<option></option>
+								<?php foreach ($model->customers_destinations->find() as $pdv) { ?>
+								<option value="<?php echo $pdv->id; ?>"><?php echo $pdv->nome; ?></option>
+								<?php } ?>
+								</select>
+							</div>
+							
 							<div class="col-lg-6 form-group">
 								<label class="control-label" for="inputIndirizzo"><?php echo 'Indirizzo PDV'; ?></label> 
 								<select id="inputIndirizzo" name="indirizzo" 
@@ -105,6 +117,7 @@
 								<?php } ?>
 								</select>
 							</div>
+							
 							<div class="col-sm-12 pull-right">
 								<button class="btn btn-primary btn-outline" data-dismiss=""
 									id="addRelationSubmit" type="button"><?php echo 'Submit'; ?></button>

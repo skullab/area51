@@ -1,0 +1,844 @@
+
+<div class="page animsition">
+	<div class="page-header">
+		<h1 class="page-title">Inserisci le promozioni</h1>
+	</div>
+	<div
+		class="page-content calendar-container padding-horizontal-30 container-fluid">
+		{{ content() }}
+		<div class="row">
+
+			<div class="col-md-12">
+				<!-- Panel Wizard Form -->
+				<div class="panel" id="exampleWizardForm">
+					<div class="panel-heading">
+						<h3 class="panel-title">Segui i passaggi</h3>
+					</div>
+					<div class="panel-body">
+						<!-- Steps -->
+						<div class="steps steps-sm row" data-plugin="matchHeight"
+							data-by-row="true" role="tablist">
+							<div class="step col-md-3 current" data-target="#Selezione"
+								role="tab">
+								<span class="step-number">1</span>
+								<div class="step-desc">
+									<span class="step-title">Selezione</span>
+								</div>
+							</div>
+
+							<div class="step col-md-3" data-target="#Scontistica" role="tab">
+								<span class="step-number">2</span>
+								<div class="step-desc">
+									<span class="step-title">Scontistica</span>
+								</div>
+							</div>
+
+							<div class="step col-md-3" data-target="#Data" role="tab">
+								<span class="step-number">3</span>
+								<div class="step-desc">
+									<span class="step-title">Data</span>
+								</div>
+							</div>
+
+							<div class="step col-md-3" data-target="#Invio" role="tab">
+								<span class="step-number">4</span>
+								<div class="step-desc">
+									<span class="step-title">Invio</span>
+								</div>
+							</div>
+						</div>
+						<!-- End Steps -->
+
+						<!-- Wizard Content -->
+						<form class="wizard-content" id="formContainer" method="POST"
+							action="{{ static_url('order-entry/promotion/register-add') }}">
+							
+							<div class="wizard-pane active" id="Selezione" role="tabpanel">
+								<!-- Example Searchable Tree -->
+								<div class="example-wrap">
+									<h4 class="example-title">Cerca Cliente</h4>
+									<div class="form-group" id="exampleSearchForm" role="search">
+										<div class="input-search">
+											<input type="search" class="form-control"
+												id="inputSearchable" placeholder="Cerca ...">
+											<button type="button" class="input-search-btn"
+												onclick="searchTree();">
+												<i class="icon wb-search" aria-hidden="true"></i>
+											</button>
+										</div>
+									</div>
+									<div class="form-group">
+										Selezionati : <span class="badge" id="selectedNode">0</span>
+										<input id="pdvSelezionati" name="pdvSelezionati" type="hidden" />
+									</div>
+									<div class="example">
+										<div id="exampleSearchableTree">Caricamento...</div>
+									</div>
+								</div>
+								<!-- End Example Searchable Tree -->
+							</div>
+							<div class="wizard-pane" id="Scontistica" role="tabpanel">
+								<div class="example-wrap margin-lg-0">
+									<div class="nav-tabs-horizontal">
+										<ul class="nav nav-tabs margin-bottom-20"
+											data-plugin="nav-tabs" role="tablist">
+											<li class="active col-md-4 col-sm-12 col-xs-12"
+												role="presentation"><a data-toggle="tab"
+												href="#exampleTabsLineOne"
+												aria-controls="exampleTabsLineOne" role="tab">Applica a
+													Linee</a></li>
+											<li class="col-md-4 col-sm-12 col-xs-12" role="presentation"><a
+												data-toggle="tab" href="#exampleTabsLineTwo"
+												aria-controls="exampleTabsLineTwo" role="tab">Applica a
+													Categorie</a></li>
+											<li class="col-md-4 col-sm-12 col-xs-12" role="presentation"><a
+												data-toggle="tab" href="#exampleTabsLineThree"
+												aria-controls="exampleTabsLineThree" role="tab">Applica
+													a Prodotti</a></li>
+										</ul>
+										<div class="tab-content padding-top-20">
+											<div class="tab-pane col-md-12 active"
+												id="exampleTabsLineOne" role="tabpanel">
+												Un LINEA o una CATEGORIA possono essere selezionate solo una
+												volta!
+
+												<div class="row hidden-sm hidden-xs">
+													<div class="col-md-3">
+														<h4 class="example-title">Linea</h4>
+													</div>
+													<div class="col-md-3">
+														<h4 class="example-title">% Sconto 1</h4>
+													</div>
+													<div class="col-md-3">
+														<h4 class="example-title">% Sconto 2</h4>
+													</div>
+													<div class="col-md-3">
+														<h4 class="example-title">% Sconto 3</h4>
+													</div>
+												</div>
+												<div class="row bg-blue-grey-100 padding-top-20">
+													<div class="col-md-3 form-group">
+														<select class="form-control" multiple
+															data-plugin="select2" data-placeholder="Seleziona Linea">
+															<option value="AK">Linea 1</option>
+															<option value="HI">Linea 2</option>
+															<option value="CA">Linea 3</option>
+															<option value="NV">Linea 4</option>
+															<option value="OR">Linea 5</option>
+															<option value="WA">Linea 6</option>
+															<option value="AZ">Linea 7</option>
+															<option value="CO">Linea 8</option>
+															<option value="ID">Linea 9</option>
+															<option value="MT">Linea 10</option>
+															<option value="NE">Linea 11</option>
+															<option value="NM">Linea 12</option>
+															<option value="ND">Linea 13</option>
+															<option value="UT">Linea 13</option>
+															<option value="WY">Linea 14</option>
+															<option value="AL">Linea 15</option>
+															<option value="AR">Linea 16</option>
+															<option value="IL">Linea 17</option>
+														</select>
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 1">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 2">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 3">
+													</div>
+												</div>
+												<div class="row padding-top-20">
+													<div class="col-md-3 form-group">
+														<select class="form-control" multiple
+															data-plugin="select2" data-placeholder="Seleziona Linea">
+															<option value="AK">Linea 1</option>
+															<option value="HI">Linea 2</option>
+															<option value="CA">Linea 3</option>
+															<option value="NV">Linea 4</option>
+															<option value="OR">Linea 5</option>
+															<option value="WA">Linea 6</option>
+															<option value="AZ">Linea 7</option>
+															<option value="CO">Linea 8</option>
+															<option value="ID">Linea 9</option>
+															<option value="MT">Linea 10</option>
+															<option value="NE">Linea 11</option>
+															<option value="NM">Linea 12</option>
+															<option value="ND">Linea 13</option>
+															<option value="UT">Linea 13</option>
+															<option value="WY">Linea 14</option>
+															<option value="AL">Linea 15</option>
+															<option value="AR">Linea 16</option>
+															<option value="IL">Linea 17</option>
+														</select>
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 1">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 2">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 3">
+													</div>
+												</div>
+												<div class="row bg-blue-grey-100 padding-top-20">
+													<div class="col-md-3 form-group">
+														<select class="form-control" multiple
+															data-plugin="select2" data-placeholder="Seleziona Linea">
+															<option value="AK">Linea 1</option>
+															<option value="HI">Linea 2</option>
+															<option value="CA">Linea 3</option>
+															<option value="NV">Linea 4</option>
+															<option value="OR">Linea 5</option>
+															<option value="WA">Linea 6</option>
+															<option value="AZ">Linea 7</option>
+															<option value="CO">Linea 8</option>
+															<option value="ID">Linea 9</option>
+															<option value="MT">Linea 10</option>
+															<option value="NE">Linea 11</option>
+															<option value="NM">Linea 12</option>
+															<option value="ND">Linea 13</option>
+															<option value="UT">Linea 13</option>
+															<option value="WY">Linea 14</option>
+															<option value="AL">Linea 15</option>
+															<option value="AR">Linea 16</option>
+															<option value="IL">Linea 17</option>
+														</select>
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 1">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 2">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 3">
+													</div>
+												</div>
+												<div class="row padding-top-20">
+													<div class="col-md-3 form-group">
+														<select class="form-control" multiple
+															data-plugin="select2" data-placeholder="Seleziona Linea">
+															<option value="AK">Linea 1</option>
+															<option value="HI">Linea 2</option>
+															<option value="CA">Linea 3</option>
+															<option value="NV">Linea 4</option>
+															<option value="OR">Linea 5</option>
+															<option value="WA">Linea 6</option>
+															<option value="AZ">Linea 7</option>
+															<option value="CO">Linea 8</option>
+															<option value="ID">Linea 9</option>
+															<option value="MT">Linea 10</option>
+															<option value="NE">Linea 11</option>
+															<option value="NM">Linea 12</option>
+															<option value="ND">Linea 13</option>
+															<option value="UT">Linea 13</option>
+															<option value="WY">Linea 14</option>
+															<option value="AL">Linea 15</option>
+															<option value="AR">Linea 16</option>
+															<option value="IL">Linea 17</option>
+														</select>
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 1">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 2">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 3">
+													</div>
+												</div>
+												<div class="row bg-blue-grey-100 padding-top-20">
+													<div class="col-md-3 form-group">
+														<select class="form-control" multiple
+															data-plugin="select2" data-placeholder="Seleziona Linea">
+															<option value="AK">Linea 1</option>
+															<option value="HI">Linea 2</option>
+															<option value="CA">Linea 3</option>
+															<option value="NV">Linea 4</option>
+															<option value="OR">Linea 5</option>
+															<option value="WA">Linea 6</option>
+															<option value="AZ">Linea 7</option>
+															<option value="CO">Linea 8</option>
+															<option value="ID">Linea 9</option>
+															<option value="MT">Linea 10</option>
+															<option value="NE">Linea 11</option>
+															<option value="NM">Linea 12</option>
+															<option value="ND">Linea 13</option>
+															<option value="UT">Linea 13</option>
+															<option value="WY">Linea 14</option>
+															<option value="AL">Linea 15</option>
+															<option value="AR">Linea 16</option>
+															<option value="IL">Linea 17</option>
+														</select>
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 1">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 2">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 3">
+													</div>
+												</div>
+												<div class="row padding-top-20">
+													<div class="col-md-3 form-group">
+														<select class="form-control" multiple
+															data-plugin="select2" data-placeholder="Seleziona Linea">
+															<option value="AK">Linea 1</option>
+															<option value="HI">Linea 2</option>
+															<option value="CA">Linea 3</option>
+															<option value="NV">Linea 4</option>
+															<option value="OR">Linea 5</option>
+															<option value="WA">Linea 6</option>
+															<option value="AZ">Linea 7</option>
+															<option value="CO">Linea 8</option>
+															<option value="ID">Linea 9</option>
+															<option value="MT">Linea 10</option>
+															<option value="NE">Linea 11</option>
+															<option value="NM">Linea 12</option>
+															<option value="ND">Linea 13</option>
+															<option value="UT">Linea 13</option>
+															<option value="WY">Linea 14</option>
+															<option value="AL">Linea 15</option>
+															<option value="AR">Linea 16</option>
+															<option value="IL">Linea 17</option>
+														</select>
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 1">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 2">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 3">
+													</div>
+												</div>
+											</div>
+											<div class="tab-pane col-md-12" id="exampleTabsLineTwo"
+												role="tabpanel">
+												<div class="row hidden-sm hidden-xs">
+													<div class="col-md-3">
+														<h4 class="example-title">Categoria</h4>
+													</div>
+													<div class="col-md-3">
+														<h4 class="example-title">% Sconto 1</h4>
+													</div>
+													<div class="col-md-3">
+														<h4 class="example-title">% Sconto 2</h4>
+													</div>
+													<div class="col-md-3">
+														<h4 class="example-title">% Sconto 3</h4>
+													</div>
+												</div>
+												<div class="row bg-blue-grey-100 padding-top-20">
+													<div class="col-md-3 form-group">
+														<select class="form-control" multiple
+															data-plugin="select2"
+															data-placeholder="Seleziona Categoria">
+															<option value="AK">Categoria 1</option>
+															<option value="HI">Categoria 2</option>
+															<option value="CA">Categoria 3</option>
+															<option value="NV">Categoria 4</option>
+															<option value="OR">Categoria 5</option>
+															<option value="WA">Categoria 6</option>
+															<option value="AZ">Categoria 7</option>
+															<option value="CO">Categoria 8</option>
+															<option value="ID">Categoria 9</option>
+															<option value="MT">Categoria 10</option>
+															<option value="NE">Categoria 11</option>
+															<option value="NM">Categoria 12</option>
+															<option value="ND">Categoria 13</option>
+															<option value="UT">Categoria 13</option>
+															<option value="WY">Categoria 14</option>
+															<option value="AL">Categoria 15</option>
+															<option value="AR">Categoria 16</option>
+															<option value="IL">Categoria 17</option>
+														</select>
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 1">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 2">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 3">
+													</div>
+												</div>
+												<div class="row padding-top-20">
+													<div class="col-md-3 form-group">
+														<select class="form-control" multiple
+															data-plugin="select2"
+															data-placeholder="Seleziona Categoria">
+															<option value="AK">Categoria 1</option>
+															<option value="HI">Categoria 2</option>
+															<option value="CA">Categoria 3</option>
+															<option value="NV">Categoria 4</option>
+															<option value="OR">Categoria 5</option>
+															<option value="WA">Categoria 6</option>
+															<option value="AZ">Categoria 7</option>
+															<option value="CO">Categoria 8</option>
+															<option value="ID">Categoria 9</option>
+															<option value="MT">Categoria 10</option>
+															<option value="NE">Categoria 11</option>
+															<option value="NM">Categoria 12</option>
+															<option value="ND">Categoria 13</option>
+															<option value="UT">Categoria 13</option>
+															<option value="WY">Categoria 14</option>
+															<option value="AL">Categoria 15</option>
+															<option value="AR">Categoria 16</option>
+															<option value="IL">Categoria 17</option>
+														</select>
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 1">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 2">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 3">
+													</div>
+												</div>
+												<div class="row bg-blue-grey-100 padding-top-20">
+													<div class="col-md-3 form-group">
+														<select class="form-control" multiple
+															data-plugin="select2"
+															data-placeholder="Seleziona Categoria">
+															<option value="AK">Categoria 1</option>
+															<option value="HI">Categoria 2</option>
+															<option value="CA">Categoria 3</option>
+															<option value="NV">Categoria 4</option>
+															<option value="OR">Categoria 5</option>
+															<option value="WA">Categoria 6</option>
+															<option value="AZ">Categoria 7</option>
+															<option value="CO">Categoria 8</option>
+															<option value="ID">Categoria 9</option>
+															<option value="MT">Categoria 10</option>
+															<option value="NE">Categoria 11</option>
+															<option value="NM">Categoria 12</option>
+															<option value="ND">Categoria 13</option>
+															<option value="UT">Categoria 13</option>
+															<option value="WY">Categoria 14</option>
+															<option value="AL">Categoria 15</option>
+															<option value="AR">Categoria 16</option>
+															<option value="IL">Categoria 17</option>
+														</select>
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 1">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 2">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 3">
+													</div>
+												</div>
+												<div class="row padding-top-20">
+													<div class="col-md-3 form-group">
+														<select class="form-control" multiple
+															data-plugin="select2"
+															data-placeholder="Seleziona Categoria">
+															<option value="AK">Categoria 1</option>
+															<option value="HI">Categoria 2</option>
+															<option value="CA">Categoria 3</option>
+															<option value="NV">Categoria 4</option>
+															<option value="OR">Categoria 5</option>
+															<option value="WA">Categoria 6</option>
+															<option value="AZ">Categoria 7</option>
+															<option value="CO">Categoria 8</option>
+															<option value="ID">Categoria 9</option>
+															<option value="MT">Categoria 10</option>
+															<option value="NE">Categoria 11</option>
+															<option value="NM">Categoria 12</option>
+															<option value="ND">Categoria 13</option>
+															<option value="UT">Categoria 13</option>
+															<option value="WY">Categoria 14</option>
+															<option value="AL">Categoria 15</option>
+															<option value="AR">Categoria 16</option>
+															<option value="IL">Categoria 17</option>
+														</select>
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 1">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 2">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 3">
+													</div>
+												</div>
+												<div class="row bg-blue-grey-100 padding-top-20">
+													<div class="col-md-3 form-group">
+														<select class="form-control" multiple
+															data-plugin="select2"
+															data-placeholder="Seleziona Categoria">
+															<option value="AK">Categoria 1</option>
+															<option value="HI">Categoria 2</option>
+															<option value="CA">Categoria 3</option>
+															<option value="NV">Categoria 4</option>
+															<option value="OR">Categoria 5</option>
+															<option value="WA">Categoria 6</option>
+															<option value="AZ">Categoria 7</option>
+															<option value="CO">Categoria 8</option>
+															<option value="ID">Categoria 9</option>
+															<option value="MT">Categoria 10</option>
+															<option value="NE">Categoria 11</option>
+															<option value="NM">Categoria 12</option>
+															<option value="ND">Categoria 13</option>
+															<option value="UT">Categoria 13</option>
+															<option value="WY">Categoria 14</option>
+															<option value="AL">Categoria 15</option>
+															<option value="AR">Categoria 16</option>
+															<option value="IL">Categoria 17</option>
+														</select>
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 1">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 2">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 3">
+													</div>
+												</div>
+												<div class="row padding-top-20">
+													<div class="col-md-3 form-group">
+														<select class="form-control" multiple
+															data-plugin="select2"
+															data-placeholder="Seleziona Categoria">
+															<option value="AK">Categoria 1</option>
+															<option value="HI">Categoria 2</option>
+															<option value="CA">Categoria 3</option>
+															<option value="NV">Categoria 4</option>
+															<option value="OR">Categoria 5</option>
+															<option value="WA">Categoria 6</option>
+															<option value="AZ">Categoria 7</option>
+															<option value="CO">Categoria 8</option>
+															<option value="ID">Categoria 9</option>
+															<option value="MT">Categoria 10</option>
+															<option value="NE">Categoria 11</option>
+															<option value="NM">Categoria 12</option>
+															<option value="ND">Categoria 13</option>
+															<option value="UT">Categoria 13</option>
+															<option value="WY">Categoria 14</option>
+															<option value="AL">Categoria 15</option>
+															<option value="AR">Categoria 16</option>
+															<option value="IL">Categoria 17</option>
+														</select>
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 1">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 2">
+													</div>
+													<div class="col-md-3 form-group">
+														<input type="text" class="form-control"
+															placeholder="% Sconto 3">
+													</div>
+												</div>
+											</div>
+											<div class="tab-pane" id="exampleTabsLineThree"
+												role="tabpanel">
+												<div class="table-responsive">
+													<table id="TabellaScontistica" class="display table"
+														cellspacing="0" width="100%">
+														<thead>
+															<tr>
+																<th>Prodotti</th>
+																<th>% Sconto 1</th>
+																<th>% Sconto 2</th>
+																<th>% Sconto 3</th>
+															</tr>
+														</thead>
+														<tfoot>
+															<tr>
+																<th>Linea / Prodotti</th>
+																<th>% Sconto 1</th>
+																<th>% Sconto 2</th>
+																<th>% Sconto 3</th>
+															</tr>
+														</tfoot>
+														<tbody>
+															<tr class="active">
+																<td>Lina Mandorle</td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+															</tr>
+															<tr>
+																<td>Lorem Ipsum</td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+															</tr>
+															<tr>
+																<td>Dolor Sit</td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+															</tr>
+															<tr>
+																<td>Amet consectetur</td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+															</tr>
+															<tr>
+																<td>Adipiscit Ellam</td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+															</tr>
+															<tr>
+																<td>Vendorus Acri</td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+															</tr>
+															<tr>
+																<td>Caesaris Locus</td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+															</tr>
+															<tr class="active">
+																<td>Lina Karitè</td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+															</tr>
+															<tr>
+																<td>Amet consectetur</td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+															</tr>
+															<tr>
+																<td>Adipiscit Ellam</td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+															</tr>
+															<tr>
+																<td>Vendorus Acri</td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+															</tr>
+															<tr>
+																<td>Dolor Sit</td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+															</tr>
+															<tr class="active">
+																<td>Lina Argan</td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+															</tr>
+															<tr>
+																<td>Amet consectetur</td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+															</tr>
+															<tr>
+																<td>Adipiscit Ellam</td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+															</tr>
+															<tr>
+																<td>Vendorus Acri</td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+															</tr>
+															<tr>
+																<td>Dolor Sit</td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+																<td><input type="text" id="row-1-age"
+																	name="row-1-age" value="61"></td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- End Example Tabs Line -->
+							</div>
+							<div class="wizard-pane" id="Data" role="tabpanel">
+								<div class="row">
+									<div class="col-md-5">
+										<div id="addNewEvent" class="margin-top-15" aria-hidden="true"
+											aria-labelledby="addNewEvent">
+											<div class="form-group margin-bottom-15 row">
+												<label class="col-sm-12 control-label" for="starts">Dai
+													un nome di riferimento alla promozione:</label>
+												<div class="col-sm-12">
+													<input type="text" class="form-control" id="starts"
+														name="starts">
+												</div>
+											</div>
+											<div class="form-group margin-bottom-15 row">
+												<label class="col-sm-12 control-label" for="starts2">Data
+													Attivazione Sell-In:</label>
+												<div class="col-sm-12">
+													<div class="input-group">
+														<input type="text" class="form-control" id="starts2"
+															data-container="#addNewEvent" data-plugin="datepicker">
+														<span class="input-group-addon"> <i
+															class="icon wb-calendar" aria-hidden="true"></i>
+														</span>
+													</div>
+												</div>
+											</div>
+											<div class="form-group margin-bottom-15 row">
+												<label class="col-sm-12 control-label" for="ends">Data
+													Cessazione Sell-In:</label>
+												<div class="col-sm-12">
+													<div class="input-group">
+														<input type="text" class="form-control" id="ends"
+															data-container="#addNewEvent" data-plugin="datepicker">
+														<span class="input-group-addon"> <i
+															class="icon wb-calendar" aria-hidden="true"></i>
+														</span>
+													</div>
+												</div>
+											</div>
+											<div class="form-group margin-bottom-15">
+												<span class="label label-lg bg-cyan-600"><i
+													class="icon wb-eye" aria-hidden="true"></i></span> Verrà assegnato
+												questo colore alla promozione
+											</div>
+											<div class="form-actions margin-bottom-15 row">
+												<div class="col-sm-12 control-label margin-bottom-15">
+													<button class="btn btn-primary" data-dismiss="modal"
+														type="button">Aggiungi</button>
+													<a class="btn btn-sm btn-white" data-dismiss="modal"
+														href="javascript:void(0)">Cancella</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-md-offset-1">
+										<div class="margin-top-15" id="calendar"></div>
+									</div>
+								</div>
+							</div>
+							<div class="wizard-pane" id="Invio" role="tabpanel">
+								<h4 class="margin-top-15 margin-bottom-10">Inserisci delle
+									note per il responsabile</h4>
+								<textarea data-provide="markdown" data-iconlibrary="fa"
+									class="col-md-12"></textarea>
+							</div>
+						</form>
+						<!-- End Wizard Content -->
+					</div>
+				</div>
+				<!-- End Panel Wizard One Form -->
+			</div>
+		</div>
+	</div>
+</div>

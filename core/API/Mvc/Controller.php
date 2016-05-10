@@ -40,6 +40,28 @@ abstract class Controller extends PhalconController{
 		$this->onInitialize();
 		
 	}
+	protected function getAssetsPackageTinycolor(){
+		$this->jsPlugins->addJs('vendor/tinycolor/tinycolor.js');
+	}
+	protected function getAssetsPackageBootstrapMarkdown(){
+		$this->cssPlugins->addCss('vendor/bootstrap-markdown/bootstrap-markdown.css');
+		$this->jsPlugins->addJs('vendor/bootstrap-markdown/bootstrap-markdown.js');
+		$this->jsPlugins->addJs('vendor/to-markdown/to-markdown.js');
+	}
+	protected function getAssetsPackageMultiSelect(){
+		$this->cssPlugins->addCss('vendor/multi-select/multi-select.css');
+		$this->jsPlugins->addJs('vendor/multi-select/jquery.multi-select.js');
+		$this->jsComponents->addJs('js/components/multi-select.js');
+	}
+	protected function getAssetsPackageFullcalendar(){
+		$this->cssPlugins->addCss('vendor/fullcalendar/fullcalendar.css');
+		$this->jsPlugins->addJs('vendor/fullcalendar/fullcalendar.js');
+	}
+	protected function getAssetsPackageBootstrapTreeview(){
+		$this->cssPlugins->addCss('vendor/bootstrap-treeview/bootstrap-treeview.css');
+		$this->jsPlugins->addJs('vendor/bootstrap-treeview/bootstrap-treeview.min.js');
+		$this->jsComponents->addJs('js/components/bootstrap-treeview.js');
+	}
 	protected function getAssetsPackageJqueryWizard(){
 		$this->cssPlugins->addCss ( 'vendor/jquery-wizard/jquery-wizard.css' );
 		$this->jsPlugins->addJs('vendor/jquery-wizard/jquery-wizard.js');
@@ -53,7 +75,8 @@ abstract class Controller extends PhalconController{
 	}
 	protected function getAssetsPackageSelect2(){
 		$this->cssPlugins->addCss('vendor/select2/select2.min.css');
-		$this->jsPlugins->addJs('vendor/select2/select2.min.js');
+		$this->jsPlugins->addJs('vendor/select2/select2.full.min.js');
+		$this->jsComponents->addJs('js/components/select2.js');
 	}
 	protected function getAssetsPackageXEditable(){
 		$this->cssPlugins->addCss('vendor/x-editable/x-editable.css');
@@ -62,7 +85,8 @@ abstract class Controller extends PhalconController{
 	protected function getAssetsPackageDatePicker(){
 		$this->cssPlugins->addCss('vendor/fullcalendar/fullcalendar.css')
 		->addCss('vendor/bootstrap-datepicker/bootstrap-datepicker.css')
-		->addCss('vendor/bootstrap-touchspin/bootstrap-touchspin.css');
+		->addCss('vendor/bootstrap-touchspin/bootstrap-touchspin.css')
+		->addCss('css/apps/calendar.css');
 		$this->jsPlugins->addJs('vendor/moment/moment.min.js')
 		->addJs('vendor/fullcalendar/fullcalendar.js')
 		->addJs('vendor/jquery-selective/jquery-selective.min.js')

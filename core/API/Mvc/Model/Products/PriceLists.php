@@ -13,6 +13,10 @@ class PriceLists extends Model{
 				'alias' => 'prices',
 				'resusable' => true
 		));
+		$this->hasMany('id','Thunderhawk\API\Mvc\Model\Customer\CustomersPriceLists','price_lists_id',array(
+				'alias' => 'relation',
+				'reusable' => true
+		));
 	}
 	public function beforeSave(){
 		$this->created_at = date('Y-m-d H:i:s');

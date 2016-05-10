@@ -213,7 +213,7 @@ class Auth extends Component implements AuthInterface{
 		}else{
 			$display_name = $user->email ;
 		}
-		if($user-details && (trim($user->details->portrait)) != ''){
+		if($user->details && (trim($user->details->portrait)) != ''){
 			$portrait = $user->details->portrait ;
 		}else{
 			$portrait = 'user_blank.png' ;

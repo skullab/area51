@@ -17,14 +17,17 @@ final class Token extends Component {
 		return $token ;
 	}
 	
-	public function check($tokenKey = 'csrf',$expire = 86400){
+	public function check($tokenKey = 'csrf',$expire = 86400,$reusable = false){
 		$token = $this->request->getPost($tokenKey);
 		$expiration = time() - $expire ;
 		if(isset($_SESSION[$this->_tokenID][$token]) && $_SESSION[$this->_tokenID][$token] >=  $expiration){
-			unset($_SESSION[$this->_tokenID][$token]);
+			if(!$reusable)unset($_SESSION[$this->_tokenID][$token]);
 			return true;
 		}
 		return false ;
+	}
+	public function checkReusable($tokenKey = 'csrf',$expire = 600){
+		return $this->check($tokenKey,$expire,true);
 	}
 	public function garbage(){
 		$_SESSION[$this->_tokenID] = null ;

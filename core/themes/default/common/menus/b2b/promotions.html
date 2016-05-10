@@ -1,22 +1,32 @@
 <li id="menu-b2b-promozioni" class="site-menu-item has-sub"><a
 	href=""> <i class="site-menu-icon icon md-money" aria-hidden="true"></i>
-		<span class="site-menu-title">Promozioni</span> <span
+		<span class="site-menu-title">{{ _('Promozioni') }}</span> <span
 		class="site-menu-arrow"></span>
 </a>
 	<ul class="site-menu-sub">
-		<li id="menu-b2b-promozioni-attive" class="site-menu-item"><a
-			class="animsition-link" href="javascript:void(0)"> <i
+	<li id="menu-b2b-promozioni-aggiungi" class="site-menu-item"><a
+			class="animsition-link" href="{{ static_url('order-entry/promotion/add') }}"> <i
 				class="site-menu-icon " aria-hidden="true"></i> <span
-				class="site-menu-title">Attive</span>
+				class="site-menu-title">{{ _('Aggiungi') }}</span>
 		</a></li>
-		<li id="menu-b2b-promozioni-aggiungi" class="site-menu-item"><a
+		<li id="menu-b2b-promozioni-approvate" class="site-menu-item"><a
 			class="animsition-link" href="javascript:void(0)"> <i
 				class="site-menu-icon " aria-hidden="true"></i> <span
-				class="site-menu-title">Aggiungi</span>
+				class="site-menu-title">{{ _('Approvate') }}</span>
 		</a></li>
-		<li id="menu-b2b-promozioni-calendario" class="site-menu-item"><a
+		<li id="menu-b2b-promozioni-attesa" class="site-menu-item"><a
 			class="animsition-link" href="javascript:void(0)"> <i
 				class="site-menu-icon " aria-hidden="true"></i> <span
-				class="site-menu-title">Calendario</span>
+				class="site-menu-title">{{ _('In Attesa') }}</span>
+		</a></li>
+		<li id="menu-b2b-promozioni-respinte" class="site-menu-item"><a
+			class="animsition-link" href="javascript:void(0)"> <i
+				class="site-menu-icon " aria-hidden="true"></i> <span
+				class="site-menu-title">{{ _('Respinte') }}</span>
+		</a></li>
+		<li id="menu-b2b-promozioni-storico" class="site-menu-item"><a
+			class="animsition-link" href="javascript:void(0)"> <i
+				class="site-menu-icon " aria-hidden="true"></i> <span
+				class="site-menu-title">{{ _('Storico') }}</span>
 		</a></li>
 	</ul></li>

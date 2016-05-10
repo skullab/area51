@@ -1,0 +1,109 @@
+<style>
+#buttonsPanel {
+	padding-left: 3%;
+}
+</style>
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+     <h1 class="page-title">{{ _('Bookkeeper') }}</h1>
+		<ol class="breadcrumb">
+			<li><a href="{{ static_url('dashboard') }}">{{ _('Dashboard') }}</a></li>
+			<li><a href="{{ static_url('order-entry') }}">{{ _('Order Entry') }}</a></li>
+			<li class="active">{{ _('Bookkeeper') }}</li>
+		</ol>
+    </div>
+	
+    <!-- Page Content -->
+    <div class="page-content">
+		{{ content() }}
+		<!-- Panel Basic -->
+		<div class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions"></div>
+				<h3 class="panel-title">{{ _('Bookkeeper') }}</h3>
+			</header>
+			<div id="buttonsPanel">
+				<button id="addList" class="btn btn-outline btn-primary"
+					data-target="#addRelationModal" data-toggle="modal" type="button">
+					<i class="icon wb-plus" aria-hidden="true"></i> {{ _('Add Relation') }}
+				</button>
+				<button id="dropList" class="btn btn-outline btn-danger"
+					type="button">
+					<i class="icon wb-trash" aria-hidden="true"></i> {{ _('Drop Relations')
+					}}
+				</button>
+			</div>
+			<div class="panel-body">
+				<table id="relationTable"
+					class="table table-hover dataTable table-striped width-full">
+					<thead>
+						<tr>
+							<th>{{ _('Fatturatario') }}</th>
+							<th>{{ _('Contabilita') }}</th>
+						</tr>
+					</thead>
+					
+					<tfoot>
+						<tr>
+							<th>{{ _('Fatturatario') }}</th>
+							<th>{{ _('Contabilita') }}</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+		<!-- End Panel Basic -->
+		<!-- Modal -->
+		<div class="modal fade" id="addRelationModal" aria-hidden="false"
+			aria-labelledby="exampleFormModalLabel" role="dialog" tabindex="-1">
+			<div class="modal-dialog">
+				<form id="relationForm" class="modal-content" method="post"
+					action="{{ static_url('order-entry/add-bookkeeper') }}">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&#10005;</span>
+						</button>
+						<h4 class="modal-title">{{ _('Add Relation') }}</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputContabile">{{ _('Contabilita') }}</label> 
+								<select id="inputContabile" name="contabile" 
+								class="form-control" required="required">
+								<option></option>
+								{% for user in model.users.find("role = 'bookkeeper'") %}
+								<option value="{{ user.id}}">{{ user.details.name }} {{ user.details.surname }}</option>
+								{% endfor %}
+								</select>
+							</div>
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputFatturatario">{{_('Fatturatario') }}</label>
+								<select id="inputFatturatario" name="fatturatario" 
+								class="form-control" required="required">
+								<option></option>
+								{% for customer in model.customers.find() %}
+								<option value="{{ customer.id}}">{{ customer.nome }}</option>
+								{% endfor %}
+								</select>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-sm-12 pull-right">
+								<button class="btn btn-primary btn-outline" data-dismiss=""
+									id="addRelationSubmit" type="button">{{ _('Submit') }}</button>
+							</div>
+						</div>
+						
+						{{ token.generateInput() }}
+				</form>
+			</div>
+		</div>
+		<!-- End Modal -->
+	</div>
+</div>
+</div> <!-- End Page -->
+

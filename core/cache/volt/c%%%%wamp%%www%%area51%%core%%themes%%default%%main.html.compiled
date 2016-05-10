@@ -29,6 +29,7 @@
   <!-- PLUGINS CSS -->
   <?php echo $this->assets->outputCss('cssPlugins'); ?>
   
+  <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/fonts/font-awesome/font-awesome.css">
   <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/fonts/web-icons/web-icons.min.css">
   <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/fonts/brand-icons/brand-icons.min.css">
   <link rel="stylesheet" href="<?php echo $this->url->getStatic(''); ?>assets/fonts/material-design/material-design.css">
@@ -96,7 +97,7 @@
   <script src="<?php echo $this->url->getStatic(''); ?>assets/js/components/animsition.js"></script>
   <script src="<?php echo $this->url->getStatic(''); ?>assets/js/components/slidepanel.js"></script>
   <script src="<?php echo $this->url->getStatic(''); ?>assets/js/components/switchery.js"></script>
-  
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/js/apps/app.js"></script>
   <?php echo $this->assets->outputJs('jsComponents'); ?>
   
   <script type="text/javascript">
@@ -106,9 +107,6 @@
       var Site = window.Site;
       $(document).ready(function() {
         Site.run();
-        $(window).on('unload',function(){
-        	
-        });
       });
     })(document, window, jQuery);
   </script>
@@ -119,79 +117,42 @@
   <?php echo $this->assets->outputJs(); ?>
   <?php echo $this->assets->outputRenderInlineJs(); ?>
   
-<script>
-<!-- TODO REMOVE -->
-/*(function() {
-    var defaults = $.components.getDefaults("wizard");
-    var options = $.extend(true, {}, defaults, {
-      onInit: function() {
-        $('#formContainer').formValidation({
-          framework: 'bootstrap',
-          fields: {
-            email: {
-              validators: {
-            	emailAddress: {
-                      message: "<?php echo 'The email address is not valid'; ?>"
-                },
-                notEmpty: {
-                  message: "<?php echo 'The email is required'; ?>"
-                },
-               	
-              }
-            },
-            password: {
-              validators: {
-                notEmpty: {
-                  message: "<?php echo 'The password is required'; ?>"
-                },
-                stringLength: {
-                    min: 8,
-                    message: "<?php echo 'The password is too short'; ?>"
-               	},
-               	regexp: {
-               		regexp: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*#?&.])[A-Za-z\d$@$!%*#?&.]/,
-               		message: "<?php echo 'Password MUST contains at least'; ?>:<ul>"+
-               			"<li><?php echo '1 Uppercase Alphabet'; ?></li>"+
-               			"<li><?php echo '1 Lowercase Alphabet'; ?></li>"+
-               			"<li><?php echo '1 Number'; ?></li>"+
-               			"<li><?php echo '1 Special character'; ?> : @ $ ! % * ? & # .</li>"+
-               			"</ul>"
-               	}
-              }
-            }
-          }
+<script type="text/javascript">
+/*    (function(document, window, $) {
+      'use strict';
+
+      var Site = window.Site;
+
+      $(document).ready(function() {
+        Site.run();
+        $(window).on('unload',function(){
+
         });
-      },
-      validator: function() {
-        var fv = $('#formContainer').data(
-          'formValidation');
+      });
 
-        var $this = $(this);
+      // Example Wizard Form
+      // -------------------
+      (function() {
 
-        // Validate the container
-        fv.validateContainer($this);
+        // init the wizard
+        var defaults = $.components.getDefaults("wizard");
+        var options = $.extend(true, {}, defaults, {
+          buttonsAppendTo: '.panel-body'
+        });
 
-        var isValidStep = fv.isValidContainer($this);
-        if (isValidStep === false || isValidStep === null) {
-          return false;
-        }
+        var wizard = $("#exampleWizardForm").wizard(options).data(
+          'wizard');
 
-        return true;
-      },
-      onFinish: function() {
-        // $('#formContainer').submit();
-      },
-      buttonsAppendTo: '.panel-body'
-    });
+      })();
 
-    $("#wizardFormContainer").wizard(options);
-  })();
-  
-/*var treeData = [
+    })(document, window, jQuery);
+
+      // CUSTOM //
+      var treeData = [
             {
             	text: "Gruppo 1",
             	state: {
-            	    expanded: false         	  
+            	    expanded: false
             	  },
               nodes: [
                 {
@@ -220,7 +181,7 @@
             },{
             text: "Gruppo 2",
         	state: {
-        	    expanded: false         	  
+        	    expanded: false
         	  },
           nodes: [
             {
@@ -267,13 +228,13 @@ var $tree = $('#exampleSearchableTree').treeview({
 		updateSelectedNode(node,false);
 	},
 	onNodeSelected: function (event,node){
-		
+
 	},
 	onNodeUnselected: function (event,node){
-		
+
 	},
 	onSearchComplete: function (event, results){
-		
+
 	}
 });
 $('#inputSearchable').keyup(function(e){
@@ -307,7 +268,101 @@ function searchTree(text){
   		exactMatch: false,    // like or equals
   		revealResults: true,  // reveal matching nodes}]);
 	}]);
-}*/
+}
+
+
+      // Example Multi-Select
+      // --------------------
+      (function() {
+        // for multi-select public methods example
+        $('.multi-select-methods').multiSelect();
+        $('#buttonSelectAll').click(function() {
+          $('.multi-select-methods').multiSelect('select_all');
+          return false;
+        });
+        $('#buttonDeselectAll').click(function() {
+          $('.multi-select-methods').multiSelect('deselect_all');
+          return false;
+        });
+        $('#buttonSelectSome').click(function() {
+          $('.multi-select-methods').multiSelect('select', ['Idaho',
+            'Montana', 'Arkansas'
+          ]);
+          return false;
+        });
+        $('#buttonDeselectSome').click(function() {
+          $('.multi-select-methods').multiSelect('select', ['Idaho',
+            'Montana', 'Arkansas'
+          ]);
+          return false;
+        });
+        $('#buttonRefresh').on('click', function() {
+          $('.multi-select-methods').multiSelect('refresh');
+          return false;
+        });
+        $('#buttonAdd').on('click', function() {
+          $('.multi-select-methods').multiSelect('addOption', {
+            value: 42,
+            text: 'test 42',
+            index: 0
+          });
+          return false;
+        });
+      })();
+      
+      (function(document, window, $) {
+        'use strict';
+
+        window.AppCalendar = App.extend({
+          handleFullcalendar: function() {
+            var my_options = {
+              header: {
+                left: null,
+                center: 'prev,title,next',
+                right: 'month,agendaWeek,agendaDay'
+              },
+              defaultDate: '2016-03-01',
+              selectable: false,
+              selectHelper: true,
+              select: function() {
+                $('#addNewEvent').modal('show');
+              },
+              editable: false,
+              eventLimit: true,
+              windowResize: function(view) {
+                var width = $(window).outerWidth();
+                var options = $.extend({}, my_options);
+
+                options.events = view.events;
+                options.aspectRatio = width < 667 ? 0.5 : 1.35;
+
+                $('#calendar').fullCalendar('destroy');
+                $('#calendar').fullCalendar(options);
+              }
+            };
+
+            var _options;
+            var my_options_mobile = $.extend({}, my_options);
+
+            my_options_mobile.aspectRatio = 0.5;
+            _options = $(window).outerWidth() < 667 ? my_options_mobile : my_options;
+
+            $('#calendar').fullCalendar(_options);
+          },
+
+          run: function(next) {
+            $('#addNewCalendarForm').modal({
+              show: false
+            });
+
+            this.handleFullcalendar();
+            this.handleAction();
+            this.handleSelective();
+
+            next();
+          }
+        });
+      })(document, window, jQuery); */
 </script>
 </body>
 

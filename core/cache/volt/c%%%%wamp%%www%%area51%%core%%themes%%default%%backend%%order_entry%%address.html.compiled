@@ -81,48 +81,61 @@
 						<h4 class="modal-title"><?php echo 'Add Address'; ?></h4>
 					</div>
 					<div class="modal-body">
+					
 						<div class="row">
 							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputAddress"><?php echo 'Address'; ?></label> 
-								<input id="inputAddress"
-									class="form-control" type="text" name="indirizzo" required="required">
+								<label class="control-label" for="inputNazione"><?php echo 'Nazione'; ?></label> 
+								<input id="inputNazione" type="text" value="Italia"
+										class="form-control" name="nazione" required="required"/>
+								
 							</div>
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputRegione"><?php echo 'Regione'; ?></label> 
+								<select id="inputRegione" 
+										class="form-control" name="regione" required="required"/>
+									<option></option>
+								<?php foreach ($model->italia_regioni->find() as $option) { ?>
+									<option value="<?php echo $option->nome; ?>"><?php echo $option->nome; ?></option>
+								<?php } ?>
+								</select>
+								
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputProvincia"><?php echo 'Provincia'; ?></label> 
+								<select id="inputProvincia" 
+										class="form-control" name="provincia" required="required"/>
+									<option></option>
+								<?php foreach ($model->italia_province->find() as $option) { ?>
+									<option value="<?php echo $option->nome; ?>"><?php echo $option->nome; ?></option>
+								<?php } ?>
+								</select>
+							</div>
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputCitta"><?php echo 'Citta'; ?></label> 
+								<select id="inputCitta" 
+										class="form-control" name="citta" required="required"/>
+									<option></option>
+								<?php foreach ($model->italia_comuni->find() as $option) { ?>
+									<option value="<?php echo $option->nome; ?>"><?php echo $option->nome; ?></option>
+								<?php } ?>
+								</select>
+								
+							</div>
+						</div>
+						<div class="row">
 							<div class="col-lg-6 form-group">
 								<label class="control-label" for="inputCap"><?php echo 'CAP'; ?></label>
 								<input id="inputCap" type="text"
 										class="form-control" name="cap" required="required"/>
 							</div>
-						</div>
-						
-						<div class="row">
 							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputCitta"><?php echo 'Citta'; ?></label> 
-								<input id="inputCitta" type="text"
-										class="form-control" name="citta" required="required"/>
-								
-							</div>
-							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputProvincia"><?php echo 'Provincia'; ?></label> 
-								<input id="inputProvincia" type="text"
-										class="form-control" name="provincia" required="required"/>
+								<label class="control-label" for="inputAddress"><?php echo 'Address'; ?></label> 
+								<input id="inputAddress"
+									class="form-control" type="text" name="indirizzo" required="required">
 							</div>
 						</div>
-						
-						<div class="row">
-							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputRegione"><?php echo 'Regione'; ?></label> 
-								<input id="inputRegione" type="text"
-										class="form-control" name="regione" required="required"/>
-								
-							</div>
-							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputNazione"><?php echo 'Nazione'; ?></label> 
-								<input id="inputNazione" type="text"
-										class="form-control" name="nazione" required="required"/>
-								
-							</div>
-						</div>
-						
 						<div class="row">
 							<div class="col-lg-6 form-group">
 								<label class="control-label" for="inputTelefono"><?php echo 'Telefono'; ?></label> 

@@ -35,10 +35,10 @@ class ProductsController extends Controller{
 	public function sourcePriceListsAction(){
 		if($this->request->isPost()){
 			if($this->request->isAjax()){
-				$records = PriceLists::find()->toArray();
+				$records = PriceLists::find();
 				$source = array();
 				foreach ($records as $record){
-					$r = array('value'=>$record['name'],'text'=>$record['name']);
+					$r = array('value'=>$record->id,'text'=>$record->name);
 					$source[] = $r ;
 				}
 				return $this->sendAjax($source);
@@ -48,19 +48,24 @@ class ProductsController extends Controller{
 	public function updateProductsPriceListAction(){
 		if($this->request->isPost()){
 			if($this->request->isAjax()){
-				$field = $this->request->getPost('columnName');
-				$newValue = $this->request->getPost('value');
 				$data = $this->request->getPost('data');
+				
+				$newValue = $this->request->getPost('value');
+				switch ($this->request->getPost('columnName')){
+					case 'listino':
+						$field = 'price_lists_id';
+						break;
+					case 'prezzo_di_listino';
+						$field = 'price_list';
+						break;
+					case 'prezzo_di_vendita':
+						$field = 'price_retail';
+						break;
+				}
+				
 				$productPrice = ProductPrices::findFirstById($data['id']);
 				$payload = array('error'=>1);
 				if($productPrice){
-					if($field == 'list_name'){
-						$field = 'price_lists_id';
-						$priceList = PriceLists::findFirstByName($newValue);
-						if($priceList){
-							$newValue = $priceList->id ;
-						}
-					}
 					
 					$productPrice->{$field} = $newValue;
 					
@@ -79,7 +84,7 @@ class ProductsController extends Controller{
 						$payload['message'] = $e->getMessage();
 					}
 				}
-				$payload['extra'] = $newValue ;
+				$payload['extra'] = $this->request->getPost();
 				return $this->sendAjax($payload);
 			}
 		}

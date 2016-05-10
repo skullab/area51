@@ -151,9 +151,9 @@ class Manifest extends \SimpleXMLElement {
 				}
 				$paths [( string ) $attribute] = is_numeric ( $value ) ? ( int ) $value : $value;
 			}
-			if ($paths [self::ATTRIBUTE_MODULE] != $this->getModuleName ()) {
+			/*if ($paths [self::ATTRIBUTE_MODULE] != $this->getModuleName ()) {
 				unset ( $paths [self::ATTRIBUTE_NAMESPACE] );
-			}
+			}*/
 			$routes [] = array('pattern' => $pattern , 'paths' => $paths);
 		}
 		return $routes;

@@ -1,4 +1,4 @@
-<li id="menu-b2b-anagrafica" class="site-menu-item"><a href="<?php echo $this->url->getStatic('products/product-price-list'); ?>"> <i
+<li id="" class="site-menu-item"><a href="<?php echo $this->url->getStatic('products/product-price-list'); ?>"> <i
 		class="site-menu-icon wb-order" aria-hidden="true"></i> <span
 		class="site-menu-title"><?php echo 'Product Price List'; ?></span>
 </a></li>

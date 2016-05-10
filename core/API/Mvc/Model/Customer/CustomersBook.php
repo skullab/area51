@@ -12,7 +12,7 @@ class CustomersBook extends Model{
 				'alias' => 'bookkeeper',
 				'reusable' => true
 		));
-		$this->belongsTo('customers_id',__NAMESPACE__,'\Customers','id',array(
+		$this->belongsTo('customers_id',__NAMESPACE__.'\Customers','id',array(
 				'alias' => 'customer',
 				'reusable' => true
 		));

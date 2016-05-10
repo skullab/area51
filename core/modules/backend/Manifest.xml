@@ -31,11 +31,19 @@
 		<route name="backend:b2b:index" controller="order_entry" action="index">order-entry</route>
 		<route name="backend:b2b:index" controller="order_entry" action="1">order-entry/:action</route>
 		<route name="backend:b2b:index" controller="order_entry" action="1" params="2">order-entry/:action/:params</route>
+		<!-- PROMOTION -->
+		<route name="backend:b2b:promotion" controller="promotion" action="1">order-entry/promotion/:action</route>
 		<!-- ACL -->
 		<route name="backend:acl:index" controller="acl" action="1">acl/:action</route>
 		<!-- PRODUCTS -->
 		<route name="backend:products:index" controller="products" action="index">products</route>
 		<route name="backend:products:action" controller="products" action="1">products/:action</route>
+		<!-- COUNTRIES -->
+		<route name="backend:countries:index" controller="countries" action="index" >countries</route>
+		<route name="backend:countries:country" controller="countries" action="index" >countries/{country}</route>
+		<route name="backend:countries" controller="countries" action="2" >countries/{country}/:action</route>
+		<route name="backend:countries:action" controller="countries" action="1">countries/:action</route>
+		
 	</routing>
 	
 	<required>

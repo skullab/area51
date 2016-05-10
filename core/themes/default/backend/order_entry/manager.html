@@ -6,11 +6,11 @@
 <!-- Page -->
 <div class="page animsition">
     <div class="page-header">
-     <h1 class="page-title">{{ _('Manager - Agent') }}</h1>
+     <h1 class="page-title">{{ _('Relazione Agenti/Responsabili') }}</h1>
 		<ol class="breadcrumb">
 			<li><a href="{{ static_url('dashboard') }}">{{ _('Dashboard') }}</a></li>
 			<li><a href="{{ static_url('order-entry') }}">{{ _('Order Entry') }}</a></li>
-			<li class="active">{{ _('Manager - Agent') }}</li>
+			<li class="active">{{ _('Responsabili') }}</li>
 		</ol>
     </div>
 	
@@ -21,17 +21,16 @@
 		<div class="panel">
 			<header class="panel-heading">
 				<div class="panel-actions"></div>
-				<h3 class="panel-title">{{ _('Manager - Agent') }}</h3>
+				<h3 class="panel-title">{{ _('Relazione Agenti/Responsabili') }}</h3>
 			</header>
 			<div id="buttonsPanel">
 				<button id="addList" class="btn btn-outline btn-primary"
 					data-target="#addRelationModal" data-toggle="modal" type="button">
-					<i class="icon wb-plus" aria-hidden="true"></i> {{ _('Add Relation') }}
+					<i class="icon wb-plus" aria-hidden="true"></i> {{ _('Aggiungi Relazione') }}
 				</button>
 				<button id="dropList" class="btn btn-outline btn-danger"
 					type="button">
-					<i class="icon wb-trash" aria-hidden="true"></i> {{ _('Drop Relations')
-					}}
+					<i class="icon wb-trash" aria-hidden="true"></i> {{ _('Cancella Relazione') }}
 				</button>
 			</div>
 			<div class="panel-body">
@@ -41,8 +40,6 @@
 						<tr>
 							<th>{{ _('Agente') }}</th>
 							<th>{{ _('Responsabile') }}</th>
-							<th>{{ _('PDV') }}</th>
-							<th>{{ _('Indirizzo') }}</th>
 						</tr>
 					</thead>
 					
@@ -50,8 +47,6 @@
 						<tr>
 							<th>{{ _('Agente') }}</th>
 							<th>{{ _('Responsabile') }}</th>
-							<th>{{ _('PDV') }}</th>
-							<th>{{ _('Indirizzo') }}</th>
 						</tr>
 					</tfoot>
 				</table>
@@ -63,55 +58,45 @@
 			aria-labelledby="exampleFormModalLabel" role="dialog" tabindex="-1">
 			<div class="modal-dialog">
 				<form id="relationForm" class="modal-content" method="post"
-					action="{{ static_url('order-entry/add-manager-agent') }}">
+					action="{{ static_url('order-entry/add-manager') }}">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&#10005;</span>
 						</button>
-						<h4 class="modal-title">{{ _('Add Relation') }}</h4>
+						<h4 class="modal-title">{{ _('Aggiungi Relazione') }}</h4>
 					</div>
 					<div class="modal-body">
 						<div class="row">
+						
 							<div class="col-lg-6 form-group">
 								<label class="control-label" for="inputAgente">{{ _('Agente') }}</label> 
 								<select id="inputAgente" name="agente" 
 								class="form-control" required="required">
 								<option></option>
-								{% for user in model.users.find("role = 'sales agent'") %}
-								<option value="{{ user.id}}">{{ user.details.name }} {{ user.details.surname }}</option>
+								{% for agent in model.users.find("role = 'sales agent'") %}
+								<option value="{{ agent.id }}">{{ agent.details.name }} {{ agent.details.surname }}</option>
 								{% endfor %}
 								</select>
 							</div>
+							
 							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputResponsabile">{{_('Responsabile') }}</label>
+								<label class="control-label" for="inputResponsabile">{{ _('Responsabile') }}</label> 
 								<select id="inputResponsabile" name="responsabile" 
-								class="form-control" required="required">
+								class="form-control">
 								<option></option>
-								{% for user in model.users.find("role = 'promotions manager'") %}
-								<option value="{{ user.id}}">{{ user.details.name }} {{ user.details.surname }}</option>
+								{% for manager in model.users.find("role = 'promotions manager'") %}
+								<option value="{{ manager.id }}">{{ manager.details.name }} {{ manager.details.surname }}</option>
 								{% endfor %}
 								</select>
 							</div>
-						</div>
-						
-						<div class="row">
-							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputIndirizzo">{{ _('Indirizzo PDV') }}</label> 
-								<select id="inputIndirizzo" name="indirizzo" 
-								class="form-control" required="required">
-								<option></option>
-								{% for address in model.customers_destinations_address.find() %}
-								<option value="{{ address.id }}">{{ address.indirizzo }}</option>
-								{% endfor %}
-								</select>
-							</div>
+							
 							<div class="col-sm-12 pull-right">
 								<button class="btn btn-primary btn-outline" data-dismiss=""
-									id="addRelationSubmit" type="button">{{ _('Submit') }}</button>
+									id="addRelationSubmit" type="button">{{ _('Invia') }}</button>
 							</div>
+							
 						</div>
-						
 						{{ token.generateInput() }}
 				</form>
 			</div>
