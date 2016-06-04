@@ -75,8 +75,11 @@ abstract class Controller extends PhalconController{
 	}
 	protected function getAssetsPackageSelect2(){
 		$this->cssPlugins->addCss('vendor/select2/select2.min.css');
-		$this->jsPlugins->addJs('vendor/select2/select2.full.min.js');
+		$this->cssPlugins->addCss('vendor/bootstrap-select/bootstrap-select.css');
+		$this->jsPlugins->addJs('vendor/bootstrap-select/bootstrap-select.js');
+		$this->jsPlugins->addJs('vendor/select2/select2.min.js');
 		$this->jsComponents->addJs('js/components/select2.js');
+		$this->jsComponents->addJs('js/components/bootstrap-select.js');
 	}
 	protected function getAssetsPackageXEditable(){
 		$this->cssPlugins->addCss('vendor/x-editable/x-editable.css');

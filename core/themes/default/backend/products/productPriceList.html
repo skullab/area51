@@ -74,8 +74,10 @@
 							<div class="col-lg-6 form-group">
 								<label class="control-label" for="inputProductName">{{ _('Product') }}</label> 
 								<select id="inputProductName" class="form-control" name="product" required="required">
-								{% for product in model.product.find() %}
-									<option value="{{ product.id }}">{{ product.name }}</option>
+								{% for productLang in model.product_lang.find('id_lang = 1') %}
+									
+									<option value="{{ productLang.id_product }}">{{ productLang.name|convert_encoding('latin1', 'utf8') }}</option>
+									
 								{% endfor %}
 								</select>
 							</div>

@@ -19,7 +19,6 @@ class PromotionController extends Controller {
 		$this->assetsPackage ( 'multi-select' );
 		$this->assetsPackage ( 'bootstrap-markdown' );
 	}
-	
 	public function getCustomersTreeAction() {
 		if ($this->request->isPost ()) {
 			if ($this->request->isAjax ()) {
@@ -61,5 +60,6 @@ class PromotionController extends Controller {
 	}
 	public function addAction() {
 		$this->assets->renderInlineJs ( 'js/controllers/promotionAdd.js' );
+		$this->view->max = 5 ;
 	}
 }

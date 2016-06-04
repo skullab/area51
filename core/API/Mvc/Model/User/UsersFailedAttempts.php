@@ -8,6 +8,9 @@ class UsersFailedAttempts extends Model{
 	public $ip_address;
 	public $attempted;
 	protected function onInitialize(){
-		$this->belongsTo('users_id',__NAMESPACE__.'\Users','id');
+		$this->belongsTo('users_id',__NAMESPACE__.'\Users','id',array(
+				'alias' => 'user',
+				'reusable' => true
+		));
 	}
 }

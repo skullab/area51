@@ -5,6 +5,7 @@ use Thunderhawk\API\Mvc\Model\Products\PriceLists;
 use Thunderhawk\API\Mvc\Model\Products\ProductPrices;
 use Thunderhawk\API\Mvc\View\Helper\Model as HelperModel ;
 use Thunderhawk\API\Mvc\Model\Products\Product;
+use Thunderhawk\API\Mvc\Model\Products\ProductLang;
 class ProductsController extends Controller{
 	protected function onInitialize(){
 		$this->view->setTemplateAfter('index');
@@ -22,10 +23,10 @@ class ProductsController extends Controller{
 	public function sourceProductsAction(){
 		if($this->request->isPost()){
 			if($this->request->isAjax()){
-				$records = Product::find()->toArray();
+				$records = Product::find();
 				$source = array();
 				foreach ($records as $record){
-					$r = array('value'=>$record['id'],'text'=>$record['name']);
+					$r = array('value'=>$record->id_product,'text'=>$record->lang->name);
 					$source[] = $r ;
 				}
 				return $this->sendAjax($source);
@@ -99,7 +100,10 @@ class ProductsController extends Controller{
 					foreach ($records as $record){
 						
 						$table[$i] = $record->toArray() ;
-						$table[$i]['name'] = $record->product->name ;
+						//$product = ProductLang::findFirst("id_lang = 1 AND id_product = $record->product_id");
+						
+						$table[$i]['name'] = $record->product->getName(1) ;
+						
 						$table[$i]['list'] = $record->list->name ;
 						
 						$i++;

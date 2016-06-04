@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html class="no-js before-run" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta name="description" content="bootstrap admin template">
+  <meta name="author" content="">
+
+  <title>Inserimento Promozioni | Areariservata</title>
+
+  <link rel="apple-touch-icon" href="../../../assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="../../../assets/images/favicon.ico">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../assets/css/bootstrap-extend.min.css">
+  <link rel="stylesheet" href="../../../assets/css/site.css">
+  <link rel="stylesheet" href="../../../assets/css/custom.css">
+
+  <link rel="stylesheet" href="../../../assets/vendor/animsition/animsition.css">
+  <link rel="stylesheet" href="../../../assets/vendor/asscrollable/asScrollable.css">
+  <link rel="stylesheet" href="../../../assets/vendor/switchery/switchery.css">
+  <link rel="stylesheet" href="../../../assets/vendor/intro-js/introjs.css">
+  <link rel="stylesheet" href="../../../assets/vendor/slidepanel/slidePanel.css">
+  <link rel="stylesheet" href="../../../assets/vendor/flag-icon-css/flag-icon.css">
+
+  <!-- Plugin -->
+  <link rel="stylesheet" href="../../../assets/vendor/jquery-wizard/jquery-wizard.css">
+  <link rel="stylesheet" href="../../../assets/vendor/formvalidation/formValidation.css">
+  <link rel="stylesheet" href="../../../assets/vendor/fullcalendar/fullcalendar.css">
+  <link rel="stylesheet" href="../../../assets/vendor/bootstrap-datepicker/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="../../../assets/vendor/bootstrap-touchspin/bootstrap-touchspin.css">
+  <link rel="stylesheet" href="../../../assets/vendor/jquery-selective/jquery-selective.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/vendor/bootstrap-treeview/bootstrap-treeview.css">
+  <link rel="stylesheet" href="../../../assets/vendor/bootstrap-markdown/bootstrap-markdown.css">
+  <link rel="stylesheet" href="../../../assets/vendor/select2/select2.css">
+  <link rel="stylesheet" href="../../../assets/vendor/bootstrap-tokenfield/bootstrap-tokenfield.css">
+  <link rel="stylesheet" href="../../../assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css">
+  <link rel="stylesheet" href="../../../assets/vendor/bootstrap-select/bootstrap-select.css">
+  <link rel="stylesheet" href="../../../assets/vendor/icheck/icheck.css">
+  <link rel="stylesheet" href="../../../assets/vendor/switchery/switchery.css">
+  <link rel="stylesheet" href="../../../assets/vendor/asrange/asRange.css">
+  <link rel="stylesheet" href="../../../assets/vendor/asspinner/asSpinner.css">
+  <link rel="stylesheet" href="../../../assets/vendor/clockpicker/clockpicker.css">
+  <link rel="stylesheet" href="../../../assets/vendor/ascolorpicker/asColorPicker.css">
+  <link rel="stylesheet" href="../../../assets/vendor/bootstrap-touchspin/bootstrap-touchspin.css">
+  <link rel="stylesheet" href="../../../assets/vendor/card/card.css">
+  <link rel="stylesheet" href="../../../assets/vendor/jquery-labelauty/jquery-labelauty.css">
+  <link rel="stylesheet" href="../../../assets/vendor/bootstrap-datepicker/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="../../../assets/vendor/bootstrap-maxlength/bootstrap-maxlength.css">
+  <link rel="stylesheet" href="../../../assets/vendor/jt-timepicker/jquery-timepicker.css">
+  <link rel="stylesheet" href="../../../assets/vendor/jquery-strength/jquery-strength.css">
+  <link rel="stylesheet" href="../../../assets/vendor/multi-select/multi-select.css">
+  <link rel="stylesheet" href="../../../assets/vendor/typeahead-js/typeahead.css">
+
+
+  <!-- Page -->
+  <link rel="stylesheet" href="../../../assets/css/apps/calendar.css">
+
+  <!-- Fonts -->
+  <link rel="stylesheet" href="../../../assets/css/../fonts/font-awesome/font-awesome.css">
+  <link rel="stylesheet" href="../../../assets/fonts/web-icons/web-icons.min.css">
+  <link rel="stylesheet" href="../../../assets/fonts/brand-icons/brand-icons.min.css">
+  <link rel="stylesheet" href="../../../assets/fonts/material-design/material-design.css">
+  <link rel="stylesheet" href="../../../assets/fonts/glyphicons/glyphicons.css">
+  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+
+  <!-- Inline -->
+  <style>
+    .bootstrap-select {
+      width: 100% !important;
+    }
+
+    .datepair-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .input-daterange-wrap {
+      float: left;
+    }
+
+    .input-daterange-to {
+      float: left;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+    }
+
+    @media (max-width: 1360px) {
+      .input-daterange-wrap,
+      .input-daterange-to {
+        display: block;
+        float: none;
+      }
+    }
+  </style>
+
+
+
+  <!--[if lt IE 9]>
+    <script src="../../../assets/vendor/html5shiv/html5shiv.min.js"></script>
+    <![endif]-->
+
+  <!--[if lt IE 10]>
+    <script src="../../../assets/vendor/media-match/media.match.min.js"></script>
+    <script src="../../../assets/vendor/respond/respond.min.js"></script>
+    <![endif]-->
+
+  <!-- Scripts -->
+  <script src="../../../assets/vendor/modernizr/modernizr.js"></script>
+  <script src="../../../assets/vendor/breakpoints/breakpoints.js"></script>
+  <script>
+    Breakpoints();
+  </script>
+
+</head>
+<body>
+  <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+  <nav class="site-navbar navbar navbar-default navbar-fixed-top navbar-mega" role="navigation">
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle hamburger hamburger-close navbar-toggle-left hided"
+      data-toggle="menubar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="hamburger-bar"></span>
+      </button>
+      <button type="button" class="navbar-toggle collapsed" data-target="#site-navbar-collapse"
+      data-toggle="collapse">
+        <i class="icon wb-more-horizontal" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="navbar-toggle collapsed" data-target="#site-navbar-search"
+      data-toggle="collapse">
+        <span class="sr-only">Toggle Search</span>
+        <i class="icon wb-search" aria-hidden="true"></i>
+      </button>
+      <div class="navbar-brand navbar-brand-center site-gridmenu-toggle center-block text-center">
+        <img class="navbar-brand-logo hidden-sm" src="../../../assets/images/logo.svg" title="i Provenzali">
+        <img class="navbar-brand-logo visible-sm" src="../../../assets/images/logo-small.svg" title="i Provenzali">
+
+      </div>
+    </div>
+
+    <div class="navbar-container container-fluid">
+      <!-- Navbar Collapse -->
+      <div class="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
+        <!-- Navbar Toolbar -->
+        <ul class="nav navbar-toolbar">
+          <li class="hidden-float" id="toggleMenubar">
+            <a data-toggle="menubar" href="#" role="button">
+              <i class="icon hamburger hamburger-arrow-left">
+                  <span class="sr-only">Toggle menubar</span>
+                  <span class="hamburger-bar"></span>
+                </i>
+            </a>
+          </li>
+          <li class="hidden-xs" id="toggleFullscreen">
+            <a class="icon icon-fullscreen" data-toggle="fullscreen" href="#" role="button">
+              <span class="sr-only">Toggle fullscreen</span>
+            </a>
+          </li>
+          <li class="hidden-float">
+            <a class="icon wb-search" data-toggle="collapse" href="#site-navbar-search" role="button">
+              <span class="sr-only">Toggle Search</span>
+            </a>
+          </li>
+        </ul>
+        <!-- End Navbar Toolbar -->
+
+        <!-- Navbar Toolbar Right -->
+        <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
+          <li class="dropdown">
+            <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
+            data-animation="slide-bottom" role="button"><span class="navbar-avatar-name">Ciao, <strong>Agente Gianasso</strong></span>
+              <span class="avatar avatar-online">
+                <img src="../../../assets/portraits/5.jpg" alt="...">
+                <i></i>
+              </span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li role="presentation">
+                <a href="javascript:void(0)" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Profilo</a>
+              </li>
+              <li role="presentation">
+                <a href="javascript:void(0)" role="menuitem"><i class="icon wb-settings" aria-hidden="true"></i> Impostazioni</a>
+              </li>
+              <li class="divider" role="presentation"></li>
+              <li role="presentation">
+                <a href="javascript:void(0)" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Logout</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a data-toggle="dropdown" href="javascript:void(0)" title="Notifications" aria-expanded="false"
+            data-animation="slide-bottom" role="button">
+              <i class="icon wb-bell" aria-hidden="true"></i>
+              <span class="badge badge-danger up">5</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
+              <li class="dropdown-menu-header" role="presentation">
+                <h5>Notifiche</h5>
+                <span class="label label-round label-danger">5 Nuove</span>
+              </li>
+
+              <li class="list-group" role="presentation">
+                <div data-role="container">
+                  <div data-role="content">
+                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                      <div class="media">
+                        <div class="media-left padding-right-10">
+                          <i class="icon wb-shopping-cart bg-green-600 white icon-circle" aria-hidden="true"></i>
+                        </div>
+                        <div class="media-body">
+                          <h6 class="media-heading">Nuovo ordine approvato</h6>
+                          <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">5 ore fa</time>
+                        </div>
+                      </div>
+                    </a>
+                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                      <div class="media">
+                        <div class="media-left padding-right-10">
+                          <i class="icon wb-user bg-green-600 white icon-circle" aria-hidden="true"></i>
+                        </div>
+                        <div class="media-body">
+                          <h6 class="media-heading">Promozione approvata</h6>
+                          <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">1 giorni fa</time>
+                        </div>
+                      </div>
+                    </a>
+                     <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                      <div class="media">
+                        <div class="media-left padding-right-10">
+                          <i class="icon wb-user bg-red-600 white icon-circle" aria-hidden="true"></i>
+                        </div>
+                        <div class="media-body">
+                          <h6 class="media-heading">Promozione non approvata</h6>
+                          <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">2 giorni fa</time>
+                        </div>
+                      </div>
+                    </a>
+                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                      <div class="media">
+                        <div class="media-left padding-right-10">
+                          <i class="icon wb-warning bg-orange-600 white icon-circle" aria-hidden="true"></i>
+                        </div>
+                        <div class="media-body">
+                          <h6 class="media-heading">Stato aggiornato / <em>controllato</em></h6>
+                          <time class="media-meta" datetime="2015-06-11T14:05:00+08:00">2 giorni fa</time>
+                        </div>
+                      </div>
+                    </a>
+                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                      <div class="media">
+                        <div class="media-left padding-right-10">
+                          <i class="icon wb-warning bg-red-600 white icon-circle" aria-hidden="true"></i>
+                        </div>
+                        <div class="media-body">
+                          <h6 class="media-heading">Stato aggiornato / <em>bloccato</em></h6>
+                          <time class="media-meta" datetime="2015-06-11T14:05:00+08:00">3 giorni fa</time>
+                        </div>
+                      </div>
+                    </a>
+                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                      <div class="media">
+                        <div class="media-left padding-right-10">
+                          <i class="icon wb-calendar bg-blue-600 white icon-circle" aria-hidden="true"></i>
+                        </div>
+                        <div class="media-body">
+                          <h6 class="media-heading">Nuovo Listino</h6>
+                          <time class="media-meta" datetime="2015-06-10T13:50:18+08:00">3 giorni fa</time>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </li>
+              <li class="dropdown-menu-footer" role="presentation">
+                <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
+                  <i class="icon wb-settings" aria-hidden="true"></i>
+                </a>
+                <a href="javascript:void(0)" role="menuitem">
+                    Tutte le notifiche
+                  </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <!-- End Navbar Toolbar Right -->
+      </div>
+      <!-- End Navbar Collapse -->
+
+      <!-- Site Navbar Seach -->
+      <div class="collapse navbar-search-overlap" id="site-navbar-search">
+        <form role="search">
+          <div class="form-group">
+            <div class="input-search">
+              <i class="input-search-icon wb-search" aria-hidden="true"></i>
+              <input type="text" class="form-control" name="site-search" placeholder="Cerca...">
+              <button type="button" class="input-search-close icon wb-close" data-target="#site-navbar-search"
+              data-toggle="collapse" aria-label="Close"></button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- End Site Navbar Seach -->
+    </div>
+  </nav>
+   <div class="site-menubar">
+    <div class="site-menubar-body">
+          <ul class="site-menu">
+            <li class="site-menu-category">Agente Gianasso</li>
+            <li class="site-menu-item">
+              <a href="../agente-bacheca.html">
+                <i class="site-menu-icon wb-home" aria-hidden="true"></i>
+                <span class="site-menu-title">Bacheca</span>
+                <!-- <div class="site-menu-badge">
+                  <span class="badge badge-success">2</span>
+                </div> -->
+              </a>
+            </li>
+            <li class="site-menu-item">
+              <a href="../agente-anagrafica.html">
+                <i class="site-menu-icon wb-users" aria-hidden="true"></i>
+                <span class="site-menu-title">Anagrafica</span>
+              </a>
+            </li>
+            <li class="site-menu-item has-sub active open">
+              <a href="">
+                <i class="site-menu-icon icon md-money" aria-hidden="true"></i>
+                <span class="site-menu-title">Promozioni</span>
+                <span class="site-menu-arrow"></span>
+              </a>
+            <ul class="site-menu-sub">
+                <li class="site-menu-item active">
+                  <a class="animsition-link" href="agente-promo-aggiungi.html" data-slug="dashboard-v1">
+                    <i class="site-menu-icon " aria-hidden="true"></i>
+                    <span class="site-menu-title">Aggiungi</span>
+                  </a>
+                </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="agente-promo-approvate.html" data-slug="dashboard-v1">
+                    <i class="site-menu-icon " aria-hidden="true"></i>
+                    <span class="site-menu-title">Approvate</span>
+                  </a>
+                </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="agente-promo-inattesa.html" data-slug="dashboard-v1">
+                    <i class="site-menu-icon " aria-hidden="true"></i>
+                    <span class="site-menu-title">In Attesa</span>
+                  </a>
+                </li>
+                <li class="site-menu-item">
+                   <a class="animsition-link" href="agente-promo-respinte.html" data-slug="dashboard-v1">
+                    <i class="site-menu-icon " aria-hidden="true"></i>
+                    <span class="site-menu-title">Respinte</span>
+                  </a>
+                </li><li class="site-menu-item">
+                  <a class="animsition-link" href="agente-promo-calendario.html" data-slug="dashboard-v1">
+                    <i class="site-menu-icon " aria-hidden="true"></i>
+                    <span class="site-menu-title">Promo Attive</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="site-menu-item has-sub">
+              <a href="">
+                <i class="site-menu-icon wb-shopping-cart" aria-hidden="true"></i>
+                <span class="site-menu-title">Ordini</span>
+                <span class="site-menu-arrow"></span>
+              </a>
+              <ul class="site-menu-sub">
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="../ordini/agente-ordini-aggiungi.html" data-slug="dashboard-v1">
+                    <i class="site-menu-icon " aria-hidden="true"></i>
+                    <span class="site-menu-title">Aggiungi</span>
+                  </a>
+                </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="../ordini/agente-ordini-approvate.html" data-slug="dashboard-v1">
+                    <i class="site-menu-icon " aria-hidden="true"></i>
+                    <span class="site-menu-title">Approvati</span>
+                  </a>
+                </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="../ordini/agente-ordini-inattesa.html" data-slug="dashboard-v1">
+                    <i class="site-menu-icon " aria-hidden="true"></i>
+                    <span class="site-menu-title">In Attesa</span>
+                  </a>
+                </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="../ordini/agente-ordini-respinte.html" data-slug="dashboard-v1">
+                    <i class="site-menu-icon " aria-hidden="true"></i>
+                    <span class="site-menu-title">Respinti</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+    </div>
+    <div class="site-menubar-footer">
+      <a href="javascript: void(0);" class="fold-show" data-placement="top" data-toggle="tooltip"
+      data-original-title="Settings">
+        <span class="icon wb-settings" aria-hidden="true"></span>
+      </a>
+      <a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Logout">
+        <span class="icon wb-power" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+
+
+
+  <div class="page animsition">
+    <div class="page-header">
+      <h1 class="page-title">Inserisci le promozioni</h1>
+    </div>
+    <div class="page-content calendar-container padding-horizontal-30 container-fluid">
+      <div class="row">
+
+        <div class="col-md-12">
+          <!-- Panel Wizard Form -->
+          <div class="panel" id="exampleWizardForm">
+            <div class="panel-heading">
+              <h3 class="panel-title">Segui i passaggi</h3>
+            </div>
+            <div class="panel-body">
+              <!-- Steps -->
+              <div class="steps steps-sm row" data-plugin="matchHeight" data-by-row="true" role="tablist">
+                <div class="step col-md-3 current" data-target="#Selezione" role="tab">
+                  <span class="step-number">1</span>
+                  <div class="step-desc">
+                    <span class="step-title">Selezione</span>
+                  </div>
+                </div>
+
+                <div class="step col-md-3" data-target="#Scontistica" role="tab">
+                  <span class="step-number">2</span>
+                  <div class="step-desc">
+                    <span class="step-title">Scontistica</span>
+                  </div>
+                </div>
+
+                <div class="step col-md-3" data-target="#Data" role="tab">
+                  <span class="step-number">3</span>
+                  <div class="step-desc">
+                    <span class="step-title">Data</span>
+                  </div>
+                </div>
+
+                <div class="step col-md-3" data-target="#Invio" role="tab">
+                  <span class="step-number">4</span>
+                  <div class="step-desc">
+                    <span class="step-title">Invio</span>
+                  </div>
+                </div>
+              </div>
+              <!-- End Steps -->
+
+              <!-- Wizard Content -->
+              <div class="wizard-content">
+                <div class="wizard-pane active" id="Selezione" role="tabpanel">
+                    <!-- Example Searchable Tree -->
+                        <div class="example-wrap">
+                          <h4 class="example-title">Cerca Cliente</h4>
+                          <form class="form-group" id="exampleSearchForm" role="search">
+                            <div class="input-search">
+                              <input type="search" class="form-control" id="inputSearchable"
+                                placeholder="Cerca ...">
+                              <button type="button" class="input-search-btn" onclick="searchTree();">
+                                <i class="icon wb-search" aria-hidden="true"></i>
+                              </button>
+                            </div>
+                          </form>
+                          <div>
+                            Selezionati : <span class="badge" id="selectedNode">0</span>
+                          </div>
+                          <div class="example">
+                            <div id="exampleSearchableTree"></div>
+                          </div>
+                        </div>
+                    <!-- End Example Searchable Tree -->
+                </div>
+                <div class="wizard-pane" id="Scontistica" role="tabpanel">
+                    <div class="example-wrap margin-lg-0">
+                      <div class="nav-tabs-horizontal">
+                        <ul class="nav nav-tabs margin-bottom-20" data-plugin="nav-tabs" role="tablist">
+                          <li class="active col-md-4 col-sm-12 col-xs-12" role="presentation"><a data-toggle="tab" href="#exampleTabsLineOne" aria-controls="exampleTabsLineOne" role="tab">Applica a Linee</a></li>
+                          <li class="col-md-4 col-sm-12 col-xs-12" role="presentation"><a data-toggle="tab" href="#exampleTabsLineTwo" aria-controls="exampleTabsLineTwo" role="tab">Applica a Categorie</a></li>
+                          <li class="col-md-4 col-sm-12 col-xs-12" role="presentation"><a data-toggle="tab" href="#exampleTabsLineThree" aria-controls="exampleTabsLineThree" role="tab">Applica a Prodotti</a></li>
+                        </ul>
+                        <div class="tab-content padding-top-20">
+                          <div class="tab-pane col-md-12 active" id="exampleTabsLineOne" role="tabpanel">
+                              Un LINEA o una CATEGORIA possono essere selezionate solo una volta!
+
+                              <div class="row hidden-sm hidden-xs">
+                                <div class="col-md-3">
+                                    <h4 class="example-title">Linea</h4>
+                                </div>
+                                <div class="col-md-3">
+                                    <h4 class="example-title">% Sconto 1</h4>
+                                </div>
+                                <div class="col-md-3">
+                                    <h4 class="example-title">% Sconto 2</h4>
+                                </div>
+                                <div class="col-md-3">
+                                    <h4 class="example-title">% Sconto 3</h4>
+                                </div>
+                              </div>
+                              <div class="row bg-blue-grey-100 padding-top-20">
+                                  <div class="col-md-3 form-group">
+                                      <select class="form-control" multiple data-plugin="select2"  data-placeholder="Seleziona Linea">
+                                          <option value="AK">Linea 1</option>
+                                          <option value="HI">Linea 2</option>
+                                          <option value="CA">Linea 3</option>
+                                          <option value="NV">Linea 4</option>
+                                          <option value="OR">Linea 5</option>
+                                          <option value="WA">Linea 6</option>
+                                          <option value="AZ">Linea 7</option>
+                                          <option value="CO">Linea 8</option>
+                                          <option value="ID">Linea 9</option>
+                                          <option value="MT">Linea 10</option>
+                                          <option value="NE">Linea 11</option>
+                                          <option value="NM">Linea 12</option>
+                                          <option value="ND">Linea 13</option>
+                                          <option value="UT">Linea 13</option>
+                                          <option value="WY">Linea 14</option>
+                                          <option value="AL">Linea 15</option>
+                                          <option value="AR">Linea 16</option>
+                                          <option value="IL">Linea 17</option>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 1">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 2">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 3">
+                                  </div>
+                              </div>
+                              <div class="row padding-top-20">
+                                  <div class="col-md-3 form-group">
+                                      <select class="form-control" multiple data-plugin="select2"  data-placeholder="Seleziona Linea">
+                                          <option value="AK">Linea 1</option>
+                                          <option value="HI">Linea 2</option>
+                                          <option value="CA">Linea 3</option>
+                                          <option value="NV">Linea 4</option>
+                                          <option value="OR">Linea 5</option>
+                                          <option value="WA">Linea 6</option>
+                                          <option value="AZ">Linea 7</option>
+                                          <option value="CO">Linea 8</option>
+                                          <option value="ID">Linea 9</option>
+                                          <option value="MT">Linea 10</option>
+                                          <option value="NE">Linea 11</option>
+                                          <option value="NM">Linea 12</option>
+                                          <option value="ND">Linea 13</option>
+                                          <option value="UT">Linea 13</option>
+                                          <option value="WY">Linea 14</option>
+                                          <option value="AL">Linea 15</option>
+                                          <option value="AR">Linea 16</option>
+                                          <option value="IL">Linea 17</option>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 1">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 2">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 3">
+                                  </div>
+                              </div>
+                              <div class="row bg-blue-grey-100 padding-top-20">
+                                  <div class="col-md-3 form-group">
+                                      <select class="form-control" multiple data-plugin="select2"  data-placeholder="Seleziona Linea">
+                                          <option value="AK">Linea 1</option>
+                                          <option value="HI">Linea 2</option>
+                                          <option value="CA">Linea 3</option>
+                                          <option value="NV">Linea 4</option>
+                                          <option value="OR">Linea 5</option>
+                                          <option value="WA">Linea 6</option>
+                                          <option value="AZ">Linea 7</option>
+                                          <option value="CO">Linea 8</option>
+                                          <option value="ID">Linea 9</option>
+                                          <option value="MT">Linea 10</option>
+                                          <option value="NE">Linea 11</option>
+                                          <option value="NM">Linea 12</option>
+                                          <option value="ND">Linea 13</option>
+                                          <option value="UT">Linea 13</option>
+                                          <option value="WY">Linea 14</option>
+                                          <option value="AL">Linea 15</option>
+                                          <option value="AR">Linea 16</option>
+                                          <option value="IL">Linea 17</option>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 1">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 2">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 3">
+                                  </div>
+                              </div>
+                              <div class="row padding-top-20">
+                                  <div class="col-md-3 form-group">
+                                      <select class="form-control" multiple data-plugin="select2"  data-placeholder="Seleziona Linea">
+                                          <option value="AK">Linea 1</option>
+                                          <option value="HI">Linea 2</option>
+                                          <option value="CA">Linea 3</option>
+                                          <option value="NV">Linea 4</option>
+                                          <option value="OR">Linea 5</option>
+                                          <option value="WA">Linea 6</option>
+                                          <option value="AZ">Linea 7</option>
+                                          <option value="CO">Linea 8</option>
+                                          <option value="ID">Linea 9</option>
+                                          <option value="MT">Linea 10</option>
+                                          <option value="NE">Linea 11</option>
+                                          <option value="NM">Linea 12</option>
+                                          <option value="ND">Linea 13</option>
+                                          <option value="UT">Linea 13</option>
+                                          <option value="WY">Linea 14</option>
+                                          <option value="AL">Linea 15</option>
+                                          <option value="AR">Linea 16</option>
+                                          <option value="IL">Linea 17</option>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 1">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 2">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 3">
+                                  </div>
+                              </div>
+                              <div class="row bg-blue-grey-100 padding-top-20">
+                                  <div class="col-md-3 form-group">
+                                      <select class="form-control" multiple data-plugin="select2"  data-placeholder="Seleziona Linea">
+                                          <option value="AK">Linea 1</option>
+                                          <option value="HI">Linea 2</option>
+                                          <option value="CA">Linea 3</option>
+                                          <option value="NV">Linea 4</option>
+                                          <option value="OR">Linea 5</option>
+                                          <option value="WA">Linea 6</option>
+                                          <option value="AZ">Linea 7</option>
+                                          <option value="CO">Linea 8</option>
+                                          <option value="ID">Linea 9</option>
+                                          <option value="MT">Linea 10</option>
+                                          <option value="NE">Linea 11</option>
+                                          <option value="NM">Linea 12</option>
+                                          <option value="ND">Linea 13</option>
+                                          <option value="UT">Linea 13</option>
+                                          <option value="WY">Linea 14</option>
+                                          <option value="AL">Linea 15</option>
+                                          <option value="AR">Linea 16</option>
+                                          <option value="IL">Linea 17</option>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 1">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 2">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 3">
+                                  </div>
+                              </div>
+                              <div class="row padding-top-20">
+                                  <div class="col-md-3 form-group">
+                                      <select class="form-control" multiple data-plugin="select2" data-placeholder="Seleziona Linea">
+                                          <option value="AK">Linea 1</option>
+                                          <option value="HI">Linea 2</option>
+                                          <option value="CA">Linea 3</option>
+                                          <option value="NV">Linea 4</option>
+                                          <option value="OR">Linea 5</option>
+                                          <option value="WA">Linea 6</option>
+                                          <option value="AZ">Linea 7</option>
+                                          <option value="CO">Linea 8</option>
+                                          <option value="ID">Linea 9</option>
+                                          <option value="MT">Linea 10</option>
+                                          <option value="NE">Linea 11</option>
+                                          <option value="NM">Linea 12</option>
+                                          <option value="ND">Linea 13</option>
+                                          <option value="UT">Linea 13</option>
+                                          <option value="WY">Linea 14</option>
+                                          <option value="AL">Linea 15</option>
+                                          <option value="AR">Linea 16</option>
+                                          <option value="IL">Linea 17</option>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 1">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 2">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 3">
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="tab-pane col-md-12" id="exampleTabsLineTwo" role="tabpanel">
+                              <div class="row hidden-sm hidden-xs">
+                                <div class="col-md-3">
+                                    <h4 class="example-title">Categoria</h4>
+                                </div>
+                                <div class="col-md-3">
+                                    <h4 class="example-title">% Sconto 1</h4>
+                                </div>
+                                <div class="col-md-3">
+                                    <h4 class="example-title">% Sconto 2</h4>
+                                </div>
+                                <div class="col-md-3">
+                                    <h4 class="example-title">% Sconto 3</h4>
+                                </div>
+                              </div>
+                              <div class="row bg-blue-grey-100 padding-top-20">
+                                  <div class="col-md-3 form-group">
+                                      <select class="form-control" multiple data-plugin="select2"  data-placeholder="Seleziona Categoria">
+                                          <option value="AK">Categoria 1</option>
+                                          <option value="HI">Categoria 2</option>
+                                          <option value="CA">Categoria 3</option>
+                                          <option value="NV">Categoria 4</option>
+                                          <option value="OR">Categoria 5</option>
+                                          <option value="WA">Categoria 6</option>
+                                          <option value="AZ">Categoria 7</option>
+                                          <option value="CO">Categoria 8</option>
+                                          <option value="ID">Categoria 9</option>
+                                          <option value="MT">Categoria 10</option>
+                                          <option value="NE">Categoria 11</option>
+                                          <option value="NM">Categoria 12</option>
+                                          <option value="ND">Categoria 13</option>
+                                          <option value="UT">Categoria 13</option>
+                                          <option value="WY">Categoria 14</option>
+                                          <option value="AL">Categoria 15</option>
+                                          <option value="AR">Categoria 16</option>
+                                          <option value="IL">Categoria 17</option>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 1">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 2">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 3">
+                                  </div>
+                              </div>
+                              <div class="row padding-top-20">
+                                  <div class="col-md-3 form-group">
+                                      <select class="form-control" multiple data-plugin="select2"  data-placeholder="Seleziona Categoria">
+                                          <option value="AK">Categoria 1</option>
+                                          <option value="HI">Categoria 2</option>
+                                          <option value="CA">Categoria 3</option>
+                                          <option value="NV">Categoria 4</option>
+                                          <option value="OR">Categoria 5</option>
+                                          <option value="WA">Categoria 6</option>
+                                          <option value="AZ">Categoria 7</option>
+                                          <option value="CO">Categoria 8</option>
+                                          <option value="ID">Categoria 9</option>
+                                          <option value="MT">Categoria 10</option>
+                                          <option value="NE">Categoria 11</option>
+                                          <option value="NM">Categoria 12</option>
+                                          <option value="ND">Categoria 13</option>
+                                          <option value="UT">Categoria 13</option>
+                                          <option value="WY">Categoria 14</option>
+                                          <option value="AL">Categoria 15</option>
+                                          <option value="AR">Categoria 16</option>
+                                          <option value="IL">Categoria 17</option>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 1">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 2">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 3">
+                                  </div>
+                              </div>
+                              <div class="row bg-blue-grey-100 padding-top-20">
+                                  <div class="col-md-3 form-group">
+                                      <select class="form-control" multiple data-plugin="select2"  data-placeholder="Seleziona Categoria">
+                                          <option value="AK">Categoria 1</option>
+                                          <option value="HI">Categoria 2</option>
+                                          <option value="CA">Categoria 3</option>
+                                          <option value="NV">Categoria 4</option>
+                                          <option value="OR">Categoria 5</option>
+                                          <option value="WA">Categoria 6</option>
+                                          <option value="AZ">Categoria 7</option>
+                                          <option value="CO">Categoria 8</option>
+                                          <option value="ID">Categoria 9</option>
+                                          <option value="MT">Categoria 10</option>
+                                          <option value="NE">Categoria 11</option>
+                                          <option value="NM">Categoria 12</option>
+                                          <option value="ND">Categoria 13</option>
+                                          <option value="UT">Categoria 13</option>
+                                          <option value="WY">Categoria 14</option>
+                                          <option value="AL">Categoria 15</option>
+                                          <option value="AR">Categoria 16</option>
+                                          <option value="IL">Categoria 17</option>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 1">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 2">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 3">
+                                  </div>
+                              </div>
+                              <div class="row padding-top-20">
+                                  <div class="col-md-3 form-group">
+                                      <select class="form-control" multiple data-plugin="select2"  data-placeholder="Seleziona Categoria">
+                                          <option value="AK">Categoria 1</option>
+                                          <option value="HI">Categoria 2</option>
+                                          <option value="CA">Categoria 3</option>
+                                          <option value="NV">Categoria 4</option>
+                                          <option value="OR">Categoria 5</option>
+                                          <option value="WA">Categoria 6</option>
+                                          <option value="AZ">Categoria 7</option>
+                                          <option value="CO">Categoria 8</option>
+                                          <option value="ID">Categoria 9</option>
+                                          <option value="MT">Categoria 10</option>
+                                          <option value="NE">Categoria 11</option>
+                                          <option value="NM">Categoria 12</option>
+                                          <option value="ND">Categoria 13</option>
+                                          <option value="UT">Categoria 13</option>
+                                          <option value="WY">Categoria 14</option>
+                                          <option value="AL">Categoria 15</option>
+                                          <option value="AR">Categoria 16</option>
+                                          <option value="IL">Categoria 17</option>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 1">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 2">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 3">
+                                  </div>
+                              </div>
+                              <div class="row bg-blue-grey-100 padding-top-20">
+                                  <div class="col-md-3 form-group">
+                                      <select class="form-control" multiple data-plugin="select2"  data-placeholder="Seleziona Categoria">
+                                          <option value="AK">Categoria 1</option>
+                                          <option value="HI">Categoria 2</option>
+                                          <option value="CA">Categoria 3</option>
+                                          <option value="NV">Categoria 4</option>
+                                          <option value="OR">Categoria 5</option>
+                                          <option value="WA">Categoria 6</option>
+                                          <option value="AZ">Categoria 7</option>
+                                          <option value="CO">Categoria 8</option>
+                                          <option value="ID">Categoria 9</option>
+                                          <option value="MT">Categoria 10</option>
+                                          <option value="NE">Categoria 11</option>
+                                          <option value="NM">Categoria 12</option>
+                                          <option value="ND">Categoria 13</option>
+                                          <option value="UT">Categoria 13</option>
+                                          <option value="WY">Categoria 14</option>
+                                          <option value="AL">Categoria 15</option>
+                                          <option value="AR">Categoria 16</option>
+                                          <option value="IL">Categoria 17</option>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 1">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 2">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 3">
+                                  </div>
+                              </div>
+                              <div class="row padding-top-20">
+                                  <div class="col-md-3 form-group">
+                                      <select class="form-control" multiple data-plugin="select2"  data-placeholder="Seleziona Categoria">
+                                          <option value="AK">Categoria 1</option>
+                                          <option value="HI">Categoria 2</option>
+                                          <option value="CA">Categoria 3</option>
+                                          <option value="NV">Categoria 4</option>
+                                          <option value="OR">Categoria 5</option>
+                                          <option value="WA">Categoria 6</option>
+                                          <option value="AZ">Categoria 7</option>
+                                          <option value="CO">Categoria 8</option>
+                                          <option value="ID">Categoria 9</option>
+                                          <option value="MT">Categoria 10</option>
+                                          <option value="NE">Categoria 11</option>
+                                          <option value="NM">Categoria 12</option>
+                                          <option value="ND">Categoria 13</option>
+                                          <option value="UT">Categoria 13</option>
+                                          <option value="WY">Categoria 14</option>
+                                          <option value="AL">Categoria 15</option>
+                                          <option value="AR">Categoria 16</option>
+                                          <option value="IL">Categoria 17</option>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 1">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 2">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control" placeholder="% Sconto 3">
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="tab-pane" id="exampleTabsLineThree" role="tabpanel">
+                              <div class="table-responsive">
+                                  <table id="TabellaScontistica" class="display table" cellspacing="0" width="100%">
+                                      <thead>
+                                          <tr>
+                                              <th>Prodotti</th>
+                                              <th>% Sconto 1</th>
+                                              <th>% Sconto 2</th>
+                                              <th>% Sconto 3</th>
+                                          </tr>
+                                      </thead>
+                                      <tfoot>
+                                          <tr>
+                                              <th>Linea / Prodotti</th>
+                                              <th>% Sconto 1</th>
+                                              <th>% Sconto 2</th>
+                                              <th>% Sconto 3</th>
+                                          </tr>
+                                      </tfoot>
+                                      <tbody>
+                                          <tr class="active">
+                                              <td>Lina Mandorle</td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                          </tr>
+                                          <tr>
+                                              <td>Lorem Ipsum</td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                          </tr>
+                                          <tr>
+                                              <td>Dolor Sit</td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                          </tr>
+                                          <tr>
+                                              <td>Amet consectetur</td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                          </tr>
+                                          <tr>
+                                              <td>Adipiscit Ellam</td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                          </tr>
+                                          <tr>
+                                              <td>Vendorus Acri</td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                          </tr>
+                                          <tr>
+                                              <td>Caesaris Locus</td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                          </tr>
+                                          <tr class="active">
+                                              <td>Lina Karitè</td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                          </tr>
+                                          <tr>
+                                              <td>Amet consectetur</td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                          </tr>
+                                          <tr>
+                                              <td>Adipiscit Ellam</td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                          </tr>
+                                          <tr>
+                                              <td>Vendorus Acri</td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                          </tr>
+                                          <tr>
+                                              <td>Dolor Sit</td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                          </tr>
+                                           <tr class="active">
+                                              <td>Lina Argan</td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                          </tr>
+                                          <tr>
+                                              <td>Amet consectetur</td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                          </tr>
+                                          <tr>
+                                              <td>Adipiscit Ellam</td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                          </tr>
+                                          <tr>
+                                              <td>Vendorus Acri</td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                          </tr>
+                                          <tr>
+                                              <td>Dolor Sit</td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                              <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Example Tabs Line -->
+                </div>
+                <div class="wizard-pane" id="Data" role="tabpanel">
+                  <div class="row">
+                    <div class="col-md-5">
+                          <div id="addNewEvent" class="margin-top-15" aria-hidden="true" aria-labelledby="addNewEvent">
+                              <div class="form-group margin-bottom-15 row">
+                                <label class="col-sm-12 control-label" for="starts">Dai un nome di riferimento alla promozione:</label>
+                                <div class="col-sm-12">
+                                  <input type="text" class="form-control" id="starts" name="starts">
+                                </div>
+                              </div>
+                              <div class="form-group margin-bottom-15 row">
+                                <label class="col-sm-12 control-label" for="starts2">Data Attivazione Sell-In:</label>
+                                <div class="col-sm-12">
+                                  <div class="input-group">
+                                    <input type="text" class="form-control" id="starts2" data-container="#addNewEvent"
+                                    data-plugin="datepicker">
+                                    <span class="input-group-addon">
+                                      <i class="icon wb-calendar" aria-hidden="true"></i>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group margin-bottom-15 row">
+                                <label class="col-sm-12 control-label" for="ends">Data Cessazione Sell-In:</label>
+                                <div class="col-sm-12">
+                                  <div class="input-group">
+                                    <input type="text" class="form-control" id="ends" data-container="#addNewEvent"
+                                    data-plugin="datepicker">
+                                    <span class="input-group-addon">
+                                      <i class="icon wb-calendar" aria-hidden="true"></i>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group margin-bottom-15">
+                                  <span class="label label-lg bg-cyan-600"><i class="icon wb-eye" aria-hidden="true"></i></span>
+                                  Verrà assegnato questo colore alla promozione
+                              </div>
+                              <div class="form-actions margin-bottom-15 row">
+                                <div class="col-sm-12 control-label margin-bottom-15">
+                                  <button class="btn btn-primary" data-dismiss="modal" type="button">Aggiungi</button>
+                                  <a class="btn btn-sm btn-white" data-dismiss="modal" href="javascript:void(0)">Cancella</a>
+                                </div>
+                              </div>
+                         </div>
+                    </div>
+                    <div class="col-md-6 col-md-offset-1">
+                      <div class="margin-top-15" id="calendar"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="wizard-pane" id="Invio" role="tabpanel">
+                  <h4 class="margin-top-15 margin-bottom-10">Inserisci delle note per il responsabile</h4>
+                  <textarea data-provide="markdown" data-iconlibrary="fa" class="col-md-12"></textarea>
+                </div>
+              </div>
+              <!-- End Wizard Content -->
+            </div>
+          </div>
+          <!-- End Panel Wizard One Form -->
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <span class="site-footer-legal">© 2016 Gianasso srl</span>
+    <div class="site-footer-right">
+      Crafted with <i class="red-600 wb wb-heart"></i> by <a href="http://gcore.it">Gcore.it</a>
+    </div>
+  </footer>
+
+  <!-- Core  -->
+  <script src="../../../assets/vendor/jquery/jquery.js"></script>
+  <script src="../../../assets/vendor/bootstrap/bootstrap.js"></script>
+  <script src="../../../assets/vendor/animsition/jquery.animsition.js"></script>
+  <script src="../../../assets/vendor/asscroll/jquery-asScroll.js"></script>
+  <script src="../../../assets/vendor/mousewheel/jquery.mousewheel.js"></script>
+  <script src="../../../assets/vendor/asscrollable/jquery.asScrollable.all.js"></script>
+  <script src="../../../assets/vendor/ashoverscroll/jquery-asHoverScroll.js"></script>
+
+  <!-- Plugins -->
+  <script src="../../../assets/vendor/switchery/switchery.min.js"></script>
+  <script src="../../../assets/vendor/intro-js/intro.js"></script>
+  <script src="../../../assets/vendor/screenfull/screenfull.js"></script>
+  <script src="../../../assets/vendor/slidepanel/jquery-slidePanel.js"></script>
+
+  <script src="../../../assets/vendor/moment/moment.min.js"></script>
+  <script src="../../../assets/vendor/fullcalendar/fullcalendar.js"></script>
+  <script src="../../../assets/vendor/jquery-selective/jquery-selective.min.js"></script>
+  <script src="../../../assets/vendor/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+  <script src="../../../assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+
+  <script src="../../../assets/vendor/formvalidation/formValidation.js"></script>
+  <script src="../../../assets/vendor/formvalidation/framework/bootstrap.js"></script>
+  <script src="../../../assets/vendor/matchheight/jquery.matchHeight-min.js"></script>
+  <script src="../../../assets/vendor/jquery-wizard/jquery-wizard.js"></script>
+  <script src="../../../assets/vendor/bootstrap-treeview/bootstrap-treeview.min.js"></script>
+
+  <script src="../../../assets/vendor/bootstrap-markdown/bootstrap-markdown.js"></script>
+  <script src="../../../assets/vendor/marked/marked.js"></script>
+  <script src="../../../assets/vendor/to-markdown/to-markdown.js"></script>
+
+  <script src="../../../assets/vendor/select2/select2.min.js"></script>
+  <script src="../../../assets/vendor/bootstrap-select/bootstrap-select.js"></script>
+  <script src="../../../assets/vendor/multi-select/jquery.multi-select.js"></script>
+
+  <!-- Scripts -->
+  <script src="../../../assets/js/core.js"></script>
+  <script src="../../../assets/js/site.js"></script>
+
+  <script src="../../../assets/js/sections/menu.js"></script>
+  <script src="../../../assets/js/sections/menubar.js"></script>
+  <script src="../../../assets/js/sections/sidebar.js"></script>
+  <script src="../../../assets/js/components/bootstrap-treeview.js"></script>
+  <script src="../../../assets/js/configs/config-colors.js"></script>
+  <script src="../../../assets/js/configs/config-tour.js"></script>
+  <script src="../../../assets/js/components/asscrollable.js"></script>
+  <script src="../../../assets/js/components/animsition.js"></script>
+  <script src="../../../assets/js/components/slidepanel.js"></script>
+  <script src="../../../assets/js/components/switchery.js"></script>
+  <script src="../../../assets/js/components/jquery-wizard.js"></script>
+  <script src="../../../assets/js/components/matchheight.js"></script>
+  <script src="../../../assets/js/components/bootstrap-touchspin.js"></script>
+  <script src="../../../assets/js/components/bootstrap-datepicker.js"></script>
+  <script src="../../../assets/js/apps/app.js"></script>
+  <script src="../../../assets/js/apps/calendar-test-aggiungi.js"></script>
+
+  <script src="../../../assets/js/components/select2.js"></script>
+  <script src="../../../assets/js/components/bootstrap-select.js"></script>
+  <script src="../../../assets/js/components/multi-select.js"></script>
+
+
+<!-- PLUGINS JS -->
+
+  <script type="text/javascript">
+    (function(document, window, $) {
+      'use strict';
+
+      var Site = window.Site;
+
+      $(document).ready(function() {
+        Site.run();
+        $(window).on('unload',function(){
+
+        });
+      });
+
+      // Example Wizard Form
+      // -------------------
+      (function() {
+
+        // init the wizard
+        var defaults = $.components.getDefaults("wizard");
+        var options = $.extend(true, {}, defaults, {
+          buttonsAppendTo: '.panel-body'
+        });
+
+        var wizard = $("#exampleWizardForm").wizard(options).data(
+          'wizard');
+
+      })();
+
+    })(document, window, jQuery);
+
+      // CUSTOM //
+      var treeData = [
+            {
+            	text: "Gruppo 1",
+            	state: {
+            	    expanded: false
+            	  },
+              nodes: [
+                {
+                  text: "Fatturatario 1-1",
+                  nodes: [
+                    {
+                      text: "PDV 1-1-1",
+                    },
+                    {
+                      text: "PDV 1-1-2"
+                    }
+                  ]
+                },
+                {
+                  text: "Fatturatario 1-2",
+                  nodes: [
+                          {
+                            text: "PDV 1-2-1",
+                          },
+                          {
+                            text: "PDV 1-2-2"
+                          }
+                        ]
+                }
+              ]
+            },{
+            text: "Gruppo 2",
+        	state: {
+        	    expanded: false
+        	  },
+          nodes: [
+            {
+              text: "Fatturatario 2-1",
+              nodes: [
+                {
+                  text: "PDV 2-1-1",
+                },
+                {
+                  text: "PDV 2-1-2"
+                }
+              ]
+            },
+            {
+              text: "Fatturatario 2-2",
+              nodes: [
+                      {
+                        text: "PDV 2-2-1",
+                      },
+                      {
+                        text: "PDV 2-2-2"
+                      }
+                    ]
+            }
+          ]
+        }
+          ];
+
+var $nodes = [] ;
+var $tree = $('#exampleSearchableTree').treeview({
+	data:treeData,
+	showCheckbox: true,
+	showTags: true,
+	onNodeChecked: function(event, node) {
+		updateSelectedNode(node,true);
+		$('#exampleSearchableTree').treeview('expandNode',[node.nodeId]);
+		for(var n in node.nodes){
+			if(node.nodes[n].state.checked == false){
+				$('#exampleSearchableTree').treeview('checkNode',[node.nodes[n].nodeId]);
+			}
+		}
+      },
+	onNodeUnchecked: function (event, node) {
+		updateSelectedNode(node,false);
+	},
+	onNodeSelected: function (event,node){
+
+	},
+	onNodeUnselected: function (event,node){
+
+	},
+	onSearchComplete: function (event, results){
+
+	}
+});
+$('#inputSearchable').keyup(function(e){
+	searchTree($(this).val());
+});
+
+function updateSelectedNode(node,add){
+	if(add == true){
+		$nodes[node.nodeId] = node ;
+	}else{
+		$nodes[node.nodeId] = false ;
+	}
+	tot = 0 ;
+	for(var n in $nodes){
+		if($nodes[n] !== false){
+			tot++;
+		}
+	}
+	$('#selectedNode').text(tot);
+	console.log($nodes);
+}
+function showData(){
+	console.log($nodes);
+}
+function searchTree(text){
+	if(!text){
+		text = $('#inputSearchable').val();
+	}
+	$('#exampleSearchableTree').treeview('search',[text,{
+		ignoreCase: true,     // case insensitive
+  		exactMatch: false,    // like or equals
+  		revealResults: true,  // reveal matching nodes}]);
+	}]);
+}
+
+
+      // Example Multi-Select
+      // --------------------
+      (function() {
+        // for multi-select public methods example
+        $('.multi-select-methods').multiSelect();
+        $('#buttonSelectAll').click(function() {
+          $('.multi-select-methods').multiSelect('select_all');
+          return false;
+        });
+        $('#buttonDeselectAll').click(function() {
+          $('.multi-select-methods').multiSelect('deselect_all');
+          return false;
+        });
+        $('#buttonSelectSome').click(function() {
+          $('.multi-select-methods').multiSelect('select', ['Idaho',
+            'Montana', 'Arkansas'
+          ]);
+          return false;
+        });
+        $('#buttonDeselectSome').click(function() {
+          $('.multi-select-methods').multiSelect('select', ['Idaho',
+            'Montana', 'Arkansas'
+          ]);
+          return false;
+        });
+        $('#buttonRefresh').on('click', function() {
+          $('.multi-select-methods').multiSelect('refresh');
+          return false;
+        });
+        $('#buttonAdd').on('click', function() {
+          $('.multi-select-methods').multiSelect('addOption', {
+            value: 42,
+            text: 'test 42',
+            index: 0
+          });
+          return false;
+        });
+      })();
+
+</script>
+
+
+</body>
+</html>

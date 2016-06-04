@@ -8,7 +8,7 @@ class ProductPrices extends Model{
 	public $price_lists_id;
 	public $product_id;
 	protected function onInitialize(){
-		$this->belongsTo('product_id',__NAMESPACE__.'\Product','id',array(
+		$this->belongsTo('product_id',__NAMESPACE__.'\Product','id_product',array(
 				'alias' => 'product',
 				'reusable' => true
 		));

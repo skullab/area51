@@ -11,7 +11,10 @@ class UsersLogin extends Model{
 	public $busy;
 	public $users_id;
 	protected function onInitialize(){
-		$this->hasOne('users_id',__NAMESPACE__.'\Users','id');
+		$this->hasOne('users_id',__NAMESPACE__.'\Users','id',array(
+				'alias' => 'user',
+				'reusable' => true
+		));
 	}
 	public function afterFetch(){
 		//$this->last_access = date("Y-m-d H:i:s",strtotime($this->last_access));

@@ -20,6 +20,7 @@ use Thunderhawk\API\Component\Translator;
 use Thunderhawk\API\Component\Auth;
 use Thunderhawk\API\Component\Mail;
 use Thunderhawk\API\Mvc\View\Helper\Model as HelperModel;
+use Thunderhawk\API\Component\Mail\SimpleMail;
 /********************************************************/
 $config = $this->get(ServiceManager::CONFIG);
 $services = array(
@@ -153,7 +154,7 @@ $services = array(
 			return new Auth();
 		},
 		ServiceManager::MAIL => function()use($config){
-			$mail = new Mail((array)$config->smtp);
+			$mail = new SimpleMail((array)$config->smtp);
 			return $mail ;
 		}
 		

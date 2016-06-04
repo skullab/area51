@@ -262,23 +262,12 @@ class Auth extends Component implements AuthInterface{
 	public function isInherits($role){
 		$identity = $this->getIdentity();
 		if(!$identity)return false ;
-		$check = false ;
-		//$role_name = null ;
-		foreach ($this->acl->getRolesInherits() as $role_name => $inherits){
-			foreach ($inherits as $inheritsRole){
-				if(strcasecmp($inheritsRole,$role) == 0){
-					$check = true ;
-					break;
-				}
-			}
-			if($check)break;
+		$inherits = $this->acl->getRolesInherits();
+		if(!isset($inherits[$identity['role']]))return false;
+		foreach ($inherits[$identity['role']] as $role_inhrerits){
+			if(strcasecmp($role_inhrerits, $role) == 0)return true;
 		}
-		if(!$check)return false ;
-		if(strcasecmp($identity['role'],$role_name) == 0){
-			return true ;
-		}else{
-			return $this->isInherits($role_name);
-		}
+		return false;
 	}
 	/**
 	 * {@inheritDoc}

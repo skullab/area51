@@ -1,0 +1,12 @@
+The easiest way to do this is actually built right in to the DataTables API:
+
+_('tr', {"filter": "applied"})
+Used in a Function:
+
+function get_filtered_datatable() {
+    var filteredrows = $("#mydatatable").dataTable()._('tr', {"filter": "applied"});
+
+    for ( var i = 0; i < filteredrows.length; i++ ) {
+        debug.console(filteredrows[i]);
+    };
+}
