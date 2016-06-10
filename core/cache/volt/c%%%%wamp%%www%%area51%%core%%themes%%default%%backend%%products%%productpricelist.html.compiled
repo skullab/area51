@@ -73,8 +73,10 @@
 							<div class="col-lg-6 form-group">
 								<label class="control-label" for="inputProductName"><?php echo 'Product'; ?></label> 
 								<select id="inputProductName" class="form-control" name="product" required="required">
-								<?php foreach ($model->product->find() as $product) { ?>
-									<option value="<?php echo $product->id; ?>"><?php echo $product->name; ?></option>
+								<?php foreach ($model->product_lang->find('id_lang = 1') as $productLang) { ?>
+									
+									<option value="<?php echo $productLang->id_product; ?>"><?php echo $this->convertEncoding($productLang->name, 'latin1', 'utf8'); ?></option>
+									
 								<?php } ?>
 								</select>
 							</div>

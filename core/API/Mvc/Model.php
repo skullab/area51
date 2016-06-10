@@ -15,9 +15,9 @@ class Model extends PhalconModel{
 		$this->setSource($this->_globalConfig->remotedb->table->prefix.$this->getSource());
 	}
 	protected function onInitialize(){}
-	public function beforeSave(){}
+	/*public function beforeSave(){}
 	public function save($data = null, $whiteList = null){
 		if($this->beforeSave() === false)return false;
 		return parent::save($data,$whiteList);
-	}
+	}*/
 }
