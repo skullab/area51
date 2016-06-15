@@ -1,16 +1,24 @@
 <style>
-#buttonsPanel {
+.buttonsPanelLeft {
 	padding-left: 3%;
+	margin-bottom: 3%;
+}
+
+.buttonsPanelRight {
+	padding-left: 3%;
+	margin-bottom: 3%;
+	float: right;
 }
 </style>
 <!-- Page -->
 <div class="page animsition">
 	<div class="page-header">
-		<h1 class="page-title"><?php echo 'Price Lists'; ?></h1>
+		<h1 class="page-title"><?php echo 'Listini'; ?></h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo $this->url->getStatic('dashboard'); ?>"><?php echo 'Dashboard'; ?></a></li>
-			<li><a href="<?php echo $this->url->getStatic('products'); ?>"><?php echo 'Products'; ?></a></li>
-			<li class="active"><?php echo 'Price Lists'; ?></li>
+			<li><a href="<?php echo $this->url->getStatic('products'); ?>"><?php echo 'Prodotti'; ?></a></li>
+			<li><a href="<?php echo $this->url->getStatic('products/price-lists-all'); ?>"><?php echo 'Listini'; ?></a></li>
+			<li class="active"><?php echo $listino->name; ?></li>
 		</ol>
 
 	</div>
@@ -19,46 +27,120 @@
 		<!-- Panel Basic -->
 		<div class="panel">
 			<header class="panel-heading">
-				<div class="panel-actions"></div>
-				<h3 class="panel-title"><?php echo 'Price Lists'; ?></h3>
+				<div class="panel-actions">
+					<button id="refreshPage" class="btn btn-outline btn-primary" type="button">
+						<i class="icon wb-reload" aria-hidden="true"></i> <?php echo 'Aggiorna'; ?>
+					</button>
+					<button id="addList" class="btn btn-outline btn-primary"
+						data-target="#addListModal" data-toggle="modal" type="button">
+						<i class="icon wb-plus" aria-hidden="true"></i> <?php echo 'Nuovo
+						Listino'; ?>
+					</button>
+					<button id="cloneList" class="btn btn-outline btn-primary" 
+						data-target="#cloneListModal" data-toggle="modal" type="button">
+						<i class="icon wb-copy" aria-hidden="true"></i> <?php echo 'Clona
+						Listino'; ?>
+					</button>
+					
+					<button id="dropListino" class="btn btn-outline btn-danger"
+						type="button">
+						<i class="icon wb-trash" aria-hidden="true"></i> <?php echo 'Elimina
+						Listino'; ?>
+					</button>
+				</div>
+				<h3 class="panel-title">
+					<span id="listinoName"><?php echo $listino->name; ?></span>
+					<a id="editName" href="#"><i class="site-menu-icon wb-pencil" aria-hidden="true"></i></a>
+					<?php if (isset($revisione)) { ?>
+					<span id="revisioneName"><?php echo $revisione->name; ?></span>
+					<a id="editRevisionName" href="#"><i class="site-menu-icon wb-pencil" aria-hidden="true"></i></a>
+					<?php } ?>
+				</h3>
+				<div style="padding-left:3%;">
+					<?php if (isset($revisione)) { ?>
+					Creato il : <span><?php echo $revisione->created_at; ?></span><br>
+					Aggiornato il : <span><?php echo $revisione->update_at; ?></span>
+					<?php } else { ?>
+					Creato il : <span><?php echo $listino->created_at; ?></span><br>
+					Aggiornato il : <span><?php echo $listino->update_at; ?></span>
+					<?php } ?>
+				</div>
+				<hr>
 			</header>
-			<div id="buttonsPanel">
-				<button id="addList" class="btn btn-outline btn-primary"
-					data-target="#addListModal" data-toggle="modal" type="button">
-					<i class="icon wb-plus" aria-hidden="true"></i> <?php echo 'Add Price List'; ?>
-				</button>
-				<button id="dropList" class="btn btn-outline btn-danger"
-					type="button">
-					<i class="icon wb-trash" aria-hidden="true"></i> <?php echo 'Drop Price List'; ?>
-				</button>
-			</div>
+			
 			<div class="panel-body">
-				<table id="priceListsTable"
-					class="table table-hover dataTable table-striped width-full">
-					<thead>
-						<tr>
-							<th><?php echo 'Name'; ?></th>
-							<th><?php echo 'Created At'; ?></th>
-							<th><?php echo 'Start Time'; ?></th>
-							<th><?php echo 'End Time'; ?></th>
-						</tr>
-					</thead>
+				<div class="row">
+					<div class="col-lg-3 form-group">
+						<label class="control-label"
+							for="inputListRevisionLoad"><?php echo 'Revisioni'; ?></label> <select id="inputListRevisionLoad"
+							class="form-control" name="listRevisionLoad">
+							<option value="0">-nessuna-</option> <?php $search = 'price_lists_id =
+							' . $listino->id; ?> <?php foreach ($model->price_lists_revisions->find($search) as $revisioni) { ?>
+							<option value="<?php echo $revisioni->id; ?>" <?php if (isset($revisione) && $revisione->id == $revisioni->id) { ?>selected="selected"<?php } ?>><?php echo $revisioni->name; ?></option>
+							<?php } ?>
+						</select>
 
-					<tfoot>
-						<tr>
-							<th><?php echo 'Name'; ?></th>
-							<th><?php echo 'Created At'; ?></th>
-							<th><?php echo 'Start Time'; ?></th>
-							<th><?php echo 'End Time'; ?></th>
-						</tr>
-					</tfoot>
-				</table>
+					</div>
+					<div class="col-lg-9 form-group">
+						<div>
+							<label class="control-label">&nbsp;</label><br>
+							<button id="loadRevisionButton" class="btn btn-outline btn-primary" type="button">
+								<i class="icon wb-download" aria-hidden="true"></i> <?php echo 'Carica
+								Revisione'; ?>
+							</button>
+							<button id="addRevisionButton" class="btn btn-outline btn-primary" 
+								data-target="#addListRevisionModal" data-toggle="modal"  type="button">
+								<i class="icon wb-extension" aria-hidden="true"></i> <?php echo 'Crea
+								Revisione'; ?>
+							</button>
+							<button id="dropRevisionButton" class="btn btn-outline btn-danger" type="button">
+								<i class="icon wb-trash" aria-hidden="true"></i> <?php echo 'Elimina
+								Revisione'; ?>
+							</button>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+
+					<div class="buttonsPanelLeft">
+						<button id="" class="btn btn-outline btn-primary" 
+						data-target="#addProductModal" data-toggle="modal" type="button">
+							<i class="icon wb-plus" aria-hidden="true"></i> <?php echo 'Nuovo
+							Prodotto'; ?>
+						</button>
+						<button id="dropList" class="btn btn-outline btn-danger" type="button">
+							<i class="icon wb-trash" aria-hidden="true"></i> <?php echo 'Elimina
+							Prodotto/i'; ?>
+						</button>
+					</div>
+
+					<table id="priceList"
+						class="table table-hover dataTable table-striped width-full floatThead-table">
+						<thead>
+							<tr>
+								<th><?php echo 'Prodotto'; ?></th>
+								<th><?php echo 'Prezzo di listino'; ?></th>
+								<th><?php echo 'Prezzo di vendita'; ?></th>
+								<th><?php echo 'Prezzo eCommerce'; ?></th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th><?php echo 'Prodotto'; ?></th>
+								<th><?php echo 'Prezzo di listino'; ?></th>
+								<th><?php echo 'Prezzo di vendita'; ?></th>
+								<th><?php echo 'Prezzo eCommerce'; ?></th>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
 			</div>
-		</div>
-		<!-- End Panel Basic -->
+		<!-- Begin Modal -->	
+		<div>
 		<!-- Modal -->
-		<div class="modal fade" id="addListModal" aria-hidden="false"
-			aria-labelledby="exampleFormModalLabel" role="dialog" tabindex="-1">
+		<div class="modal fade" id="addListModal" aria-hidden="true"
+			aria-labelledby="addListModal" role="dialog" tabindex="-1">
 			<div class="modal-dialog">
 				<form id="listForm" class="modal-content" method="post"
 					action="<?php echo $this->url->getStatic('products/add-price-list'); ?>">
@@ -67,34 +149,189 @@
 							aria-label="Close">
 							<span aria-hidden="true">&#10005;</span>
 						</button>
-						<h4 class="modal-title"><?php echo 'Add Price List'; ?></h4>
+						<h4 class="modal-title"><?php echo 'Nuovo Listino'; ?></h4>
 					</div>
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-lg-4 form-group">
-								<label class="control-label" for="inputListName"><?php echo 'Price List Name'; ?></label> <input id="inputListName"
-									class="form-control" type="text" name="listName" required="required">
+								<label class="control-label" for="inputListName"><?php echo 'Nome Listino'; ?></label> <input id="inputListName"
+									class="form-control" type="text" name="listName"
+									required="required">
 							</div>
 							<div class="col-lg-8 form-group">
-								<label class="control-label" for="inputListTime"><?php echo 'Price
-									List Validity'; ?></label>
-								<div class="input-daterange input-group" id="datepicker">
-									<input id="inputListStart" type="text" class="input-sm form-control" name="start" required="required"/>
-									<span class="input-group-addon">to</span> <input id="inputListStart" type="text"
-										class="input-sm form-control" name="end" required="required"/>
+								<label class="control-label" for="inputListClone"><?php echo 'Clona da'; ?></label>
+								<select class="form-control" id="inputListClone" name="listClone">
+									<option><?php echo '-nessuno-'; ?></option>
+									<?php foreach ($model->price_lists->find() as $clone) { ?>
+									
+									<option value="<?php echo $clone->id; ?>"><?php echo $clone->name; ?></option>
+									
+									<?php } ?>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-4 form-group">
+								
+								<div class="checkbox-custom checkbox-primary">
+								<input id="inputListEmpty"
+									 type="checkbox" name="listEmpty">
+								<label class="control-label" for="inputListEmpty"><?php echo 'Crea listino vuoto'; ?></label> 
 								</div>
+								
 							</div>
 							<div class="col-sm-12 pull-right">
 								<button class="btn btn-primary btn-outline" data-dismiss=""
-									id="addListSubmit" type="button"><?php echo 'Submit'; ?></button>
+									id="addListSubmit" type="button"><?php echo 'Crea'; ?></button>
 							</div>
 						</div>
 						<?php echo $this->token->generateInput(); ?>
+					</div>
 				</form>
 			</div>
 		</div>
 		<!-- End Modal -->
+		</div>
+		<!-- End Modal Section -->
+		
+		<!-- Begin Modal -->
+		<div>
+		<!-- Modal Clone -->
+		<div class="modal fade" id="cloneListModal" aria-hidden="true"
+			aria-labelledby="cloneListModal" role="dialog" tabindex="-1">
+			<div class="modal-dialog">
+				<form id="listCloneForm" class="modal-content" method="post"
+					action="<?php echo $this->url->getStatic('products/add-price-list'); ?>">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&#10005;</span>
+						</button>
+						<h4 class="modal-title"><?php echo 'Clona Listino'; ?></h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-lg-4 form-group">
+								<label class="control-label" for="inputListName"><?php echo 'Nome Listino'; ?></label> <input id="inputListName"
+									class="form-control" type="text" name="listName"
+									required="required">
+							</div>
+							<div class="col-lg-8 form-group">
+								<label class="control-label" for="inputListClone"><?php echo 'Clona da'; ?></label>
+								<input id="inputListClone" class="form-control" type="text" 
+								name="listCloneName" value="<?php echo $listino->name; ?>" disabled>
+								<input type="hidden" name="listClone" value="<?php echo $listino->id; ?>">
+							</div>
+							<div class="col-sm-12 pull-right">
+								<button class="btn btn-primary btn-outline" data-dismiss=""
+									id="cloneListSubmit" type="button"><?php echo 'Crea'; ?></button>
+							</div>
+						</div>
+						<?php echo $this->token->generateInput(); ?>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- End Modal Clone-->
+		</div>
+		<!-- End Modal Section -->
+		
+		<!-- Begin Modal -->
+		<div>
+		<!-- Modal Revision-->
+		<div class="modal fade" id="addListRevisionModal" aria-hidden="true"
+			aria-labelledby="addListRevisionModal" role="dialog" tabindex="-1">
+			<div class="modal-dialog">
+				<form id="listRevisionForm" class="modal-content" method="post"
+					action="<?php echo $this->url->getStatic('products/add-price-list-revision'); ?>">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&#10005;</span>
+						</button>
+						<h4 class="modal-title"><?php echo 'Nuova Revisione Listino'; ?></h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-lg-12 form-group">
+								<label class="control-label" for="inputRevisionName"><?php echo 'Nome Revisione'; ?></label> <input id="inputRevisionName"
+									class="form-control" type="text" name="revisionName"
+									required="required">
+							</div>
+							<input type="hidden" name="idListino" value="<?php echo $listino->id; ?>">
+						</div>
+						<div class="row">
+							<div class="col-sm-12 pull-right">
+								<button class="btn btn-primary btn-outline" data-dismiss=""
+									id="addListRevisionSubmit" type="button"><?php echo 'Crea'; ?></button>
+							</div>
+						</div>
+						<?php echo $this->token->generateInput(); ?>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- End Modal Revision-->
+		</div>
+		<!-- End Modal Section -->
+		
+		<div>
+		<!-- Modal Revision-->
+		<div class="modal fade" id="addProductModal" aria-hidden="true"
+			aria-labelledby="addProductModal" role="dialog" tabindex="-1">
+			<div class="modal-dialog">
+				<form id="addProductForm" class="modal-content" method="post"
+					action="<?php echo $this->url->getStatic('products/add-product-price'); ?>">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&#10005;</span>
+						</button>
+						<h4 class="modal-title"><?php echo 'Aggiungi prodotto a listino'; ?></h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-lg-12 form-group">
+								<label class="control-label" for="inputProductName"><?php echo 'Prodotto'; ?></label>
+								<select class="form-control" id="inputProductName" name="product">
+								<?php foreach ($model->product->find() as $prodotto) { ?>
+									<option value="<?php echo $prodotto->id_product; ?>"><?php echo $prodotto->getName(1); ?></option>
+								<?php } ?>
+								</select>
+							</div>
+							<input type="hidden" name="idListino" value="<?php echo $listino->id; ?>">
+						</div>
+						<div class="row">
+							<div class="col-lg-4 form-group">
+								<label class="control-label" for="inputProductPriceList"><?php echo 'Prezzo di listino'; ?></label>
+								<input id="inputProduct" class="form-control" name="productPriceList" value="0.00" type="number" step="0.01" min="0" required>
+							</div>
+							<div class="col-lg-4 form-group">
+								<label class="control-label" for="inputProductPriceRetail"><?php echo 'Prezzo di vendita'; ?></label>
+								<input id="inputProductPriceRetail" class="form-control" name="productPriceRetail" value="0.00" type="number" step="0.01" min="0"  required>
+							</div>
+							<div class="col-lg-4 form-group">
+								<label class="control-label" for="inputProductPriceEcommerce"><?php echo 'Prezzo eCommerce'; ?></label>
+								<input id="inputProductPriceEcommerce" class="form-control" name="productPriceEcommerce" value="0.00" type="number" step="0.01" min="0" required>
+							</div>
+							<div class="col-sm-12 pull-right">
+								<button class="btn btn-primary btn-outline" data-dismiss=""
+									id="addProductPrice" type="submit"><?php echo 'Aggiungi'; ?></button>
+							</div>
+						</div>
+						<input type="hidden" name="idListino" value="<?php echo $listino->id; ?>">
+						<input type="hidden" name="idRevisione" value="<?php if (isset($revisione)) { ?><?php echo $revisione->id; ?>{ % else %}0<?php } ?>">
+						<?php echo $this->token->generateInput(); ?>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- End Modal Revision-->
+		</div>
+		<!-- End Modal Section -->
+		
+		</div>
+		<!-- End Panel Basic -->
 	</div>
-</div>
 </div>
 <!-- End Page -->

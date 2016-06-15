@@ -55,7 +55,7 @@ class Product extends Model {
 	public $buyOnAmazonLink;
 	public $buyOnEbayLink;
 	protected function onInitialize() {
-		$this->switchToRemoteConnection ();
+		//$this->switchToRemoteConnection ();
 		$this->hasMany ( 'id_product', __NAMESPACE__ . '\PriceList', 'product_id', array (
 				'alias' => 'prices',
 				'reusable' => true 

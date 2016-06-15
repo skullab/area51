@@ -15,4 +15,6 @@ LISTINI
 
 select pp.id,pp.product_id,pp.price_lists_id,pp.price_list,pp.price_retail,pp.price_ecommerce,ppr.price_lists_revisions_id,ppr.price_list as price_list_revision,ppr.price_retail as price_retail_revision,ppr.price_ecommerce as price_ecommerce_revision from product_prices as pp left join product_prices_revisions as ppr on pp.id = ppr.product_prices_id and ppr.price_lists_revisions_id = 2 where pp.price_lists_id = 1
 
-select pp.id,ppr.id as revision_id,pp.product_id,pp.price_lists_id,pp.price_list,pp.price_retail,pp.price_ecommerce,ppr.price_lists_revisions_id,ppr.price_list as price_list_revision,ppr.price_retail as price_retail_revision,ppr.price_ecommerce as price_ecommerce_revision from product_prices as pp left join product_prices_revisions as ppr on pp.id = ppr.product_prices_id and ppr.price_lists_revisions_id = 1 where pp.price_lists_id = 1
+select 
+pp.id,ppr.id as revision_id,pp.product_id,pp.price_lists_id,pp.price_list,pp.price_retail,pp.price_ecommerce,ppr.price_lists_revisions_id,ppr.price_list as price_list_revision,ppr.price_retail as price_retail_revision,ppr.price_ecommerce as price_ecommerce_revision 
+from product_prices as pp left join product_prices_revisions as ppr on pp.id = ppr.product_prices_id and ppr.price_lists_revisions_id = 1 where pp.price_lists_id = 1

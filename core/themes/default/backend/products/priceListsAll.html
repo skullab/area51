@@ -1,0 +1,101 @@
+<div class="page animsition">
+	<div class="page-header">
+		<h1 class="page-title">{{ _('Listini') }}</h1>
+		<ol class="breadcrumb">
+			<li><a href="{{ static_url('dashboard') }}">{{
+					_('Dashboard') }}</a></li>
+			<li><a href="{{ static_url('products') }}">{{ _('Prodotti')
+					}}</a></li>
+			<li class="active">{{ _('Elenco Listini') }}</li>
+		</ol>
+
+	</div>
+	<div class="page-content">
+		{{ content() }}
+		<!-- Panel Basic -->
+		<div class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions">
+					<button id="addList" class="btn btn-outline btn-primary"
+						data-target="#addListModal" data-toggle="modal" type="button">
+						<i class="icon wb-plus" aria-hidden="true"></i> {{ _('Nuovo
+						Listino') }}
+					</button>
+				</div>
+				<h3 class="panel-title">{{ _('Elenco listini') }}</h3>
+			</header>
+			<div class="panel-body">
+				<ul>
+					{% for listino in model.price_lists.find() %}
+					<li>
+						<a href="{{ static_url('products/price-lists/') }}{{listino.id}}">{{ listino.name }}</a>
+						<div style="
+							display: inline-block;
+    						padding-left: 5%">
+							<a href="#" class="popover-primary" data-content="{{ _('Download del listino in formato PDF') }}" data-trigger="hover" data-toggle="popover" data-original-title="{{ _('Download') }}"><i class="site-menu-icon wb-download" aria-hidden="true"></i></a>
+							<a href="#" class="popover-warning" data-content="{{ _('Eliminare il listino comporta la perdita permanente di tutti i dati !') }}" data-trigger="hover" data-toggle="popover" data-original-title="{{ _('Attenzione') }}"><i class="site-menu-icon wb-trash red-800" aria-hidden="true"></i></a>
+						</div>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="addListModal" aria-hidden="false"
+			aria-labelledby="exampleFormModalLabel" role="dialog" tabindex="-1">
+			<div class="modal-dialog">
+				<form id="listForm" class="modal-content" method="post"
+					action="{{ static_url('products/add-price-list') }}">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&#10005;</span>
+						</button>
+						<h4 class="modal-title">{{ _('Nuovo Listino') }}</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-lg-4 form-group">
+								<label class="control-label" for="inputListName">{{
+									_('Nome Listino') }}</label> <input id="inputListName"
+									class="form-control" type="text" name="listName"
+									required="required">
+							</div>
+							<div class="col-lg-8 form-group">
+								<label class="control-label" for="inputListClone">{{_('Clona
+									da') }}</label> <select class="form-control" id="inputListClone"
+									name="listClone">
+									<option>{{ _('-nessuno-') }}</option> {% for clone in
+									model.price_lists.find() %}
+
+									<option value="{{clone.id}}">{{ clone.name }}</option> {%
+									endfor %}
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-4 form-group">
+								
+								<div class="checkbox-custom checkbox-primary">
+								<input id="inputListEmpty"
+									 type="checkbox" name="listEmpty">
+								<label class="control-label" for="inputListEmpty">{{
+									_('Crea listino vuoto') }}</label> 
+								</div>
+								
+							</div>
+							<div class="col-sm-12 pull-right">
+								<button class="btn btn-primary btn-outline" data-dismiss=""
+									id="addListSubmit" type="submit">{{ _('Crea') }}</button>
+							</div>
+						</div>
+						{{ token.generateInput() }}
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- End Modal -->
+
+	</div>
+</div>

@@ -28,7 +28,7 @@ class ProductLang extends Model{
 	public $available_later; //	varchar(255)	Sì 	NULL
 	
 	protected function onInitialize(){
-		$this->switchToRemoteConnection();
+		//$this->switchToRemoteConnection();
 		$this->belongsTo('id_product',__NAMESPACE__.'\Product','id_product',array(
 				'alias' => 'product',
 				'reusable' => true

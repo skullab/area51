@@ -12,6 +12,11 @@ class CustomersPriceLists extends Model{
 	public $listino_futuro;
 	public $listino_futuro_revisione;
 	//
+	public $data_inizio_vigore;
+	public $data_inizio_futuro;
+	public $data_fine_vigore;
+	public $data_fine_futuro;
+	//
 	protected function onInitialize(){
 		// n-1
 		$this->belongsTo('customers_id',__NAMESPACE__.'\Customers','id',array(

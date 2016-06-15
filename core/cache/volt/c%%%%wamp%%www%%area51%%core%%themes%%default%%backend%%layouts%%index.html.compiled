@@ -1,4 +1,3 @@
-<?php echo $this->partial('menus/gridmenu'); ?> 
 <?php echo $this->partial('menus/navbar'); ?> 
 <?php echo $this->partial('menus/menubar'); ?> 
 <?php echo $this->getContent(); ?>

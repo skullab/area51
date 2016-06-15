@@ -1,24 +1,25 @@
 <?php
+
 namespace Thunderhawk\API\Mvc\Model\Products;
 use Thunderhawk\API\Mvc\Model;
-class ProductPrices extends Model{
+class ProductPricesRevisions extends Model{
 	public $id;
+	public $product_prices_id;
+	public $price_lists_revisions_id;
 	public $price_list;
 	public $price_retail;
 	public $price_ecommerce;
-	public $price_lists_id;
-	public $product_id;
 	public $update_at;
 	
 	protected function onInitialize(){
-		// n-1
-		$this->belongsTo('product_id',__NAMESPACE__.'\Product','id_product',array(
-				'alias' => 'product',
+		//n-1
+		$this->belongsTo('product_prices_id',__NAMESPACE__.'\ProductPrices','id',array(
+				'alias' => 'product_prices',
 				'reusable' => true
 		));
 		//n-1
-		$this->belongsTo('price_lists_id',__NAMESPACE__.'\PriceLists','id',array(
-				'alias' => 'list',
+		$this->belongsTo('price_lists_revisions_id',__NAMESPACE__.'\PriceListsRevisions','id',array(
+				'alias' => 'revision',
 				'reusable' => true
 		));
 	}
@@ -27,7 +28,7 @@ class ProductPrices extends Model{
 	}
 	public function beforeValidationOnUpdate(){
 		$this->update_at = date('Y-m-d H:i:s');
-		$this->list->update_at = date('Y-m-d H:i:s');
-		$this->list->save();
+		$this->revision->update_at = date('Y-m-d H:i:s');
+		$this->revision->save();
 	}
 }

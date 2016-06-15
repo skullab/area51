@@ -1,4 +1,32 @@
+<style>
+.bootstrap-select {
+	width: 100% !important;
+}
 
+.datepair-wrap {
+	position: relative;
+	overflow: hidden;
+}
+
+.input-daterange-wrap {
+	float: left;
+}
+
+.input-daterange-to {
+	float: left;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+}
+
+@media ( max-width : 1360px) {
+	.input-daterange-wrap, .input-daterange-to {
+		display: block;
+		float: none;
+	}
+}
+</style>
 <div class="page animsition">
 	<div class="page-header">
 		<h1 class="page-title">Inserisci le promozioni</h1>
@@ -85,23 +113,24 @@
 											<li class="active col-md-4 col-sm-12 col-xs-12"
 												role="presentation"><a data-toggle="tab"
 												href="#exampleTabsLineOne"
+												onclick="changePromoTab(1)"
 												aria-controls="exampleTabsLineOne" role="tab">Applica a
 													Linee</a></li>
 											<li class="col-md-4 col-sm-12 col-xs-12" role="presentation"><a
 												data-toggle="tab" href="#exampleTabsLineTwo"
+												onclick="changePromoTab(2)"
 												aria-controls="exampleTabsLineTwo" role="tab">Applica a
 													Tipologie</a></li>
 											<li class="col-md-4 col-sm-12 col-xs-12" role="presentation"><a
 												data-toggle="tab" href="#exampleTabsLineThree"
+												onclick="changePromoTab(3)"
 												aria-controls="exampleTabsLineThree" role="tab">Applica
 													a Prodotti</a></li>
 										</ul>
 										<div class="tab-content padding-top-20">
 											<div class="tab-pane col-md-12 active"
 												id="exampleTabsLineOne" role="tabpanel">
-												Un LINEA o una CATEGORIA possono essere selezionate solo una
-												volta!
-
+												
 												<div class="row hidden-sm hidden-xs">
 													<div class="col-md-3">
 														<h4 class="example-title">Linea</h4>
@@ -119,27 +148,28 @@
 
 
 												<?php foreach (range(0, $max) as $n) { ?>
-												<div class="row padding-top-20 <?php if ($n % 2 == 0) { ?>bg-blue-grey-100<?php } ?>">
+												<div id="promoLineaRow_0"
+													class="row padding-top-20 bg-blue-grey-100">
 													<div class="col-md-3 form-group">
-														<select name="promoSelectLinea_<?php echo $n; ?>" class="form-control" multiple
-															data-plugin="select2" data-placeholder="Linea">
-															<?php foreach ($model->category_lang->find('id_lang = 1') as $cat) { ?>
-																<?php if ($cat->category->active == 1 && $cat->category->level_depth == 2) { ?>
-																<option value="<?php echo $cat->id_category; ?>"><?php echo $this->convertEncoding($cat->name, 'latin1', 'utf8'); ?></option>
-																<?php } ?>
-															<?php } ?>
+														<select id="promoSelectLinea_<?php echo $n; ?>" name="promoSelectLinea_0"
+															class="form-control" multiple data-plugin="select2"
+															data-placeholder="Linea"> <?php foreach ($model->category_lang->find('id_lang = 1') as $cat) { ?> <?php if ($cat->category->active == 1 && $cat->category->level_depth == 2) { ?>
+															<option value="<?php echo $cat->id_category; ?>"><?php echo $this->convertEncoding($cat->name, 'latin1', 'utf8'); ?></option> <?php } ?> <?php } ?>
 														</select>
 													</div>
 													<div class="col-md-3 form-group">
-														<input type="text" class="form-control"
+														<input type="number" id="promoSelectLinea_<?php echo $n; ?>_sconto1" name="promoSelectLinea_<?php echo $n; ?>_sconto1"
+															class="form-control"
 															placeholder="% Sconto 1">
 													</div>
 													<div class="col-md-3 form-group">
-														<input type="text" class="form-control"
+														<input type="number" id="promoSelectLinea_<?php echo $n; ?>_sconto2" name="promoSelectLinea_<?php echo $n; ?>_sconto2"
+															class="form-control"
 															placeholder="% Sconto 2">
 													</div>
 													<div class="col-md-3 form-group">
-														<input type="text" class="form-control"
+														<input type="number" id="promoSelectLinea_<?php echo $n; ?>_sconto3" name="promoSelectLinea_<?php echo $n; ?>_sconto3"
+															class="form-control"
 															placeholder="% Sconto 3">
 													</div>
 												</div>
@@ -148,6 +178,7 @@
 												<div>&nbsp</div>
 
 											</div>
+
 											<div class="tab-pane col-md-12" id="exampleTabsLineTwo"
 												role="tabpanel">
 												<div class="row hidden-sm hidden-xs">
@@ -165,41 +196,37 @@
 													</div>
 												</div>
 												<?php foreach (range(0, $max) as $n) { ?>
-												<div class="row padding-top-20 <?php if ($n % 2 == 0) { ?>bg-blue-grey-100<?php } ?>">
+												<div id="promoTipologieRow_<?php echo $n; ?>"
+													class="row padding-top-20 <?php if ($n % 2 == 0) { ?>bg-blue-grey-100<?php } ?>">
 													<div class="col-md-3 form-group">
-														<select class="form-control" multiple
-															data-plugin="select2"
-															data-placeholder="Tipologia">
-															<option value="AK">Categoria 1</option>
-															<option value="HI">Categoria 2</option>
-															<option value="CA">Categoria 3</option>
-															<option value="NV">Categoria 4</option>
-															<option value="OR">Categoria 5</option>
-															<option value="WA">Categoria 6</option>
-															<option value="AZ">Categoria 7</option>
-															<option value="CO">Categoria 8</option>
-															<option value="ID">Categoria 9</option>
-															<option value="MT">Categoria 10</option>
-															<option value="NE">Categoria 11</option>
-															<option value="NM">Categoria 12</option>
-															<option value="ND">Categoria 13</option>
-															<option value="UT">Categoria 13</option>
-															<option value="WY">Categoria 14</option>
-															<option value="AL">Categoria 15</option>
-															<option value="AR">Categoria 16</option>
-															<option value="IL">Categoria 17</option>
+														<select id="promoSelectTipologie_<?php echo $n; ?>" class="form-control" multiple
+															data-plugin="select2" data-placeholder="Tipologia">
+															<option value="1">Tipologia 1</option>
+															<option value="2">Tipologia 2</option>
+															<option value="3">Tipologia 3</option>
+															<option value="4">Tipologia 4</option>
+															<option value="5">Tipologia 5</option>
+															<option value="6">Tipologia 6</option>
+															<option value="7">Tipologia 7</option>
+															
 														</select>
 													</div>
 													<div class="col-md-3 form-group">
-														<input type="text" class="form-control"
+														<input type="number" id="promoSelectTipologie_<?php echo $n; ?>_sconto1"
+															name="promoSelectTipologie_<?php echo $n; ?>_sconto1"
+															class="form-control"
 															placeholder="% Sconto 1">
 													</div>
 													<div class="col-md-3 form-group">
-														<input type="text" class="form-control"
+														<input type="number" id="promoSelectTipologie_<?php echo $n; ?>_sconto2"
+															name="promoSelectTipologie_<?php echo $n; ?>_sconto2"
+															class="form-control"
 															placeholder="% Sconto 2">
 													</div>
 													<div class="col-md-3 form-group">
-														<input type="text" class="form-control"
+														<input type="number" id="promoSelectTipologie_<?php echo $n; ?>_sconto3"
+															name="promoSelectTipologie_<?php echo $n; ?>_sconto3"
+															class="form-control"
 															placeholder="% Sconto 3">
 													</div>
 												</div>
@@ -221,168 +248,29 @@
 														</thead>
 														<tfoot>
 															<tr>
-																<th>Linea / Prodotti</th>
+																<th>Prodotti</th>
 																<th>% Sconto 1</th>
 																<th>% Sconto 2</th>
 																<th>% Sconto 3</th>
 															</tr>
 														</tfoot>
 														<tbody>
-															<tr class="active">
-																<td>Lina Mandorle</td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
+														
+															<?php $progressivo = 0; ?>
+															<?php foreach ($model->product->find('active = 1') as $product) { ?>
+															<tr class="<?php if ($progressivo % 2 == 0) { ?>active<?php } ?>">
+																<td id="promoProdotto_<?php echo $product->id_product; ?>"><?php echo $product->getName(1); ?></td>
+																<td><input type="text" id="promoProdotto_<?php echo $progressivo; ?>_sconto1" name="promoProdotto_<?php echo $progressivo; ?>_sconto1" ></td>
+																<td><input type="text" id="promoProdotto_<?php echo $progressivo; ?>_sconto2" name="promoProdotto_<?php echo $progressivo; ?>_sconto2" ></td>
+																<td><input type="text" id="promoProdotto_<?php echo $progressivo; ?>_sconto3" name="promoProdotto_<?php echo $progressivo; ?>_sconto3" ></td>
+																<input type="hidden" id="promoProdotto_<?php echo $progressivo; ?>_id" value="<?php echo $product->id_product; ?>" >
 															</tr>
-															<tr>
-																<td>Lorem Ipsum</td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-															</tr>
-															<tr>
-																<td>Dolor Sit</td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-															</tr>
-															<tr>
-																<td>Amet consectetur</td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-															</tr>
-															<tr>
-																<td>Adipiscit Ellam</td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-															</tr>
-															<tr>
-																<td>Vendorus Acri</td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-															</tr>
-															<tr>
-																<td>Caesaris Locus</td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-															</tr>
-															<tr class="active">
-																<td>Lina Karitè</td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-															</tr>
-															<tr>
-																<td>Amet consectetur</td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-															</tr>
-															<tr>
-																<td>Adipiscit Ellam</td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-															</tr>
-															<tr>
-																<td>Vendorus Acri</td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-															</tr>
-															<tr>
-																<td>Dolor Sit</td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-															</tr>
-															<tr class="active">
-																<td>Lina Argan</td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-															</tr>
-															<tr>
-																<td>Amet consectetur</td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-															</tr>
-															<tr>
-																<td>Adipiscit Ellam</td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-															</tr>
-															<tr>
-																<td>Vendorus Acri</td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-															</tr>
-															<tr>
-																<td>Dolor Sit</td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-																<td><input type="text" id="row-1-age"
-																	name="row-1-age" value="61"></td>
-															</tr>
+															<?php $progressivo = $progressivo + 1; ?>
+															<?php } ?>
+															
 														</tbody>
 													</table>
+													<script>var maxProducts = <?php echo $progressivo; ?> ;</script>
 												</div>
 											</div>
 										</div>
@@ -431,16 +319,11 @@
 											</div>
 											<div class="form-group margin-bottom-15">
 												<span class="label label-lg bg-cyan-600"><i
-													class="icon wb-eye" aria-hidden="true"></i></span> Verrà assegnato
-												questo colore alla promozione
+													class="icon wb-eye" aria-hidden="true"></i></span> 
+													Verr&agrave; assegnato questo colore alla promozione
 											</div>
 											<div class="form-actions margin-bottom-15 row">
-												<div class="col-sm-12 control-label margin-bottom-15">
-													<button class="btn btn-primary" data-dismiss="modal"
-														type="button">Aggiungi</button>
-													<a class="btn btn-sm btn-white" data-dismiss="modal"
-														href="javascript:void(0)">Cancella</a>
-												</div>
+												
 											</div>
 										</div>
 									</div>
@@ -464,3 +347,4 @@
 		</div>
 	</div>
 </div>
+

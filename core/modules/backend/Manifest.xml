@@ -38,6 +38,8 @@
 		<!-- PRODUCTS -->
 		<route name="backend:products:index" controller="products" action="index">products</route>
 		<route name="backend:products:action" controller="products" action="1">products/:action</route>
+		<route name="backend:products:priceLists" controller="products" action="price-lists" idListino="1">products/price-lists/:int</route>
+		<route name="backend:products:priceLists:revisions" controller="products" action="price-lists" idListino="1" idRevisione="2">products/price-lists/{idListino:[0-9]+}/revisions/{idRevisione:[0-9]+}</route>
 		<!-- COUNTRIES -->
 		<route name="backend:countries:index" controller="countries" action="index" >countries</route>
 		<route name="backend:countries:country" controller="countries" action="index" >countries/{country}</route>

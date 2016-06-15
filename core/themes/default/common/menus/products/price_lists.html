@@ -1,0 +1,26 @@
+<li id="" class="site-menu-item has-sub">
+	<a href="javascript:void(0)"> <i
+		class="site-menu-icon wb-order" aria-hidden="true"></i> <span
+		class="site-menu-title">{{ _('Listini') }}</span>
+		<span class="site-menu-arrow"></span>
+	</a>
+	<ul class="site-menu-sub">
+		<li class="site-menu-item"><a
+			class="animsition-link" href="{{ static_url('products/price-lists-new') }}"> <i
+				class="site-menu-icon " aria-hidden="true"></i> <span
+				class="site-menu-title">{{ _('Nuovo Listino') }}</span>
+		</a></li>
+		<li class="site-menu-item"><a
+			class="animsition-link" href="{{ static_url('products/price-lists-all') }}"> <i
+				class="site-menu-icon " aria-hidden="true"></i> <span
+				class="site-menu-title">{{ _('Elenco') }}</span>
+		</a></li>
+		{% for listino in model.price_lists.find() %}
+		<li class="site-menu-item"><a
+			class="animsition-link" href="{{ static_url('products/price-lists/') }}{{ listino.id }}"> <i
+				class="site-menu-icon " aria-hidden="true"></i> <span
+				class="site-menu-title">{{ _(listino.name) }}</span>
+		</a></li>
+		{% endfor %}
+	</ul>
+</li>

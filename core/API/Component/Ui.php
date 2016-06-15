@@ -20,8 +20,7 @@ class Ui extends Component {
 		// PRODUCTS
 		if($this->auth->isRoleOrInherits(Auth::ROLE_USER)){
 			$this->view->partial('menus/products/category');
-			$this->view->partial('menus/products/list');
-			$this->view->partial('menus/products/price_list');
+			$this->view->partial('menus/products/price_lists');
 		}
 		// ORDER ENTRY
 		if($this->auth->isRoleOrInherits(Auth::ROLE_USER)){
