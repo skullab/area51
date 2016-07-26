@@ -3,6 +3,7 @@ namespace Thunderhawk\API\Mvc\Model\Customer;
 use Thunderhawk\API\Mvc\Model;
 class CustomersDestinationsAddress extends Model{
 	public $id;
+	public $codice_indirizzo;
 	public $indirizzo;
 	public $cap;
 	public $citta;
@@ -14,7 +15,7 @@ class CustomersDestinationsAddress extends Model{
 	public $customers_destinations_id;
 	protected function onInitialize(){
 		$this->belongsTo('customers_destinations_id',__NAMESPACE__.'\CustomersDestinations','id',array(
-				'alias' => 'destination',
+				'alias' => 'pdv',
 				'reusable' => true
 		));
 	}

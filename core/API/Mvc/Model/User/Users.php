@@ -27,7 +27,10 @@ class Users extends Model{
 				'alias' => 'forgot',
 				'reusable' => true
 		));
-		$this->hasMany('role',__NAMESPACE__.'\Acl\AclRoles','name');
+		$this->hasMany('role',__NAMESPACE__.'\Acl\AclRoles','name',array(
+				'alias' => 'roles',
+				'reusable' => true
+		));
 	}
 	public static function exists($where){
 		return self::findFirst($where);

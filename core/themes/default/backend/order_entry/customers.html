@@ -7,11 +7,11 @@
 <!-- Page -->
 <div class="page animsition">
     <div class="page-header">
-     <h1 class="page-title">{{ _('Customers') }}</h1>
+     <h1 class="page-title">{{ _('Fatturatari') }}</h1>
 		<ol class="breadcrumb">
 			<li><a href="{{ static_url('dashboard') }}">{{ _('Dashboard') }}</a></li>
 			<li><a href="{{ static_url('order-entry') }}">{{ _('Order Entry') }}</a></li>
-			<li class="active">{{ _('Customers') }}</li>
+			<li class="active">{{ _('Fatturatari') }}</li>
 		</ol>
     </div>
 	
@@ -23,16 +23,16 @@
 		<div class="panel">
 			<header class="panel-heading">
 				<div class="panel-actions"></div>
-				<h3 class="panel-title">{{ _('Customers') }}</h3>
+				<h3 class="panel-title">{{ _('Fatturatari') }}</h3>
 			</header>
 			<div id="buttonsPanel">
 				<button id="addList" class="btn btn-outline btn-primary"
 					data-target="#addCustomerModal" data-toggle="modal" type="button">
-					<i class="icon wb-plus" aria-hidden="true"></i> {{ _('Add Customer') }}
+					<i class="icon wb-plus" aria-hidden="true"></i> {{ _('Aggiungi Fatturatario') }}
 				</button>
 				<button id="dropList" class="btn btn-outline btn-danger"
 					type="button">
-					<i class="icon wb-trash" aria-hidden="true"></i> {{ _('Drop Customers')
+					<i class="icon wb-trash" aria-hidden="true"></i> {{ _('Elimina Fatturatario/i')
 					}}
 				</button>
 			</div>
@@ -42,9 +42,10 @@
 					<thead>
 						<tr>
 							<th>{{ _('Gruppo') }}</th>
-							<th>{{ _('Codice') }}</th>
+							<th>{{ _('Codice Fatturatario') }}</th>
 							<th>{{ _('Nome') }}</th>
 							<th>{{ _('Stato') }}</th>
+							<th>{{ _('Contabile') }}</th>
 							<th style="display:none">{{ _('Scheda') }}</th>
 						</tr>
 					</thead>
@@ -52,9 +53,10 @@
 					<tfoot>
 						<tr>
 							<th>{{ _('Gruppo') }}</th>
-							<th>{{ _('Codice') }}</th>
+							<th>{{ _('Codice Fatturatario') }}</th>
 							<th>{{ _('Nome') }}</th>
 							<th>{{ _('Stato') }}</th>
+							<th>{{ _('Contabile') }}</th>
 							<th style="display:none">{{ _('Scheda') }}</th>
 						</tr>
 					</tfoot>
@@ -72,7 +74,7 @@
 								aria-label="Close">
 								<span aria-hidden="true">&#10005;</span>
 							</button>
-							<h4 class="modal-title">{{ _('Customer Details') }}</h4>
+							<h4 class="modal-title">{{ _('Dettagli Fatturatario') }}</h4>
 							<h5 id="customerName"></h5>
 					</div>
 					<div class="modal-body">
@@ -106,6 +108,8 @@
 							<td><a id="epal" href="javascript(void);" data-type="select" data-source="{{ static_url('order-entry/source-epal') }}"></a></td></tr>
 							<tr><td>{{ _('MONOREF') }}</td>
 							<td><a id="monoref" href="javascript(void);" data-type="select" data-source="{{ static_url('order-entry/source-monoref') }}"></a></td></tr>
+							<tr><td>{{ _('Metodo di Pagamento') }}</td>
+							<td><a id="payment_modes_id" href="javascript(void);" data-type="select" data-source="{{ static_url('order-entry/source-payment-modes') }}"></a></td></tr>
 							<tr><td>{{ _('Note') }}</td>
 							<td><a id="note" href="javascript(void);" data-type="textarea"></a></td></tr>
 						</table>
@@ -125,24 +129,12 @@
 							aria-label="Close">
 							<span aria-hidden="true">&#10005;</span>
 						</button>
-						<h4 class="modal-title">{{ _('Add Customer') }}</h4>
+						<h4 class="modal-title">{{ _('Aggiungi Fatturatario') }}</h4>
 					</div>
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputCustomerCode">{{ _('Code') }}</label> 
-								<input id="inputGroupCode"
-									class="form-control" type="text" name="customerCode" required="required">
-							</div>
-							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputCustomerName">{{_('Name') }}</label>
-								<input id="inputGroupName" type="text"
-										class="form-control" name="customerName" required="required"/>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputCustomerGroup">{{ _('Group') }}</label> 
+								<label class="control-label" for="inputCustomerGroup">{{ _('Gruppo') }}</label> 
 								<select id="inputCustomerGroup" class="form-control" 
 								name="customerGroup" required="required">
 									<option value=""></option>
@@ -150,10 +142,27 @@
 									<option value="{{ group.id }}">{{ group.nome }}</option>
 									{% endfor %}
 								</select>
+							</div>
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputCustomerName">{{_('Nome') }}</label>
+								<input id="inputCustomerName" type="text"
+										class="form-control" name="customerName" required="required"/>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputCustomerBookkeeper">{{_('Contabile') }}</label>
+								<select id="inputCustomerBookkeeper" class="form-control" 
+									name="customerBookkeeper" required="required">
+									<option value=""></option>
+									{% for bookkeeper in model.users.find("role = 'bookkeeper'") %}
+									<option value="{{ bookkeeper.id }}">{{ bookkeeper.details.name }} {{ bookkeeper.details.surname }}</option>
+									{% endfor %}
+								</select>
 								
 							</div>
 							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputCustomerState">{{ _('State') }}</label> 
+								<label class="control-label" for="inputCustomerState">{{ _('Stato') }}</label> 
 								<select id="inputCustomerState" class="form-control" 
 								name="customerState" required="required">
 									{% for state in model.customers_state.find() %}
@@ -164,7 +173,7 @@
 							</div>
 							<div class="col-sm-12 pull-right">
 								<button class="btn btn-primary btn-outline" data-dismiss=""
-									id="addCustomerSubmit" type="button">{{ _('Submit') }}</button>
+									id="addCustomerSubmit" type="button">{{ _('Crea') }}</button>
 							</div>
 						</div>
 						{{ token.generateInput() }}

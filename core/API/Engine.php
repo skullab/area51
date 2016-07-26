@@ -126,7 +126,7 @@ final class Engine extends Application implements EngineInterface{
 	 *
 	 * @see \Thunderhawk\API\Engine\EngineInterface::isResisteredModule()
 	 */
-	public function isResisteredModule($moduleName) {
+	public function isRegisteredModule($moduleName) {
 		return isset ( $this->getModules () [$moduleName] );
 	}
 	public function isInstalledModule($moduleName) {
@@ -157,7 +157,9 @@ final class Engine extends Application implements EngineInterface{
 	public function getDbPrefix() {
 		return $this->config->db->table->prefix;
 	}
-	
+	public function getDbName() {
+		return $this->config->db->dbname;
+	}
 	/**
 	 *
 	 * {@inheritDoc}

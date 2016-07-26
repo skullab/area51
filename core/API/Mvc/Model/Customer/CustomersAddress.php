@@ -12,6 +12,9 @@ class CustomersAddress extends Model{
 	public $nazione;
 	public $customers_id;
 	protected function onInitialize(){
-		$this->hasOne('customers_id',__NAMESPACE__.'\Customers','id');
+		$this->hasOne('customers_id',__NAMESPACE__.'\Customers','id',array(
+				'alias' => 'fatturatario',
+				'reusable' => true
+		));
 	}
 }

@@ -7,11 +7,11 @@
 <!-- Page -->
 <div class="page animsition">
     <div class="page-header">
-     <h1 class="page-title"><?php echo 'Customers'; ?></h1>
+     <h1 class="page-title"><?php echo 'Fatturatari'; ?></h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo $this->url->getStatic('dashboard'); ?>"><?php echo 'Dashboard'; ?></a></li>
 			<li><a href="<?php echo $this->url->getStatic('order-entry'); ?>"><?php echo 'Order Entry'; ?></a></li>
-			<li class="active"><?php echo 'Customers'; ?></li>
+			<li class="active"><?php echo 'Fatturatari'; ?></li>
 		</ol>
     </div>
 	
@@ -23,16 +23,16 @@
 		<div class="panel">
 			<header class="panel-heading">
 				<div class="panel-actions"></div>
-				<h3 class="panel-title"><?php echo 'Customers'; ?></h3>
+				<h3 class="panel-title"><?php echo 'Fatturatari'; ?></h3>
 			</header>
 			<div id="buttonsPanel">
 				<button id="addList" class="btn btn-outline btn-primary"
 					data-target="#addCustomerModal" data-toggle="modal" type="button">
-					<i class="icon wb-plus" aria-hidden="true"></i> <?php echo 'Add Customer'; ?>
+					<i class="icon wb-plus" aria-hidden="true"></i> <?php echo 'Aggiungi Fatturatario'; ?>
 				</button>
 				<button id="dropList" class="btn btn-outline btn-danger"
 					type="button">
-					<i class="icon wb-trash" aria-hidden="true"></i> <?php echo 'Drop Customers'; ?>
+					<i class="icon wb-trash" aria-hidden="true"></i> <?php echo 'Elimina Fatturatario/i'; ?>
 				</button>
 			</div>
 			<div class="panel-body">
@@ -41,9 +41,10 @@
 					<thead>
 						<tr>
 							<th><?php echo 'Gruppo'; ?></th>
-							<th><?php echo 'Codice'; ?></th>
+							<th><?php echo 'Codice Fatturatario'; ?></th>
 							<th><?php echo 'Nome'; ?></th>
 							<th><?php echo 'Stato'; ?></th>
+							<th><?php echo 'Contabile'; ?></th>
 							<th style="display:none"><?php echo 'Scheda'; ?></th>
 						</tr>
 					</thead>
@@ -51,9 +52,10 @@
 					<tfoot>
 						<tr>
 							<th><?php echo 'Gruppo'; ?></th>
-							<th><?php echo 'Codice'; ?></th>
+							<th><?php echo 'Codice Fatturatario'; ?></th>
 							<th><?php echo 'Nome'; ?></th>
 							<th><?php echo 'Stato'; ?></th>
+							<th><?php echo 'Contabile'; ?></th>
 							<th style="display:none"><?php echo 'Scheda'; ?></th>
 						</tr>
 					</tfoot>
@@ -71,7 +73,7 @@
 								aria-label="Close">
 								<span aria-hidden="true">&#10005;</span>
 							</button>
-							<h4 class="modal-title"><?php echo 'Customer Details'; ?></h4>
+							<h4 class="modal-title"><?php echo 'Dettagli Fatturatario'; ?></h4>
 							<h5 id="customerName"></h5>
 					</div>
 					<div class="modal-body">
@@ -105,6 +107,8 @@
 							<td><a id="epal" href="javascript(void);" data-type="select" data-source="<?php echo $this->url->getStatic('order-entry/source-epal'); ?>"></a></td></tr>
 							<tr><td><?php echo 'MONOREF'; ?></td>
 							<td><a id="monoref" href="javascript(void);" data-type="select" data-source="<?php echo $this->url->getStatic('order-entry/source-monoref'); ?>"></a></td></tr>
+							<tr><td><?php echo 'Metodo di Pagamento'; ?></td>
+							<td><a id="payment_modes_id" href="javascript(void);" data-type="select" data-source="<?php echo $this->url->getStatic('order-entry/source-payment-modes'); ?>"></a></td></tr>
 							<tr><td><?php echo 'Note'; ?></td>
 							<td><a id="note" href="javascript(void);" data-type="textarea"></a></td></tr>
 						</table>
@@ -124,24 +128,12 @@
 							aria-label="Close">
 							<span aria-hidden="true">&#10005;</span>
 						</button>
-						<h4 class="modal-title"><?php echo 'Add Customer'; ?></h4>
+						<h4 class="modal-title"><?php echo 'Aggiungi Fatturatario'; ?></h4>
 					</div>
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputCustomerCode"><?php echo 'Code'; ?></label> 
-								<input id="inputGroupCode"
-									class="form-control" type="text" name="customerCode" required="required">
-							</div>
-							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputCustomerName"><?php echo 'Name'; ?></label>
-								<input id="inputGroupName" type="text"
-										class="form-control" name="customerName" required="required"/>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputCustomerGroup"><?php echo 'Group'; ?></label> 
+								<label class="control-label" for="inputCustomerGroup"><?php echo 'Gruppo'; ?></label> 
 								<select id="inputCustomerGroup" class="form-control" 
 								name="customerGroup" required="required">
 									<option value=""></option>
@@ -149,10 +141,27 @@
 									<option value="<?php echo $group->id; ?>"><?php echo $group->nome; ?></option>
 									<?php } ?>
 								</select>
+							</div>
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputCustomerName"><?php echo 'Nome'; ?></label>
+								<input id="inputCustomerName" type="text"
+										class="form-control" name="customerName" required="required"/>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6 form-group">
+								<label class="control-label" for="inputCustomerBookkeeper"><?php echo 'Contabile'; ?></label>
+								<select id="inputCustomerBookkeeper" class="form-control" 
+									name="customerBookkeeper" required="required">
+									<option value=""></option>
+									<?php foreach ($model->users->find('role = \'bookkeeper\'') as $bookkeeper) { ?>
+									<option value="<?php echo $bookkeeper->id; ?>"><?php echo $bookkeeper->details->name; ?> <?php echo $bookkeeper->details->surname; ?></option>
+									<?php } ?>
+								</select>
 								
 							</div>
 							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputCustomerState"><?php echo 'State'; ?></label> 
+								<label class="control-label" for="inputCustomerState"><?php echo 'Stato'; ?></label> 
 								<select id="inputCustomerState" class="form-control" 
 								name="customerState" required="required">
 									<?php foreach ($model->customers_state->find() as $state) { ?>
@@ -163,7 +172,7 @@
 							</div>
 							<div class="col-sm-12 pull-right">
 								<button class="btn btn-primary btn-outline" data-dismiss=""
-									id="addCustomerSubmit" type="button"><?php echo 'Submit'; ?></button>
+									id="addCustomerSubmit" type="button"><?php echo 'Crea'; ?></button>
 							</div>
 						</div>
 						<?php echo $this->token->generateInput(); ?>

@@ -6,6 +6,9 @@ class CustomersState extends Model{
 	public $id;
 	public $stato;
 	protected function onInitialize(){
-		$this->hasMany('id',__NAMESPACE__.'\Customers','customers_state_id');
+		$this->hasMany('id',__NAMESPACE__.'\Customers','customers_state_id',array(
+				'alias' => 'fatturatari',
+				'reusable' => true
+		));
 	}
 }

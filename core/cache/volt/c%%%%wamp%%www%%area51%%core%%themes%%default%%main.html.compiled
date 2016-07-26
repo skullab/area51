@@ -93,8 +93,8 @@
   <script src="<?php echo $this->url->getStatic(''); ?>assets/js/configs/config-colors.js"></script>
   <script src="<?php echo $this->url->getStatic(''); ?>assets/js/configs/config-tour.js"></script>
 
-  <script src="<?php echo $this->url->getStatic(''); ?>assets/js/components/asscrollable.js"></script>
   <script src="<?php echo $this->url->getStatic(''); ?>assets/js/components/animsition.js"></script>
+  <script src="<?php echo $this->url->getStatic(''); ?>assets/js/components/asscrollable.js"></script>
   <script src="<?php echo $this->url->getStatic(''); ?>assets/js/components/slidepanel.js"></script>
   <script src="<?php echo $this->url->getStatic(''); ?>assets/js/components/switchery.js"></script>
   <script src="<?php echo $this->url->getStatic(''); ?>assets/js/apps/app.js"></script>
@@ -103,7 +103,7 @@
   <script type="text/javascript">
     (function(document, window, $) {
       'use strict';
-	  
+     
       var Site = window.Site;
       $(document).ready(function() {
         Site.run();

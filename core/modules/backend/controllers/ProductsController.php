@@ -149,8 +149,8 @@ class ProductsController extends Controller{
 		$this->assetsPackage('date-picker');
 		$this->assetsPackage('form-validation');
 		
-		var_dump($idListino);
-		var_dump($idRevisione);
+		//var_dump($idListino);
+		//var_dump($idRevisione);
 		$listino = PriceLists::findFirstById($idListino);
 		if(!$listino){
 			$listino = PriceLists::findFirst();

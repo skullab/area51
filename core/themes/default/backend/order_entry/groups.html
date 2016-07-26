@@ -6,11 +6,11 @@
 <!-- Page -->
 <div class="page animsition">
     <div class="page-header">
-     <h1 class="page-title">{{ _('Customers Group') }}</h1>
+     <h1 class="page-title">{{ _('Gruppi') }}</h1>
 		<ol class="breadcrumb">
 			<li><a href="{{ static_url('dashboard') }}">{{ _('Dashboard') }}</a></li>
 			<li><a href="{{ static_url('order-entry') }}">{{ _('Order Entry') }}</a></li>
-			<li class="active">{{ _('Customers Group') }}</li>
+			<li class="active">{{ _('Gruppi') }}</li>
 		</ol>
     </div>
 	
@@ -21,16 +21,16 @@
 		<div class="panel">
 			<header class="panel-heading">
 				<div class="panel-actions"></div>
-				<h3 class="panel-title">{{ _('Customers Group') }}</h3>
+				<h3 class="panel-title">{{ _('Gruppi') }}</h3>
 			</header>
 			<div id="buttonsPanel">
 				<button id="addList" class="btn btn-outline btn-primary"
 					data-target="#addGroupModal" data-toggle="modal" type="button">
-					<i class="icon wb-plus" aria-hidden="true"></i> {{ _('Add Group') }}
+					<i class="icon wb-plus" aria-hidden="true"></i> {{ _('Aggiungi Gruppo') }}
 				</button>
 				<button id="dropList" class="btn btn-outline btn-danger"
 					type="button">
-					<i class="icon wb-trash" aria-hidden="true"></i> {{ _('Drop Group')
+					<i class="icon wb-trash" aria-hidden="true"></i> {{ _('Elimina Gruppo/i')
 					}}
 				</button>
 			</div>
@@ -39,14 +39,14 @@
 					class="table table-hover dataTable table-striped width-full">
 					<thead>
 						<tr>
-							<th>{{ _('Codice') }}</th>
+							<th>{{ _('Codice Gruppo') }}</th>
 							<th>{{ _('Nome') }}</th>
 						</tr>
 					</thead>
 
 					<tfoot>
 						<tr>
-							<th>{{ _('Codice') }}</th>
+							<th>{{ _('Codice Gruppo') }}</th>
 							<th>{{ _('Nome') }}</th>
 						</tr>
 					</tfoot>
@@ -65,23 +65,19 @@
 							aria-label="Close">
 							<span aria-hidden="true">&#10005;</span>
 						</button>
-						<h4 class="modal-title">{{ _('Add Customers Group') }}</h4>
+						<h4 class="modal-title">{{ _('Aggiungi Gruppo') }}</h4>
 					</div>
 					<div class="modal-body">
 						<div class="row">
-							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputGroupCode">{{ _('Code') }}</label> 
-								<input id="inputGroupCode"
-									class="form-control" type="text" name="groupCode" required="required">
-							</div>
-							<div class="col-lg-6 form-group">
-								<label class="control-label" for="inputGroupName">{{_('Name') }}</label>
+							
+							<div class="col-lg-12 form-group">
+								<label class="control-label" for="inputGroupName">{{_('Nome') }}</label>
 								<input id="inputGroupName" type="text"
 										class="form-control" name="groupName" required="required"/>
 							</div>
 							<div class="col-sm-12 pull-right">
 								<button class="btn btn-primary btn-outline" data-dismiss=""
-									id="addGroupSubmit" type="button">{{ _('Submit') }}</button>
+									id="addGroupSubmit" type="button">{{ _('Crea') }}</button>
 							</div>
 						</div>
 						{{ token.generateInput() }}
