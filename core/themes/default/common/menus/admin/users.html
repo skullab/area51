@@ -3,7 +3,7 @@
 		<i class="site-menu-icon wb-users" aria-hidden="true"></i> 
 		<span class="site-menu-title">{{ _('Users') }}</span><span class="site-menu-arrow"></span>
 		{% set active_id = model.users_status.findFirstByName('active').id %}
-		{% set warning_user = model.users.count('status_id != ' ~ active_id) %}
+		{% set warning_user = model.users.count('users_status_id != ' ~ active_id) %}
 		{% if  warning_user %}
 		<div class="site-menu-badge">
 			<span class="badge badge-danger" >{{ warning_user }}</span>

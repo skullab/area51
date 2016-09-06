@@ -3,7 +3,7 @@
 namespace Thunderhawk\API\Mvc\Model\User;
 use Thunderhawk\API\Mvc\Model;
 class Users extends Model{
-	public $id,$email,$password,$created_at,$status_id,$role;
+	public $id,$email,$password,$created_at,$users_status_id,$acl_roles_name;
 	protected function onInitialize(){
 		// 1-1
 		$this->hasOne('id',__NAMESPACE__.'\UsersDetails','users_id',array(
@@ -14,8 +14,12 @@ class Users extends Model{
 				'alias' => 'login'
 		));
 		// n-1
-		$this->belongsTo('status_id',__NAMESPACE__.'\UsersStatus','id',array(
+		$this->belongsTo('users_status_id',__NAMESPACE__.'\UsersStatus','id',array(
 				'alias' => 'status',
+				'reusable' => true
+		));
+		$this->belongsTo('acl_roles_name','Thunderhawk\API\Mvc\Model\Acl\AclRoles','name',array(
+				'alias' => 'roles',
 				'reusable' => true
 		));
 		// 1-n
@@ -27,10 +31,7 @@ class Users extends Model{
 				'alias' => 'forgot',
 				'reusable' => true
 		));
-		$this->hasMany('role',__NAMESPACE__.'\Acl\AclRoles','name',array(
-				'alias' => 'roles',
-				'reusable' => true
-		));
+		
 	}
 	public static function exists($where){
 		return self::findFirst($where);

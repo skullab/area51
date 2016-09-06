@@ -5,10 +5,18 @@ use Phalcon\Mvc\Model as PhalconModel;
 use Thunderhawk\API\Di\Service\Manager as ServiceManager;
 class Model extends PhalconModel{
 	protected $_globalConfig ;
+	protected $_tableName ;
 	public function initialize(){
 		$this->_globalConfig = $this->getDI()->get(ServiceManager::CONFIG);
-		$this->setSource($this->_globalConfig->db->table->prefix.$this->getSource());
+		$this->_tableName = $this->getSource();
+		$this->setAsFrameworkModel();
 		$this->onInitialize();
+	}
+	protected function setAsVendorModel(){
+		$this->setSource($this->_globalConfig->vendor->table->prefix.$this->_tableName);
+	}
+	protected function setAsFrameworkModel(){
+		$this->setSource($this->_globalConfig->db->table->prefix.$this->_tableName);
 	}
 	protected function switchToRemoteConnection(){
 		$this->setConnectionService(ServiceManager::REMOTE_DB);

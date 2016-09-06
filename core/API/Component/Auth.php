@@ -222,7 +222,7 @@ class Auth extends Component implements AuthInterface{
 				'id' => $user->id,
 				'email' => $user->email,
 				'status' => $user->status->name,
-				'role' => $user->role,
+				'role' => $user->roles->name,
 				'display_name' => $display_name,
 				'portrait' => $portrait
 		));

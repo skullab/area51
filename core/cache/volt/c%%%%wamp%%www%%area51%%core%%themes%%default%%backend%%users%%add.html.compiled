@@ -1,10 +1,10 @@
 <!-- Page -->
 <div class="page animsition">
 	<div class="page-header">
-	<h1 class="page-title"><?php echo 'Add a user'; ?></h1>
+	<h1 class="page-title"><?php echo 'Aggiungi utente'; ?></h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo $this->url->getStatic('dashboard'); ?>"><?php echo 'Home'; ?></a></li>
-			<li class="active"><?php echo 'Users'; ?></li>
+			<li class="active"><?php echo 'Utenti'; ?></li>
 		</ol>
 	</div>
 	<div class="page-content container-fluid">
@@ -16,7 +16,7 @@
 				<!-- Panel Wizard Form Container -->
 				<div class="panel" id="wizardFormContainer">
 					<div class="panel-heading">
-						<h3 class="panel-title"><?php echo 'User informations'; ?></h3>
+						<h3 class="panel-title"><?php echo 'Informazioni utente'; ?></h3>
 					</div>
 					<div class="panel-body">
 						<!-- Steps -->
@@ -25,19 +25,19 @@
 								<div class="pearl-icon">
 									<i class="icon wb-lock" aria-hidden="true"></i>
 								</div>
-								<span class="pearl-title"><?php echo 'Login Info'; ?></span>
+								<span class="pearl-title"><?php echo 'Login'; ?></span>
 							</div>
 							<div class="pearl col-xs-4">
 								<div class="pearl-icon">
 									<i class="icon wb-user" aria-hidden="true"></i>
 								</div>
-								<span class="pearl-title"><?php echo 'Details Info'; ?></span>
+								<span class="pearl-title"><?php echo 'Dettagli'; ?></span>
 							</div>
 							<div class="pearl col-xs-4">
 								<div class="pearl-icon">
 									<i class="icon wb-check" aria-hidden="true"></i>
 								</div>
-								<span class="pearl-title"><?php echo 'Confirmations'; ?></span>
+								<span class="pearl-title"><?php echo 'Conferma'; ?></span>
 							</div>
 						</div>
 						<!-- End Steps -->
@@ -56,7 +56,7 @@
 										id="inputPasswordOne" name="password" required="required">
 								</div>
 								<div class="form-group">
-									<label class="control-label" for="inputPasswordTwo"><?php echo 'Repeat Password'; ?></label> <input type="password"
+									<label class="control-label" for="inputPasswordTwo"><?php echo 'Ripeti Password'; ?></label> <input type="password"
 										class="form-control" id="inputPasswordTwo"
 										data-fv-identical="true" data-fv-identical-field="password"
 										data-fv-identical-message="<?php echo 'The password does not match'; ?>"
@@ -66,34 +66,39 @@
 							<!-- DETAILS INFO -->
 							<div class="wizard-pane" id="exampleBillingOne" role="tabpanel">
 								<div class="form-group">
-									<label class="control-label" for="inputRole"><?php echo 'Role'; ?></label> <select class="form-control" id="inputRole"
+									<label class="control-label" for="inputRole"><?php echo 'Ruolo'; ?></label> <select class="form-control" id="inputRole"
 										name="role" required="required">
 										<option></option> <?php foreach ($model->aclRoles->find() as $role) { ?>
 										<option value="<?php echo $role->name; ?>"><?php echo $role->name; ?></option> <?php } ?>
 									</select>
 								</div>
-								<?php echo 'Optionals'; ?>:<br>
 								<div class="form-group">
-									<label class="control-label" for="inputName"><?php echo 'Name'; ?></label> <input type="text" class="form-control"
+									<label class="control-label" for="inputCode"><?php echo 'Codice'; ?></label> <input type="text" class="form-control"
+										id="inputCode" name="code" placeholder="" required="required">
+								</div>
+								<div class="form-group">
+									<label class="control-label" for="inputName"><?php echo 'Nome'; ?></label> <input type="text" class="form-control"
 										id="inputName" name="name" placeholder="" required="required">
 								</div>
 								<div class="form-group">
-									<label class="control-label" for="inputSurname"><?php echo 'Surname'; ?></label> <input type="text" class="form-control"
+									<label class="control-label" for="inputSurname"><?php echo 'Cognome'; ?></label> <input type="text" class="form-control"
 										id="inputSurname" name="surname" placeholder="" required="required">
 								</div>
+								<?php echo 'Opzionali'; ?>:<br>
+								
 								<div class="form-group">
-									<label class="control-label" for="inputAddress"><?php echo 'Address'; ?></label> <input type="text" class="form-control"
+									<label class="control-label" for="inputAddress"><?php echo 'Indirizzo'; ?></label> <input type="text" class="form-control"
 										id="inputAddress" name="address" placeholder="">
 								</div>
 								<div class="form-group">
-									<label class="control-label" for="inputPhone"><?php echo 'Phone'; ?></label> <input type="text" class="form-control"
+									<label class="control-label" for="inputPhone"><?php echo 'Telefono'; ?></label> <input type="text" class="form-control"
 										id="inputPhone" name="phone" placeholder="">
 								</div>
 							</div>
 
 							<div class="wizard-pane" id="confirmWizardPane" role="tabpanel">
 								<div class="text-center margin-vertical-20">
-									<h4><?php echo 'Confirm registration'; ?></h4>
+									<h4><?php echo 'Conferma registrazione'; ?></h4>
 									<div class="table-responsive">
 										<div class="table-responsive">
 											<table class="table table-bordered table-striped"
@@ -104,23 +109,27 @@
 														<td style="width: 65%" id="confirmInputEmail"></td>
 													</tr>
 													<tr>
-														<td style="width: 35%"><?php echo 'Role'; ?></td>
+														<td style="width: 35%"><?php echo 'Ruolo'; ?></td>
 														<td style="width: 65%" id="confirmInputRole"></td>
 													</tr>
 													<tr>
-														<td style="width: 35%"><?php echo 'Name'; ?></td>
+														<td style="width: 35%"><?php echo 'Codice'; ?></td>
+														<td style="width: 65%" id="confirmInputCode"></td>
+													</tr>
+													<tr>
+														<td style="width: 35%"><?php echo 'Nome'; ?></td>
 														<td style="width: 65%" id="confirmInputName"></td>
 													</tr>
 													<tr>
-														<td style="width: 35%"><?php echo 'Surname'; ?></td>
+														<td style="width: 35%"><?php echo 'Cognome'; ?></td>
 														<td style="width: 65%" id="confirmInputSurname"></td>
 													</tr>
 													<tr>
-														<td style="width: 35%"><?php echo 'Address'; ?></td>
+														<td style="width: 35%"><?php echo 'Indirizzo'; ?></td>
 														<td style="width: 65%" id="confirmInputAddress"></td>
 													</tr>
 													<tr>
-														<td style="width: 35%"><?php echo 'Phone'; ?></td>
+														<td style="width: 35%"><?php echo 'Telefono'; ?></td>
 														<td style="width: 65%" id="confirmInputPhone"></td>
 													</tr>
 												</tbody>

@@ -15,6 +15,18 @@ theme.layouts	= "layouts"
 theme.name		= "default"
 
 ;-------------------------------------------------------------+
+; SETTINGS DATABASE TABLES					  |
+;-------------------------------------------------------------+ 
+; Table name of controller's settings
+;--------------------------------------------------------------
+settings.controller = "controller_settings"
+;--------------------------------------------------------------
+; Table name of general's settings
+;--------------------------------------------------------------
+settings.general = "app_settings"
+;--------------------------------------------------------------
+
+;-------------------------------------------------------------+
 ; CRYPT SALT - DON'T CHANGE THIS VALUE ! 					  |
 ;-------------------------------------------------------------+
 ; Change this only the first time that Thunderhawk

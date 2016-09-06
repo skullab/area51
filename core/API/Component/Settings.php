@@ -2,21 +2,34 @@
 
 namespace Thunderhawk\API\Component;
 use Thunderhawk\API\Component\Settings\BaseModel;
-class Settings extends BaseModel implements \ArrayAccess {
+use Thunderhawk\API\Di\Service\Manager as ServiceManager;
+class Settings extends BaseModel {
 	protected $id;
 	protected $namespace;
 	protected $controller;
-	protected $data;
-	protected $_dataAccess = array ();
 	
-	public function onConstruct() {
-		$this->setNamespaceName ( $this->getDI () ['dispatcher']->getNamespaceName () );
-		$this->setControllerName ( $this->getDI () ['dispatcher']->getControllerName () );
+	public function initialize(){
+		$this->setSource($this->getDI()->get(ServiceManager::CONFIG)->app->settings->controller);
 	}
-	public function setNamespaceName($namespace) {
+	public function onConstruct() {
+		$this->setNamespace ( $this->getDI () ['dispatcher']->getNamespaceName () );
+		$this->setController ( $this->getDI () ['dispatcher']->getControllerName () );
+	}
+	
+	public function getId(){
+		return $this->id ;
+	}
+	public function setNamespace($namespace) {
 		$this->namespace = $namespace ? $namespace : '';
 	}
-	public function setControllerName($controller) {
+	public function getNamespace(){
+		return $this->namespace ;
+	}
+	public function setController($controller) {
 		$this->controller = $controller;
 	}
+	public function getController(){
+		return $this->controller;
+	}
+	
 }

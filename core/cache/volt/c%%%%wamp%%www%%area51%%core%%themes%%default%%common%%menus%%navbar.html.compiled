@@ -55,7 +55,7 @@
           <li class="dropdown">
             <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
             data-animation="slide-bottom" role="button">
-           	<?php echo 'hello'; ?>, <b><?php echo $identity['display_name']; ?></b>
+           	<?php echo 'Ciao'; ?>, <b><?php echo $identity['display_name']; ?></b>
               <span class="avatar avatar-online">
                 <img src="<?php echo $this->url->getStatic(''); ?>assets/portraits/<?php echo $identity['portrait']; ?>" alt="...">
                 <i></i>
@@ -63,14 +63,14 @@
             </a>
             <ul class="dropdown-menu" role="menu">
               <li role="presentation">
-                <a href="<?php echo $this->url->getStatic('users/profile/'); ?><?php echo $identity['id']; ?>" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Profile</a>
+                <a href="<?php echo $this->url->getStatic('users/profile/'); ?><?php echo $identity['id']; ?>" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i><?php echo 'Profilo'; ?></a>
               </li>
               <li role="presentation">
-                <a href="javascript:void(0)" role="menuitem"><i class="icon wb-settings" aria-hidden="true"></i> Settings</a>
+                <a href="javascript:void(0)" role="menuitem"><i class="icon wb-settings" aria-hidden="true"></i><?php echo 'Impostazioni'; ?></a>
               </li>
               <li class="divider" role="presentation"></li>
               <li role="presentation">
-                <a href="<?php echo $this->url->getStatic('logout'); ?>" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Logout</a>
+                <a href="<?php echo $this->url->getStatic('logout'); ?>" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i><?php echo 'Esci'; ?></a>
               </li>
             </ul>
           </li>

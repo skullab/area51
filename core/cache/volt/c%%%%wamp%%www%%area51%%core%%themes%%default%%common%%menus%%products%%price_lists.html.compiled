@@ -15,12 +15,6 @@
 				class="site-menu-icon " aria-hidden="true"></i> <span
 				class="site-menu-title"><?php echo 'Elenco'; ?></span>
 		</a></li>
-		<?php foreach ($model->price_lists->find() as $listino) { ?>
-		<li class="site-menu-item"><a
-			class="animsition-link" href="<?php echo $this->url->getStatic('products/price-lists/'); ?><?php echo $listino->id; ?>"> <i
-				class="site-menu-icon " aria-hidden="true"></i> <span
-				class="site-menu-title"><?php echo $listino->name; ?></span>
-		</a></li>
-		<?php } ?>
+		
 	</ul>
 </li>

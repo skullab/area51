@@ -3,7 +3,7 @@
 		<i class="site-menu-icon wb-users" aria-hidden="true"></i> 
 		<span class="site-menu-title"><?php echo 'Users'; ?></span><span class="site-menu-arrow"></span>
 		<?php $active_id = $model->users_status->findFirstByName('active')->id; ?>
-		<?php $warning_user = $model->users->count('status_id != ' . $active_id); ?>
+		<?php $warning_user = $model->users->count('users_status_id != ' . $active_id); ?>
 		<?php if ($warning_user) { ?>
 		<div class="site-menu-badge">
 			<span class="badge badge-danger" ><?php echo $warning_user; ?></span>

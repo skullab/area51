@@ -1,10 +1,10 @@
 <!-- Page -->
 <div class="page animsition">
 	<div class="page-header">
-	<h1 class="page-title">{{ _('Add a user') }}</h1>
+	<h1 class="page-title">{{ _('Aggiungi utente') }}</h1>
 		<ol class="breadcrumb">
 			<li><a href="{{ static_url('dashboard') }}">{{ _('Home') }}</a></li>
-			<li class="active">{{ _('Users') }}</li>
+			<li class="active">{{ _('Utenti') }}</li>
 		</ol>
 	</div>
 	<div class="page-content container-fluid">
@@ -16,7 +16,7 @@
 				<!-- Panel Wizard Form Container -->
 				<div class="panel" id="wizardFormContainer">
 					<div class="panel-heading">
-						<h3 class="panel-title">{{ _('User informations') }}</h3>
+						<h3 class="panel-title">{{ _('Informazioni utente') }}</h3>
 					</div>
 					<div class="panel-body">
 						<!-- Steps -->
@@ -25,19 +25,19 @@
 								<div class="pearl-icon">
 									<i class="icon wb-lock" aria-hidden="true"></i>
 								</div>
-								<span class="pearl-title">{{ _('Login Info') }}</span>
+								<span class="pearl-title">{{ _('Login') }}</span>
 							</div>
 							<div class="pearl col-xs-4">
 								<div class="pearl-icon">
 									<i class="icon wb-user" aria-hidden="true"></i>
 								</div>
-								<span class="pearl-title">{{ _('Details Info') }}</span>
+								<span class="pearl-title">{{ _('Dettagli') }}</span>
 							</div>
 							<div class="pearl col-xs-4">
 								<div class="pearl-icon">
 									<i class="icon wb-check" aria-hidden="true"></i>
 								</div>
-								<span class="pearl-title">{{ _('Confirmations') }}</span>
+								<span class="pearl-title">{{ _('Conferma') }}</span>
 							</div>
 						</div>
 						<!-- End Steps -->
@@ -59,7 +59,7 @@
 								</div>
 								<div class="form-group">
 									<label class="control-label" for="inputPasswordTwo">{{
-										_('Repeat Password') }}</label> <input type="password"
+										_('Ripeti Password') }}</label> <input type="password"
 										class="form-control" id="inputPasswordTwo"
 										data-fv-identical="true" data-fv-identical-field="password"
 										data-fv-identical-message="{{ _('The password does not match') }}"
@@ -70,39 +70,45 @@
 							<div class="wizard-pane" id="exampleBillingOne" role="tabpanel">
 								<div class="form-group">
 									<label class="control-label" for="inputRole">{{
-										_('Role') }}</label> <select class="form-control" id="inputRole"
+										_('Ruolo') }}</label> <select class="form-control" id="inputRole"
 										name="role" required="required">
 										<option></option> {% for role in model.aclRoles.find() %}
 										<option value="{{ role.name }}">{{ role.name }}</option> {%
 										endfor %}
 									</select>
 								</div>
-								{{ _('Optionals') }}:<br>
+								<div class="form-group">
+									<label class="control-label" for="inputCode">{{
+										_('Codice') }}</label> <input type="text" class="form-control"
+										id="inputCode" name="code" placeholder="" required="required">
+								</div>
 								<div class="form-group">
 									<label class="control-label" for="inputName">{{
-										_('Name') }}</label> <input type="text" class="form-control"
+										_('Nome') }}</label> <input type="text" class="form-control"
 										id="inputName" name="name" placeholder="" required="required">
 								</div>
 								<div class="form-group">
 									<label class="control-label" for="inputSurname">{{
-										_('Surname') }}</label> <input type="text" class="form-control"
+										_('Cognome') }}</label> <input type="text" class="form-control"
 										id="inputSurname" name="surname" placeholder="" required="required">
 								</div>
+								{{ _('Opzionali') }}:<br>
+								
 								<div class="form-group">
 									<label class="control-label" for="inputAddress">{{
-										_('Address') }}</label> <input type="text" class="form-control"
+										_('Indirizzo') }}</label> <input type="text" class="form-control"
 										id="inputAddress" name="address" placeholder="">
 								</div>
 								<div class="form-group">
 									<label class="control-label" for="inputPhone">{{
-										_('Phone') }}</label> <input type="text" class="form-control"
+										_('Telefono') }}</label> <input type="text" class="form-control"
 										id="inputPhone" name="phone" placeholder="">
 								</div>
 							</div>
 
 							<div class="wizard-pane" id="confirmWizardPane" role="tabpanel">
 								<div class="text-center margin-vertical-20">
-									<h4>{{ _('Confirm registration') }}</h4>
+									<h4>{{ _('Conferma registrazione') }}</h4>
 									<div class="table-responsive">
 										<div class="table-responsive">
 											<table class="table table-bordered table-striped"
@@ -113,23 +119,27 @@
 														<td style="width: 65%" id="confirmInputEmail"></td>
 													</tr>
 													<tr>
-														<td style="width: 35%">{{ _('Role') }}</td>
+														<td style="width: 35%">{{ _('Ruolo') }}</td>
 														<td style="width: 65%" id="confirmInputRole"></td>
 													</tr>
 													<tr>
-														<td style="width: 35%">{{ _('Name') }}</td>
+														<td style="width: 35%">{{ _('Codice') }}</td>
+														<td style="width: 65%" id="confirmInputCode"></td>
+													</tr>
+													<tr>
+														<td style="width: 35%">{{ _('Nome') }}</td>
 														<td style="width: 65%" id="confirmInputName"></td>
 													</tr>
 													<tr>
-														<td style="width: 35%">{{ _('Surname') }}</td>
+														<td style="width: 35%">{{ _('Cognome') }}</td>
 														<td style="width: 65%" id="confirmInputSurname"></td>
 													</tr>
 													<tr>
-														<td style="width: 35%">{{ _('Address') }}</td>
+														<td style="width: 35%">{{ _('Indirizzo') }}</td>
 														<td style="width: 65%" id="confirmInputAddress"></td>
 													</tr>
 													<tr>
-														<td style="width: 35%">{{ _('Phone') }}</td>
+														<td style="width: 35%">{{ _('Telefono') }}</td>
 														<td style="width: 65%" id="confirmInputPhone"></td>
 													</tr>
 												</tbody>

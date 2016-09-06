@@ -55,7 +55,7 @@
           <li class="dropdown">
             <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
             data-animation="slide-bottom" role="button">
-           	{{ _('hello') }}, <b>{{ identity['display_name'] }}</b>
+           	{{ _('Ciao') }}, <b>{{ identity['display_name'] }}</b>
               <span class="avatar avatar-online">
                 <img src="{{ static_url('') }}assets/portraits/{{ identity['portrait'] }}" alt="...">
                 <i></i>
@@ -63,14 +63,14 @@
             </a>
             <ul class="dropdown-menu" role="menu">
               <li role="presentation">
-                <a href="{{ static_url('users/profile/') }}{{ identity['id'] }}" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Profile</a>
+                <a href="{{ static_url('users/profile/') }}{{ identity['id'] }}" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i>{{ _('Profilo') }}</a>
               </li>
               <li role="presentation">
-                <a href="javascript:void(0)" role="menuitem"><i class="icon wb-settings" aria-hidden="true"></i> Settings</a>
+                <a href="javascript:void(0)" role="menuitem"><i class="icon wb-settings" aria-hidden="true"></i>{{ _('Impostazioni') }}</a>
               </li>
               <li class="divider" role="presentation"></li>
               <li role="presentation">
-                <a href="{{ static_url('logout') }}" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Logout</a>
+                <a href="{{ static_url('logout') }}" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i>{{ _('Esci') }}</a>
               </li>
             </ul>
           </li>

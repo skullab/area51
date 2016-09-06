@@ -40,6 +40,25 @@ abstract class Controller extends PhalconController{
 		$this->onInitialize();
 		
 	}
+	/********************************************************************/
+	protected function _loadInlineActionJs($path){
+		$this->assets->renderInlineJs($path);
+	}
+	protected function _loadActionJs($path){
+		$this->jsControllers->addJs($path);
+	}
+	protected function _getFullPathJs($filename = '',$prefix = ''){
+		$prefix = $prefix != '' ? $prefix : $this->getControllerName();
+		$filename = $filename != '' ? $filename : \Phalcon\Text::uncamelize($this->getActionName());
+		return 'js/controllers/'.$prefix.'/'.$filename.'.js' ;
+	}
+	public function loadActionJs($filename = '',$prefix = ''){
+		return $this->_loadActionJs($this->_getFullPathJs($filename,$prefix));
+	}
+	public function loadInlineActionJs($filename = '',$prefix = ''){
+		return $this->_loadInlineActionJs($this->_getFullPathJs($filename,$prefix));
+	}
+	/********************************************************************/
 	protected function getAssetsPackageTinycolor(){
 		$this->jsPlugins->addJs('vendor/tinycolor/tinycolor.js');
 	}

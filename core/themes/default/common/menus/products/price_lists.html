@@ -15,12 +15,6 @@
 				class="site-menu-icon " aria-hidden="true"></i> <span
 				class="site-menu-title">{{ _('Elenco') }}</span>
 		</a></li>
-		{% for listino in model.price_lists.find() %}
-		<li class="site-menu-item"><a
-			class="animsition-link" href="{{ static_url('products/price-lists/') }}{{ listino.id }}"> <i
-				class="site-menu-icon " aria-hidden="true"></i> <span
-				class="site-menu-title">{{ _(listino.name) }}</span>
-		</a></li>
-		{% endfor %}
+		
 	</ul>
 </li>

@@ -25,5 +25,7 @@ dbname			= "gc2110008_pr0v"
 adapter			= Mysql
 table.prefix 	= "ps_"
 
+[vendor]
 
+table.prefix 	= "pr_"
 

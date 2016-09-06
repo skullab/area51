@@ -9,6 +9,8 @@ class UsersDetails extends Model{
 	public $address;
 	public $phone;
 	public $portrait;
+	public $code;
+	public $update_time;
 	public $users_id;
 	protected function onInitialize(){
 		$this->hasOne('users_id',__NAMESPACE__.'\Users','id',array(

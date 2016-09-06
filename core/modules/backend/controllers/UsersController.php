@@ -31,7 +31,8 @@ class UsersController extends Controller {
 		$this->jsComponents->addJs ( 'js/components/jquery-wizard.js' )
 		->addJs ( 'js/components/matchheight.js' );
 		// ->addJs('js/components/toastr.js');
-		$this->assets->renderInlineJs ( 'js/controllers/userRegistration.js' );
+		$this->loadInlineActionJs();
+		//$this->assets->renderInlineJs ( 'js/controllers/userRegistration.js' );
 	}
 	public function registerAction() {
 		if ($this->request->isPost ()) {
@@ -39,12 +40,13 @@ class UsersController extends Controller {
 				$email = $this->filter->sanitize ( $this->request->getPost ( 'email' ), 'email' );
 				$user = Users::findFirstByEmail ( $email );
 				if ($user) {
-					$this->flash->error ( _ ( 'There is already a user with this email' ) );
+					$this->flash->error ( _ ( 'Esiste già un utente registrato con questa email' ) );
 					return $this->forward ( 'users', 'add' );
 				}
 				$password = $this->request->getPost ( 'password' );
 				$name = $this->request->getPost ( 'name' );
 				$role = $this->request->getPost ( 'role' );
+				$code = $this->request->getPost ( 'code' );
 				$surname = $this->request->getPost ( 'surname' );
 				$address = $this->request->getPost ( 'address' );
 				$phone = $this->request->getPost ( 'phone' );
@@ -52,25 +54,26 @@ class UsersController extends Controller {
 				$user = new Users ();
 				$user->email = $email;
 				$user->password = $this->security->hash ( $this->auth->passwordHash ( $password ) );
-				$user->status_id = UsersStatus::findFirstByName ( 'active' )->id;
-				$user->role = $role;
+				$user->users_status_id = UsersStatus::findFirstByName ( 'active' )->id;
+				$user->acl_roles_name = $role;
 				$user->details = new UsersDetails ();
 				$user->details->name = $name;
 				$user->details->surname = $surname;
 				$user->details->address = $address;
 				$user->details->phone = $phone;
+				$user->details->code = $code;
 				
 				if ($user->save () == false) {
 					foreach ( $user->getMessages () as $message ) {
 						$this->flash->error ( $message );
 					}
 				} else {
-					$this->flash->success ( _ ( 'User is added !' ) );
+					$this->flash->success ( _ ( 'Utente aggiunto !' ) );
 				}
 				return $this->forward ( 'users', 'add' );
 			}
 		} else {
-			$this->flash->warning ( _ ( 'Use this form to register a new User' ) );
+			$this->flash->warning ( _ ( 'Usa il form per registrare un nuovo utente' ) );
 			return $this->forward ( 'users', 'add' );
 		}
 	}
@@ -83,7 +86,7 @@ class UsersController extends Controller {
 				$user = Users::findFirstByEmail ( $this->request->getPost ( 'email' ) );
 				if ($user) {
 					$payload ['error'] = 1;
-					$payload ['message'] = _ ( 'There is already a user with this email' );
+					$payload ['message'] = _ ( 'Esiste già un utente registrato con questa email' );
 				}
 				return $this->sendAjax ( $payload );
 			}
