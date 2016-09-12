@@ -1,7 +1,7 @@
 <li class="site-menu-item has-sub">
 	<a href="javascript:void(0)" data-slug="admin-user"> 
 		<i class="site-menu-icon wb-users" aria-hidden="true"></i> 
-		<span class="site-menu-title">{{ _('Users') }}</span><span class="site-menu-arrow"></span>
+		<span class="site-menu-title">{{ _('Utenti') }}</span><span class="site-menu-arrow"></span>
 		{% set active_id = model.users_status.findFirstByName('active').id %}
 		{% set warning_user = model.users.count('users_status_id != ' ~ active_id) %}
 		{% if  warning_user %}
@@ -14,25 +14,25 @@
 		<li class="site-menu-item">
 			<a class="animsition-link" href="{{ static_url('users/add') }}" data-slug="admin-user-add">
 				<i class="site-menu-icon " aria-hidden="true"></i> 
-				<span class="site-menu-title">{{ _('Add') }}</span>
+				<span class="site-menu-title">{{ _('Aggiungi') }}</span>
 			</a>
 		</li>
 		<li class="site-menu-item">
 			<a class="animsition-link" href="{{ static_url('users/list') }}" data-slug="admin-user-list">
 				<i class="site-menu-icon " aria-hidden="true"></i> 
-				<span class="site-menu-title">{{ _('List') }}</span>
+				<span class="site-menu-title">{{ _('Lista') }}</span>
 			</a>
 		</li>
 		<li class="site-menu-item">
 			<a class="animsition-link" href="{{ static_url('users/failed') }}" data-slug="admin-user-failed">
 				<i class="site-menu-icon " aria-hidden="true"></i> 
-				<span class="site-menu-title">{{ _('Failed Attempts') }}</span>
+				<span class="site-menu-title">{{ _('Tentativi falliti') }}</span>
 			</a>
 		</li>
 		<li class="site-menu-item">
 			<a class="animsition-link" href="{{ static_url('users/forgot') }}" data-slug="admin-user-forgot"> 
 				<i class="site-menu-icon " aria-hidden="true"></i> 
-				<span class="site-menu-title">{{ _('Forgot password requests') }}</span>
+				<span class="site-menu-title">{{ _('Richieste di perdita password') }}</span>
 			</a>
 		</li>
 	</ul>

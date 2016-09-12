@@ -4,10 +4,9 @@
 	<div class="page-content vertical-align-middle">
 		<img class="error-mark animation-slide-top"
 			src="<?php echo $this->url->getStatic(); ?>assets/images/404.png" alt="...">
-		<h2>Page Not Found !</h2>
-		<p class="error-advise">YOU SEEM TO BE TRYING TO FIND HIS WAY HOME</p>
-		<a class="btn btn-primary btn-round" href="<?php echo $this->url->getStatic(); ?>">GO TO
-			HOME PAGE</a>
+		<h2><?php echo 'Pagina non trovata'; ?> !</h2>
+		<p class="error-advise"><?php echo 'PROVA A SEGUIRE LA STRADA DI CASA'; ?></p>
+		<a class="btn btn-primary btn-round" href="<?php echo $this->url->getStatic(); ?>"><?php echo 'TORNA ALLA HOME PAGE'; ?></a>
 		
 		<?php echo $this->partial('pages/footer.copyright'); ?>
 	</div>

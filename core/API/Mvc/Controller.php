@@ -41,8 +41,8 @@ abstract class Controller extends PhalconController{
 		
 	}
 	/********************************************************************/
-	protected function _loadInlineActionJs($path){
-		$this->assets->renderInlineJs($path);
+	protected function _loadInlineActionJs($path,$local,$vars){
+		$this->assets->renderInlineJs($path,$local,$vars);
 	}
 	protected function _loadActionJs($path){
 		$this->jsControllers->addJs($path);
@@ -55,10 +55,15 @@ abstract class Controller extends PhalconController{
 	public function loadActionJs($filename = '',$prefix = ''){
 		return $this->_loadActionJs($this->_getFullPathJs($filename,$prefix));
 	}
-	public function loadInlineActionJs($filename = '',$prefix = ''){
-		return $this->_loadInlineActionJs($this->_getFullPathJs($filename,$prefix));
+	public function loadInlineActionJs($vars = array(),$local = true,$filename = '',$prefix = ''){
+		return $this->_loadInlineActionJs($this->_getFullPathJs($filename,$prefix),$local,$vars);
 	}
 	/********************************************************************/
+	protected function getAssetsPackageJvectormap(){
+		$this->cssPlugins->addCss('vendor/jvectormap/jquery-jvectormap.css');
+		$this->jsPlugins->addJs('vendor/jvectormap/jquery-jvectormap.min.js');
+		//$this->jsComponents->addJs('js/components/jvectormap.js');
+	}
 	protected function getAssetsPackageTinycolor(){
 		$this->jsPlugins->addJs('vendor/tinycolor/tinycolor.js');
 	}
@@ -151,6 +156,12 @@ abstract class Controller extends PhalconController{
 	protected function getAssetsPackageSpinner(){
 		$this->cssPlugins->addCss('css/spinner.css');
 		$this->jsPlugins->addJs('js/spinner.js');
+	}
+	public function loadJvectormapData($data){
+		$this->jsPlugins->addJs('vendor/jvectormap/data/'.$data.'.js');
+	}
+	public function loadJvectormap($map){
+		$this->jsPlugins->addJs('vendor/jvectormap/maps/jquery-jvectormap-'.$map.'.js');
 	}
 	public function assetsPackage($package){
 		$func = "getAssetsPackage".\Phalcon\Text::camelize($package);
@@ -268,7 +279,7 @@ abstract class Controller extends PhalconController{
 	}
 	protected function accessDenied($role,$resource,$action){
 		if($this->auth->getIdentity()){
-			$this->flash->error(_('You don\'t have permission to perform this operation'));
+			$this->flash->error(_('Non si hanno i permessi per questa operazione'));
 			return $this->forward();
 		}
 	}

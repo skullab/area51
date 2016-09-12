@@ -7,19 +7,19 @@
 		<li class="site-menu-item">
 			<a class="animsition-link" href="{{ static_url('acl/add-role') }}">
 			<i class="site-menu-icon" ></i>
-			<span>{{ _('Add Role') }}</span></a>
+			<span>{{ _('Aggiungi Ruolo') }}</span></a>
 		</li>
 		{% if auth.isRoleOrInherits('super') %}
 		<li class="site-menu-item">
 			<a class="animsition-link" href="{{ static_url('acl/add-resource') }}">
 			<i class="site-menu-icon" ></i>
-			<span>{{ _('Add Resource') }}</span></a>
+			<span>{{ _('Aggiungi Risorsa') }}</span></a>
 		</li>
 		{% endif %}
 		<li class="site-menu-item">
 			<a class="animsition-link" href="{{ static_url('acl/list') }}">
 			<i class="site-menu-icon" ></i>
-			<span>{{ _('Access list') }}</span></a>
+			<span>{{ _('Lista Accessi') }}</span></a>
 		</li>
 	</ul>
 </li>

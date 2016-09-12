@@ -18,4 +18,7 @@ class UsersDetails extends Model{
 				'reusable' => true
 		));
 	}
+	public function beforeValidationOnUpdate(){
+		$this->update_time = date('Y-m-d H:i:s');
+	}
 }

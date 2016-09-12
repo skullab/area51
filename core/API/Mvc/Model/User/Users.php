@@ -36,4 +36,11 @@ class Users extends Model{
 	public static function exists($where){
 		return self::findFirst($where);
 	}
+	public static function getProgressiveCode($maxLength = 7,$substitute = 0){
+		$max = Users::maximum(array(
+				'column' => 'id'
+		));
+		$code = str_pad((int)substr($max, -4) + 1,$maxLength,$substitute,STR_PAD_LEFT);
+		return $code ;
+	}
 }

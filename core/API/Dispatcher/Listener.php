@@ -6,7 +6,15 @@ class Listener {
 	public function beforeDispatchLoop($event,$dispatcher){
 		$dispatcher->setActionName(lcfirst(\Phalcon\Text::camelize($dispatcher->getActionName())));
 	}
-	public function beforeDispatch($event,$dispatcher){}
+	public function beforeDispatch($event,$dispatcher){
+		$auth = $dispatcher->getDI()->get('auth');
+		$moduleName = $dispatcher->getModuleName();
+		if(!$auth->getIdentity() && $moduleName == 'backend'){
+			$response = $dispatcher->getDI()->get('response');
+			$response->redirect();
+			return false;
+		}
+	}
 	public function beforeExecuteRoute($event,$dispatcher){}
 	public function beforeNotFoundAction($event,$dispatcher){}
 	public function beforeException($event,$dispatcher,$exception){

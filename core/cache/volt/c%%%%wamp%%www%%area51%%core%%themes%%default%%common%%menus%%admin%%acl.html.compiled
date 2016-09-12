@@ -7,19 +7,19 @@
 		<li class="site-menu-item">
 			<a class="animsition-link" href="<?php echo $this->url->getStatic('acl/add-role'); ?>">
 			<i class="site-menu-icon" ></i>
-			<span><?php echo 'Add Role'; ?></span></a>
+			<span><?php echo 'Aggiungi Ruolo'; ?></span></a>
 		</li>
 		<?php if ($this->auth->isRoleOrInherits('super')) { ?>
 		<li class="site-menu-item">
 			<a class="animsition-link" href="<?php echo $this->url->getStatic('acl/add-resource'); ?>">
 			<i class="site-menu-icon" ></i>
-			<span><?php echo 'Add Resource'; ?></span></a>
+			<span><?php echo 'Aggiungi Risorsa'; ?></span></a>
 		</li>
 		<?php } ?>
 		<li class="site-menu-item">
 			<a class="animsition-link" href="<?php echo $this->url->getStatic('acl/list'); ?>">
 			<i class="site-menu-icon" ></i>
-			<span><?php echo 'Access list'; ?></span></a>
+			<span><?php echo 'Lista Accessi'; ?></span></a>
 		</li>
 	</ul>
 </li>

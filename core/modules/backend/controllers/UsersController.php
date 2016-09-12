@@ -34,6 +34,15 @@ class UsersController extends Controller {
 		$this->loadInlineActionJs();
 		//$this->assets->renderInlineJs ( 'js/controllers/userRegistration.js' );
 	}
+	public function generateCodeAction(){
+		if($this->request->isPost()){
+			if($this->request->isAjax()){
+				$code = Users::getProgressiveCode();
+				$response = array('code' => $code);
+				return $this->sendAjax($response);
+			}
+		}
+	}
 	public function registerAction() {
 		if ($this->request->isPost ()) {
 			if ($this->token->check ()) {
@@ -103,7 +112,9 @@ class UsersController extends Controller {
 		->addJs('vendor/bootstrap-sweetalert/sweet-alert.js');
 		$this->jsComponents->addJs('js/components/bootbox.js')
 		->addJs('js/components/bootstrap-sweetalert.js');
-		$this->assets->renderInlineJs('js/controllers/dropUser.js');
+		
+		$this->loadInlineActionJs();
+		//$this->assets->renderInlineJs('js/controllers/dropUser.js');
 	}
 	public function dropAction(){
 		if($this->request->isPost()){
@@ -183,7 +194,9 @@ class UsersController extends Controller {
 		->addJs('vendor/datatables-responsive/dataTables.responsive.js')
 		->addJs('vendor/datatables-tabletools/dataTables.tableTools.js');
 		$this->jsComponents->addJs('js/components/datatables.js');
-		$this->assets->renderInlineJs('js/controllers/userForgot.js');
+		
+		$this->loadInlineActionJs();
+		//$this->assets->renderInlineJs('js/controllers/userForgot.js');
 	}
 	public function failedAction() {
 		$this->cssPlugins->addCss('vendor/datatables-bootstrap/dataTables.bootstrap.css')
@@ -195,7 +208,9 @@ class UsersController extends Controller {
 		->addJs('vendor/datatables-responsive/dataTables.responsive.js')
 		->addJs('vendor/datatables-tabletools/dataTables.tableTools.js');
 		$this->jsComponents->addJs('js/components/datatables.js');
-		$this->assets->renderInlineJs('js/controllers/userFailed.js');
+		
+		$this->loadInlineActionJs();
+		//$this->assets->renderInlineJs('js/controllers/userFailed.js');
 	}
 	public function changeStatusAction($id,$status){
 		$user = Users::findFirstById ( $id );
@@ -233,12 +248,17 @@ class UsersController extends Controller {
 							$user->details->users_id = $user->id ;
 						}
 						if($field == 'role'){
-							$user->role = $value ;
+							$user->acl_roles_name = $value ;
 						}else{
 							$user->details->{$field} = $value ;
 						}
 						try{
-							$user->save();
+							if($user->save() == false){
+								$payload['error'] = 1 ;
+								foreach ($user->getMessages() as $message){
+									$payload['message'] .= $message.'<br>';
+								}
+							}
 						}catch(\Exception $e){
 							$payload['error'] = $e->getCode();
 							$payload['message'] = $e->getMessage();
@@ -260,7 +280,8 @@ class UsersController extends Controller {
 				->addJs('vendor/select2/select2.min.js')
 				->addJs('vendor/moment/moment.min.js');
 				
-				$this->assets->renderInlineJs('js/controllers/userProfile.js',true,array('user'=>$user));
+				$this->loadInlineActionJs(array('user'=>$user));
+				//$this->assets->renderInlineJs('js/controllers/userProfile.js',true,array('user'=>$user));
 				
 				$this->view->body_class = 'page-profile';
 				$this->view->user = $user;

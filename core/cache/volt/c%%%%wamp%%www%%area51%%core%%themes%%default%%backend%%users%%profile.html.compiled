@@ -1,5 +1,6 @@
 <!-- Page -->
 <?php $portrait = ($user->details ? (($user->details->portrait ? $user->details->portrait : 'user_blank.png')) : 'user_blank.png'); ?> 
+<?php $code = ($user->details ? $user->details->code : ''); ?>
 <?php $name = ($user->details ? $user->details->name : ''); ?> 
 <?php $surname = ($user->details ? $user->details->surname : ''); ?>
 <?php $address = ($user->details ? $user->details->address : ''); ?>
@@ -7,11 +8,11 @@
 
 <div class="page animsition">
 	<div class="page-header">
-	<h1 class="page-title"><?php echo 'User Profile'; ?></h1>
+	<h1 class="page-title"><?php echo 'Profilo Utente'; ?></h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo $this->url->getStatic('dashboard'); ?>"><?php echo 'Home'; ?></a></li>
-			<li><a href="<?php echo $this->url->getStatic('users/list'); ?>"><?php echo 'Users List'; ?></a></li>
-			<li class="active"><?php echo 'User Profile'; ?></li>
+			<li><a href="<?php echo $this->url->getStatic('users/list'); ?>"><?php echo 'Lista Utenti'; ?></a></li>
+			<li class="active"><?php echo 'Profilo Utente'; ?></li>
 		</ol>
 		
 		
@@ -31,7 +32,7 @@
 								alt="...">
 							</a>
 							<div class="profile-user"><?php echo $user->email; ?></div>
-							<div class="profile-job"><?php echo 'Role'; ?>: <?php echo $user->role; ?></div>
+							<div class="profile-job"><?php echo 'Ruolo'; ?>: <?php echo $user->acl_roles_name; ?></div>
 							<p></p>
 							<div class="profile-social">
 								<a class="icon bd-twitter" href="javascript:void(0)"></a> <a
@@ -39,7 +40,7 @@
 									class="icon bd-dribbble" href="javascript:void(0)"></a> <a
 									class="icon bd-github" href="javascript:void(0)"></a>
 							</div>
-							<button type="button" class="btn btn-primary"><?php echo 'Contact Him/Her'; ?></button>
+							<button type="button" class="btn btn-primary"><?php echo 'Contatta'; ?></button>
 						</div>
 					</div>
 					<div class="widget-footer">
@@ -61,12 +62,12 @@
 							role="tablist">
 							<?php if ($this->auth->isRole('admin') || $this->auth->isInherits('admin')) { ?>
 							<li role="presentation"><a data-toggle="tab"
-								href="#status" aria-controls="status" role="tab"><?php echo 'Status'; ?> <?php if ($user->status->name != 'active') { ?><span
+								href="#status" aria-controls="status" role="tab"><?php echo 'Stato'; ?> <?php if ($user->status->name != 'active') { ?><span
 									class="badge badge-danger">!</span><?php } ?>
 							</a></li>
 							<?php } ?>
 							<li class="active" role="presentation"><a data-toggle="tab" href="#details"
-								aria-controls="details" role="tab"><?php echo 'Details'; ?> </a></li>
+								aria-controls="details" role="tab"><?php echo 'Dettagli'; ?> </a></li>
 							<li role="presentation"><a data-toggle="tab" href="#logs"
 								aria-controls="logs" role="tab"><?php echo 'Logs'; ?></a></li>
 						</ul>
@@ -109,35 +110,41 @@
 												id="editableUser">
 												<tbody>
 													<tr>
-														<td style="width: 35%"><?php echo 'Role'; ?></td>
+														<td style="width: 35%"><?php echo 'Ruolo'; ?></td>
 														<td style="width: 65%"><a id="editableRole"
 															href="javascript:void(0)" data-type="select" data-pk="<?php echo $user->id; ?>"
-															data-title="<?php echo 'Name'; ?>"><?php echo $user->role; ?></a></td>
+															data-title="<?php echo 'Ruolo'; ?>"><?php echo $user->acl_roles_name; ?></a></td>
 													</tr>
 													<tr>
-														<td style="width: 35%"><?php echo 'Name'; ?></td>
+														<td style="width: 35%"><?php echo 'Codice'; ?></td>
+														<td style="width: 65%"><a id="editableCode"
+															href="javascript:void(0)" data-type="text" data-pk="<?php echo $user->id; ?>"
+															data-title="<?php echo 'Codice'; ?>"><?php echo $code; ?></a></td>
+													</tr>
+													<tr>
+														<td style="width: 35%"><?php echo 'Nome'; ?></td>
 														<td style="width: 65%"><a id="editableName"
 															href="javascript:void(0)" data-type="text" data-pk="<?php echo $user->id; ?>"
-															data-title="<?php echo 'Name'; ?>"><?php echo $name; ?></a></td>
+															data-title="<?php echo 'Nome'; ?>"><?php echo $name; ?></a></td>
 													</tr>
 													<tr>
-														<td><?php echo 'Surname'; ?></td>
+														<td><?php echo 'Cognome'; ?></td>
 														<td><a id="editableSurname"
 															href="javascript:void(0)" data-type="text" data-pk="<?php echo $user->id; ?>"
-															data-title="<?php echo 'Surname'; ?>"><?php echo $surname; ?></a></td>
+															data-title="<?php echo 'Cognome'; ?>"><?php echo $surname; ?></a></td>
 													</tr>
 													<tr>
-														<td><?php echo 'Address'; ?></td>
+														<td><?php echo 'Indirizzo'; ?></td>
 														<td><a id="editableAddress" href="javascript:void(0)"
-															data-type="textarea" data-pk="1" data-pk="<?php echo $user->id; ?>"
-															data-title="<?php echo 'Address'; ?>"><?php echo $address; ?></a></td>
+															data-type="textarea" data-pk="<?php echo $user->id; ?>"
+															data-title="<?php echo 'Indirizzo'; ?>"><?php echo $address; ?></a></td>
 													</tr>
 
 													<tr>
-														<td><?php echo 'Phone'; ?></td>
+														<td><?php echo 'Telefono'; ?></td>
 														<td><a id="editablePhone"
 															href="javascript:void(0)" data-type="text"
-															data-pk="<?php echo $user->id; ?>" data-title="<?php echo 'Phone'; ?>"><?php echo $phone; ?></a></td>
+															data-pk="<?php echo $user->id; ?>" data-title="<?php echo 'Telefono'; ?>"><?php echo $phone; ?></a></td>
 													</tr>
 
 												</tbody>

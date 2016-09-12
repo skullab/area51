@@ -2,6 +2,7 @@
 {% set portrait = user.details ? 
 	(user.details.portrait ? user.details.portrait : 'user_blank.png') 
 	: 'user_blank.png' %} 
+{% set code = user.details ? user.details.code : '' %}
 {% set name = user.details ? user.details.name : '' %} 
 {% set surname = user.details ? user.details.surname : '' %}
 {% set address = user.details ? user.details.address : '' %}
@@ -9,11 +10,11 @@
 
 <div class="page animsition">
 	<div class="page-header">
-	<h1 class="page-title">{{ _('User Profile') }}</h1>
+	<h1 class="page-title">{{ _('Profilo Utente') }}</h1>
 		<ol class="breadcrumb">
 			<li><a href="{{ static_url('dashboard') }}">{{ _('Home') }}</a></li>
-			<li><a href="{{ static_url('users/list') }}">{{ _('Users List') }}</a></li>
-			<li class="active">{{ _('User Profile') }}</li>
+			<li><a href="{{ static_url('users/list') }}">{{ _('Lista Utenti') }}</a></li>
+			<li class="active">{{ _('Profilo Utente') }}</li>
 		</ol>
 		
 		
@@ -33,7 +34,7 @@
 								alt="...">
 							</a>
 							<div class="profile-user">{{ user.email }}</div>
-							<div class="profile-job">{{ _('Role') }}: {{ user.role }}</div>
+							<div class="profile-job">{{ _('Ruolo') }}: {{ user.acl_roles_name }}</div>
 							<p></p>
 							<div class="profile-social">
 								<a class="icon bd-twitter" href="javascript:void(0)"></a> <a
@@ -42,7 +43,7 @@
 									class="icon bd-github" href="javascript:void(0)"></a>
 							</div>
 							<button type="button" class="btn btn-primary">{{
-								_('Contact Him/Her') }}</button>
+								_('Contatta') }}</button>
 						</div>
 					</div>
 					<div class="widget-footer">
@@ -65,12 +66,12 @@
 							{% if auth.isRole('admin') or auth.isInherits('admin') %}
 							<li role="presentation"><a data-toggle="tab"
 								href="#status" aria-controls="status" role="tab">{{
-									_('Status') }} {% if user.status.name != 'active' %}<span
+									_('Stato') }} {% if user.status.name != 'active' %}<span
 									class="badge badge-danger">!</span>{% endif %}
 							</a></li>
 							{% endif %}
 							<li class="active" role="presentation"><a data-toggle="tab" href="#details"
-								aria-controls="details" role="tab">{{ _('Details') }} </a></li>
+								aria-controls="details" role="tab">{{ _('Dettagli') }} </a></li>
 							<li role="presentation"><a data-toggle="tab" href="#logs"
 								aria-controls="logs" role="tab">{{ _('Logs') }}</a></li>
 						</ul>
@@ -115,35 +116,41 @@
 												id="editableUser">
 												<tbody>
 													<tr>
-														<td style="width: 35%">{{ _('Role') }}</td>
+														<td style="width: 35%">{{ _('Ruolo') }}</td>
 														<td style="width: 65%"><a id="editableRole"
 															href="javascript:void(0)" data-type="select" data-pk="{{ user.id }}"
-															data-title="{{ _('Name') }}">{{ user.role }}</a></td>
+															data-title="{{ _('Ruolo') }}">{{ user.acl_roles_name }}</a></td>
 													</tr>
 													<tr>
-														<td style="width: 35%">{{ _('Name') }}</td>
+														<td style="width: 35%">{{ _('Codice') }}</td>
+														<td style="width: 65%"><a id="editableCode"
+															href="javascript:void(0)" data-type="text" data-pk="{{ user.id }}"
+															data-title="{{ _('Codice') }}">{{ code }}</a></td>
+													</tr>
+													<tr>
+														<td style="width: 35%">{{ _('Nome') }}</td>
 														<td style="width: 65%"><a id="editableName"
 															href="javascript:void(0)" data-type="text" data-pk="{{ user.id }}"
-															data-title="{{ _('Name') }}">{{ name }}</a></td>
+															data-title="{{ _('Nome') }}">{{ name }}</a></td>
 													</tr>
 													<tr>
-														<td>{{ _('Surname') }}</td>
+														<td>{{ _('Cognome') }}</td>
 														<td><a id="editableSurname"
 															href="javascript:void(0)" data-type="text" data-pk="{{ user.id }}"
-															data-title="{{ _('Surname') }}">{{ surname }}</a></td>
+															data-title="{{ _('Cognome') }}">{{ surname }}</a></td>
 													</tr>
 													<tr>
-														<td>{{ _('Address') }}</td>
+														<td>{{ _('Indirizzo') }}</td>
 														<td><a id="editableAddress" href="javascript:void(0)"
-															data-type="textarea" data-pk="1" data-pk="{{ user.id }}"
-															data-title="{{ _('Address') }}">{{ address }}</a></td>
+															data-type="textarea" data-pk="{{ user.id }}"
+															data-title="{{ _('Indirizzo') }}">{{ address }}</a></td>
 													</tr>
 
 													<tr>
-														<td>{{ _('Phone') }}</td>
+														<td>{{ _('Telefono') }}</td>
 														<td><a id="editablePhone"
 															href="javascript:void(0)" data-type="text"
-															data-pk="{{ user.id }}" data-title="{{ _('Phone') }}">{{ phone }}</a></td>
+															data-pk="{{ user.id }}" data-title="{{ _('Telefono') }}">{{ phone }}</a></td>
 													</tr>
 
 												</tbody>

@@ -6,6 +6,9 @@ use Thunderhawk\API\Mvc\Controller;
 use Thunderhawk\API\Mvc\Model\Italia\ItaliaRegioni;
 use Thunderhawk\API\Mvc\Model\Italia\ItaliaProvince;
 use Thunderhawk\API\Mvc\Model\Italia\ItaliaComuni;
+use Thunderhawk\API\Mvc\Model\Locale\LocaleCountries;
+use Thunderhawk\API\Mvc\Model\Locale\LocaleRegions;
+use Thunderhawk\API\Mvc\Model\Locale\LocaleProvinces;
 
 class CountriesController extends Controller {
 	protected function onInitialize() {
@@ -15,6 +18,85 @@ class CountriesController extends Controller {
 		$this->assetsPackage ( 'data-table' );
 		$this->assetsPackage ( 'data-editor' );
 		$this->assetsPackage ( 'form-validation' );
+		$this->assetsPackage ( 'select2' );
+	}
+	public function addAction(){
+		$this->assetsPackage('jvectormap');
+		$this->loadJvectormapData('gdp-data');
+		$this->loadJvectormap('world-mill');
+		$this->loadInlineActionJs();
+	}
+	public function getInfoNationAction(){
+		if($this->request->isPost()){
+			if($this->request->isAjax()){
+				if($this->token->checkReusable()){
+					$code = $this->request->getPost('code','string');
+					$country = LocaleCountries::findFirst(array(
+							'iso_alpha_2 = ?0',
+							'bind' => array($code)
+					));
+					if($country){
+						return $this->sendAjax(array(
+								'error' => 0,
+								'country' => $country->toArray()
+						));
+					}else{
+						return $this->sendAjax(array(
+								'error' => 1,
+								'country' => null
+						));
+					}
+				}
+			}
+		}
+	}
+	public function getInfoRegionsAction(){
+		if($this->request->isPost()){
+			if($this->request->isAjax()){
+				if($this->token->checkReusable()){
+					$code = $this->request->getPost('code','string');
+					$region = LocaleRegions::findFirst(array(
+							'iso_code_2 = ?0',
+							'bind' => array($code)
+					));
+					if($region){
+						return $this->sendAjax(array(
+								'error' => 0,
+								'region' => $region->toArray()
+						));
+					}else{
+						return $this->sendAjax(array(
+								'error' => 1,
+								'region' => null
+						));
+					}
+				}
+			}
+		}
+	}
+	public function getInfoProvincesAction(){
+		if($this->request->isPost()){
+			if($this->request->isAjax()){
+				if($this->token->checkReusable()){
+					$code = $this->request->getPost('code','string');
+					$province = LocaleProvinces::findFirst(array(
+							'iso_code_2 = ?0',
+							'bind' => array($code)
+					));
+					if($province){
+						return $this->sendAjax(array(
+								'error' => 0,
+								'province' => $province->toArray()
+						));
+					}else{
+						return $this->sendAjax(array(
+								'error' => 1,
+								'province' => null
+						));
+					}
+				}
+			}
+		}
 	}
 	public function regionAction(){
 		$country = $this->dispatcher->getParam('country');

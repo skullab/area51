@@ -1,1 +1,1 @@
-<li class="site-menu-category"><?php echo 'Administration'; ?></li>
+<li class="site-menu-category"><?php echo 'Amministratore'; ?></li>

@@ -6,7 +6,7 @@ use Phalcon\Mvc\User\Component;
 class Ui extends Component {
 	public function getMenu() {
 		// ADMINISTRATOR
-		if ($this->auth->isRole ( Auth::ROLE_ADMIN )) {
+		if ($this->auth->isRoleOrInherits ( Auth::ROLE_ADMIN )) {
 			$this->view->partial ( 'menus/admin/category' );
 			$this->view->partial ( 'menus/admin/users' );
 			$this->view->partial ( 'menus/admin/acl' );
@@ -15,7 +15,7 @@ class Ui extends Component {
 		// COUNTRIES
 		if($this->auth->isRoleOrInherits(Auth::ROLE_USER)){
 			$this->view->partial('menus/countries/category');
-			$this->view->partial('menus/countries/italy');
+			$this->view->partial('menus/countries/country');
 		}
 		// PRODUCTS
 		if($this->auth->isRoleOrInherits(Auth::ROLE_USER)){

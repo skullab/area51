@@ -1,7 +1,7 @@
 <li class="site-menu-item has-sub">
 	<a href="javascript:void(0)" data-slug="admin-user"> 
 		<i class="site-menu-icon wb-users" aria-hidden="true"></i> 
-		<span class="site-menu-title"><?php echo 'Users'; ?></span><span class="site-menu-arrow"></span>
+		<span class="site-menu-title"><?php echo 'Utenti'; ?></span><span class="site-menu-arrow"></span>
 		<?php $active_id = $model->users_status->findFirstByName('active')->id; ?>
 		<?php $warning_user = $model->users->count('users_status_id != ' . $active_id); ?>
 		<?php if ($warning_user) { ?>
@@ -14,25 +14,25 @@
 		<li class="site-menu-item">
 			<a class="animsition-link" href="<?php echo $this->url->getStatic('users/add'); ?>" data-slug="admin-user-add">
 				<i class="site-menu-icon " aria-hidden="true"></i> 
-				<span class="site-menu-title"><?php echo 'Add'; ?></span>
+				<span class="site-menu-title"><?php echo 'Aggiungi'; ?></span>
 			</a>
 		</li>
 		<li class="site-menu-item">
 			<a class="animsition-link" href="<?php echo $this->url->getStatic('users/list'); ?>" data-slug="admin-user-list">
 				<i class="site-menu-icon " aria-hidden="true"></i> 
-				<span class="site-menu-title"><?php echo 'List'; ?></span>
+				<span class="site-menu-title"><?php echo 'Lista'; ?></span>
 			</a>
 		</li>
 		<li class="site-menu-item">
 			<a class="animsition-link" href="<?php echo $this->url->getStatic('users/failed'); ?>" data-slug="admin-user-failed">
 				<i class="site-menu-icon " aria-hidden="true"></i> 
-				<span class="site-menu-title"><?php echo 'Failed Attempts'; ?></span>
+				<span class="site-menu-title"><?php echo 'Tentativi falliti'; ?></span>
 			</a>
 		</li>
 		<li class="site-menu-item">
 			<a class="animsition-link" href="<?php echo $this->url->getStatic('users/forgot'); ?>" data-slug="admin-user-forgot"> 
 				<i class="site-menu-icon " aria-hidden="true"></i> 
-				<span class="site-menu-title"><?php echo 'Forgot password requests'; ?></span>
+				<span class="site-menu-title"><?php echo 'Richieste di perdita password'; ?></span>
 			</a>
 		</li>
 	</ul>

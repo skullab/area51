@@ -1,0 +1,109 @@
+
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+     <h1 class="page-title"><?php echo 'Nuova Localizzazione'; ?></h1>
+		<ol class="breadcrumb">
+			<li><a href="<?php echo $this->url->getStatic('dashboard'); ?>"><?php echo 'Dashboard'; ?></a></li>
+			<li><a href="<?php echo $this->url->getStatic('countries'); ?>"><?php echo 'Localizzazioni'; ?></a></li>
+			<li class="active"><?php echo 'Nuova Localizzazione'; ?></li>
+		</ol>
+    </div>
+	
+    <!-- Page Content -->
+    <div class="page-content">
+		<?php echo $this->getContent(); ?>
+		<!-- Panel Basic -->
+		<div class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions"></div>
+				<h3 class="panel-title">
+				<button onclick="reloadWorldMap();" type="button" class="btn btn-icon btn-outline btn-default">
+					<i class="icon wb-chevron-left"></i>
+				</button>
+				<?php echo 'Nuova Localizzazione'; ?></h3>
+			</header>
+			
+			<div class="panel-body">
+				<form>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-sm-6">
+								<div id="map" style="height: 400px"></div>
+							</div>
+							<div class="col-sm-6">
+								<label class="control-label" for="inputNation"><?php echo 'Nazione'; ?></label>
+								<input class="form-control" type="text" id="inputNation" name="nation">
+								<div class="row">
+									<div class="col-sm-3">
+										<label class="control-label" for="inputNationIsoAlpha2">Codice Iso ALPHA 2</label>
+										<input class="form-control" type="text" 
+										id="inputNationIsoAlpha2" name="nationIsoAlpha2">
+									</div>
+									<div class="col-sm-3">
+										<label class="control-label" for="inputNationIsoAlpha3">Codice Iso ALPHA 3</label>
+										<input class="form-control" type="text" 
+										id="inputNationIsoAlpha3" name="nationIsoAlpha3">
+									</div>
+									<div class="col-sm-3">
+										<label class="control-label" for="inputNationCode"><?php echo 'Codice Numerico'; ?></label>
+										<input class="form-control" type="text" 
+										id="inputNationCode" name="nationCode">
+									</div>
+									<div class="col-sm-3">
+										<label class="control-label" for="inputNationPostal"><?php echo 'Formato Codice Postale'; ?></label>
+										<input class="form-control" type="text" 
+										id="inputNationPostal" name="nationPostal">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-8">
+										<label class="control-label" for="inputRegion"><?php echo 'Regione'; ?></label>
+										<select class="form-control" data-tags="true" id="inputRegion" name="region">
+										</select>
+									</div>
+									<div class="col-sm-4">
+										<label class="control-label" for="inputRegionIso"><?php echo 'Codice Iso'; ?></label>
+										<input class="form-control" id="inputRegionIso" name="regionIso" type="text">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<label class="control-label" for="inputProvince"><?php echo 'Provincia'; ?></label>
+										<select class="form-control" data-tags="true" id="inputProvince" name="province">
+										</select>
+									</div>
+									<div class="col-sm-3">
+										<label class="control-label" for="inputProvinceIso"><?php echo 'Codice Iso'; ?></label>
+										<input class="form-control" id="inputProvinceIso" name="provinceIso">
+									</div>
+									<div class="col-sm-3">
+										<label class="control-label" for="inputProvinceLeadTime"><?php echo 'Lead Time'; ?></label>
+										<input class="form-control" id="inputProvinceLeadTime" name="provinceLeadTime">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-8">
+										<label class="control-label" for="inputCity"><?php echo 'Citta'; ?></label>
+										<input class="form-control" type="text" id="inputCity" name="city">
+									</div>
+									<div class="col-sm-4">
+										<label class="control-label" for="inputCityPostal"><?php echo 'Codice Postale'; ?></label>
+										<input class="form-control" type="text" id="inputCityPostal" name="cityPostal">
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<label></label>
+								<button type="button" class="btn btn-block btn-primary"><?php echo 'Completa'; ?></button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			
+		</div>
+		<!-- End Panel Basic -->
+	</div>
+</div>
+
