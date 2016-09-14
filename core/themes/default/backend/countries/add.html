@@ -1,4 +1,10 @@
-
+<style>
+	label{
+		font-size: 80%;
+		margin-bottom: 2%;
+		margin-top: 2%;
+	}
+</style>
 <!-- Page -->
 <div class="page animsition">
     <div class="page-header">
@@ -25,33 +31,39 @@
 			</header>
 			
 			<div class="panel-body">
-				<form>
+				<form id="addLocaleForm">
 					<div class="form-group">
 						<div class="row">
+						
 							<div class="col-sm-6">
 								<div id="map" style="height: 400px"></div>
 							</div>
+							
 							<div class="col-sm-6">
-								<label class="control-label" for="inputNation">{{ _('Nazione') }}</label>
-								<input class="form-control" type="text" id="inputNation" name="nation">
+								<div class="row">
+									<div class="col-sm-12">
+										<label class="control-label" for="inputNation">{{ _('Nazione') }}</label>
+										<input class="form-control" type="text" id="inputNation" name="nation" required="required">
+									</div>
+								</div>
 								<div class="row">
 									<div class="col-sm-3">
-										<label class="control-label" for="inputNationIsoAlpha2">Codice Iso ALPHA 2</label>
+										<label class="control-label" for="inputNationIsoAlpha2">Cod. Iso ALPHA 2</label>
 										<input class="form-control" type="text" 
-										id="inputNationIsoAlpha2" name="nationIsoAlpha2">
+										id="inputNationIsoAlpha2" name="nationIsoAlpha2" required="required">
 									</div>
 									<div class="col-sm-3">
-										<label class="control-label" for="inputNationIsoAlpha3">Codice Iso ALPHA 3</label>
+										<label class="control-label" for="inputNationIsoAlpha3">Cod. Iso ALPHA 3</label>
 										<input class="form-control" type="text" 
 										id="inputNationIsoAlpha3" name="nationIsoAlpha3">
 									</div>
 									<div class="col-sm-3">
-										<label class="control-label" for="inputNationCode">{{ _('Codice Numerico') }}</label>
+										<label class="control-label" for="inputNationCode">{{ _('Cod. Numerico') }}</label>
 										<input class="form-control" type="text" 
 										id="inputNationCode" name="nationCode">
 									</div>
 									<div class="col-sm-3">
-										<label class="control-label" for="inputNationPostal">{{ _('Formato Codice Postale') }}</label>
+										<label class="control-label" for="inputNationPostal">{{ _('Frmt. Cod. Postale') }}</label>
 										<input class="form-control" type="text" 
 										id="inputNationPostal" name="nationPostal">
 									</div>
@@ -59,49 +71,62 @@
 								<div class="row">
 									<div class="col-sm-8">
 										<label class="control-label" for="inputRegion">{{ _('Regione') }}</label>
-										<select class="form-control" data-tags="true" id="inputRegion" name="region">
+										<select class="form-control" data-tags="true" 
+											id="inputRegion" name="region" required="required">
 										</select>
 									</div>
 									<div class="col-sm-4">
 										<label class="control-label" for="inputRegionIso">{{ _('Codice Iso') }}</label>
-										<input class="form-control" id="inputRegionIso" name="regionIso" type="text">
+										<input class="form-control" id="inputRegionIso" 
+											name="regionIso" type="text" required="required">
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-sm-6">
 										<label class="control-label" for="inputProvince">{{ _('Provincia') }}</label>
-										<select class="form-control" data-tags="true" id="inputProvince" name="province">
+										<select class="form-control" data-tags="true" 
+											id="inputProvince" name="province" required="required">
 										</select>
 									</div>
 									<div class="col-sm-3">
 										<label class="control-label" for="inputProvinceIso">{{ _('Codice Iso') }}</label>
-										<input class="form-control" id="inputProvinceIso" name="provinceIso">
+										<input class="form-control" id="inputProvinceIso" name="provinceIso" required="required">
 									</div>
 									<div class="col-sm-3">
 										<label class="control-label" for="inputProvinceLeadTime">{{ _('Lead Time') }}</label>
-										<input class="form-control" id="inputProvinceLeadTime" name="provinceLeadTime">
+										<input class="form-control" id="inputProvinceLeadTime" name="provinceLeadTime" required="required">
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-sm-8">
 										<label class="control-label" for="inputCity">{{ _('Citta') }}</label>
-										<input class="form-control" type="text" id="inputCity" name="city">
+										<input class="form-control" type="text" id="inputCity" name="city" required="required">
 									</div>
 									<div class="col-sm-4">
 										<label class="control-label" for="inputCityPostal">{{ _('Codice Postale') }}</label>
-										<input class="form-control" type="text" id="inputCityPostal" name="cityPostal">
+										<input class="form-control" type="text" id="inputCityPostal" name="cityPostal" required="required">
 									</div>
 								</div>
 							</div>
 							<div class="col-sm-6">
 								<label></label>
-								<button type="button" class="btn btn-block btn-primary">{{ _('Completa') }}</button>
+								<input type="submit" class="btn btn-block btn-primary" value="{{ _('Completa') }}">
 							</div>
 						</div>
 					</div>
+					{{ token.generateInput() }}
 				</form>
 			</div>
-			
+			<!-- MODAL -->
+			<div class="modal fade" aria-hidden="true" role="dialog" tabindex="-1" style="display:none;">
+				<div class="modal-dialog modal-center">
+					<div class="modal-content">
+						<div class="modal-header"></div>
+						<div class="modal-body"></div>
+						<div class="modal-footer"></div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<!-- End Panel Basic -->
 	</div>

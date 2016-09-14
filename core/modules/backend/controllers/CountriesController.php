@@ -20,6 +20,10 @@ class CountriesController extends Controller {
 		$this->assetsPackage ( 'form-validation' );
 		$this->assetsPackage ( 'select2' );
 	}
+	
+	public function validateAddAction(){
+		
+	}
 	public function addAction(){
 		$this->assetsPackage('jvectormap');
 		$this->loadJvectormapData('gdp-data');
@@ -98,6 +102,142 @@ class CountriesController extends Controller {
 			}
 		}
 	}
+	public function getSourceRegionsAction(){
+		if($this->request->isPost()){
+			if($this->request->isAjax()){
+				if($this->token->checkReusable()){
+					
+					$response = array('error' => 0 , 'regions' => array());
+					
+					$code = $this->request->getPost('code','string');
+					$nation = LocaleCountries::findFirst(array(
+							'iso_alpha_2 = ?0',
+							'bind' => array($code)
+					));
+					if($nation){
+						$regions = LocaleRegions::find(array(
+								'locale_countries_id = ?0',
+								'bind' => array($nation->id),
+								'order' => 'name'
+						));
+						foreach ($regions as $region){
+							array_push($response['regions'],array('id' => $region->name,'text' => $region->name));
+						}
+					}else{
+						$response['error'] = 1 ;
+					}
+					
+					return $this->sendAjax($response);
+				}
+			}
+		}
+	}
+	public function getIsoRegionAction(){
+		if($this->request->isPost()){
+			if($this->request->isAjax()){
+				if($this->token->checkReusable()){
+					$nationCode = $this->request->getPost('nationCode','string');
+					$regionName = $this->request->getPost('regionName','string');
+					$response = array('error' => 0,'iso' => '','suggest'=>null);
+					$nation = LocaleCountries::findFirst(array(
+							'iso_alpha_2 = ?0',
+							'bind' => array($nationCode)
+					));
+					if($nation){
+						$region = LocaleRegions::findFirst(array(
+								'locale_countries_id = ?0 AND name LIKE ?1',
+								'bind' => array($nation->id,'%'.$regionName.'%')
+						));
+						if($region){
+							$response['iso'] = $region->iso_code_2 ;
+							$response['suggest'] = $region->name ;
+						}else{
+							$response['error'] = 2 ;
+						}
+					}else{
+						$response['error'] = 1 ;
+					}
+					return $this->sendAjax($response);
+				}
+			}
+		}
+	}
+	public function getSourceProvincesAction(){
+		if($this->request->isPost()){
+			if($this->request->isAjax()){
+				if($this->token->checkReusable()){
+					$nationCode = $this->request->getPost('nationCode','string');
+					$regionCode = $this->request->getPost('regionCode','string');
+					$response = array('error' => 0,'provinces' => array());
+					$nation = LocaleCountries::findFirst(array(
+							'iso_alpha_2 = ?0',
+							'bind' => array($nationCode)
+					));
+					if($nation){
+						$region = LocaleRegions::findFirst(array(
+								'locale_countries_id = ?0 AND iso_code_2 = ?1',
+								'bind' => array($nation->id,$regionCode)
+						));
+						if($region){
+							$provinces = LocaleProvinces::find(array(
+									'locale_regions_id = ?0',
+									'bind' => array($region->id)
+							));
+							foreach ($provinces as $province){
+								array_push($response['provinces'],array('id' => $province->name,'text' => $province->name));
+							}
+						}else{
+							$response['error'] = 2 ;
+						}
+					}else{
+						$response['error'] = 1 ;
+					}
+					return $this->sendAjax($response);
+				}
+			}
+		}
+	}
+	public function getIsoProvinceAction(){
+		if($this->request->isPost()){
+			if($this->request->isAjax()){
+				if($this->token->checkReusable()){
+					$nationCode = $this->request->getPost('nationCode','string');
+					$regionCode = $this->request->getPost('regionCode','string');
+					$provinceName = $this->request->getPost('provinceName','string');
+					
+					$response = array('error' => 0,'iso' => '','suggest'=>null,'lead_time' => null);
+					$nation = LocaleCountries::findFirst(array(
+							'iso_alpha_2 = ?0',
+							'bind' => array($nationCode)
+					));
+					if($nation){
+						$region = LocaleRegions::findFirst(array(
+								'locale_countries_id = ?0 AND iso_code_2 = ?1',
+								'bind' => array($nation->id,$regionCode)
+						));
+						if($region){
+							$province = LocaleProvinces::findFirst(array(
+									'locale_regions_id = ?0 AND name LIKE ?1',
+									'bind' => array($region->id,'%'.$provinceName.'%')
+							));
+							if($province){
+								$response['iso'] = $province->iso_code_2 ;
+								$response['suggest'] = $province->name ;
+								$response['lead_time'] = $province->lead_time ;
+							}
+						}else{
+							$response['error'] = 2 ;
+						}
+					}else{
+						$response['error'] = 1 ;
+					}
+					return $this->sendAjax($response);
+				}
+			}
+		}
+	}
+	//********************************************************************************
+	/*
 	public function regionAction(){
 		$country = $this->dispatcher->getParam('country');
 		$this->view->country = _($country) ;
@@ -108,6 +248,7 @@ class CountriesController extends Controller {
 			return $this->show404Action();
 		}
 	}
+	
 	public function provinceAction(){
 		$country = $this->dispatcher->getParam('country');
 		$this->view->country = _($country) ;
@@ -690,4 +831,5 @@ class CountriesController extends Controller {
 	public function italyCity(){
 		$this->assets->renderInlineJs('js/controllers/countriesItalyCity.js');
 	}
+	*/
 }
