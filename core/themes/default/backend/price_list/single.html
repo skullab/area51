@@ -1,0 +1,67 @@
+<div class="page animsition">
+	<div class="page-header">
+		<h1 class="page-title">{{ _('Listini') }}</h1>
+		<ol class="breadcrumb">
+			<li><a href="{{ static_url('dashboard') }}">{{
+					_('Dashboard') }}</a></li>
+			<li><a href="{{ static_url('products') }}">{{ _('Prodotti')
+					}}</a></li>
+			<li><a href="{{ static_url('products/price-list/show') }}">{{
+					_('Listini') }}</a></li>
+			<li class="active">{{ listino.nome }}</li>
+		</ol>
+
+	</div>
+	<div class="page-content">
+		<div id="spinner" class="spinner-container"></div>
+		{{ content() }}
+		<!-- Panel Basic -->
+		<div class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions"></div>
+				<h3 class="panel-title">
+					<span id="listinoName">{{ listino.nome }}</span>
+					<a id="editName" href="#"><i class="site-menu-icon wb-pencil" aria-hidden="true"></i></a>
+				</h3>
+			</header>
+			<div class="panel-body">
+			
+				<div class="row">
+					<div class="col-sm-3">
+						<i class="icon wb-time" aria-hidden="true"></i>
+						<span>{{ _('Ultimo Aggiornamento') }} :</span>
+					</div>
+					<div class="col-sm-3">{{ listino.update_time }}</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-sm-3">
+						<i class="icon wb-power" aria-hidden="true"></i>
+						<span>{{ _('Attivo') }} :</span>
+					</div>
+					<div class="col-sm-3">
+						<input id="editListActive" type="checkbox" 
+							name="listActive" {% if listino.attivo == 1 %} checked="true" {% endif %}>
+					</div>
+				</div>
+				<div><hr><h4>{{ _('Revisioni') }}</h4></div>
+				
+				<table id="listVersions"
+						class="table table-hover dataTable table-striped width-full floatThead-table">
+						<thead>
+							<tr>
+								<th>{{ _('Versione') }}</th>
+								<th>{{ _('Attivo') }}</th>
+								<th>{{ _('Ultimo aggiornamento') }}</th>
+								<th style="display:none;">{{ _('Scheda') }}</th>
+							</tr>
+						</thead>
+						<tfoot>
+							
+						</tfoot>
+					</table>
+			</div>
+		</div>
+
+	</div>
+</div>

@@ -1,0 +1,17 @@
+<li class="site-menu-item has-sub"><a
+	href="javascript:void(0)"> <i class="site-menu-icon wb-time"
+		aria-hidden="true"></i> <span class="site-menu-title"><?php echo ('Lead Time'); ?></span>
+		<span class="site-menu-arrow"></span></a>
+		<ul class="site-menu-sub">
+			<li class="site-menu-item"><a
+				class="animsition-link" href="<?php echo $this->url->getStatic('lead-time/show'); ?>"> <i
+					class="site-menu-icon " aria-hidden="true"></i> <span
+					class="site-menu-title"><?php echo 'Visualizza tutti'; ?></span>
+			</a></li>
+			<li class="site-menu-item"><a
+				class="animsition-link" href="<?php echo $this->url->getStatic('lead-time/add-geo'); ?>"> <i
+					class="site-menu-icon " aria-hidden="true"></i> <span
+					class="site-menu-title"><?php echo 'Definisci area geografica'; ?></span>
+			</a></li>
+		</ul>
+</li>

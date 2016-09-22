@@ -1,0 +1,64 @@
+<div class="page animsition">
+	<div class="page-header">
+		<h1 class="page-title"><?php echo 'Listini'; ?></h1>
+		<ol class="breadcrumb">
+			<li><a href="<?php echo $this->url->getStatic('dashboard'); ?>"><?php echo 'Dashboard'; ?></a></li>
+			<li><a href="<?php echo $this->url->getStatic('products'); ?>"><?php echo 'Prodotti'; ?></a></li>
+			<li><a href="<?php echo $this->url->getStatic('products/price-list/show'); ?>"><?php echo 'Listini'; ?></a></li>
+			<li class="active"><?php echo $listino->nome; ?></li>
+		</ol>
+
+	</div>
+	<div class="page-content">
+		<div id="spinner" class="spinner-container"></div>
+		<?php echo $this->getContent(); ?>
+		<!-- Panel Basic -->
+		<div class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions"></div>
+				<h3 class="panel-title">
+					<span id="listinoName"><?php echo $listino->nome; ?></span>
+					<a id="editName" href="#"><i class="site-menu-icon wb-pencil" aria-hidden="true"></i></a>
+				</h3>
+			</header>
+			<div class="panel-body">
+			
+				<div class="row">
+					<div class="col-sm-3">
+						<i class="icon wb-time" aria-hidden="true"></i>
+						<span><?php echo 'Ultimo Aggiornamento'; ?> :</span>
+					</div>
+					<div class="col-sm-3"><?php echo $listino->update_time; ?></div>
+				</div>
+				
+				<div class="row">
+					<div class="col-sm-3">
+						<i class="icon wb-power" aria-hidden="true"></i>
+						<span><?php echo 'Attivo'; ?> :</span>
+					</div>
+					<div class="col-sm-3">
+						<input id="editListActive" type="checkbox" 
+							name="listActive" <?php if ($listino->attivo == 1) { ?> checked="true" <?php } ?>>
+					</div>
+				</div>
+				<div><hr><h4><?php echo 'Revisioni'; ?></h4></div>
+				
+				<table id="listVersions"
+						class="table table-hover dataTable table-striped width-full floatThead-table">
+						<thead>
+							<tr>
+								<th><?php echo 'Versione'; ?></th>
+								<th><?php echo 'Attivo'; ?></th>
+								<th><?php echo 'Ultimo aggiornamento'; ?></th>
+								<th style="display:none;"><?php echo 'Scheda'; ?></th>
+							</tr>
+						</thead>
+						<tfoot>
+							
+						</tfoot>
+					</table>
+			</div>
+		</div>
+
+	</div>
+</div>

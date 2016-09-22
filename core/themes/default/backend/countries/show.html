@@ -1,0 +1,71 @@
+<style>
+#buttonsPanel {
+	padding-left: 3%;
+}
+.sweet-alert input[type='checkbox'] {
+   display: initial;
+   width: auto;
+   height: auto;
+   
+}
+</style>
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+     <h1 class="page-title">{{ _('Visualizza Aree Geografiche') }}</h1>
+		<ol class="breadcrumb">
+			<li><a href="{{ static_url('dashboard') }}">{{ _('Dashboard') }}</a></li>
+			<li><a href="{{ static_url('countries') }}">{{ _('Aree Geografiche') }}</a></li>
+			<li class="active">{{ _('Visualizza tutti') }}</li>
+		</ol>
+    </div>
+	
+    <!-- Page Content -->
+    <div class="page-content">
+		{{ content() }}
+		<!-- Panel Basic -->
+		<div class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions"></div>
+				<h3 class="panel-title">{{ _('Aree Geografiche') }}</h3>
+			</header>
+			<div id="buttonsPanel">
+				<button id="addList" class="btn btn-outline btn-primary" type="button">
+					<i class="icon wb-plus" aria-hidden="true"></i> {{ _('Nuova Area Geografica') }}
+				</button>
+				<button id="dropList" class="btn btn-outline btn-danger"
+					type="button">
+					<i class="icon wb-trash" aria-hidden="true"></i> {{ _('Elimina Aree Geografiche')
+					}}
+				</button>
+			</div>
+			<div class="panel-body">
+				
+				<table id="countryTable"
+					class="table table-hover dataTable table-striped width-full">
+					<thead>
+						<tr>
+							<th>{{ _('Citta') }}</th>
+							<th>{{ _('Codice Postale') }}</th>
+							<th>{{ _('Provincia') }}</th>
+							<th>{{ _('Lead Time') }}</th>
+							<th>{{ _('Codice ISO Provincia') }}</th>
+							<th>{{ _('Regione') }}</th>
+							<th>{{ _('Codice ISO Regione') }}</th>
+							<th>{{ _('Nazione') }}</th>
+							<th>{{ _('Codice ISO 3166-1 Alpha 2') }}</th>
+							<th>{{ _('Codice ISO 3166-1 Alpha 3') }}</th>
+							<th>{{ _('Codice Numerico Nazione') }}</th>
+							<th>{{ _('Formato codice postale') }}</th>
+							<th>{{ _('Latitudine') }}</th>
+							<th>{{ _('Longitudine') }}</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+					<tfoot></tfoot>
+				</table>
+			</div>
+		</div>
+		<!-- End Panel Basic -->
+	</div>
+</div>

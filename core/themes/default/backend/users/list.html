@@ -139,13 +139,18 @@
 												</a>
 											</div>
 										</div>
-										<div class="media-right" style="display:inline;margin-top:5%">
-											<a href="{{ static_url('users/profile/') }}{{ user.id }}" type="button" class="btn btn-outline btn-success btn-sm">
-											<i class="icon wb-pencil" aria-hidden="true"></i>{{ _('Show Profile') }}
+										<div class="media-right" style="width:33%;">
+											<div>
+											<a href="{{ static_url('users/profile/') }}{{ user.id }}" 
+												type="button" class="btn btn-outline btn-primary">
+												<i class="icon wb-pencil" aria-hidden="true"></i>{{ _('Profilo') }}
 											</a>
-											<a href="javascript:void(0)" id="dropWarningCancel" onclick="dropUser('{{ user.id }}')" type="button" class="btn btn-outline btn-danger btn-sm">
-											<i class="icon wb-trash" aria-hidden="true"></i>{{ _('Drop User') }}
+											<a href="javascript:void(0)" id="dropWarningCancel" 
+												onclick="dropUser('{{ user.id }}')" 
+												type="button" class="btn btn-outline btn-danger">
+												<i class="icon wb-trash" aria-hidden="true"></i>{{ _('Elimina') }}
 											</a>
+											</div>
 										</div>
 									</div>
 								</li>

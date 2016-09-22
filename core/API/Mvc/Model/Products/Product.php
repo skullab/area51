@@ -56,10 +56,10 @@ class Product extends Model {
 	public $buyOnEbayLink;
 	protected function onInitialize() {
 		//$this->switchToRemoteConnection ();
-		$this->hasMany ( 'id_product', __NAMESPACE__ . '\PriceList', 'product_id', array (
+		/*$this->hasMany ( 'id_product', __NAMESPACE__ . '\PriceList', 'product_id', array (
 				'alias' => 'prices',
 				'reusable' => true 
-		) );
+		) );*/
 		$this->hasMany ( 'id_product', __NAMESPACE__ . '\ProductLang', 'id_product', array (
 				'alias' => 'lang',
 				'reusable' => true 

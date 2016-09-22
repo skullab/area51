@@ -31,7 +31,7 @@
 			</header>
 			
 			<div class="panel-body">
-				<form id="addLocaleForm">
+				<form id="addLocaleForm" method="POST" action="<?php echo $this->url->getStatic('countries/add'); ?>">
 					<div class="form-group">
 						<div class="row">
 						
@@ -107,6 +107,23 @@
 										<input class="form-control" type="text" id="inputCityPostal" name="cityPostal" required="required">
 									</div>
 								</div>
+								<div class="row">
+									<div class="col-sm-4">
+										<label class="control-label" for="inputCityLat"><?php echo 'Latitudine'; ?></label>
+										<input class="form-control" type="text" id="inputCityLat" name="cityLat">									
+									</div>
+									<div class="col-sm-4">
+										<label class="control-label" for="inputCityLng"><?php echo 'Longitudine'; ?></label>
+										<input class="form-control" type="text" id="inputCityLng" name="cityLng">	
+									</div>
+									<div class="col-sm-4">
+										<label class="control-label" for="buttonGeoSearch"></label>
+										<button id="buttonGeoSearch" type="button" 
+										class="btn btn-icon btn-dark btn-round" style="margin-top:20px;">
+											<i class="icon wb-map" aria-hidden="true"></i>
+										</button>
+									</div>
+								</div>
 							</div>
 							<div class="col-sm-6">
 								<label></label>
@@ -114,6 +131,7 @@
 							</div>
 						</div>
 					</div>
+					<?php echo $this->token->generateInput(); ?>
 				</form>
 			</div>
 			<!-- MODAL -->

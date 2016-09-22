@@ -1,0 +1,73 @@
+<div class="page animsition">
+	<div class="page-header">
+		<h1 class="page-title">{{ _('Listini') }}</h1>
+		<ol class="breadcrumb">
+			<li><a href="{{ static_url('dashboard') }}">{{
+					_('Dashboard') }}</a></li>
+			<li><a href="{{ static_url('products') }}">{{ _('Prodotti')
+					}}</a></li>
+			<li><a href="{{ static_url('products/price-list/show') }}">{{
+					_('Listini') }}</a></li>
+			<li class="active">{{ _('Nuovo Listino') }}</li>
+		</ol>
+
+	</div>
+	<div class="page-content">
+		<div id="spinner" class="spinner-container"></div>
+		{{ content() }}
+		<!-- Panel Basic -->
+		<div class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions"></div>
+				<h3 class="panel-title">{{ _('Nuovo Listino') }}</h3>
+			</header>
+			<div class="panel-body">
+				<form id="listForm" class="form-content" method="post"
+					action="{{ static_url('products/price-list/new') }}">
+					<div class="form-body">
+						<div class="row">
+							<div class="col-lg-4 form-group">
+								<label class="control-label" for="inputListName">{{
+									_('Nome Listino') }}</label> <input id="inputListName"
+									class="form-control" type="text" name="listName"
+									required="required">
+							</div>
+							<div class="col-lg-8 form-group">
+								<label class="control-label" for="inputListClone">{{_('Clona
+									da') }}</label> <select class="form-control" id="inputListClone"
+									name="listClone">
+									<option>{{ _('-nessuno-') }}</option> {% for clone in
+									model.listini.find() %}
+
+									<option value="{{clone.id}}">{{ clone.nome }}</option> {%
+									endfor %}
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-4 form-group">
+
+								<div class="checkbox-custom checkbox-primary">
+									<input id="inputListEmpty" type="checkbox" name="listEmpty">
+									<label class="control-label popover-primary"
+										for="inputListEmpty"
+										data-original-title="{{ _('Listino Vuoto') }}"
+										data-content="{{ _('Verra creato il solo listino, senza riferimenti a prodotti e prezzi') }}"
+										data-trigger="hover" data-toggle="popover">{{ _('Crea
+										listino vuoto') }}</label>
+								</div>
+
+							</div>
+							<div class="col-sm-12 pull-right">
+								<button class="btn btn-primary btn-outline" data-dismiss=""
+									id="addListSubmit" type="submit">{{ _('Crea') }}</button>
+							</div>
+						</div>
+						{{ token.generateInput() }}
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</div>
+</div>

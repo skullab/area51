@@ -1,0 +1,83 @@
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+     <h1 class="page-title"><?php echo 'Lead Time'; ?></h1>
+		<ol class="breadcrumb">
+			<li><a href="<?php echo $this->url->getStatic('dashboard'); ?>"><?php echo 'Dashboard'; ?></a></li>
+			<li><a href="<?php echo $this->url->getStatic('lead-time'); ?>"><?php echo 'Lead Time'; ?></a></li>
+			<li class="active"><?php echo 'Definisci area geografica'; ?></li>
+		</ol>
+    </div>
+	
+    <!-- Page Content -->
+    <div class="page-content">
+		<?php echo $this->getContent(); ?>
+		<!-- Panel Basic -->
+		<div class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions"></div>
+				<h3 class="panel-title">
+				<?php echo 'Nuova Area Geografica'; ?>
+				</h3>
+			</header>
+			
+			<div class="panel-body">
+				<div id="mapContainer">
+				<div id="map" style="height:600px"></div>
+				<div class="widget widget-shadow" style="position:absolute;top:13%;left:4%;width:22%;">
+					<div class="widget-content widget-radius bg-white">
+						<div class="padding-30" id="mapInfo">
+							<form id="mapInfoForm" method="POST" action="<?php echo $this->url->getStatic('lead-time/add-geo'); ?>">
+							<div class="form-group">
+								<div class="row">
+									<div class="col-sm-12">
+										<label class="control-label" for="mapAreaLabel"><?php echo 'Etichetta'; ?></label>
+										<input id="mapAreaLabel" name="label" type="text" class="form-control" size="10" required="required">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<label class="control-label" for="mapAreaLeadTime"><?php echo 'Lead Time'; ?></label>
+										<input id="mapAreaLeadTime" name="lead_time" type="number" class="form-control" size="10" required="required">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<label class="control-label" for="mapAreaLat"><?php echo 'Latitudine'; ?></label>
+										<input id="mapAreaLat" name="lat" type="text" class="form-control" size="10" readonly required="required">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<label class="control-label" for="mapAreaLng"><?php echo 'Longitudine'; ?></label>
+										<input id="mapAreaLng" name="lng" type="text" class="form-control" size="10" readonly required="required">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<label class="control-label" for="mapAreaRadius"><?php echo 'Raggio'; ?></label>
+										<div class="input-group">
+											<input id="mapAreaRadius" name="radius" type="text" class="form-control" size="10" required="required">
+											<span class="input-group-addon">KM</span>
+										</div>
+									</div>
+								</div> 
+								<div class="row">
+									<div class="col-sm-12">
+										<label class="control-label" for="mapAreaSubmit"></label>
+										<input class="btn btn-block btn-primary" id="mapAreaSubmit" type="submit" value="<?php echo 'Aggiungi'; ?>">
+									</div>
+								</div>
+							</div>
+							
+							<?php echo $this->token->generateInput(); ?>
+							</form>
+						</div>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Panel Basic -->
+	</div>
+</div>

@@ -112,9 +112,8 @@
   </script>
   
   <!-- CUSTOM JS -->
-  
-  <?php echo $this->assets->outputJs('jsControllers'); ?>
   <?php echo $this->assets->outputJs(); ?>
+  <?php echo $this->assets->outputJs('jsControllers'); ?>
   <?php echo $this->assets->outputRenderInlineJs(); ?>
   
 </body>

@@ -59,6 +59,10 @@ abstract class Controller extends PhalconController{
 		return $this->_loadInlineActionJs($this->_getFullPathJs($filename,$prefix),$local,$vars);
 	}
 	/********************************************************************/
+	protected function getAssetsPackageBootstrapSwitch(){
+		$this->cssPlugins->addCss('vendor/bootstrap-switch/bootstrap-switch.min.css');
+		$this->jsPlugins->addJs('vendor/bootstrap-switch/bootstrap-switch.min.js');
+	}
 	protected function getAssetsPackageJvectormap(){
 		$this->cssPlugins->addCss('vendor/jvectormap/jquery-jvectormap.css');
 		$this->jsPlugins->addJs('vendor/jvectormap/jquery-jvectormap.min.js');
@@ -127,10 +131,10 @@ abstract class Controller extends PhalconController{
 	}
 	protected function getAssetsPackageSweetAlert(){
 		$this->cssPlugins->addCss('vendor/bootstrap-sweetalert/sweet-alert.css');
-		$this->jsPlugins->addJs('vendor/bootbox/bootbox.js')
-		->addJs('vendor/bootstrap-sweetalert/sweet-alert.js');
-		$this->jsComponents->addJs('js/components/bootbox.js')
-		->addJs('js/components/bootstrap-sweetalert.js');
+		//$this->cssPlugins->addCss('vendor/bootstrap-sweetalert/themes/google/google.css');
+		$this->jsPlugins->addJs('vendor/bootstrap-sweetalert/sweet-alert.min.js');
+		//$this->jsPlugins->addJs('vendor/bootbox/bootbox.js')->addJs('vendor/bootstrap-sweetalert/sweet-alert.js');
+		//$this->jsComponents->addJs('js/components/bootbox.js')->addJs('js/components/bootstrap-sweetalert.js');
 	}
 	protected function getAssetsPackageToastr(){
 		$this->cssPlugins->addCss('vendor/toastr/toastr.original.css');

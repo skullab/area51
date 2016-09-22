@@ -121,12 +121,20 @@ class UsersController extends Controller {
 			if($this->request->isAjax()){
 				$id = $this->request->getPost('users_id');
 				$user = Users::findFirstById($id);
-				$payload = array('error'=>1);
+				$payload = array(
+						'error' 	=> 1,
+						'message' 	=>_('Non si hanno i permessi per questa operazione')
+				);
+				if(!$this->auth->isRoleOrInherits(Auth::ROLE_ADMIN)){
+					return $this->sendAjax($payload);
+				}
 				if($user){
-					if($user->role == Auth::ROLE_ADMIN){
+						if($user->acl_roles_name == Auth::ROLE_ADMIN){
+							$payload['error'] = 2 ;
+							return $this->sendAjax($payload);
+						}
 						try{
-							$delete = $user->delete();
-							if($delete){
+							if($user->delete()){
 								$payload['error'] = 0 ;
 							}else{
 								foreach ($user->getMessages() as $message){
@@ -136,11 +144,10 @@ class UsersController extends Controller {
 						}catch(\Exception $e){
 							$payload = array('error'=>$e->getCode(),'message'=>$e->getMessage());
 						}
-					}else{
-						$payload['message'] = _('You don\'t have permission to perform this operation');
-					}
+					
 				}else{
-					$payload['message'] = _('User not found');
+					$payload['error'] = 3 ;
+					$payload['message'] = _('Utente non trovato');
 				}
 				return $this->sendAjax($payload);
 			}

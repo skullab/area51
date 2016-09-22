@@ -1,0 +1,70 @@
+<style>
+#buttonsPanel {
+	padding-left: 3%;
+}
+.sweet-alert input[type='checkbox'] {
+   display: initial;
+   width: auto;
+   height: auto;
+   
+}
+</style>
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+     <h1 class="page-title"><?php echo 'Visualizza Aree Geografiche'; ?></h1>
+		<ol class="breadcrumb">
+			<li><a href="<?php echo $this->url->getStatic('dashboard'); ?>"><?php echo 'Dashboard'; ?></a></li>
+			<li><a href="<?php echo $this->url->getStatic('countries'); ?>"><?php echo 'Aree Geografiche'; ?></a></li>
+			<li class="active"><?php echo 'Visualizza tutti'; ?></li>
+		</ol>
+    </div>
+	
+    <!-- Page Content -->
+    <div class="page-content">
+		<?php echo $this->getContent(); ?>
+		<!-- Panel Basic -->
+		<div class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions"></div>
+				<h3 class="panel-title"><?php echo 'Aree Geografiche'; ?></h3>
+			</header>
+			<div id="buttonsPanel">
+				<button id="addList" class="btn btn-outline btn-primary" type="button">
+					<i class="icon wb-plus" aria-hidden="true"></i> <?php echo 'Nuova Area Geografica'; ?>
+				</button>
+				<button id="dropList" class="btn btn-outline btn-danger"
+					type="button">
+					<i class="icon wb-trash" aria-hidden="true"></i> <?php echo 'Elimina Aree Geografiche'; ?>
+				</button>
+			</div>
+			<div class="panel-body">
+				
+				<table id="countryTable"
+					class="table table-hover dataTable table-striped width-full">
+					<thead>
+						<tr>
+							<th><?php echo 'Citta'; ?></th>
+							<th><?php echo 'Codice Postale'; ?></th>
+							<th><?php echo 'Provincia'; ?></th>
+							<th><?php echo 'Lead Time'; ?></th>
+							<th><?php echo 'Codice ISO Provincia'; ?></th>
+							<th><?php echo 'Regione'; ?></th>
+							<th><?php echo 'Codice ISO Regione'; ?></th>
+							<th><?php echo 'Nazione'; ?></th>
+							<th><?php echo 'Codice ISO 3166-1 Alpha 2'; ?></th>
+							<th><?php echo 'Codice ISO 3166-1 Alpha 3'; ?></th>
+							<th><?php echo 'Codice Numerico Nazione'; ?></th>
+							<th><?php echo 'Formato codice postale'; ?></th>
+							<th><?php echo 'Latitudine'; ?></th>
+							<th><?php echo 'Longitudine'; ?></th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+					<tfoot></tfoot>
+				</table>
+			</div>
+		</div>
+		<!-- End Panel Basic -->
+	</div>
+</div>

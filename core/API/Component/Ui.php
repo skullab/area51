@@ -17,6 +17,11 @@ class Ui extends Component {
 			$this->view->partial('menus/countries/category');
 			$this->view->partial('menus/countries/country');
 		}
+		// LEAD TIME
+		if($this->auth->isRoleOrInherits(Auth::ROLE_USER)){
+			$this->view->partial('menus/lead_time/category');
+			$this->view->partial('menus/lead_time/time');
+		}
 		// PRODUCTS
 		if($this->auth->isRoleOrInherits(Auth::ROLE_USER)){
 			$this->view->partial('menus/products/category');
